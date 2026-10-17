@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Flame, Sparkles, MessageCircle } from 'lucide-react';
+import React from 'react';
+import { Sparkles, MessageCircle, RotateCcw } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 export default function BestSellersTabs({ 
@@ -7,7 +7,8 @@ export default function BestSellersTabs({
   onOpenProduct, 
   onAddToCart,
   selectedCategory,
-  onTabChange
+  onTabChange,
+  onResetFilters
 }) {
   const tabs = [
     { id: 'all', label: 'TODOS' },
@@ -19,10 +20,12 @@ export default function BestSellersTabs({
 
   const currentTab = selectedCategory || 'all';
 
-  const filteredProducts = products.filter(p => {
-    if (currentTab === 'all') return true;
-    if (currentTab === 'decants') return true; // All have decants
-    return p.gender === currentTab;
+  const displayProducts = products.filter(p => {
+    if (currentTab === 'all' || currentTab === 'decants' || currentTab === 'ofertas') return true;
+    if (currentTab === 'Para Él') return p.gender === 'Para Él' || p.gender === 'Unisex';
+    if (currentTab === 'Para Ella') return p.gender === 'Para Ella' || p.gender === 'Unisex';
+    if (currentTab === 'Unisex') return p.gender === 'Unisex';
+    return true;
   });
 
   return (
@@ -66,31 +69,39 @@ export default function BestSellersTabs({
         </div>
 
         {/* Product Cards Grid (Ref: Imagen 4) */}
-        {filteredProducts.length === 0 ? (
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-purple-100 text-center max-w-xl mx-auto shadow-sm my-6">
-            <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-700 flex items-center justify-center mx-auto mb-4 border border-amber-200">
+        {displayProducts.length === 0 ? (
+          <div className="bg-[#FAF7F2] rounded-3xl p-8 sm:p-12 border border-purple-100 text-center max-w-xl mx-auto shadow-sm my-6">
+            <div className="w-16 h-16 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center mx-auto mb-4 border border-amber-200">
               <Sparkles className="w-8 h-8 text-[#D4AF37]" />
             </div>
             <h4 className="font-arabic-title text-xl font-bold text-gray-900 mb-2">
-              Lote en Tránsito Directo desde Dubái ✈️
+              No hay coincidencias con esos filtros combinados
             </h4>
             <p className="text-xs text-gray-600 leading-relaxed mb-6">
-              Estamos recibiendo nuevas cosechas selladas de esta casa perfumera esta semana en nuestro showroom. 
-              Escríbenos por WhatsApp para enviarte la lista completa de referencias disponibles o reservarte tu botella.
+              Para no dejarte sin opciones, puedes restablecer los filtros y explorar todo el catálogo de perfumes originales disponibles para entrega inmediata.
             </p>
-            <a
-              href="https://wa.me/593985911895?text=Hola%20Sultan%20Parfums,%20quiero%20consultar%20disponibilidad%20y%20precios%20de%20esta%20marca"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#2E1065] hover:bg-[#3B0764] text-white font-bold text-xs py-3 px-6 rounded-full shadow-md transition-all active:scale-95"
-            >
-              <MessageCircle className="w-4 h-4 text-[#D4AF37]" />
-              <span>Consultar Catálogo de la Marca en WhatsApp</span>
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={onResetFilters}
+                className="inline-flex items-center gap-2 bg-[#2E1065] hover:bg-[#3B0764] text-[#D4AF37] font-bold text-xs py-3 px-6 rounded-full shadow-md transition-all active:scale-95"
+              >
+                <RotateCcw className="w-4 h-4" />
+                <span>Restablecer Filtros y Ver Todo</span>
+              </button>
+              <a
+                href="https://wa.me/593985911895?text=Hola%20Sultan%20Parfums,%20quiero%20consultar%20disponibilidad%20de%20perfumes%20%C3%A1rabes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 px-6 rounded-full shadow-md transition-all active:scale-95"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>Consultar por WhatsApp</span>
+              </a>
+            </div>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {filteredProducts.map((perfume) => (
+            {displayProducts.map((perfume) => (
               <ProductCard
                 key={perfume.id}
                 product={perfume}

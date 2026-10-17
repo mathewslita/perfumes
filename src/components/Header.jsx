@@ -1,24 +1,46 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Search, ShoppingBag, User, ChevronDown, Sparkles, X, Flame, ShieldCheck } from 'lucide-react';
-import { BRANDS_LIST } from '../data/perfumes';
+import React, { useState, useRef } from 'react';
+import { Search, ShoppingBag, ChevronDown, Sparkles, X, Flame, ShieldCheck } from 'lucide-react';
+import { BRANDS_LIST, ACORDES_LIST } from '../data/perfumes';
 
 export default function Header({ 
   cartCount, 
   onOpenCart, 
   onSelectCategory, 
   onSelectBrand,
+  onSelectAcorde,
   onSearch, 
   searchQuery,
   onOpenProduct
 }) {
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const menuTimeoutRef = useRef(null);
 
   // Category navigation that filters and smooth-scrolls to the catalog
   const handleNavCategory = (category) => {
     onSelectCategory(category);
+    const catalogEl = document.getElementById('los-mas-vendidos');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Brand navigation with auto-scroll
+  const handleSelectBrandNav = (brandName) => {
+    onSelectBrand(brandName);
+    setMegaMenuOpen(false);
+    const catalogEl = document.getElementById('los-mas-vendidos');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Acorde navigation with auto-scroll
+  const handleSelectAcordeNav = (acordeId) => {
+    if (onSelectAcorde) {
+      onSelectAcorde(acordeId);
+    }
+    setMegaMenuOpen(false);
     const catalogEl = document.getElementById('los-mas-vendidos');
     if (catalogEl) {
       catalogEl.scrollIntoView({ behavior: 'smooth' });
@@ -33,7 +55,7 @@ export default function Header({
   const handleMouseLeave = () => {
     menuTimeoutRef.current = setTimeout(() => {
       setMegaMenuOpen(false);
-    }, 200);
+    }, 250);
   };
 
   return (
@@ -89,13 +111,14 @@ export default function Header({
               onMouseLeave={handleMouseLeave}
             >
               <button 
-                className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#2E1065] bg-purple-50/80 hover:bg-purple-100/70 font-bold transition-all border border-purple-200/50"
+                onClick={() => setMegaMenuOpen(!megaMenuOpen)}
+                className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#2E1065] bg-purple-50/90 hover:bg-purple-100 font-bold transition-all border border-purple-200/70 shadow-sm"
               >
                 <span>Casas Árabes & Novedades</span>
-                <ChevronDown className="w-4 h-4 text-[#D4AF37]" />
+                <ChevronDown className={`w-4 h-4 text-[#D4AF37] transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* MEGA MENU DROPDOWN (Ref: Imagen 1 Layout) */}
+              {/* MEGA MENU DROPDOWN (Ref: Imagen 1 Layout with Live Product Counters) */}
               {megaMenuOpen && (
                 <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[920px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-12 gap-6 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                   
@@ -104,19 +127,16 @@ export default function Header({
                     <h4 className="text-xs font-bold text-[#2E1065] uppercase tracking-wider mb-3 flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Casas Oficiales
                     </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
+                    <ul className="space-y-1.5 text-sm text-gray-600">
                       {BRANDS_LIST.map((brand) => (
                         <li key={brand.name}>
                           <button
-                            onClick={() => {
-                              onSelectBrand(brand.name);
-                              setMegaMenuOpen(false);
-                            }}
-                            className="w-full text-left flex items-center justify-between hover:text-[#2E1065] hover:font-bold py-1 px-1.5 rounded-md hover:bg-purple-50 transition-colors"
+                            onClick={() => handleSelectBrandNav(brand.name)}
+                            className="w-full text-left flex items-center justify-between hover:text-[#2E1065] hover:font-bold py-1.5 px-2 rounded-lg hover:bg-purple-50 transition-all group"
                           >
-                            <span>{brand.name}</span>
-                            <span className="text-[10px] text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded-full">
-                              {brand.badge}
+                            <span className="font-semibold text-gray-800 group-hover:text-[#2E1065]">{brand.name}</span>
+                            <span className="text-[10px] text-purple-900 bg-purple-100/90 font-bold px-2 py-0.5 rounded-full">
+                              {brand.count}
                             </span>
                           </button>
                         </li>
@@ -129,56 +149,46 @@ export default function Header({
                     <h4 className="text-xs font-bold text-[#2E1065] uppercase tracking-wider mb-3 flex items-center gap-1.5">
                       <Flame className="w-3.5 h-3.5 text-amber-500" /> Acordes & Estilos
                     </h4>
-                    <ul className="space-y-2 text-sm text-gray-600">
-                      <li>
+                    <ul className="space-y-1.5 text-sm text-gray-600">
+                      {ACORDES_LIST.map((acorde) => (
+                        <li key={acorde.id}>
+                          <button 
+                            onClick={() => handleSelectAcordeNav(acorde.id)}
+                            className="w-full text-left flex items-center justify-between hover:text-[#2E1065] hover:font-bold py-1.5 px-2 rounded-lg hover:bg-amber-50/70 transition-all group"
+                          >
+                            <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-800 group-hover:text-[#2E1065]">
+                              <span>{acorde.icon}</span>
+                              <span>{acorde.name}</span>
+                            </span>
+                            <span className="text-[10px] text-amber-900 bg-amber-100/90 font-bold px-1.5 py-0.5 rounded-full">
+                              {acorde.count}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                      <li className="pt-1 border-t border-gray-100">
                         <button 
-                          onClick={() => { onSearch('vainilla'); setMegaMenuOpen(false); }}
-                          className="hover:text-[#2E1065] hover:font-bold block py-1"
+                          onClick={() => { handleNavCategory('decants'); setMegaMenuOpen(false); }}
+                          className="w-full text-left flex items-center justify-between text-[#B89228] hover:text-[#977317] font-bold py-1.5 px-2 rounded-lg hover:bg-yellow-50/80 transition-all"
                         >
-                          🍯 Gourmand & Vainilla
-                        </button>
-                      </li>
-                      <li>
-                        <button 
-                          onClick={() => { onSearch('oud'); setMegaMenuOpen(false); }}
-                          className="hover:text-[#2E1065] hover:font-bold block py-1"
-                        >
-                          🪵 Oud & Maderas Orientales
-                        </button>
-                      </li>
-                      <li>
-                        <button 
-                          onClick={() => { onSearch('piña'); setMegaMenuOpen(false); }}
-                          className="hover:text-[#2E1065] hover:font-bold block py-1"
-                        >
-                          🍍 Cítricos & Piña Ahumada
-                        </button>
-                      </li>
-                      <li>
-                        <button 
-                          onClick={() => { onSearch('rosa'); setMegaMenuOpen(false); }}
-                          className="hover:text-[#2E1065] hover:font-bold block py-1"
-                        >
-                          🌹 Rosas de Grasse & Lichi
-                        </button>
-                      </li>
-                      <li>
-                        <button 
-                          onClick={() => { onSelectCategory('decants'); setMegaMenuOpen(false); }}
-                          className="text-[#D4AF37] font-bold hover:underline block py-1"
-                        >
-                          🧪 Decants 10ml (Muestras)
+                          <span className="flex items-center gap-1.5 text-xs">
+                            <span>🧪</span>
+                            <span>Decants 10ml (Muestras)</span>
+                          </span>
+                          <span className="text-[10px] bg-yellow-100 text-yellow-900 font-bold px-1.5 py-0.5 rounded-full">
+                            11 fragancias
+                          </span>
                         </button>
                       </li>
                     </ul>
                   </div>
 
-                  {/* Right Column: 2 Photographic Promotion Banners (Identical to Image 1) */}
+                  {/* Right Column: 2 Photographic Promotion Banners (Ref: Imagen 1) */}
                   <div className="col-span-6 grid grid-cols-2 gap-4">
                     {/* Banner 1: Discovery Kit / Decants Pouch */}
                     <div 
                       onClick={() => {
-                        onSelectCategory('decants');
+                        handleNavCategory('decants');
                         setMegaMenuOpen(false);
                       }}
                       className="group cursor-pointer rounded-xl overflow-hidden relative border border-gray-100 bg-[#FAF7F2] shadow-sm hover:shadow-md transition-all flex flex-col"
@@ -199,7 +209,7 @@ export default function Header({
                             Decants de 10ml en Atomizador
                           </h5>
                           <p className="text-[11px] text-gray-500 mt-1 line-clamp-2">
-                            Prueba antes de comprar la botella grande con envío gratis.
+                            Prueba antes de comprar la botella grande con envío express.
                           </p>
                         </div>
                         <span className="text-xs font-bold text-[#2E1065] mt-2 inline-flex items-center gap-1 group-hover:text-[#D4AF37]">
@@ -290,7 +300,7 @@ export default function Header({
             >
               <span>Ofertas</span>
               <span className="bg-rose-100 text-rose-700 text-[10px] px-1.5 py-0.5 rounded-full font-black">
-                Hasta -44%
+                Hasta -45%
               </span>
             </button>
           </nav>
@@ -319,7 +329,7 @@ export default function Header({
               )}
             </div>
 
-            {/* WhatsApp Advisor Live Button (Conversion-focused replacement for Mi Cuenta) */}
+            {/* WhatsApp Advisor Live Button */}
             <a
               href="https://wa.me/593985911895?text=Hola%20Sultan%20Parfums,%20deseo%20asesor%C3%ADa%20personalizada%20para%20elegir%20mi%20perfume"
               target="_blank"
@@ -337,7 +347,7 @@ export default function Header({
               </div>
             </a>
 
-            {/* Cart Trigger (Ref: Imagen 1 badge) */}
+            {/* Cart Trigger */}
             <button 
               onClick={onOpenCart}
               className="relative p-2.5 rounded-full bg-[#FAF7F2] hover:bg-purple-100/70 border border-purple-200/60 text-[#2E1065] transition-all hover:scale-105 active:scale-95 group shadow-sm"

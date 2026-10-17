@@ -15,7 +15,7 @@ import AboutSection from './components/AboutSection';
 import NewsletterBanner from './components/NewsletterBanner';
 import Footer from './components/Footer';
 import { PERFUMES_DATA } from './data/perfumes';
-import { Sparkles, ShieldCheck, Check } from 'lucide-react';
+import { Sparkles, ShieldCheck, Check, RotateCcw } from 'lucide-react';
 
 export default function App() {
   // Cart state persisted in localStorage
@@ -35,6 +35,7 @@ export default function App() {
   const [activeVibe, setActiveVibe] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState(null);
+  const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
   // Sync cart to localStorage
@@ -122,10 +123,61 @@ export default function App() {
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
+  // Clear all filters safely
+  const handleResetFilters = () => {
+    setSelectedBrand(null);
+    setSelectedAcorde(null);
+    setActiveCategory('all');
+    setActiveVibe('all');
+    setSearchQuery('');
+  };
+
+  // Select brand with smart reset & smooth scroll
+  const handleSelectBrand = (brand) => {
+    setSelectedBrand(brand);
+    setSelectedAcorde(null);
+    setActiveCategory('all');
+    setActiveVibe('all');
+    setSearchQuery('');
+    const el = document.getElementById('los-mas-vendidos');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Select acorde with smart fallback so it never returns an empty screen
+  const handleSelectAcorde = (acordeId) => {
+    setSelectedAcorde(acordeId);
+    // If the currently selected brand has no perfume with this acorde, clear brand so user sees all matching perfumes!
+    if (selectedBrand) {
+      const brandHasAcorde = PERFUMES_DATA.some(
+        p => p.brand.toLowerCase() === selectedBrand.toLowerCase() && p.acordes?.includes(acordeId)
+      );
+      if (!brandHasAcorde) setSelectedBrand(null);
+    }
+    // If active category has no matching perfume with this acorde, reset category to 'all'
+    if (activeCategory !== 'all') {
+      const catHasAcorde = PERFUMES_DATA.some(p => {
+        const matchesCat = (activeCategory === 'Para Él' && (p.gender === 'Para Él' || p.gender === 'Unisex')) ||
+                           (activeCategory === 'Para Ella' && (p.gender === 'Para Ella' || p.gender === 'Unisex')) ||
+                           (activeCategory === 'Unisex' && p.gender === 'Unisex');
+        return matchesCat && p.acordes?.includes(acordeId);
+      });
+      if (!catHasAcorde) setActiveCategory('all');
+    }
+    setActiveVibe('all');
+    setSearchQuery('');
+    const el = document.getElementById('los-mas-vendidos');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // Filtered Products Logic
   const filteredProducts = PERFUMES_DATA.filter(p => {
-    // Brand filter from mega menu
+    // Brand filter from mega menu or brands section
     if (selectedBrand && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
+      return false;
+    }
+
+    // Acorde filter from mega menu
+    if (selectedAcorde && !p.acordes?.includes(selectedAcorde)) {
       return false;
     }
 
@@ -169,6 +221,17 @@ export default function App() {
   const openedProduct = PERFUMES_DATA.find(p => p.id === selectedProductId);
   const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+  // Label for active acorde
+  const getAcordeLabel = (id) => {
+    switch (id) {
+      case 'gourmand': return '🍯 Gourmand & Vainilla';
+      case 'oud_maderas': return '🪵 Oud & Maderas Orientales';
+      case 'citricos': return '🍍 Cítricos & Piña Ahumada';
+      case 'rosas': return '🌹 Rosas & Florales';
+      default: return id;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#FAF7F2] text-[#1F2937] flex flex-col font-body selection:bg-[#2E1065] selection:text-[#D4AF37]">
       
@@ -182,54 +245,105 @@ export default function App() {
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
           setSelectedBrand(null);
+          setSelectedAcorde(null);
         }}
-        onSelectBrand={(brand) => {
-          setSelectedBrand(brand);
-          setActiveCategory('all');
+        onSelectBrand={handleSelectBrand}
+        onSelectAcorde={handleSelectAcorde}
+        onSearch={(query) => {
+          setSearchQuery(query);
+          if (query.trim()) {
+            setSelectedAcorde(null);
+          }
         }}
-        onSearch={(query) => setSearchQuery(query)}
         searchQuery={searchQuery}
         onOpenProduct={(id) => setSelectedProductId(id)}
       />
 
-      {/* Active Filter Notice if brand or search is active */}
-      {(selectedBrand || searchQuery || activeCategory !== 'all' || activeVibe !== 'all') && (
-        <div className="bg-purple-100/70 border-b border-purple-200/80 py-2.5 px-4 text-xs">
-          <div className="max-w-7xl mx-auto flex items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="font-bold text-[#2E1065]">Filtro activo:</span>
+      {/* Active Filter Notice if brand, acorde, category or search is active */}
+      {(selectedBrand || selectedAcorde || searchQuery || activeCategory !== 'all' || activeVibe !== 'all') && (
+        <div className="bg-purple-100/90 border-b border-purple-200 py-3 px-4 text-xs sticky top-20 z-30 backdrop-blur-md shadow-sm">
+          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-extrabold text-[#2E1065] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Filtros activos:
+              </span>
+
               {selectedBrand && (
-                <span className="bg-[#2E1065] text-[#D4AF37] px-2.5 py-0.5 rounded-full font-bold">
-                  Casa: {selectedBrand}
+                <span className="inline-flex items-center gap-1.5 bg-[#2E1065] text-[#D4AF37] px-3 py-1 rounded-full font-bold shadow-sm">
+                  <span>Casa: {selectedBrand}</span>
+                  <button 
+                    onClick={() => setSelectedBrand(null)} 
+                    className="hover:text-white ml-0.5 text-sm leading-none"
+                    title="Quitar filtro de casa"
+                  >
+                    &times;
+                  </button>
                 </span>
               )}
+
+              {selectedAcorde && (
+                <span className="inline-flex items-center gap-1.5 bg-[#D4AF37] text-[#1E0741] px-3 py-1 rounded-full font-black shadow-sm">
+                  <span>{getAcordeLabel(selectedAcorde)}</span>
+                  <button 
+                    onClick={() => setSelectedAcorde(null)} 
+                    className="hover:text-black ml-0.5 text-sm leading-none"
+                    title="Quitar filtro de acorde"
+                  >
+                    &times;
+                  </button>
+                </span>
+              )}
+
               {activeCategory !== 'all' && (
-                <span className="bg-purple-200 text-[#2E1065] px-2.5 py-0.5 rounded-full font-bold">
-                  Categoría: {activeCategory}
+                <span className="inline-flex items-center gap-1.5 bg-purple-200 text-[#2E1065] px-3 py-1 rounded-full font-bold">
+                  <span>{activeCategory}</span>
+                  <button 
+                    onClick={() => setActiveCategory('all')} 
+                    className="hover:text-purple-950 ml-0.5 text-sm leading-none"
+                    title="Quitar filtro de categoría"
+                  >
+                    &times;
+                  </button>
                 </span>
               )}
+
               {activeVibe !== 'all' && (
-                <span className="bg-amber-100 text-amber-900 px-2.5 py-0.5 rounded-full font-bold">
-                  Vibe seleccionada
+                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-bold">
+                  <span>Vibe seleccionada</span>
+                  <button 
+                    onClick={() => setActiveVibe('all')} 
+                    className="hover:text-amber-950 ml-0.5 text-sm leading-none"
+                    title="Quitar filtro de vibe"
+                  >
+                    &times;
+                  </button>
                 </span>
               )}
+
               {searchQuery && (
-                <span className="bg-white text-gray-800 px-2.5 py-0.5 rounded-full border border-gray-200">
-                  Búsqueda: "{searchQuery}"
+                <span className="inline-flex items-center gap-1.5 bg-white text-gray-800 px-3 py-1 rounded-full border border-gray-300 font-medium">
+                  <span>Búsqueda: "{searchQuery}"</span>
+                  <button 
+                    onClick={() => setSearchQuery('')} 
+                    className="hover:text-black ml-0.5 text-sm leading-none"
+                    title="Limpiar búsqueda"
+                  >
+                    &times;
+                  </button>
                 </span>
               )}
-              <span className="text-gray-500 font-medium">({filteredProducts.length} fragancias encontradas)</span>
+
+              <span className="text-gray-600 font-semibold bg-white/90 px-2.5 py-1 rounded-full border border-purple-200 shadow-xs">
+                {filteredProducts.length} fragancia{filteredProducts.length === 1 ? '' : 's'} disponible{filteredProducts.length === 1 ? '' : 's'}
+              </span>
             </div>
+
             <button
-              onClick={() => {
-                setSelectedBrand(null);
-                setActiveCategory('all');
-                setActiveVibe('all');
-                setSearchQuery('');
-              }}
-              className="text-xs text-[#2E1065] font-bold hover:underline"
+              onClick={handleResetFilters}
+              className="text-xs text-[#2E1065] font-black hover:text-[#581C87] bg-white hover:bg-purple-50 px-3.5 py-1.5 rounded-full border border-purple-200 transition-all flex items-center gap-1 shadow-xs"
             >
-              Limpiar filtros &times;
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Ver Todo el Catálogo</span>
             </button>
           </div>
         </div>
@@ -244,7 +358,6 @@ export default function App() {
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
         onOpenAiModal={() => {
-          // Open AI Widget
           const widgetBtn = document.querySelector('[aria-label="Abrir Sommelier de Perfumes IA"]');
           if (widgetBtn) widgetBtn.click();
         }}
@@ -264,6 +377,7 @@ export default function App() {
           onAddToCart={handleAddToCart}
           selectedCategory={activeCategory}
           onTabChange={(tabId) => setActiveCategory(tabId)}
+          onResetFilters={handleResetFilters}
         />
 
         {/* 6. Cross-Selling Carousel ("También Compraron") - Justo debajo del catálogo */}
@@ -275,11 +389,7 @@ export default function App() {
 
         {/* 7. Brands Showcase Section (Ref: Luzents reference requested by user) */}
         <BrandsSection
-          onSelectBrand={(brandName) => {
-            setSelectedBrand(brandName);
-            setActiveCategory('all');
-            setActiveVibe('all');
-          }}
+          onSelectBrand={handleSelectBrand}
         />
 
         {/* 8. About Us & Authenticity Guarantee Section */}
@@ -293,12 +403,13 @@ export default function App() {
       <Footer 
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
-          window.scrollTo({ top: 400, behavior: 'smooth' });
+          const el = document.getElementById('los-mas-vendidos');
+          el?.scrollIntoView({ behavior: 'smooth' });
         }} 
       />
 
       {/* 9. Product Detail Modal / PDP (Ref: Imagen 5, 6, 7) */}
-      {openedProduct && (
+      {selectedProductId && openedProduct && (
         <ProductDetailModal
           product={openedProduct}
           onClose={() => setSelectedProductId(null)}
@@ -307,27 +418,37 @@ export default function App() {
         />
       )}
 
-      {/* 10. Slide-Over Cart Drawer with WhatsApp Direct Checkout (Ref: Imagen 2) */}
+      {/* 10. Slide-Over Cart Drawer (Ref: Imagen 2) */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
-        cart={cart}
+        cartItems={cart}
         onUpdateQty={handleUpdateQty}
         onRemoveItem={handleRemoveItem}
-        onClearCart={() => setCart([])}
+        onExploreCatalog={() => {
+          setIsCartOpen(false);
+          const el = document.getElementById('los-mas-vendidos');
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }}
       />
 
-      {/* 11. AI Sommelier Floating Avatar Widget (Ref: Imagen 1, 2, 3, 4) */}
+      {/* 11. AI Sommelier Floating Concierge Widget */}
       <AiSommelierWidget
-        onOpenProduct={(id) => setSelectedProductId(id)}
-        onAddToCart={handleAddToCart}
+        catalog={PERFUMES_DATA}
+        onSelectProduct={(id) => {
+          setSelectedProductId(id);
+        }}
       />
 
-      {/* Toast Notification Alert */}
+      {/* Toast Alert Notification */}
       {toastMessage && (
-        <div className="fixed top-24 right-5 z-50 bg-[#1E0741] text-[#F7E7A9] border border-[#D4AF37]/70 py-3 px-5 rounded-2xl shadow-2xl flex items-center gap-2.5 animate-in slide-in-from-top-4 duration-300">
-          <Sparkles className="w-4 h-4 text-[#D4AF37] flex-shrink-0" />
-          <span className="text-xs font-semibold">{toastMessage}</span>
+        <div className="fixed bottom-6 left-6 z-50 bg-[#2E1065] text-[#D4AF37] border border-[#D4AF37]/40 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="w-6 h-6 rounded-full bg-[#D4AF37] text-[#1E0741] flex items-center justify-center flex-shrink-0">
+            <Check className="w-4 h-4 font-black" />
+          </div>
+          <span className="text-xs sm:text-sm font-bold text-white">
+            {toastMessage}
+          </span>
         </div>
       )}
 

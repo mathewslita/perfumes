@@ -1,6 +1,6 @@
 /**
  * Catálogo Oficial de Perfumes Árabes 100% Originales
- * Marcas: Lattafa, Armaf, Afnan, Al Haramain
+ * Marcas: Lattafa, Armaf, Afnan, Al Haramain, Rasasi, Bharara
  */
 
 export const PERFUMES_DATA = [
@@ -23,6 +23,7 @@ export const PERFUMES_DATA = [
     vibes: ['🌸 Florales & Románticos', '💼 Oficina / Diario', '👑 Más Virales de TikTok'],
     vibeBadge: '🔥 Best Seller Femenino',
     badgeColor: 'bg-rose-500 text-white',
+    acordes: ['rosas', 'citricos', 'vainilla'],
     imageMain: '/assets/images/armaf_cdn_woman.jpg',
     gallery: [
       '/assets/images/armaf_cdn_woman.jpg',
@@ -74,6 +75,7 @@ export const PERFUMES_DATA = [
     vibes: ['🔥 Modo Bestia', '💼 Oficina / Diario', '👑 Más Virales de TikTok'],
     vibeBadge: '🔥 Rey de Cumplidos',
     badgeColor: 'bg-amber-600 text-white',
+    acordes: ['citricos', 'oud_maderas'],
     imageMain: '/assets/images/armaf_cdn_intense.jpg',
     gallery: [
       '/assets/images/armaf_cdn_intense.jpg',
@@ -125,6 +127,7 @@ export const PERFUMES_DATA = [
     vibes: ['🔥 Modo Bestia', '🌙 Seducción y Noche', '👑 Más Virales de TikTok'],
     vibeBadge: '⚡ Nueva Generación',
     badgeColor: 'bg-purple-700 text-white',
+    acordes: ['citricos', 'oud_maderas'],
     imageMain: '/assets/images/armaf_urban_elixir.jpg',
     gallery: [
       '/assets/images/armaf_urban_elixir.jpg',
@@ -176,6 +179,7 @@ export const PERFUMES_DATA = [
     vibes: ['🍯 Dulces y Gourmand', '🌙 Seducción y Noche', '🔥 Modo Bestia', '👑 Más Virales de TikTok'],
     vibeBadge: '🏆 Fenómeno Mundial #1',
     badgeColor: 'bg-amber-500 text-black font-bold',
+    acordes: ['gourmand', 'vainilla'],
     imageMain: '/assets/images/lattafa_khamrah.jpg',
     gallery: [
       '/assets/images/lattafa_khamrah.jpg',
@@ -227,6 +231,7 @@ export const PERFUMES_DATA = [
     vibes: ['🍯 Dulces y Gourmand', '🌸 Florales & Románticos', '👑 Más Virales de TikTok'],
     vibeBadge: '🎀 Nube de Vainilla',
     badgeColor: 'bg-pink-500 text-white',
+    acordes: ['gourmand', 'vainilla', 'rosas'],
     imageMain: '/assets/images/lattafa_yara.jpg',
     gallery: [
       '/assets/images/lattafa_yara.jpg',
@@ -278,6 +283,7 @@ export const PERFUMES_DATA = [
     vibes: ['🔥 Modo Bestia', '🌙 Seducción y Noche', '👑 Más Virales de TikTok'],
     vibeBadge: '🦁 Poder y Elegancia',
     badgeColor: 'bg-black text-amber-400 border border-amber-500',
+    acordes: ['oud_maderas', 'vainilla'],
     imageMain: '/assets/images/lattafa_asad.jpg',
     gallery: [
       '/assets/images/lattafa_asad.jpg',
@@ -311,6 +317,58 @@ export const PERFUMES_DATA = [
     historyText: 'Consolidado como el perfume de mayor madurez y presencia de Lattafa, ideal para eventos de gala o citas donde se requiere dejar una impresión imborrable.'
   },
   {
+    id: 'lattafa-oud-for-glory',
+    name: "Bade'e Al Oud (Oud for Glory)",
+    brand: 'LATTAFA',
+    sku: 'LT-44302',
+    concentration: 'Eau de Parfum Concentrée',
+    volume100ml: '100 ml / 3.4 FL. OZ.',
+    volumeDecant: '10 ml (Atomizador de Viaje)',
+    price100ml: 52.00,
+    originalPrice100ml: 89.00,
+    priceDecant: 13.50,
+    originalPriceDecant: 20.00,
+    discountPercent: 42,
+    rating: 4.9,
+    reviewCount: 1150,
+    gender: 'Unisex',
+    vibes: ['🔥 Modo Bestia', '🌙 Seducción y Noche'],
+    vibeBadge: '🪵 El Rey del Oud',
+    badgeColor: 'bg-neutral-900 text-amber-400 border border-amber-500',
+    acordes: ['oud_maderas'],
+    imageMain: '/assets/images/lattafa_oud_glory.jpg',
+    gallery: [
+      '/assets/images/lattafa_oud_glory.jpg',
+      '/assets/images/lattafa_asad.jpg',
+      '/assets/images/mega_menu_discovery.jpg'
+    ],
+    noteIcons: [
+      { emoji: '🪵', name: 'Oud Ahumado' },
+      { emoji: '🌿', name: 'Azafrán Noble' },
+      { emoji: '🌰', name: 'Nuez Moscada' }
+    ],
+    technicalTable: {
+      headNotes: 'Azafrán real, Nuez moscada y Lavanda aromática francesa',
+      heartNotes: 'Madera de Agar (Oud natural), Pachulí ahumado y Resina de benjuí',
+      baseNotes: 'Oud puro, Almizcle animalizado noble y Madera de cedro oscuro',
+      fragranceType: 'Oriental Amaderado Especiado',
+      concentrationPct: '22% Concentrado de Oud Noble',
+      batchCodePrefix: 'BATCH# LT-OFG-2026-DXB',
+      origin: 'Dubái, Emiratos Árabes Unidos'
+    },
+    performance: {
+      durationLabel: '14+ Horas (Piel y Ropa)',
+      durationPct: 98,
+      projectionLabel: 'Pesada / Presencia Imperial',
+      projectionPct: 96,
+      seasonLabel: 'Otoño / Invierno / Noche',
+      seasonPct: 96
+    },
+    inspiration: 'El homenaje más idéntico y alabado a nivel global a Oud for Greatness de Initio Parfums Privés.',
+    compositionText: 'Un monumento al Oud oriental sagrado. El azafrán y la nuez moscada abren con fuego refinado para dar paso a un corazón de maderas de agar y pachulí que envuelve cualquier habitación con aura de realeza.',
+    historyText: 'Aclamado universalmente por la comunidad nicho internacional por ofrecer la misma potencia y majestuosidad de perfumes de más de $350 dólares.'
+  },
+  {
     id: 'afnan-9pm',
     name: '9 PM',
     brand: 'AFNAN',
@@ -329,6 +387,7 @@ export const PERFUMES_DATA = [
     vibes: ['🌙 Seducción y Noche', '🍯 Dulces y Gourmand', '👑 Más Virales de TikTok'],
     vibeBadge: '🕺 El Rey de la Fiesta',
     badgeColor: 'bg-indigo-700 text-white',
+    acordes: ['gourmand', 'vainilla', 'citricos'],
     imageMain: '/assets/images/afnan_9pm.jpg',
     gallery: [
       '/assets/images/afnan_9pm.jpg',
@@ -380,6 +439,7 @@ export const PERFUMES_DATA = [
     vibes: ['🔥 Modo Bestia', '🍯 Dulces y Gourmand', '👑 Más Virales de TikTok'],
     vibeBadge: '👑 Extrait de Parfum Puro',
     badgeColor: 'bg-yellow-500 text-black font-bold',
+    acordes: ['gourmand', 'citricos', 'oud_maderas'],
     imageMain: '/assets/images/al_haramain_amber_oud.jpg',
     gallery: [
       '/assets/images/al_haramain_amber_oud.jpg',
@@ -411,6 +471,108 @@ export const PERFUMES_DATA = [
     inspiration: 'El más aclamado sucesor de Xerjoff Erba Pura, famoso por su explosión de frutas doradas y almizcle solar.',
     compositionText: 'Un monumento de lujo en metal dorado cepillado. Su concentración Extrait de Parfum libera una cascada de frutas tropicales maduras bañadas en ámbar y vainilla que dura hasta después de bañarse.',
     historyText: 'Una de las fragancias nicho más deseadas de Oriente Medio. Producida por la histórica casa Al Haramain fundada en 1970.'
+  },
+  {
+    id: 'rasasi-hawas-for-him',
+    name: 'Hawas for Him',
+    brand: 'RASASI',
+    sku: 'RS-55201',
+    concentration: 'Eau de Parfum',
+    volume100ml: '100 ml / 3.4 FL. OZ.',
+    volumeDecant: '10 ml (Atomizador de Viaje)',
+    price100ml: 64.90,
+    originalPrice100ml: 110.00,
+    priceDecant: 15.50,
+    originalPriceDecant: 24.00,
+    discountPercent: 41,
+    rating: 4.9,
+    reviewCount: 1420,
+    gender: 'Para Él',
+    vibes: ['🔥 Modo Bestia', '👑 Más Virales de TikTok', '💼 Oficina / Diario'],
+    vibeBadge: '🌊 Bestia Marina Viral',
+    badgeColor: 'bg-cyan-600 text-white',
+    acordes: ['citricos', 'frescos'],
+    imageMain: '/assets/images/rasasi_hawas.jpg',
+    gallery: [
+      '/assets/images/rasasi_hawas.jpg',
+      '/assets/images/mega_menu_discovery.jpg'
+    ],
+    noteIcons: [
+      { emoji: '🍎', name: 'Manzana & Canela' },
+      { emoji: '🌊', name: 'Brisa Marina' },
+      { emoji: '🫐', name: 'Ciruela Oscura' }
+    ],
+    technicalTable: {
+      headNotes: 'Manzana verde crujiente, Bergamota italiana, Limón y Canela cálida',
+      heartNotes: 'Ciruela jugosa, Cardamomo aromático, Flor de azahar y Acordes acuáticos',
+      baseNotes: 'Ámbar gris noble, Almizcle blanco, Pachulí y Maderas flotantes',
+      fragranceType: 'Acuático Especiado Frutal',
+      concentrationPct: '20% Eau de Parfum de Larga Duración',
+      batchCodePrefix: 'BATCH# RS-HWS-2026-DXB',
+      origin: 'Dubái, Emiratos Árabes Unidos'
+    },
+    performance: {
+      durationLabel: '12+ Horas en Piel (Calor Extremo)',
+      durationPct: 96,
+      projectionLabel: 'Pesada / Rastro Acuático Envolvente',
+      projectionPct: 94,
+      seasonLabel: 'Verano / Calor / Todo el Año',
+      seasonPct: 98
+    },
+    inspiration: 'El rey absoluto de los perfumes frescos de verano. Combina la frescura magnética de Invictus Aqua con ciruela oriental y ámbar gris.',
+    compositionText: 'Un torbellino de frescura y seducción. La manzana verde y ciruela madura se funden con notas marinas cristalinas y una base de ámbar gris que proyecta con fuerza titánica aún en días calurosos.',
+    historyText: 'Creado por la legendaria casa Rasasi de Dubái, fundada en 1979. Es uno de los perfumes con mayor cantidad de videos de elogios espontáneos en YouTube y TikTok.'
+  },
+  {
+    id: 'bharara-king-parfum',
+    name: 'King',
+    brand: 'BHARARA',
+    sku: 'BH-77001',
+    concentration: 'Parfum Pure',
+    volume100ml: '100 ml / 3.4 FL. OZ.',
+    volumeDecant: '10 ml (Atomizador de Viaje)',
+    price100ml: 74.90,
+    originalPrice100ml: 135.00,
+    priceDecant: 16.50,
+    originalPriceDecant: 26.00,
+    discountPercent: 45,
+    rating: 5.0,
+    reviewCount: 730,
+    gender: 'Para Él',
+    vibes: ['🔥 Modo Bestia', '👑 Más Virales de TikTok', '🌙 Seducción y Noche'],
+    vibeBadge: '👑 Corona Imperial',
+    badgeColor: 'bg-amber-600 text-black font-bold',
+    acordes: ['citricos', 'vainilla', 'gourmand'],
+    imageMain: '/assets/images/bharara_king.jpg',
+    gallery: [
+      '/assets/images/bharara_king.jpg',
+      '/assets/images/mega_menu_discovery.jpg'
+    ],
+    noteIcons: [
+      { emoji: '🍊', name: 'Naranja Real' },
+      { emoji: '🍦', name: 'Vainilla Bourbon' },
+      { emoji: '✨', name: 'Ámbar Puro' }
+    ],
+    technicalTable: {
+      headNotes: 'Naranja dulce de Sicilia, Limón brillante y Bergamota de Calabria',
+      heartNotes: 'Frutas confitadas, Acorde ambarino y Resinas doradas',
+      baseNotes: 'Vainilla de Madagascar pura, Almizcle blanco y Madera de cedro',
+      fragranceType: 'Cítrico Oriental Dulce (Parfum)',
+      concentrationPct: '25% Parfum Puro Concentrado',
+      batchCodePrefix: 'BATCH# BH-KNG-2026',
+      origin: 'Emiratos Árabes Unidos'
+    },
+    performance: {
+      durationLabel: '14+ Horas (Concentración Extrema)',
+      durationPct: 98,
+      projectionLabel: 'Bestial / Llena Habitaciones',
+      projectionPct: 97,
+      seasonLabel: 'Todo el Año / Noches Especiales',
+      seasonPct: 95
+    },
+    inspiration: 'Una oda imperial al magnetismo cítrico-avainillado de nicho. Proyección de realeza que no admite comparación.',
+    compositionText: 'Un elixir adictivo donde la naranja siciliana y la bergamota reposan sobre una capa suntuosa de vainilla pura y ámbar cálido. Su frasco negro mate con corona dorada es el símbolo definitivo de estatus.',
+    historyText: 'La creación insignia de Bharara Beauty, viralizada por los perfumistas más exigentes como la joya oculta de la alta perfumería oriental moderna.'
   }
 ];
 
@@ -423,11 +585,18 @@ export const VIBE_CATEGORIES = [
   { id: 'viral', name: 'Los Más Virales de TikTok', icon: '👑', filterTag: '👑 Más Virales de TikTok' }
 ];
 
+export const ACORDES_LIST = [
+  { id: 'gourmand', name: 'Gourmand & Vainilla', icon: '🍯', count: '5 fragancias', badge: 'Dulces' },
+  { id: 'oud_maderas', name: 'Oud & Maderas Orientales', icon: '🪵', count: '4 fragancias', badge: 'Amaderados' },
+  { id: 'citricos', name: 'Cítricos & Piña Ahumada', icon: '🍍', count: '5 fragancias', badge: 'Frescos' },
+  { id: 'rosas', name: 'Rosas de Grasse & Florales', icon: '🌹', count: '2 fragancias', badge: 'Florales' }
+];
+
 export const BRANDS_LIST = [
-  { name: 'LATTAFA', count: '14 fragancias', badge: 'Dubai' },
-  { name: 'ARMAF', count: '12 fragancias', badge: 'Best Seller' },
-  { name: 'AFNAN', count: '8 fragancias', badge: 'Ultra Niche' },
-  { name: 'AL HARAMAIN', count: '9 fragancias', badge: 'Fundada 1970' },
-  { name: 'RASASI', count: '6 fragancias', badge: 'Tradicional' },
-  { name: 'BHARARA', count: '5 fragancias', badge: 'Alta Gama' }
+  { name: 'LATTAFA', count: '4 fragancias', badge: 'Top #1 Viral' },
+  { name: 'ARMAF', count: '3 fragancias', badge: 'Best Seller' },
+  { name: 'RASASI', count: '1 fragancia', badge: 'Hawas' },
+  { name: 'BHARARA', count: '1 fragancia', badge: 'King' },
+  { name: 'AFNAN', count: '1 fragancia', badge: '9 PM Niche' },
+  { name: 'AL HARAMAIN', count: '1 fragancia', badge: 'Gold Edition' }
 ];
