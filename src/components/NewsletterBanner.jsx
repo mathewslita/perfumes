@@ -17,7 +17,7 @@ export default function NewsletterBanner() {
   };
 
   return (
-    <section className="bg-gradient-to-r from-[#2E1065] via-[#431407] to-[#1E0741] text-white py-10 px-4 border-t border-[#D4AF37]/30">
+    <section className="bg-gradient-to-r from-[#2E1065] via-[#3B0764] to-[#1E0741] text-white py-12 px-4 border-t border-[#D4AF37]/30">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
         
         {/* Left Text (Ref: Imagen 3: "HABLEMOS DE BELLEZA") */}
