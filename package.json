@@ -4,18 +4,23 @@
   "description": "Una experiencia digital web de alta perfumería artesanal y fragancias de nicho. Desarrollada con estética editorial de lujo en modo oscuro (obsidiana y oro champán), tipografía refinada (*Playfair Display*, *Cormorant Garamond* y *Montserrat*), micro-animaciones interactivas y arquitectura modular en Vanilla HTML5, CSS3 y JavaScript.",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5173",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "dev:vite": "vite --port 5173",
+    "build:vite": "vite build"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
     "@vitejs/plugin-react": "^6.1.2",
+    "postcss": "^8.5.30",
     "tailwindcss": "^4.3.3",
     "vite": "^8.3.4"
   },
   "dependencies": {
     "lucide-react": "^1.59.0",
+    "next": "^16.4.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   }

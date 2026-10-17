@@ -63,7 +63,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
     return { replyText, recs };
   };
 
-  const handleSendMessage = (textToSend) => {
+  const handleSendMessage = async (textToSend) => {
     const query = textToSend || inputMessage;
     if (!query.trim()) return;
 
@@ -72,7 +72,27 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
     setMessages(newMessages);
     setInputMessage('');
 
-    // Simulate AI thinking and reply
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: query, history: messages })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setMessages([...newMessages, {
+          sender: 'bot',
+          text: data.reply,
+          recommendations: data.recommendations || []
+        }]);
+        return;
+      }
+    } catch (e) {
+      console.warn('Fallback to local engine:', e);
+    }
+
+    // Fallback response engine
     setTimeout(() => {
       const { replyText, recs } = generateSommelierResponse(query);
       setMessages([...newMessages, {
