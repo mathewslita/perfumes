@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Search, ShoppingBag, User, ChevronDown, Sparkles, X, Flame } from 'lucide-react';
+import { Search, ShoppingBag, User, ChevronDown, Sparkles, X, Flame, ShieldCheck } from 'lucide-react';
 import { BRANDS_LIST } from '../data/perfumes';
 
 export default function Header({ 
@@ -15,6 +15,15 @@ export default function Header({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const menuTimeoutRef = useRef(null);
+
+  // Category navigation that filters and smooth-scrolls to the catalog
+  const handleNavCategory = (category) => {
+    onSelectCategory(category);
+    const catalogEl = document.getElementById('los-mas-vendidos');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   const handleMouseEnter = () => {
     if (menuTimeoutRef.current) clearTimeout(menuTimeoutRef.current);
@@ -55,19 +64,19 @@ export default function Header({
           {/* Center Navigation Links with Mega-Menu Trigger */}
           <nav className="hidden lg:flex items-center space-x-1 font-medium text-sm text-gray-700">
             <button 
-              onClick={() => onSelectCategory('Para Él')}
+              onClick={() => handleNavCategory('Para Él')}
               className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
             >
               Para Él
             </button>
             <button 
-              onClick={() => onSelectCategory('Para Ella')}
+              onClick={() => handleNavCategory('Para Ella')}
               className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
             >
               Para Ella
             </button>
             <button 
-              onClick={() => onSelectCategory('Unisex')}
+              onClick={() => handleNavCategory('Unisex')}
               className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
             >
               Unisex
@@ -240,32 +249,43 @@ export default function Header({
               )}
             </div>
 
+            {/* Visual Divider */}
+            <span className="h-4 w-px bg-gray-200 mx-1 hidden xl:inline-block" />
+
+            {/* Marcas Button - Refined Luxury Aesthetic */}
             <button 
               onClick={() => {
                 const el = document.getElementById('nuestras-marcas');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-3 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+              className="px-3.5 py-1.5 rounded-full text-gray-800 hover:text-[#2E1065] hover:bg-amber-50/70 border border-transparent hover:border-[#D4AF37]/50 transition-all font-bold text-xs flex items-center gap-1.5 shadow-none hover:shadow-sm"
+              title="Explorar todas las casas perfumeras"
             >
-              Marcas
+              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+              <span>Marcas</span>
             </button>
+
+            {/* Nosotros Button - Refined Luxury Aesthetic */}
             <button 
               onClick={() => {
                 const el = document.getElementById('acerca-de-nosotros');
                 el?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-3 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+              className="px-3.5 py-1.5 rounded-full text-gray-800 hover:text-[#2E1065] hover:bg-purple-50/70 border border-transparent hover:border-[#2E1065]/30 transition-all font-bold text-xs flex items-center gap-1.5 shadow-none hover:shadow-sm"
+              title="Conoce nuestra historia y sellos de autenticidad"
             >
-              Nosotros
+              <ShieldCheck className="w-3.5 h-3.5 text-[#2E1065]" />
+              <span>Nosotros</span>
             </button>
+
             <button 
-              onClick={() => onSelectCategory('decants')}
-              className="px-3 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+              onClick={() => handleNavCategory('decants')}
+              className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
             >
               Decants / Muestras
             </button>
             <button 
-              onClick={() => onSelectCategory('ofertas')}
+              onClick={() => handleNavCategory('ofertas')}
               className="px-3 py-2 rounded-full text-rose-600 hover:bg-rose-50 font-bold transition-all flex items-center gap-1"
             >
               <span>Ofertas</span>

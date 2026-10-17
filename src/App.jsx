@@ -264,7 +264,14 @@ export default function App() {
           onTabChange={(tabId) => setActiveCategory(tabId)}
         />
 
-        {/* 6. Brands Showcase Section (Ref: Luzents reference requested by user) */}
+        {/* 6. Cross-Selling Carousel ("También Compraron") - Justo debajo del catálogo */}
+        <CrossSelling
+          products={PERFUMES_DATA}
+          onOpenProduct={(id) => setSelectedProductId(id)}
+          onAddToCart={handleAddToCart}
+        />
+
+        {/* 7. Brands Showcase Section (Ref: Luzents reference requested by user) */}
         <BrandsSection
           onSelectBrand={(brandName) => {
             setSelectedBrand(brandName);
@@ -273,15 +280,8 @@ export default function App() {
           }}
         />
 
-        {/* 7. About Us & Authenticity Guarantee Section */}
+        {/* 8. About Us & Authenticity Guarantee Section */}
         <AboutSection />
-
-        {/* 8. Cross-Selling Carousel (Ref: Imagen 3) */}
-        <CrossSelling
-          products={PERFUMES_DATA}
-          onOpenProduct={(id) => setSelectedProductId(id)}
-          onAddToCart={handleAddToCart}
-        />
 
         {/* 9. WhatsApp VIP Club Banner (Ref: Imagen 3 upgraded to WhatsApp) */}
         <NewsletterBanner />
