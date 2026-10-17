@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, ShoppingBag, Zap, ShieldCheck, Truck, Check, 
-  Maximize2, Clock, Sparkles, Wind, Calendar, Info 
+  Maximize2, Clock, Sparkles, Wind, Calendar, Info, Flame 
 } from 'lucide-react';
 import LightboxModal from './LightboxModal';
 
