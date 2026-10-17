@@ -1,85 +1,133 @@
-# 🌟 AUREA LUMINA — Maison de Haute Parfumerie
+# 🌙 SULTAN PARFUMS — Boutique de Alta Perfumería Árabe
 
-Una experiencia digital web de alta perfumería artesanal y fragancias de nicho. Desarrollada con estética editorial de lujo en modo oscuro (obsidiana y oro champán), tipografía refinada (*Playfair Display*, *Cormorant Garamond* y *Montserrat*), micro-animaciones interactivas y arquitectura modular en Vanilla HTML5, CSS3 y JavaScript.
+Una aplicación web de comercio electrónico de alta conversión especializada en **Perfumes Árabes 100% Originales con Sello Holográfico y Batch Code verificable** (Lattafa, Armaf, Afnan, Al Haramain, Rasasi, Bharara).
 
----
-
-## ✨ Características Principales
-
-1. **Estética Visual de Lujo (*Dark Editorial Luxury*)**:
-   - Paleta de colores inspirada en la alta perfumería francesa: fondo obsidiana profundo (`#0a0b0e`), acabados en pan de oro (`#d4af37`), champán suave y reflejos en cristal esmerilado con efecto *glassmorphism* (`backdrop-filter: blur(20px)`).
-   - Fotografía de producto generada en alta definición con frascos de cristal facetado, destellos lumínicos y detalles de lujo.
-
-2. **Descubridor Olfativo Interactivo ("Encuentra tu Firma")**:
-   - Cuestionario sensorial en 3 etapas: Atmósfera deseada, Acordes olfativos predilectos e Intensidad de fijación.
-   - Algoritmo en tiempo real que recomienda la fragancia ideal con notas desglosadas y botón de compra directa.
-
-3. **Catálogo Exclusivo y Filtrado Dinámico**:
-   - Filtros por familia olfativa: *Ámbar & Oriental*, *Maderas & Oud*, *Flores de Grasse*, *Cítrico Solar*.
-   - Buscador predictivo en vivo por notas olfativas (oud, rosa, bergamota, vainilla, ámbar) o nombre.
-
-4. **Pirámide Olfativa Interactiva**:
-   - Desglose visual de las fases de evaporación: **Notas de Salida** (primeros 30 min), **Notas de Corazón** (2 a 6 horas) y **Notas de Fondo** (8 a 24+ horas).
-
-5. **Modal de Vista Rápida (*Quick View*)**:
-   - Inspección detallada del frasco, notas olfativas y selector dinámico de formato (100 ml vs. 50 ml) con cálculo de precio proporcional en vivo.
-
-6. **Bolsa de Compras Desplegable (*Cart Drawer*)**:
-   - Despliegue lateral con animación fluida.
-   - Control de cantidades (+ / -), eliminación de productos y persistencia con `localStorage`.
-   - Sistema de cupones de cortesía (prueba con `LUMINA10` para un 10% de descuento o `CONCIERGE` para 15%).
-   - Simulación de compra con modal de confirmación y número de pedido oficial.
-
-7. **Selector Multidivisa en Tiempo Real**:
-   - Conversión instantánea de precios entre **USD ($)**, **EUR (€)** y **MXN ($)**.
-
-8. **Optimización SEO y Semántica**:
-   - Estructura semántica HTML5 (`<header>`, `<main>`, `<section>`, `<article>`, `<aside>`, `<footer>`).
-   - Meta etiquetas OpenGraph, Twitter Cards, títulos y descripciones optimizadas.
-   - IDs únicos en todos los elementos interactivos para pruebas automáticas.
+Diseñada bajo el concepto **"Lujo Oriental Accesible"**:
+- **Paleta cromática:** Crema Arena Suave (`#FAF7F2`), Púrpura Imperial Profundo (`#2E1065`) y Dorado Árabe (`#D4AF37`).
+- **Arquitectura UI/UX:** Inspirada fielmente en la distribución de 7 layouts e-commerce de alto rendimiento: Mega-menú fotográfico en hover, selector visual por "Vibe", fichas olfativas con pirámide y medidores de duración, carrito lateral con barra de envío gratis, checkout directo a WhatsApp Business y Asistente Sommelier IA.
+- **Full-Stack:** Compatible de forma nativa con **Next.js (App Router) y Vercel**, incluyendo endpoints de API Route Handlers.
 
 ---
 
-## 📁 Estructura del Repositorio
+## 🚀 Despliegue en Vercel (1-Click Ready)
+
+Este repositorio está 100% optimizado para **Vercel** con detección automática de Next.js:
+
+1. Sube este repositorio a tu cuenta de **GitHub**.
+2. En [Vercel](https://vercel.com), haz clic en **"Add New Project"** e importa el repositorio `perfumes`.
+3. Vercel detectará automáticamente:
+   - **Framework Preset:** `Next.js`
+   - **Build Command:** `next build`
+   - **Output Directory:** `.next`
+4. *(Opcional)* En las variables de entorno de Vercel (**Environment Variables**), agrega:
+   - `GEMINI_API_KEY`: Tu clave de Google Gemini API para potenciar las respuestas del Sommelier IA en `/api/chat`. Si no se define, el sistema utiliza el motor sommelier semántico local incorporado.
+5. Haz clic en **Deploy**. ¡Tu boutique estará en vivo con HTTPS y CDN global en segundos!
+
+---
+
+## 💎 Características y Módulos Implementados
+
+### 1. Header Inteligente y Mega-Menú Visual (Ref: Imagen 1)
+- **Top Bar Promocional:** Aviso de garantía holográfica, envíos asegurados y línea de soporte WhatsApp.
+- **Navbar Sticky:** Logo de la marca, buscador predictivo en tiempo real y contador de carrito animado.
+- **Mega-Menú en Hover:** 
+  - Columnas de Marcas oficiales y Acordes olfativos a la izquierda.
+  - **2 Banners fotográficos promocionales a la derecha**: Discovery Kit de Decants 10ml y Club de Nuit Urban Man Elixir en rocas volcánicas.
+
+### 2. Buscador Visual por "Vibe" (Principiantes)
+- Botones píldora para filtrar sin necesidad de conocer notas técnicas:
+  - 🔥 *Modo Bestia (+12h)*
+  - 🍯 *Dulces y Gourmand*
+  - 💼 *Frescos para Oficina / Diario*
+  - 🌙 *Seducción y Fiesta Nocturna*
+  - 👑 *Los Más Virales de TikTok*
+
+### 3. Ficha de Producto Especializada (PDP) & Modal Lightbox (Ref: Imágenes 5, 6 y 7)
+- **Galería con Lightbox a Pantalla Completa:** Vista detallada en fondo oscuro con flechas de navegación y carrusel de miniaturas (Ref: Imagen 5).
+- **Selector de Formato:** Botones para alternar entre `Botella Completa 100ml` y `Decant (Muestra 10ml)` con ajuste automático de precios y etiqueta de ahorro.
+- **Medidores de Rendimiento Visual (Barras de progreso):** Duración en piel (12h+ Modo Bestia), Proyección/Estela y Estación ideal.
+- **Referencia Olfativa ("Te encantará si te gusta..."):** ADN y parecidos con perfumes famosos de diseñador (*Angels' Share*, *Creed Aventus*, *Sauvage Elixir*, *Coco Mademoiselle*, *Erba Pura*, *Ultra Male*).
+- **Tabla Técnica Estructurada (Ref: Imagen 7):** Notas de salida, corazón, fondo, concentración, batch code verificado y país de origen.
+- **Botones de Conversión Rápida:** `Agregar al Carrito` y `Comprar Ahora por WhatsApp`.
+
+### 4. Carrito Lateral Desplegable & Checkout a WhatsApp Business (Ref: Imagen 2)
+- Cajón lateral con overlay translúcido.
+- **Barra de progreso de incentivo:** Calcula en vivo cuánto le falta al cliente para obtener *Envío Gratis y un Decant de cortesía*.
+- Control de cantidades (+ / -) y desglose de ahorro en negativo.
+- **Botón "Confirmar Pedido por WhatsApp":** Construye automáticamente el enlace `https://wa.me/...` con el mensaje formateado, listado de productos, presentaciones, cantidades, total y datos de envío del cliente.
+
+### 5. Sommelier de Perfumes IA (Ref: Widget Imágenes 1-4)
+- Avatar flotante animado en la esquina inferior derecha con burbuja de saludo no intrusiva.
+- Endpoint `/api/chat` en Next.js con soporte para Google Gemini API y motor semántico de respaldo.
+- Respuestas especializadas con tarjetas de recomendación interactivas para agregar al carrito o abrir la ficha directamente.
+- Enlace directo para escalar la conversación con un asesor humano en WhatsApp.
+
+---
+
+## 🗂️ Estructura del Repositorio
 
 ```text
 perfumes/
-├── .git/                      # Repositorio Git inicializado
-├── .gitignore                 # Exclusiones de control de versiones
-├── index.html                 # Estructura semántica y componentes de la web
-├── styles.css                 # Sistema de diseño, temas, responsive y efectos
-├── app.js                     # Motor interactivo en Vanilla JavaScript
-├── README.md                  # Documentación del proyecto
-└── assets/
-    └── images/
-        ├── perfume_hero.jpg   # Frasco insignia Aurea Lumina
-        ├── perfume_oud.jpg    # Aethel Agar Oud (Maderas & Humo)
-        ├── perfume_rose.jpg   # Éclat de Rose (Flores de Grasse)
-        └── perfume_solaris.jpg# Aurosa Bergamotto (Cítricos Solares)
+├── app/
+│   ├── api/
+│   │   └── chat/
+│   │       └── route.js       # Route Handler de Next.js para el Sommelier IA
+│   ├── layout.jsx             # Root layout con metadatos y fuentes
+│   └── page.jsx               # Página de inicio Next.js
+├── src/
+│   ├── components/
+│   │   ├── TopBar.jsx
+│   │   ├── Header.jsx         # Mega-menú con 2 banners fotográficos
+│   │   ├── HeroBanner.jsx
+│   │   ├── VibeSelector.jsx   # Filtros rápidos por estilo
+│   │   ├── BestSellersTabs.jsx# Tabs dinámicos y cuadrícula
+│   │   ├── ProductCard.jsx    # Tarjeta con 3 notas e iconos
+│   │   ├── CrossSelling.jsx   # Carrusel "Personas que vieron este producto..."
+│   │   ├── ProductDetailModal.jsx # Ficha técnica, barras de duración y selector 100ml/10ml
+│   │   ├── LightboxModal.jsx  # Modal fullscreen oscuro
+│   │   ├── CartDrawer.jsx     # Slide-over cart con checkout WhatsApp
+│   │   ├── AiSommelierWidget.jsx # Widget flotante de IA
+│   │   ├── NewsletterBanner.jsx
+│   │   └── Footer.jsx
+│   ├── data/
+│   │   └── perfumes.js        # Catálogo de 8 perfumes árabes con notas reales
+│   ├── App.jsx                # Componente principal interactivo
+│   ├── index.css              # Tailwind CSS v4 y tokens de diseño
+│   └── main.jsx               # Entry para Vite
+├── public/
+│   └── assets/
+│       └── images/            # Fotografías de producto de alta resolución
+├── next.config.mjs            # Configuración de Next.js
+├── postcss.config.mjs         # Configuración PostCSS / Tailwind
+├── vercel.json                # Configuración de despliegue Vercel
+├── vite.config.js             # Configuración Vite alternativa
+└── package.json
 ```
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto
+## 🛠️ Comandos de Ejecución Local
 
-Puedes abrir la web directamente en tu navegador o a través de un servidor local:
-
-### Opción 1: Apertura Directa
-Abre el archivo `index.html` en cualquier navegador web moderno (Google Chrome, Edge, Firefox, Safari).
-
-### Opción 2: Con un Servidor Local (Recomendado)
-Usando Node.js / npx:
+### Con Next.js (Recomendado para Vercel)
 ```bash
-npx serve perfumes
+# Modo desarrollo
+npm run dev
+
+# Compilar para producción
+npm run build
+
+# Iniciar servidor de producción local
+npm run start
 ```
-O usando Python 3:
+Abre en tu navegador: `http://localhost:3000`
+
+### Con Vite (Alternativa ultra-rápida)
 ```bash
-cd perfumes
-python -m http.server 3000
+npm run dev:vite
 ```
-Y abre en tu navegador: `http://localhost:3000`
+Abre en tu navegador: `http://localhost:5173`
 
 ---
 
-## 📜 Licencia & Créditos
-Creado para la experiencia de alta perfumería **AUREA LUMINA**. Todos los derechos reservados 2026.
+## 📜 Licencia & Autenticidad
+Creado para **SULTAN PARFUMS**. Todos los derechos reservados 2026. Distribución autorizada de perfumería oriental con sello holográfico.
