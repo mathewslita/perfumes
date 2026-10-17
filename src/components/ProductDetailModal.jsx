@@ -69,11 +69,12 @@ export default function ProductDetailModal({
                     alt={product.name} 
                     className="w-full h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute top-3 left-3 bg-rose-600 text-white font-extrabold text-xs px-2.5 py-1 rounded-full shadow-sm">
-                    -{product.discountPercent}% OFF
+                  <div className="absolute top-3 left-3 bg-rose-600 text-white font-black text-xs px-3 py-1 rounded-full shadow-lg border-2 border-white ring-1 ring-black/10 flex items-center gap-1">
+                    <Flame className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+                    <span>-{product.discountPercent}% OFF</span>
                   </div>
                   <button 
-                    className="absolute bottom-3 right-3 bg-white/90 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all flex items-center gap-1 text-xs font-semibold"
+                    className="absolute bottom-3 right-3 bg-white/95 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all flex items-center gap-1 text-xs font-bold border border-gray-200"
                     title="Ver pantalla completa"
                   >
                     <Maximize2 className="w-4 h-4 text-[#2E1065]" />
@@ -128,24 +129,27 @@ export default function ProductDetailModal({
                   </div>
 
                   {/* Pricing Box & Savings (Ref: Imagen 6) */}
-                  <div className="mt-4 p-3.5 bg-[#FAF7F2] rounded-xl border border-gray-200/80">
+                  <div className="mt-4 p-3.5 bg-[#FAF7F2] rounded-xl border border-gray-200/90 shadow-sm">
                     <div className="flex items-baseline gap-3">
                       <span className="text-3xl font-black text-[#2E1065]">
                         ${currentPrice.toFixed(2)}
                       </span>
-                      <span className="text-sm text-gray-400 line-through">
+                      <span className="text-sm font-bold text-gray-600 line-through decoration-rose-500 decoration-1.5">
                         ${originalPrice.toFixed(2)}
                       </span>
-                      <span className="ml-auto bg-emerald-100 text-emerald-800 text-xs font-black px-2.5 py-1 rounded-full">
+                      <span className="ml-auto bg-emerald-100 text-emerald-900 text-xs font-black px-3 py-1 rounded-full border border-emerald-300/80 shadow-sm">
                         Precio un {product.discountPercent}% más ventajoso
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-500 mt-1">
-                      Impuestos incluidos. Ahorro inmediato de ${savings.toFixed(2)}.
-                    </p>
+                    <div className="flex items-center justify-between text-[11px] text-gray-600 mt-2 pt-2 border-t border-gray-200/60">
+                      <span>✓ Impuestos incluidos • Ahorro de <strong>${savings.toFixed(2)}</strong></span>
+                      <span className="text-amber-800 font-bold flex items-center gap-1">
+                        <Flame className="w-3.5 h-3.5 text-amber-500 fill-amber-500" /> 14 personas viendo ahora
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Format Selector (Ref: Key Conversion Element) */}
+                  {/* Format Selector (Ref: Key Conversion Element with UX guidance) */}
                   <div className="mt-5">
                     <label className="text-xs font-bold text-gray-800 uppercase tracking-wider block mb-2">
                       Seleccionar Presentación:
@@ -154,19 +158,25 @@ export default function ProductDetailModal({
                       <button
                         type="button"
                         onClick={() => setSelectedFormat('100ml')}
-                        className={`p-3 rounded-xl border text-left transition-all relative ${
+                        className={`p-3.5 rounded-xl border text-left transition-all relative ${
                           selectedFormat === '100ml'
-                            ? 'border-[#2E1065] bg-purple-50/70 ring-2 ring-[#2E1065]/20'
+                            ? 'border-[#2E1065] bg-purple-50/80 ring-2 ring-[#2E1065]/30 shadow-md'
                             : 'border-gray-200 hover:border-gray-300 bg-white'
                         }`}
                       >
-                        <div className="font-bold text-xs text-gray-900">Botella Completa</div>
-                        <div className="text-[11px] text-gray-500">{product.volume100ml}</div>
-                        <div className="text-xs font-extrabold text-[#2E1065] mt-1">
+                        <div className="flex items-center justify-between">
+                          <span className="font-extrabold text-xs text-gray-900">Botella Completa</span>
+                          <span className="text-[9px] bg-purple-100 text-[#2E1065] font-black px-1.5 py-0.5 rounded">👑 Favorito</span>
+                        </div>
+                        <div className="text-[11px] text-gray-500 mt-0.5">{product.volume100ml}</div>
+                        <div className="text-sm font-black text-[#2E1065] mt-1.5">
                           ${product.price100ml.toFixed(2)}
                         </div>
+                        <div className="text-[10px] text-emerald-700 font-bold mt-0.5">
+                          Mejor valor por ml
+                        </div>
                         {selectedFormat === '100ml' && (
-                          <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-[#2E1065] text-white flex items-center justify-center">
+                          <div className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-[#2E1065] text-white flex items-center justify-center">
                             <Check className="w-2.5 h-2.5" />
                           </div>
                         )}
@@ -175,19 +185,25 @@ export default function ProductDetailModal({
                       <button
                         type="button"
                         onClick={() => setSelectedFormat('decant')}
-                        className={`p-3 rounded-xl border text-left transition-all relative ${
+                        className={`p-3.5 rounded-xl border text-left transition-all relative ${
                           selectedFormat === 'decant'
-                            ? 'border-[#2E1065] bg-purple-50/70 ring-2 ring-[#2E1065]/20'
+                            ? 'border-[#2E1065] bg-purple-50/80 ring-2 ring-[#2E1065]/30 shadow-md'
                             : 'border-gray-200 hover:border-gray-300 bg-white'
                         }`}
                       >
-                        <div className="font-bold text-xs text-gray-900">Decant / Muestra</div>
-                        <div className="text-[11px] text-gray-500">{product.volumeDecant}</div>
-                        <div className="text-xs font-extrabold text-[#2E1065] mt-1">
+                        <div className="flex items-center justify-between">
+                          <span className="font-extrabold text-xs text-gray-900">Decant / Muestra</span>
+                          <span className="text-[9px] bg-amber-100 text-amber-900 font-black px-1.5 py-0.5 rounded">🧪 Probar</span>
+                        </div>
+                        <div className="text-[11px] text-gray-500 mt-0.5">{product.volumeDecant}</div>
+                        <div className="text-sm font-black text-[#2E1065] mt-1.5">
                           ${product.priceDecant.toFixed(2)}
                         </div>
+                        <div className="text-[10px] text-purple-700 font-bold mt-0.5">
+                          ~120 atomizaciones
+                        </div>
                         {selectedFormat === 'decant' && (
-                          <div className="absolute top-2 right-2 w-4 h-4 rounded-full bg-[#2E1065] text-white flex items-center justify-center">
+                          <div className="absolute top-2.5 right-2.5 w-4 h-4 rounded-full bg-[#2E1065] text-white flex items-center justify-center">
                             <Check className="w-2.5 h-2.5" />
                           </div>
                         )}

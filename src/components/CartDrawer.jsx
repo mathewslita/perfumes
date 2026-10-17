@@ -192,8 +192,8 @@ export default function CartDrawer({
                         <span className="text-[10px] text-gray-400 block">
                           ${item.price.toFixed(2)} por 1 un.
                         </span>
-                        <div className="flex items-baseline gap-1 justify-end">
-                          <span className="text-[10px] text-gray-400 line-through">
+                        <div className="flex items-baseline gap-1.5 justify-end">
+                          <span className="text-[11px] font-bold text-gray-500 line-through decoration-rose-500 decoration-1.5">
                             ${(item.originalPrice * item.quantity).toFixed(2)}
                           </span>
                           <span className="font-black text-sm text-[#2E1065]">
