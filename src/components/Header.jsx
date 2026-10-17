@@ -241,6 +241,24 @@ export default function Header({
             </div>
 
             <button 
+              onClick={() => {
+                const el = document.getElementById('nuestras-marcas');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-3 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+            >
+              Marcas
+            </button>
+            <button 
+              onClick={() => {
+                const el = document.getElementById('acerca-de-nosotros');
+                el?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="px-3 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+            >
+              Nosotros
+            </button>
+            <button 
               onClick={() => onSelectCategory('decants')}
               className="px-3 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
             >
@@ -281,14 +299,23 @@ export default function Header({
               )}
             </div>
 
-            {/* Profile Button (Ref: Imagen 1 "¡Hola! Mi cuenta") */}
-            <button className="hidden sm:flex items-center gap-1.5 text-xs text-gray-700 hover:text-[#2E1065] font-semibold px-2 py-1.5 rounded-full hover:bg-purple-50 transition-colors">
-              <User className="w-4 h-4 text-[#2E1065]" />
+            {/* WhatsApp Advisor Live Button (Conversion-focused replacement for Mi Cuenta) */}
+            <a
+              href="https://wa.me/593985911895?text=Hola%20Sultan%20Parfums,%20deseo%20asesor%C3%ADa%20personalizada%20para%20elegir%20mi%20perfume"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:flex items-center gap-2 bg-[#FAF7F2] hover:bg-emerald-50 border border-emerald-200 text-gray-800 hover:text-emerald-900 font-bold text-xs px-3.5 py-1.5 rounded-full transition-all shadow-sm active:scale-95"
+              title="Chatear con un asesor humano en WhatsApp"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
               <div className="text-left text-[11px] leading-tight">
-                <span className="text-gray-400 block text-[9px]">¡Hola!</span>
-                <span>Mi cuenta</span>
+                <span className="text-emerald-700 font-black block text-[9px] uppercase tracking-wider">En Línea</span>
+                <span className="text-[#2E1065] font-extrabold">Asesor WhatsApp</span>
               </div>
-            </button>
+            </a>
 
             {/* Cart Trigger (Ref: Imagen 1 badge) */}
             <button 

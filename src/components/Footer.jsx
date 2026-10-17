@@ -9,85 +9,78 @@ export default function Footer({ onSelectCategory }) {
         {/* 4 Perfectly Balanced Columns (Ref: Imagen 3 Layout) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-12 border-b border-purple-900/60">
           
-          {/* Col 1: MI CUENTA & BENEFICIOS */}
+          {/* Col 1: GARANTÍA & CONFIANZA (Eliminada Mi Cuenta sin BD) */}
           <div className="space-y-4">
             <div>
               <h4 className="font-bold text-xs uppercase tracking-widest text-[#D4AF37] mb-3 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Mi Cuenta
+                <ShieldCheck className="w-4 h-4 text-[#D4AF37]" /> Garantía & Confianza
               </h4>
               <ul className="space-y-2 text-xs text-purple-200">
-                <li>
-                  <a href="#" className="hover:text-white hover:underline transition-colors block">
-                    Mi cuenta
-                  </a>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-emerald-400">✓</span>
+                  <span>100% Originales de Dubái</span>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-white hover:underline transition-colors block">
-                    Rastrea tu pedido 📦
-                  </a>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-emerald-400">✓</span>
+                  <span>Sello Holográfico de Fábrica 🔒</span>
                 </li>
-                <li>
-                  <a href="#" className="hover:text-white hover:underline transition-colors block">
-                    Autenticidad & Batch Code 🔒
-                  </a>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-emerald-400">✓</span>
+                  <span>Batch Code Verificable en Botella</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <span className="text-emerald-400">✓</span>
+                  <span>Decants de Muestra 10ml (~120 sprays)</span>
                 </li>
               </ul>
             </div>
 
             <div className="pt-2 border-t border-purple-900/40">
               <h5 className="font-bold text-[11px] uppercase tracking-wider text-[#D4AF37] mb-2.5">
-                Beneficios Exclusivos
+                Compra Fácil por WhatsApp
               </h5>
-              <ul className="space-y-2 text-xs text-purple-200">
-                <li>
-                  <a href="#" className="hover:text-white hover:underline transition-colors block">
-                    Sultan Points | Acumula Puntos 🌟
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="hover:text-white hover:underline transition-colors block">
-                    Crédito Directo & Pagos Flexibles 💳
-                  </a>
-                </li>
-              </ul>
+              <p className="text-xs text-purple-200 leading-relaxed">
+                Sin necesidad de registrarte ni crear contraseñas. Elige tu aroma y coordinamos tu pedido en minutos.
+              </p>
             </div>
           </div>
 
           {/* Col 2: ACERCA DE */}
           <div>
             <h4 className="font-bold text-xs uppercase tracking-widest text-[#D4AF37] mb-3">
-              Acerca De
+              Conoce Sultan Parfums
             </h4>
             <ul className="space-y-2.5 text-xs text-purple-200">
               <li>
-                <a href="#" className="hover:text-white hover:underline transition-colors block">
-                  Nuestra empresa
+                <a 
+                  href="#acerca-de-nosotros" 
+                  className="hover:text-white hover:underline transition-colors block"
+                >
+                  Nuestra Historia & Misión 🌙
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline transition-colors block">
-                  Boutiques & Showrooms 📍
+                <a 
+                  href="#nuestras-marcas" 
+                  className="hover:text-white hover:underline transition-colors block"
+                >
+                  Nuestras 12 Casas Oficiales 👑
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline transition-colors block">
-                  Políticas, términos y condiciones
+                <a 
+                  href="https://wa.me/593985911895?text=Hola%20Sultan%20Parfums,%20deseo%20asesoría%20sobre%20sus%20perfumes"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white hover:underline transition-colors block text-[#D4AF37]"
+                >
+                  Asesoría en Vivo por WhatsApp 💬
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-white hover:underline transition-colors block">
-                  Políticas de privacidad y cookies
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline transition-colors block">
-                  HABLEMOS DE BELLEZA ÁRABE
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-white hover:underline transition-colors block">
-                  Beauty Blog Oficial ✨
-                </a>
+                <span className="text-purple-300/80 block">
+                  Envíos a todo el país con empaque blindado
+                </span>
               </li>
             </ul>
           </div>

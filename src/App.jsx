@@ -10,6 +10,8 @@ import CrossSelling from './components/CrossSelling';
 import ProductDetailModal from './components/ProductDetailModal';
 import CartDrawer from './components/CartDrawer';
 import AiSommelierWidget from './components/AiSommelierWidget';
+import BrandsSection from './components/BrandsSection';
+import AboutSection from './components/AboutSection';
 import NewsletterBanner from './components/NewsletterBanner';
 import Footer from './components/Footer';
 import { PERFUMES_DATA } from './data/perfumes';
@@ -262,14 +264,26 @@ export default function App() {
           onTabChange={(tabId) => setActiveCategory(tabId)}
         />
 
-        {/* 6. Cross-Selling Carousel (Ref: Imagen 3) */}
+        {/* 6. Brands Showcase Section (Ref: Luzents reference requested by user) */}
+        <BrandsSection
+          onSelectBrand={(brandName) => {
+            setSelectedBrand(brandName);
+            setActiveCategory('all');
+            setActiveVibe('all');
+          }}
+        />
+
+        {/* 7. About Us & Authenticity Guarantee Section */}
+        <AboutSection />
+
+        {/* 8. Cross-Selling Carousel (Ref: Imagen 3) */}
         <CrossSelling
           products={PERFUMES_DATA}
           onOpenProduct={(id) => setSelectedProductId(id)}
           onAddToCart={handleAddToCart}
         />
 
-        {/* 7. Newsletter Banner (Ref: Imagen 3) */}
+        {/* 9. WhatsApp VIP Club Banner (Ref: Imagen 3 upgraded to WhatsApp) */}
         <NewsletterBanner />
       </main>
 

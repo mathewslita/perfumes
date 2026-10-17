@@ -195,45 +195,69 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                 {/* Clickable Product Recommendation Cards inside Chat */}
                 {msg.recommendations && msg.recommendations.length > 0 && (
                   <div className="mt-2.5 space-y-2 w-full max-w-[90%]">
-                    {msg.recommendations.map((perfume) => (
-                      <div
-                        key={perfume.id}
-                        className="bg-white p-2.5 rounded-xl border border-purple-100 shadow-sm flex items-center justify-between gap-2 hover:border-[#D4AF37] transition-all"
-                      >
-                        <div 
-                          className="flex items-center gap-2 cursor-pointer flex-grow"
-                          onClick={() => {
-                            onOpenProduct(perfume.id);
-                            setIsOpen(false);
-                          }}
+                    {msg.recommendations.map((perfume) => {
+                      const waText = encodeURIComponent(
+                        `Hola Sultan Parfums! El Sommelier Virtual Yasmin me acaba de recomendar ${perfume.brand} ${perfume.name} ($${perfume.price100ml.toFixed(2)}). Deseo saber si tienen disponibilidad para envío inmediato.`
+                      );
+
+                      return (
+                        <div
+                          key={perfume.id}
+                          className="bg-white p-3 rounded-2xl border border-purple-100 shadow-sm hover:border-[#D4AF37] transition-all"
                         >
-                          <img 
-                            src={perfume.imageMain} 
-                            alt={perfume.name} 
-                            className="w-11 h-11 object-contain rounded bg-[#FAF7F2] p-1"
-                          />
-                          <div>
-                            <span className="text-[9px] font-bold text-[#2E1065] uppercase block">
-                              {perfume.brand}
-                            </span>
-                            <h5 className="font-bold text-xs text-gray-900 leading-tight">
-                              {perfume.name}
-                            </h5>
-                            <span className="text-xs font-black text-[#D4AF37]">
-                              ${perfume.price100ml.toFixed(2)}
-                            </span>
+                          <div 
+                            className="flex items-center gap-2.5 cursor-pointer mb-2"
+                            onClick={() => {
+                              onOpenProduct(perfume.id);
+                              setIsOpen(false);
+                            }}
+                          >
+                            <img 
+                              src={perfume.imageMain} 
+                              alt={perfume.name} 
+                              className="w-12 h-12 object-contain rounded-xl bg-[#FAF7F2] p-1 border border-gray-100 flex-shrink-0"
+                            />
+                            <div className="flex-grow">
+                              <span className="text-[9px] font-black text-[#2E1065] uppercase block">
+                                {perfume.brand}
+                              </span>
+                              <h5 className="font-bold text-xs text-gray-900 leading-tight">
+                                {perfume.name}
+                              </h5>
+                              <div className="flex items-baseline gap-1.5 mt-0.5">
+                                <span className="text-xs font-black text-[#2E1065]">
+                                  ${perfume.price100ml.toFixed(2)}
+                                </span>
+                                <span className="text-[10px] text-gray-400 line-through">
+                                  ${perfume.originalPrice100ml.toFixed(2)}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Dual Action Buttons: Add to Cart & WhatsApp Direct Order */}
+                          <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-gray-100">
+                            <button
+                              onClick={() => onAddToCart(perfume, '100ml', 1)}
+                              className="bg-purple-50 hover:bg-purple-100 text-[#2E1065] font-bold text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors"
+                            >
+                              <ShoppingBag className="w-3 h-3 text-[#D4AF37]" />
+                              <span>+ Carrito</span>
+                            </button>
+
+                            <a
+                              href={`https://wa.me/593985911895?text=${waText}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 shadow-sm transition-colors"
+                            >
+                              <MessageCircle className="w-3 h-3 fill-white" />
+                              <span>Pedir en WhatsApp</span>
+                            </a>
                           </div>
                         </div>
-
-                        <button
-                          onClick={() => onAddToCart(perfume, '100ml', 1)}
-                          className="bg-[#2E1065] text-white p-2 rounded-full hover:bg-[#3B0764] transition-all"
-                          title="Añadir a la bolsa"
-                        >
-                          <ShoppingBag className="w-3.5 h-3.5 text-[#D4AF37]" />
-                        </button>
-                      </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 )}
               </div>
