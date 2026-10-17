@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-cream: #FAF7F2;
+    --purple-imperial: #2E1065;
+    --purple-deep: #1E0741;
+    --purple-accent: #581C87;
+    --gold-arabic: #D4AF37;
+    --gold-light: #F7E7A9;
+    --dark-obsidian: #121212;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    color: #1F2937;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B89228;
+}
+
+/* Custom Utility Classes */
+.font-arabic-title {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+}
+
+.font-body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Glow & Shadows */
+.shadow-soft-card {
+  box-shadow: 0 4px 20px -2px rgba(46, 16, 101, 0.06), 0 2px 8px -1px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-soft-card:hover {
+  box-shadow: 0 12px 28px -4px rgba(46, 16, 101, 0.12), 0 4px 12px -2px rgba(212, 175, 55, 0.15);
+}
+
+.shadow-glow-gold {
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+}
+
+.shadow-glow-purple {
+  box-shadow: 0 0 25px rgba(46, 16, 101, 0.3);
+}
+
+/* Smooth Transitions */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+@keyframes pulseGently {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-pulse-gently {
+  animation: pulseGently 3s ease-in-out infinite;
+}
