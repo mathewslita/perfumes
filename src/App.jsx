@@ -237,6 +237,8 @@ export default function App() {
 
       {/* 3. Hero Banner (Boutique de Lujo Oriental Accesible) */}
       <HeroBanner
+        onOpenProduct={(id) => setSelectedProductId(id)}
+        onAddToCart={handleAddToCart}
         onExplore={() => {
           const el = document.getElementById('los-mas-vendidos');
           el?.scrollIntoView({ behavior: 'smooth' });
