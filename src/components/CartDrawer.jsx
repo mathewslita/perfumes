@@ -4,13 +4,19 @@ import { X, Trash2, ShoppingBag, Truck, Gift, MessageCircle, ArrowRight, ShieldC
 export default function CartDrawer({ 
   isOpen, 
   onClose, 
-  cart, 
+  cart: cartProp, 
+  cartItems,
   onUpdateQty, 
   onRemoveItem,
-  onClearCart 
+  onClearCart,
+  onExploreCatalog
 }) {
   const [customerName, setCustomerName] = useState('');
   const [customerCity, setCustomerCity] = useState('');
+
+  const cart = Array.isArray(cartProp) 
+    ? cartProp 
+    : (Array.isArray(cartItems) ? cartItems : []);
 
   if (!isOpen) return null;
 
@@ -18,9 +24,9 @@ export default function CartDrawer({
   const FREE_SHIPPING_GOAL = 75.00;
 
   // Calculations
-  const subtotal = cart.reduce((sum, item) => sum + (item.originalPrice * item.quantity), 0);
-  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const totalDiscount = subtotal - total;
+  const subtotal = cart.reduce((sum, item) => sum + ((item.originalPrice || item.price || 0) * (item.quantity || 1)), 0);
+  const total = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
+  const totalDiscount = Math.max(0, subtotal - total);
   const progressPct = Math.min(100, Math.round((total / FREE_SHIPPING_GOAL) * 100));
   const remainingForFreeShipping = Math.max(0, FREE_SHIPPING_GOAL - total);
 
@@ -125,7 +131,10 @@ export default function CartDrawer({
                   Agrega una de nuestras joyas olfativas de Dubái para iniciar tu experiencia sensorial.
                 </p>
                 <button
-                  onClick={onClose}
+                  onClick={() => {
+                    onClose();
+                    if (onExploreCatalog) onExploreCatalog();
+                  }}
                   className="mt-5 bg-[#2E1065] text-white text-xs font-bold py-2.5 px-6 rounded-full hover:bg-[#3B0764] transition-all"
                 >
                   Explorar Perfumes Árabes

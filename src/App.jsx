@@ -19,14 +19,8 @@ import { Sparkles, ShieldCheck, Check, RotateCcw } from 'lucide-react';
 
 export default function App() {
   // Cart state persisted in localStorage
-  const [cart, setCart] = useState(() => {
-    try {
-      const saved = localStorage.getItem('sultan_cart');
-      return saved ? JSON.parse(saved) : [];
-    } catch (e) {
-      return [];
-    }
-  });
+  const [cart, setCart] = useState([]);
+  const [isMounted, setIsMounted] = useState(false);
 
   // UI States
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -38,14 +32,31 @@ export default function App() {
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
-  // Sync cart to localStorage
+  // Load cart on client mount to prevent SSR hydration mismatch
   useEffect(() => {
+    try {
+      const saved = localStorage.getItem('sultan_cart');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setCart(parsed);
+        }
+      }
+    } catch (e) {
+      console.error('Error loading cart:', e);
+    }
+    setIsMounted(true);
+  }, []);
+
+  // Sync cart to localStorage after mounted
+  useEffect(() => {
+    if (!isMounted) return;
     try {
       localStorage.setItem('sultan_cart', JSON.stringify(cart));
     } catch (e) {
       console.error('Error saving cart:', e);
     }
-  }, [cart]);
+  }, [cart, isMounted]);
 
   // Show Toast Alert
   const showToast = (msg) => {
@@ -219,7 +230,7 @@ export default function App() {
   });
 
   const openedProduct = PERFUMES_DATA.find(p => p.id === selectedProductId);
-  const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartItemCount = (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + (item.quantity || 1), 0);
 
   // Label for active acorde
   const getAcordeLabel = (id) => {
@@ -422,6 +433,7 @@ export default function App() {
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
+        cart={cart}
         cartItems={cart}
         onUpdateQty={handleUpdateQty}
         onRemoveItem={handleRemoveItem}
