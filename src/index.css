@@ -82,3 +82,77 @@
 .animate-pulse-gently {
   animation: pulseGently 3s ease-in-out infinite;
 }
+
+/* ==========================================================================
+   CINTA AUTOMÁTICA DE MARCAS (INFINITE LOGO MARQUEE RIBBON)
+   ========================================================================== */
+@keyframes marqueeScrollLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes marqueeScrollRight {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marqueeScrollLeft 45s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marqueeScrollRight 48s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-left-fast {
+  animation: marqueeScrollLeft 30s linear infinite;
+}
+
+.animate-marquee-right-fast {
+  animation: marqueeScrollRight 32s linear infinite;
+}
+
+.animate-marquee-left-slow {
+  animation: marqueeScrollLeft 65s linear infinite;
+}
+
+.animate-marquee-right-slow {
+  animation: marqueeScrollRight 68s linear infinite;
+}
+
+/* Pause animation on hover */
+.pause-marquee-hover:hover .animate-marquee-left,
+.pause-marquee-hover:hover .animate-marquee-right,
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused !important;
+}
+
+/* Vignette mask for marquee edges */
+.mask-marquee-edges {
+  mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
