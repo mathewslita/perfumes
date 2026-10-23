@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Search, ShoppingBag, ChevronDown, Sparkles, X, Flame, ShieldCheck } from 'lucide-react';
+import { Search, ShoppingBag, ChevronDown, Sparkles, X, Flame, ShieldCheck, Crown, Award } from 'lucide-react';
 import { BRANDS_LIST, ACORDES_LIST } from '../data/perfumes';
+import Logo from './Logo';
 
 export default function Header({ 
   cartCount, 
@@ -59,52 +60,61 @@ export default function Header({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-40 bg-[#0E0E0E]/95 backdrop-blur-md border-b border-[#C9A961]/25 text-[#F5F1E8] shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20 gap-4">
           
-          {/* Brand Logo */}
-          <div className="flex items-center gap-6">
+          {/* Brand Logo ARKANO PERFUMERÍA */}
+          <div className="flex items-center gap-4">
             <button 
-              onClick={() => onSelectCategory('all')} 
-              className="text-left group flex flex-col"
+              onClick={() => handleNavCategory('all')} 
+              className="text-left group flex items-center transition-transform hover:scale-[1.02]"
+              title="ARKANO Perfumería - Inicio"
             >
-              <div className="flex items-center gap-1.5">
-                <span className="font-arabic-title text-2xl sm:text-3xl font-extrabold tracking-wider text-[#2E1065] group-hover:text-[#581C87] transition-colors">
-                  SULTAN
-                </span>
-                <span className="font-arabic-title text-2xl sm:text-3xl font-light text-[#D4AF37]">
-                  PARFUMS
-                </span>
-              </div>
-              <span className="text-[9px] tracking-[0.25em] font-semibold text-gray-500 uppercase -mt-1">
-                Alta Perfumería Árabe • Dubái
-              </span>
+              <Logo variant="horizontal" theme="light" size="md" />
             </button>
           </div>
 
-          {/* Center Navigation Links with Mega-Menu Trigger */}
-          <nav className="hidden lg:flex items-center space-x-1 font-medium text-sm text-gray-700">
+          {/* Center Navigation Links with Categories */}
+          <nav className="hidden lg:flex items-center space-x-1 font-medium text-xs tracking-wider uppercase">
+            {/* Categoría Árabe con Corona */}
+            <button 
+              onClick={() => handleNavCategory('arabes')}
+              className="px-3.5 py-2 rounded-full text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5"
+            >
+              <Crown className="w-3.5 h-3.5" />
+              <span>Árabes Dubái</span>
+            </button>
+
+            {/* Categoría Diseñador */}
+            <button 
+              onClick={() => handleNavCategory('disenador')}
+              className="px-3.5 py-2 rounded-full text-[#F5F1E8] hover:text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5"
+            >
+              <Award className="w-3.5 h-3.5 text-[#C9A961]" />
+              <span>Diseñador</span>
+            </button>
+
             <button 
               onClick={() => handleNavCategory('Para Él')}
-              className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
             >
               Para Él
             </button>
             <button 
               onClick={() => handleNavCategory('Para Ella')}
-              className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
             >
               Para Ella
             </button>
             <button 
               onClick={() => handleNavCategory('Unisex')}
-              className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
+              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
             >
               Unisex
             </button>
 
-            {/* Mega-Menu Hover Button (Ref: Imagen 1) */}
+            {/* Mega-Menu Hover Button */}
             <div 
               className="relative"
               onMouseEnter={handleMouseEnter}
@@ -112,145 +122,84 @@ export default function Header({
             >
               <button 
                 onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#2E1065] bg-purple-50/90 hover:bg-purple-100 font-bold transition-all border border-purple-200/70 shadow-sm"
+                className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#C9A961] bg-[#1A1A1A] hover:bg-[#252525] font-bold transition-all border border-[#C9A961]/30 shadow-sm"
               >
-                <span>Casas Árabes & Novedades</span>
-                <ChevronDown className={`w-4 h-4 text-[#D4AF37] transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
+                <span>Casas & Acordes</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-[#C9A961] transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
-              {/* MEGA MENU DROPDOWN (Ref: Imagen 1 Layout with Live Product Counters) */}
+              {/* Mega-Menu Dropdown Panel */}
               {megaMenuOpen && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[920px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 grid grid-cols-12 gap-6 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
-                  
-                  {/* Left Column 1: Casas / Marcas */}
-                  <div className="col-span-3 border-r border-gray-100 pr-4">
-                    <h4 className="text-xs font-bold text-[#2E1065] uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Casas Oficiales
-                    </h4>
-                    <ul className="space-y-1.5 text-sm text-gray-600">
-                      {BRANDS_LIST.map((brand) => (
-                        <li key={brand.name}>
-                          <button
-                            onClick={() => handleSelectBrandNav(brand.name)}
-                            className="w-full text-left flex items-center justify-between hover:text-[#2E1065] hover:font-bold py-1.5 px-2 rounded-lg hover:bg-purple-50 transition-all group"
-                          >
-                            <span className="font-semibold text-gray-800 group-hover:text-[#2E1065]">{brand.name}</span>
-                            <span className="text-[10px] text-purple-900 bg-purple-100/90 font-bold px-2 py-0.5 rounded-full">
-                              {brand.count}
-                            </span>
-                          </button>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Left Column 2: Familias Olfativas & Formatos */}
-                  <div className="col-span-3 border-r border-gray-100 pr-4">
-                    <h4 className="text-xs font-bold text-[#2E1065] uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                      <Flame className="w-3.5 h-3.5 text-amber-500" /> Acordes & Estilos
-                    </h4>
-                    <ul className="space-y-1.5 text-sm text-gray-600">
-                      {ACORDES_LIST.map((acorde) => (
-                        <li key={acorde.id}>
-                          <button 
-                            onClick={() => handleSelectAcordeNav(acorde.id)}
-                            className="w-full text-left flex items-center justify-between hover:text-[#2E1065] hover:font-bold py-1.5 px-2 rounded-lg hover:bg-amber-50/70 transition-all group"
-                          >
-                            <span className="flex items-center gap-1.5 text-xs font-semibold text-gray-800 group-hover:text-[#2E1065]">
-                              <span>{acorde.icon}</span>
-                              <span>{acorde.name}</span>
-                            </span>
-                            <span className="text-[10px] text-amber-900 bg-amber-100/90 font-bold px-1.5 py-0.5 rounded-full">
-                              {acorde.count}
-                            </span>
-                          </button>
-                        </li>
-                      ))}
-                      <li className="pt-1 border-t border-gray-100">
-                        <button 
-                          onClick={() => { handleNavCategory('decants'); setMegaMenuOpen(false); }}
-                          className="w-full text-left flex items-center justify-between text-[#B89228] hover:text-[#977317] font-bold py-1.5 px-2 rounded-lg hover:bg-yellow-50/80 transition-all"
-                        >
-                          <span className="flex items-center gap-1.5 text-xs">
-                            <span>🧪</span>
-                            <span>Decants 10ml (Muestras)</span>
-                          </span>
-                          <span className="text-[10px] bg-yellow-100 text-yellow-900 font-bold px-1.5 py-0.5 rounded-full">
-                            11 fragancias
-                          </span>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-
-                  {/* Right Column: 2 Photographic Promotion Banners (Ref: Imagen 1) */}
-                  <div className="col-span-6 grid grid-cols-2 gap-4">
-                    {/* Banner 1: Discovery Kit / Decants Pouch */}
-                    <div 
-                      onClick={() => {
-                        handleNavCategory('decants');
-                        setMegaMenuOpen(false);
-                      }}
-                      className="group cursor-pointer rounded-xl overflow-hidden relative border border-gray-100 bg-[#FAF7F2] shadow-sm hover:shadow-md transition-all flex flex-col"
-                    >
-                      <div className="h-32 overflow-hidden bg-gray-100">
-                        <img 
-                          src="/assets/images/mega_menu_discovery.jpg" 
-                          alt="Estuche organizador de decants de viaje"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
-                        />
-                      </div>
-                      <div className="p-3 bg-white flex-grow flex flex-col justify-between">
-                        <div>
-                          <span className="text-[10px] font-bold text-[#D4AF37] tracking-wider uppercase block">
-                            Experiencia Discovery
-                          </span>
-                          <h5 className="font-bold text-xs text-[#2E1065] leading-tight mt-0.5">
-                            Decants de 10ml en Atomizador
-                          </h5>
-                          <p className="text-[11px] text-gray-500 mt-1 line-clamp-2">
-                            Prueba antes de comprar la botella grande con envío express.
-                          </p>
-                        </div>
-                        <span className="text-xs font-bold text-[#2E1065] mt-2 inline-flex items-center gap-1 group-hover:text-[#D4AF37]">
-                          Ver Muestras &rarr;
-                        </span>
-                      </div>
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[720px] animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                  <div className="bg-[#0E0E0E] rounded-3xl shadow-2xl border border-[#C9A961]/40 p-6 grid grid-cols-12 gap-6 text-[#F5F1E8]">
+                    
+                    {/* Columna 1: Casas de Diseñador & Árabes */}
+                    <div className="col-span-4 border-r border-white/10 pr-4">
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
+                        <Crown className="w-3.5 h-3.5" /> Casas de Perfumería
+                      </h4>
+                      <ul className="space-y-1.5 text-xs">
+                        {BRANDS_LIST.map((brand, idx) => (
+                          <li key={idx}>
+                            <button
+                              onClick={() => handleSelectBrandNav(brand.name)}
+                              className="w-full text-left py-1 px-2 rounded-lg hover:bg-white/10 hover:text-[#C9A961] flex items-center justify-between transition-colors group"
+                            >
+                              <span className="font-semibold text-gray-200 group-hover:text-[#C9A961]">
+                                {brand.name}
+                              </span>
+                              <span className="text-[10px] bg-white/10 text-[#C9A961] px-1.5 py-0.5 rounded font-mono">
+                                {brand.badge}
+                              </span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
-                    {/* Banner 2: Club de Nuit Urban Man Elixir (Ref: Image 1) */}
-                    <div 
-                      onClick={() => {
-                        onOpenProduct('armaf-club-de-nuit-urban-man-elixir');
-                        setMegaMenuOpen(false);
-                      }}
-                      className="group cursor-pointer rounded-xl overflow-hidden relative border border-gray-100 bg-gray-950 shadow-sm hover:shadow-md transition-all flex flex-col"
-                    >
-                      <div className="h-32 overflow-hidden bg-gray-900 relative">
-                        <img 
-                          src="/assets/images/armaf_urban_elixir.jpg" 
-                          alt="Armaf Club de Nuit Urban Man Elixir"
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90" 
-                        />
-                        <span className="absolute top-2 left-2 bg-[#D4AF37] text-black text-[9px] font-black px-1.5 py-0.5 rounded">
-                          NOVEDAD
-                        </span>
-                      </div>
-                      <div className="p-3 bg-gray-950 text-white flex-grow flex flex-col justify-between">
-                        <div>
-                          <span className="text-[10px] font-bold text-[#D4AF37] tracking-wider uppercase block">
-                            Armaf Parfums
-                          </span>
-                          <h5 className="font-bold text-xs text-white leading-tight mt-0.5">
-                            Club de Nuit Urban Man Elixir
-                          </h5>
-                          <p className="text-[11px] text-gray-400 mt-1">
-                            El híbrido bestial entre Sauvage Elixir y Aventus.
-                          </p>
+                    {/* Columna 2: Familias Olfativas y Acordes */}
+                    <div className="col-span-4 border-r border-white/10 pr-4">
+                      <h4 className="text-[10px] font-black uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
+                        <Sparkles className="w-3.5 h-3.5" /> Acordes Estilo Fragrantica
+                      </h4>
+                      <ul className="space-y-1.5 text-xs">
+                        {ACORDES_LIST.map((acorde, idx) => (
+                          <li key={idx}>
+                            <button
+                              onClick={() => handleSelectAcordeNav(acorde.id)}
+                              className="w-full text-left py-1 px-2 rounded-lg hover:bg-white/10 hover:text-[#C9A961] flex items-center justify-between transition-colors group"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span>{acorde.icon}</span>
+                                <span className="font-semibold text-gray-200 group-hover:text-[#C9A961]">
+                                  {acorde.name}
+                                </span>
+                              </div>
+                              <span className="text-[10px] text-gray-400">
+                                {acorde.badge}
+                              </span>
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    {/* Columna 3: Banner de Calidad */}
+                    <div className="col-span-4 flex flex-col justify-between bg-[#171717] p-4 rounded-2xl border border-[#C9A961]/25">
+                      <div>
+                        <div className="inline-flex items-center gap-1 bg-[#C9A961]/20 text-[#C9A961] text-[9px] font-black px-2 py-0.5 rounded uppercase mb-2">
+                          Garantía ARKANO
                         </div>
-                        <span className="text-xs font-bold text-[#D4AF37] mt-2 inline-flex items-center gap-1">
-                          Comprar Ahora &rarr;
-                        </span>
+                        <h5 className="font-arabic-title text-sm font-bold text-white leading-snug">
+                          El Arte de la Perfumería Original
+                        </h5>
+                        <p className="text-[11px] text-gray-300 mt-1.5 leading-relaxed">
+                          Fórmulas certificadas con sello holográfico y batch code coincidentes para total tranquilidad.
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-[11px] text-[#C9A961] font-bold">
+                        <span>Fragrantica Integrado</span>
+                        <span>100% Genuinos</span>
                       </div>
                     </div>
 
@@ -258,104 +207,41 @@ export default function Header({
                 </div>
               )}
             </div>
-
-            {/* Visual Divider */}
-            <span className="h-4 w-px bg-gray-200 mx-1 hidden xl:inline-block" />
-
-            {/* Marcas Button - Refined Luxury Aesthetic */}
-            <button 
-              onClick={() => {
-                const el = document.getElementById('nuestras-marcas');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-3.5 py-1.5 rounded-full text-gray-800 hover:text-[#2E1065] hover:bg-amber-50/70 border border-transparent hover:border-[#D4AF37]/50 transition-all font-bold text-xs flex items-center gap-1.5 shadow-none hover:shadow-sm"
-              title="Explorar todas las casas perfumeras"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span>Marcas</span>
-            </button>
-
-            {/* Nosotros Button - Refined Luxury Aesthetic */}
-            <button 
-              onClick={() => {
-                const el = document.getElementById('acerca-de-nosotros');
-                el?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-3.5 py-1.5 rounded-full text-gray-800 hover:text-[#2E1065] hover:bg-purple-50/70 border border-transparent hover:border-[#2E1065]/30 transition-all font-bold text-xs flex items-center gap-1.5 shadow-none hover:shadow-sm"
-              title="Conoce nuestra historia y sellos de autenticidad"
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#2E1065]" />
-              <span>Nosotros</span>
-            </button>
-
-            <button 
-              onClick={() => handleNavCategory('decants')}
-              className="px-3.5 py-2 rounded-full hover:text-[#2E1065] hover:bg-purple-50 transition-all font-semibold"
-            >
-              Decants / Muestras
-            </button>
-            <button 
-              onClick={() => handleNavCategory('ofertas')}
-              className="px-3 py-2 rounded-full text-rose-600 hover:bg-rose-50 font-bold transition-all flex items-center gap-1"
-            >
-              <span>Ofertas</span>
-              <span className="bg-rose-100 text-rose-700 text-[10px] px-1.5 py-0.5 rounded-full font-black">
-                Hasta -45%
-              </span>
-            </button>
           </nav>
 
-          {/* Right Actions: Live Search, Profile, Cart */}
+          {/* Right Actions: Search + Cart */}
           <div className="flex items-center gap-3">
-            {/* Live Search Input (Ref: Imagen 1) */}
-            <div className="relative w-44 sm:w-64 lg:w-72">
-              <input
-                type="text"
-                placeholder="¿Buscas algo en especial? (oud, vainilla...)"
+            {/* Live Search Input */}
+            <div className={`relative transition-all duration-300 ${searchFocused ? 'w-56 sm:w-64' : 'w-40 sm:w-52'}`}>
+              <Search className="w-4 h-4 text-[#C9A961] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+              <input 
+                type="text" 
+                placeholder="Buscar perfume, notas..."
                 value={searchQuery}
                 onChange={(e) => onSearch(e.target.value)}
                 onFocus={() => setSearchFocused(true)}
-                onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
-                className="w-full bg-[#FAF7F2] border border-gray-200 rounded-full py-2 pl-9 pr-8 text-xs font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:border-[#2E1065] focus:bg-white focus:ring-2 focus:ring-[#2E1065]/10 transition-all"
+                onBlur={() => setSearchFocused(false)}
+                className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-full py-1.5 pl-9 pr-8 text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#C9A961] transition-all"
               />
-              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               {searchQuery && (
                 <button 
-                  onClick={() => onSearch('')}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  onClick={() => onSearch('')} 
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
 
-            {/* WhatsApp Advisor Live Button */}
-            <a
-              href="https://wa.me/593985911895?text=Hola%20Sultan%20Parfums,%20deseo%20asesor%C3%ADa%20personalizada%20para%20elegir%20mi%20perfume"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-2 bg-[#FAF7F2] hover:bg-emerald-50 border border-emerald-200 text-gray-800 hover:text-emerald-900 font-bold text-xs px-3.5 py-1.5 rounded-full transition-all shadow-sm active:scale-95"
-              title="Chatear con un asesor humano en WhatsApp"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <div className="text-left text-[11px] leading-tight">
-                <span className="text-emerald-700 font-black block text-[9px] uppercase tracking-wider">En Línea</span>
-                <span className="text-[#2E1065] font-extrabold">Asesor WhatsApp</span>
-              </div>
-            </a>
-
             {/* Cart Trigger */}
             <button 
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-full bg-[#FAF7F2] hover:bg-purple-100/70 border border-purple-200/60 text-[#2E1065] transition-all hover:scale-105 active:scale-95 group shadow-sm"
-              aria-label="Abrir carrito"
+              className="relative p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95"
+              aria-label="Ver carrito"
             >
-              <ShoppingBag className="w-5 h-5 text-[#2E1065] group-hover:text-[#581C87]" />
+              <ShoppingBag className="w-5 h-5" />
               {cartCount > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-[#2E1065] text-[#D4AF37] font-black text-[11px] w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-md animate-in zoom-in-50 duration-200">
+                <span className="absolute -top-1 -right-1 bg-[#C9A961] text-[#0E0E0E] text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse-gently">
                   {cartCount}
                 </span>
               )}

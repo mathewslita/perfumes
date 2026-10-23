@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 110" width="300" height="110">
+  <!-- Xerjoff Iconic Emblem -->
+  <g fill="#000000" transform="translate(133, 5) scale(0.65)">
+    <path d="M25 0 C25 15 35 25 50 25 C35 25 25 35 25 50 C25 35 15 25 0 25 C15 25 25 15 25 0 Z"/>
+    <circle cx="25" cy="25" r="4" fill="#000000"/>
+  </g>
+  <text x="150" y="75" text-anchor="middle" font-family="'Cinzel', 'Trajan Pro', 'Georgia', serif" font-weight="800" font-size="28" letter-spacing="7" fill="#000000">XERJOFF</text>
+  <text x="150" y="96" text-anchor="middle" font-family="'Cinzel', 'Georgia', serif" font-weight="600" font-size="10" letter-spacing="4" fill="#A58B4E">TORINO 1861</text>
+</svg>

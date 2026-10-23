@@ -3,21 +3,21 @@ import { VIBE_CATEGORIES } from '../data/perfumes';
 
 export default function VibeSelector({ activeVibe, onSelectVibe }) {
   return (
-    <div className="bg-[#FAF7F2] py-6 border-b border-gray-200/60">
+    <div className="bg-[#F5F1E8] py-6 border-b border-[#C9A961]/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
-        {/* Title for Beginners */}
+        {/* Title */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
           <div>
-            <span className="text-[10px] font-bold tracking-[0.2em] text-[#D4AF37] uppercase">
-              Compra Rápida e Intuitiva
+            <span className="text-[10px] font-bold tracking-[0.2em] text-[#A58B4E] uppercase">
+              Descubrimiento por Ocasión
             </span>
-            <h3 className="font-arabic-title text-base sm:text-lg font-bold text-[#2E1065]">
-              ¿Qué vibra o momento buscas hoy?
+            <h3 className="font-arabic-title text-base sm:text-lg font-bold text-[#0E0E0E]">
+              ¿Qué estilo o momento buscas hoy?
             </h3>
           </div>
           <span className="text-xs text-gray-500 italic">
-            Elige tu estilo sin necesidad de olerlo previamente ✨
+            Filtra rápidamente por personalidad y estela ✨
           </span>
         </div>
 
@@ -31,8 +31,8 @@ export default function VibeSelector({ activeVibe, onSelectVibe }) {
                 onClick={() => onSelectVibe(vibe.id)}
                 className={`flex-shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all shadow-sm ${
                   isActive
-                    ? 'bg-[#2E1065] text-[#D4AF37] ring-2 ring-[#D4AF37] shadow-md scale-105'
-                    : 'bg-white text-gray-700 hover:text-[#2E1065] hover:bg-purple-50/80 border border-gray-200'
+                    ? 'bg-[#0E0E0E] text-[#C9A961] ring-2 ring-[#C9A961] shadow-md scale-105'
+                    : 'bg-white text-gray-800 hover:text-[#0E0E0E] hover:bg-[#C9A961]/15 border border-gray-200'
                 }`}
               >
                 <span className="text-base">{vibe.icon}</span>

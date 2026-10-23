@@ -2,41 +2,46 @@
 
 @layer base {
   :root {
-    --bg-cream: #FAF7F2;
-    --purple-imperial: #2E1065;
-    --purple-deep: #1E0741;
-    --purple-accent: #581C87;
-    --gold-arabic: #D4AF37;
-    --gold-light: #F7E7A9;
-    --dark-obsidian: #121212;
+    /* Paleta Oficial ARKANO PERFUMERÍA */
+    --arkano-black: #0E0E0E;
+    --arkano-gold: #C9A961;
+    --arkano-gold-muted: #A58B4E;
+    --arkano-bone: #F5F1E8;
+
+    /* Tokens del Sistema */
+    --bg-cream: #F5F1E8;
+    --primary-black: #0E0E0E;
+    --accent-gold: #C9A961;
+    --accent-gold-muted: #A58B4E;
+    --dark-obsidian: #0E0E0E;
   }
 
   body {
-    background-color: #FAF7F2;
-    color: #1F2937;
+    background-color: #F5F1E8;
+    color: #0E0E0E;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar con Dorado ARKANO */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: #F5F1E8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
+  background: #C9A961;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B89228;
+  background: #A58B4E;
 }
 
-/* Custom Utility Classes */
+/* Tipografías Editoriales */
 .font-arabic-title {
   font-family: 'Cinzel', 'Playfair Display', serif;
 }
@@ -45,24 +50,24 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-/* Glow & Shadows */
+/* Sombras y Efectos de Lujo */
 .shadow-soft-card {
-  box-shadow: 0 4px 20px -2px rgba(46, 16, 101, 0.06), 0 2px 8px -1px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 20px -2px rgba(14, 14, 14, 0.05), 0 2px 8px -1px rgba(201, 169, 97, 0.08);
 }
 
 .shadow-soft-card:hover {
-  box-shadow: 0 12px 28px -4px rgba(46, 16, 101, 0.12), 0 4px 12px -2px rgba(212, 175, 55, 0.15);
+  box-shadow: 0 12px 30px -4px rgba(14, 14, 14, 0.12), 0 4px 14px -2px rgba(201, 169, 97, 0.22);
 }
 
 .shadow-glow-gold {
-  box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 0 25px rgba(201, 169, 97, 0.35);
 }
 
-.shadow-glow-purple {
-  box-shadow: 0 0 25px rgba(46, 16, 101, 0.3);
+.shadow-glow-dark {
+  box-shadow: 0 10px 30px -5px rgba(14, 14, 14, 0.4);
 }
 
-/* Smooth Transitions */
+/* Transiciones fluidas */
 * {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -71,7 +76,7 @@
 
 @keyframes pulseGently {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+  50% { transform: scale(1.04); }
 }
 
 .animate-pulse-gently {

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
+import CategoryBanner from './components/CategoryBanner';
 import VibeSelector from './components/VibeSelector';
 import BestSellersTabs from './components/BestSellersTabs';
 import CrossSelling from './components/CrossSelling';
@@ -15,7 +16,7 @@ import AboutSection from './components/AboutSection';
 import NewsletterBanner from './components/NewsletterBanner';
 import Footer from './components/Footer';
 import { PERFUMES_DATA } from './data/perfumes';
-import { Sparkles, ShieldCheck, Check, RotateCcw } from 'lucide-react';
+import { Sparkles, ShieldCheck, Check, RotateCcw, Crown, Award } from 'lucide-react';
 
 export default function App() {
   // Cart state persisted in localStorage
@@ -25,7 +26,7 @@ export default function App() {
   // UI States
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'Para Él', 'Para Ella', 'Unisex', 'decants', 'ofertas'
+  const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'arabes', 'disenador', 'Para Él', 'Para Ella', 'Unisex', 'decants'
   const [activeVibe, setActiveVibe] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState(null);
@@ -35,7 +36,7 @@ export default function App() {
   // Load cart on client mount to prevent SSR hydration mismatch
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('sultan_cart');
+      const saved = localStorage.getItem('arkano_cart') || localStorage.getItem('sultan_cart');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
@@ -52,7 +53,7 @@ export default function App() {
   useEffect(() => {
     if (!isMounted) return;
     try {
-      localStorage.setItem('sultan_cart', JSON.stringify(cart));
+      localStorage.setItem('arkano_cart', JSON.stringify(cart));
     } catch (e) {
       console.error('Error saving cart:', e);
     }
@@ -83,6 +84,7 @@ export default function App() {
           id: product.id,
           name: product.name,
           brand: product.brand,
+          collection: product.collection,
           sku: product.sku,
           image: product.imageMain,
           format: format,
@@ -120,15 +122,15 @@ export default function App() {
     const isFull = format === '100ml';
     const price = isFull ? product.price100ml : product.priceDecant;
     const totalAmount = price * quantity;
-    const phoneNumber = '593985911895';
+    const phoneNumber = '593992851808';
 
-    let msg = `*¡Hola Sultan Parfums! 🌙 Deseo comprar ahora este perfume árabe con entrega express:*\n\n`;
-    msg += `👑 *Producto:* ${product.brand} - ${product.name}\n`;
+    let msg = `*¡Hola ARKANO Perfumería! 👑 Deseo comprar ahora este perfume con entrega express:*\n\n`;
+    msg += `✨ *Colección:* ${product.collection === 'arabes' ? 'Alta Perfumería Árabe de Dubái' : 'Diseñador Alta Costura'}\n`;
+    msg += `💎 *Producto:* ${product.brand} - ${product.name}\n`;
     msg += `📦 *Presentación:* ${isFull ? 'Botella Completa ' + product.volume100ml : 'Decant Muestra 10ml'}\n`;
     msg += `🔢 *Cantidad:* ${quantity}\n`;
     msg += `💰 *Total a Pagar:* $${totalAmount.toFixed(2)} USD\n`;
-    msg += `🏷️ *SKU:* ${product.sku}\n`;
-    msg += `🔒 *Garantía:* Con Sello Holográfico y Batch Code verificado\n\n`;
+    msg += `🔒 *Garantía:* Con Sello de Fábrica y Batch Code verificado\n\n`;
     msg += `_¿Tienen disponibilidad para despacho hoy mismo?_`;
 
     window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -154,22 +156,23 @@ export default function App() {
     el?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Select acorde with smart fallback so it never returns an empty screen
+  // Select acorde with smart fallback
   const handleSelectAcorde = (acordeId) => {
     setSelectedAcorde(acordeId);
-    // If the currently selected brand has no perfume with this acorde, clear brand so user sees all matching perfumes!
     if (selectedBrand) {
       const brandHasAcorde = PERFUMES_DATA.some(
         p => p.brand.toLowerCase() === selectedBrand.toLowerCase() && p.acordes?.includes(acordeId)
       );
       if (!brandHasAcorde) setSelectedBrand(null);
     }
-    // If active category has no matching perfume with this acorde, reset category to 'all'
     if (activeCategory !== 'all') {
       const catHasAcorde = PERFUMES_DATA.some(p => {
-        const matchesCat = (activeCategory === 'Para Él' && (p.gender === 'Para Él' || p.gender === 'Unisex')) ||
-                           (activeCategory === 'Para Ella' && (p.gender === 'Para Ella' || p.gender === 'Unisex')) ||
-                           (activeCategory === 'Unisex' && p.gender === 'Unisex');
+        let matchesCat = true;
+        if (activeCategory === 'arabes') matchesCat = p.collection === 'arabes';
+        else if (activeCategory === 'disenador') matchesCat = p.collection === 'disenador';
+        else if (activeCategory === 'Para Él') matchesCat = p.gender === 'Para Él' || p.gender === 'Unisex';
+        else if (activeCategory === 'Para Ella') matchesCat = p.gender === 'Para Ella' || p.gender === 'Unisex';
+        else if (activeCategory === 'Unisex') matchesCat = p.gender === 'Unisex';
         return matchesCat && p.acordes?.includes(acordeId);
       });
       if (!catHasAcorde) setActiveCategory('all');
@@ -182,17 +185,19 @@ export default function App() {
 
   // Filtered Products Logic
   const filteredProducts = PERFUMES_DATA.filter(p => {
-    // Brand filter from mega menu or brands section
+    // Brand filter
     if (selectedBrand && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
       return false;
     }
 
-    // Acorde filter from mega menu
+    // Acorde filter
     if (selectedAcorde && !p.acordes?.includes(selectedAcorde)) {
       return false;
     }
 
-    // Category filter
+    // Category / Collection filter
+    if (activeCategory === 'arabes' && p.collection !== 'arabes') return false;
+    if (activeCategory === 'disenador' && p.collection !== 'disenador') return false;
     if (activeCategory === 'Para Él' && p.gender !== 'Para Él' && p.gender !== 'Unisex') return false;
     if (activeCategory === 'Para Ella' && p.gender !== 'Para Ella' && p.gender !== 'Unisex') return false;
     if (activeCategory === 'Unisex' && p.gender !== 'Unisex') return false;
@@ -232,24 +237,24 @@ export default function App() {
   const openedProduct = PERFUMES_DATA.find(p => p.id === selectedProductId);
   const cartItemCount = (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + (item.quantity || 1), 0);
 
-  // Label for active acorde
   const getAcordeLabel = (id) => {
     switch (id) {
       case 'gourmand': return '🍯 Gourmand & Vainilla';
-      case 'oud_maderas': return '🪵 Oud & Maderas Orientales';
-      case 'citricos': return '🍍 Cítricos & Piña Ahumada';
+      case 'oud_maderas': return '🪵 Oud & Maderas Nobles';
+      case 'citricos': return '🍍 Cítricos & Frutales';
+      case 'especiados': return '🌶️ Especiados Cálidos';
       case 'rosas': return '🌹 Rosas & Florales';
       default: return id;
     }
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-[#1F2937] flex flex-col font-body selection:bg-[#2E1065] selection:text-[#D4AF37]">
+    <div className="min-h-screen bg-[#F5F1E8] text-[#0E0E0E] flex flex-col font-body selection:bg-[#0E0E0E] selection:text-[#C9A961]">
       
-      {/* 1. Promotional Top Bar (Ref: Imagen 1) */}
+      {/* 1. Promotional Top Bar */}
       <TopBar />
 
-      {/* 2. Header with Sticky Navbar & Mega-Menu (Ref: Imagen 1) */}
+      {/* 2. Header with Sticky Navbar & Mega-Menu */}
       <Header
         cartCount={cartItemCount}
         onOpenCart={() => setIsCartOpen(true)}
@@ -272,19 +277,19 @@ export default function App() {
 
       {/* Active Filter Notice if brand, acorde, category or search is active */}
       {(selectedBrand || selectedAcorde || searchQuery || activeCategory !== 'all' || activeVibe !== 'all') && (
-        <div className="bg-purple-100/90 border-b border-purple-200 py-3 px-4 text-xs sticky top-20 z-30 backdrop-blur-md shadow-sm">
+        <div className="bg-[#0E0E0E] text-[#F5F1E8] border-b border-[#C9A961]/30 py-3 px-4 text-xs sticky top-20 z-30 backdrop-blur-md shadow-md">
           <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
-              <span className="font-extrabold text-[#2E1065] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" /> Filtros activos:
+              <span className="font-extrabold text-[#C9A961] flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" /> Filtros activos:
               </span>
 
               {selectedBrand && (
-                <span className="inline-flex items-center gap-1.5 bg-[#2E1065] text-[#D4AF37] px-3 py-1 rounded-full font-bold shadow-sm">
+                <span className="inline-flex items-center gap-1.5 bg-[#C9A961] text-[#0E0E0E] px-3 py-1 rounded-full font-black shadow-sm">
                   <span>Casa: {selectedBrand}</span>
                   <button 
                     onClick={() => setSelectedBrand(null)} 
-                    className="hover:text-white ml-0.5 text-sm leading-none"
+                    className="hover:text-black ml-0.5 text-sm leading-none"
                     title="Quitar filtro de casa"
                   >
                     &times;
@@ -293,11 +298,11 @@ export default function App() {
               )}
 
               {selectedAcorde && (
-                <span className="inline-flex items-center gap-1.5 bg-[#D4AF37] text-[#1E0741] px-3 py-1 rounded-full font-black shadow-sm">
+                <span className="inline-flex items-center gap-1.5 bg-white/20 text-[#F5F1E8] px-3 py-1 rounded-full font-bold shadow-sm border border-[#C9A961]/40">
                   <span>{getAcordeLabel(selectedAcorde)}</span>
                   <button 
                     onClick={() => setSelectedAcorde(null)} 
-                    className="hover:text-black ml-0.5 text-sm leading-none"
+                    className="hover:text-[#C9A961] ml-0.5 text-sm leading-none"
                     title="Quitar filtro de acorde"
                   >
                     &times;
@@ -306,11 +311,17 @@ export default function App() {
               )}
 
               {activeCategory !== 'all' && (
-                <span className="inline-flex items-center gap-1.5 bg-purple-200 text-[#2E1065] px-3 py-1 rounded-full font-bold">
-                  <span>{activeCategory}</span>
+                <span className="inline-flex items-center gap-1.5 bg-[#C9A961]/25 text-[#C9A961] border border-[#C9A961]/40 px-3 py-1 rounded-full font-bold">
+                  <span>
+                    {activeCategory === 'arabes' 
+                      ? '👑 Colección Árabe' 
+                      : activeCategory === 'disenador' 
+                        ? '✨ Diseñador Alta Costura' 
+                        : activeCategory}
+                  </span>
                   <button 
                     onClick={() => setActiveCategory('all')} 
-                    className="hover:text-purple-950 ml-0.5 text-sm leading-none"
+                    className="hover:text-white ml-0.5 text-sm leading-none"
                     title="Quitar filtro de categoría"
                   >
                     &times;
@@ -319,11 +330,11 @@ export default function App() {
               )}
 
               {activeVibe !== 'all' && (
-                <span className="inline-flex items-center gap-1.5 bg-amber-100 text-amber-900 px-3 py-1 rounded-full font-bold">
+                <span className="inline-flex items-center gap-1.5 bg-white/10 text-[#C9A961] px-3 py-1 rounded-full font-bold border border-[#C9A961]/30">
                   <span>Vibe seleccionada</span>
                   <button 
                     onClick={() => setActiveVibe('all')} 
-                    className="hover:text-amber-950 ml-0.5 text-sm leading-none"
+                    className="hover:text-white ml-0.5 text-sm leading-none"
                     title="Quitar filtro de vibe"
                   >
                     &times;
@@ -332,11 +343,11 @@ export default function App() {
               )}
 
               {searchQuery && (
-                <span className="inline-flex items-center gap-1.5 bg-white text-gray-800 px-3 py-1 rounded-full border border-gray-300 font-medium">
+                <span className="inline-flex items-center gap-1.5 bg-white/10 text-white px-3 py-1 rounded-full border border-gray-600 font-medium">
                   <span>Búsqueda: "{searchQuery}"</span>
                   <button 
                     onClick={() => setSearchQuery('')} 
-                    className="hover:text-black ml-0.5 text-sm leading-none"
+                    className="hover:text-[#C9A961] ml-0.5 text-sm leading-none"
                     title="Limpiar búsqueda"
                   >
                     &times;
@@ -344,14 +355,14 @@ export default function App() {
                 </span>
               )}
 
-              <span className="text-gray-600 font-semibold bg-white/90 px-2.5 py-1 rounded-full border border-purple-200 shadow-xs">
-                {filteredProducts.length} fragancia{filteredProducts.length === 1 ? '' : 's'} disponible{filteredProducts.length === 1 ? '' : 's'}
+              <span className="text-gray-300 font-semibold bg-white/10 px-2.5 py-1 rounded-full border border-[#C9A961]/20">
+                {filteredProducts.length} fragancia{filteredProducts.length === 1 ? '' : 's'} encontrada{filteredProducts.length === 1 ? '' : 's'}
               </span>
             </div>
 
             <button
               onClick={handleResetFilters}
-              className="text-xs text-[#2E1065] font-black hover:text-[#581C87] bg-white hover:bg-purple-50 px-3.5 py-1.5 rounded-full border border-purple-200 transition-all flex items-center gap-1 shadow-xs"
+              className="text-xs text-[#0E0E0E] bg-[#C9A961] hover:bg-[#B89228] font-black px-3.5 py-1.5 rounded-full transition-all flex items-center gap-1 shadow-sm active:scale-95"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Ver Todo el Catálogo</span>
@@ -360,7 +371,7 @@ export default function App() {
         </div>
       )}
 
-      {/* 3. Hero Banner (Boutique de Lujo Oriental Accesible) */}
+      {/* 3. Hero Banner (ARKANO PERFUMERÍA) */}
       <HeroBanner
         onOpenProduct={(id) => setSelectedProductId(id)}
         onAddToCart={handleAddToCart}
@@ -374,13 +385,23 @@ export default function App() {
         }}
       />
 
-      {/* 4. Visual "Vibe" Search for Beginners */}
+      {/* 4. Category Showcase Banner: Árabes & Diseñador con Frases de Alta Calidad */}
+      <CategoryBanner
+        activeCollection={activeCategory}
+        onSelectCollection={(col) => {
+          setActiveCategory(col);
+          const el = document.getElementById('los-mas-vendidos');
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
+
+      {/* 5. Visual "Vibe" Search */}
       <VibeSelector
         activeVibe={activeVibe}
         onSelectVibe={(vibeId) => setActiveVibe(vibeId)}
       />
 
-      {/* 5. Best Sellers Section with Dynamic Tabs (Ref: Imagen 4) */}
+      {/* 6. Best Sellers Section with Dynamic Tabs */}
       <main className="flex-grow">
         <BestSellersTabs
           products={filteredProducts}
@@ -391,26 +412,26 @@ export default function App() {
           onResetFilters={handleResetFilters}
         />
 
-        {/* 6. Cross-Selling Carousel ("También Compraron") - Justo debajo del catálogo */}
+        {/* 7. Cross-Selling Carousel ("También Compraron") */}
         <CrossSelling
           products={PERFUMES_DATA}
           onOpenProduct={(id) => setSelectedProductId(id)}
           onAddToCart={handleAddToCart}
         />
 
-        {/* 7. Brands Showcase Section (Ref: Luzents reference requested by user) */}
+        {/* 8. Brands Showcase Section */}
         <BrandsSection
           onSelectBrand={handleSelectBrand}
         />
 
-        {/* 8. About Us & Authenticity Guarantee Section */}
+        {/* 9. About Us & Authenticity Guarantee Section */}
         <AboutSection />
 
-        {/* 9. WhatsApp VIP Club Banner (Ref: Imagen 3 upgraded to WhatsApp) */}
+        {/* 10. WhatsApp VIP Club Banner */}
         <NewsletterBanner />
       </main>
 
-      {/* 8. Footer (Ref: Imagen 3) */}
+      {/* 11. Footer */}
       <Footer 
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
@@ -419,7 +440,7 @@ export default function App() {
         }} 
       />
 
-      {/* 9. Product Detail Modal / PDP (Ref: Imagen 5, 6, 7) */}
+      {/* 12. Product Detail Modal / PDP con Integración Fragrantica */}
       {selectedProductId && openedProduct && (
         <ProductDetailModal
           product={openedProduct}
@@ -429,7 +450,7 @@ export default function App() {
         />
       )}
 
-      {/* 10. Slide-Over Cart Drawer (Ref: Imagen 2) */}
+      {/* 13. Slide-Over Cart Drawer */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -444,7 +465,7 @@ export default function App() {
         }}
       />
 
-      {/* 11. AI Sommelier Floating Concierge Widget */}
+      {/* 14. AI Sommelier Floating Concierge Widget */}
       <AiSommelierWidget
         catalog={PERFUMES_DATA}
         onSelectProduct={(id) => {
@@ -454,8 +475,8 @@ export default function App() {
 
       {/* Toast Alert Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 left-6 z-50 bg-[#2E1065] text-[#D4AF37] border border-[#D4AF37]/40 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="w-6 h-6 rounded-full bg-[#D4AF37] text-[#1E0741] flex items-center justify-center flex-shrink-0">
+        <div className="fixed bottom-6 left-6 z-50 bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961]/50 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="w-6 h-6 rounded-full bg-[#C9A961] text-[#0E0E0E] flex items-center justify-center flex-shrink-0">
             <Check className="w-4 h-4 font-black" />
           </div>
           <span className="text-xs sm:text-sm font-bold text-white">

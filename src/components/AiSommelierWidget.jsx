@@ -9,7 +9,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
   const [messages, setMessages] = useState([
     {
       sender: 'bot',
-      text: '¡Salam y bienvenidos a Sultan Parfums! 🌙 Soy Yasmin, tu Sommelier de Perfumería Árabe. ¿Buscas un perfume para ti o para regalar? ¿Prefieres algo dulce y gourmand, o una bomba de duración extrema?',
+      text: '¡Bienvenidos a ARKANO PERFUMERÍA! 👑 Soy Yasmin, tu Sommelier de Alta Perfumería Árabe y Diseñador. ¿Buscas un perfume para ti o para regalar? ¿Prefieres la potencia misteriosa de Oriente o la sofisticación icónica de Diseñador?',
       recommendations: []
     }
   ]);
@@ -28,36 +28,33 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
 
   // Suggested Prompts
   const quickPrompts = [
-    { label: '🍯 Dulce y Vainilla Gourmand', query: 'Busco un perfume dulce, cremoso con vainilla o canela' },
-    { label: '🔥 Duración Extrema (+12h)', query: 'Quiero un perfume modo bestia que proyecte muchísimo' },
-    { label: '💼 Fresco para Oficina', query: 'Un aroma limpio y elegante para usar diario en el trabajo' },
-    { label: '👑 El más viral de TikTok', query: '¿Cuál es el perfume más famoso y vendido de la tienda?' }
+    { label: '✨ Diseñador Alta Costura', query: 'Recomiéndame lo mejor de diseñador como Dior o Chanel' },
+    { label: '👑 Árabes Virales Dubái', query: '¿Cuáles son los perfumes árabes más virales y de mayor duración?' },
+    { label: '🍯 Dulce Gourmand & Vainilla', query: 'Busco un perfume dulce, cremoso con vainilla o canela' },
+    { label: '🔥 Modo Bestia (+12h)', query: 'Quiero un perfume modo bestia que proyecte muchísimo' }
   ];
 
-  // Sommelier Intelligent Response Engine (Ready for Gemini API backend)
+  // Sommelier Intelligent Response Engine
   const generateSommelierResponse = (userQuery) => {
     const q = userQuery.toLowerCase();
     let replyText = '';
     let recs = [];
 
-    if (q.includes('dulce') || q.includes('vainilla') || q.includes('gourmand') || q.includes('canela') || q.includes('praliné')) {
-      replyText = 'Para amantes de lo dulce y gourmand, tenemos dos joyas absolutas de Oriente: **Lattafa Khamrah** (canela, praliné belga y dátiles, estilo Angels Share) y **Lattafa Yara** (fresas con crema batida y malvaviscos esponjosos). ¡Ambos son sumamente adictivos y generan elogios constantes!';
-      recs = PERFUMES_DATA.filter(p => p.id === 'lattafa-khamrah' || p.id === 'lattafa-yara');
-    } else if (q.includes('bestia') || q.includes('duracion') || q.includes('duración') || q.includes('fijacion') || q.includes('fijación') || q.includes('fuerte')) {
-      replyText = 'Si buscas que el perfume dure más de 12 a 16 horas en piel y días en ropa, te recomiendo directamente **Al Haramain Amber Oud (Gold Edition)** (concentración Extrait) y **Armaf Club de Nuit Intense Man** (el legendario clon de Creed Aventus con estela de 2 metros). ¡Son auténticos monstruos de fijación!';
-      recs = PERFUMES_DATA.filter(p => p.id === 'al-haramain-amber-oud-gold' || p.id === 'armaf-club-de-nuit-intense-man');
-    } else if (q.includes('oficina') || q.includes('trabajo') || q.includes('fresco') || q.includes('diario') || q.includes('limpio')) {
-      replyText = 'Para el día a día y oficina necesitas algo sofisticado que no abrume. **Club de Nuit Woman** (inspirado en Coco Mademoiselle) para dama, y **Club de Nuit Urban Man Elixir** para caballero son opciones sumamente elegantes y versátiles.';
-      recs = PERFUMES_DATA.filter(p => p.id === 'armaf-club-de-nuit-woman' || p.id === 'armaf-club-de-nuit-urban-man-elixir');
-    } else if (q.includes('viral') || q.includes('tiktok') || q.includes('famoso') || q.includes('mas vendido') || q.includes('más vendido')) {
-      replyText = 'Sin duda alguna, los reyes de TikTok son **Lattafa Khamrah** y **Afnan 9 PM**. Khamrah ha acumulado cientos de millones de visitas por su parecido a un perfume de $300 USD, y 9 PM es el rey de las fiestas nocturnas.';
-      recs = PERFUMES_DATA.filter(p => p.id === 'lattafa-khamrah' || p.id === 'afnan-9pm');
-    } else if (q.includes('original') || q.includes('autenticidad') || q.includes('batch') || q.includes('copia')) {
-      replyText = 'Todos nuestros perfumes son **100% Originales importados directamente de Dubái**, sellados de fábrica con su **Sello Holográfico de Seguridad** y **Batch Code** verificable en la base del frasco y caja. ¡Garantía de satisfacción total o la devolución de tu dinero!';
-      recs = [];
+    if (q.includes('diseñador') || q.includes('disenador') || q.includes('dior') || q.includes('chanel') || q.includes('ysl') || q.includes('tom ford')) {
+      replyText = 'En nuestra **Colección de Diseñador**, contamos con joyas absolutas de la alta costura: **Dior Sauvage Elixir** (el elixir especiado más potente del mercado) y **Bleu de Chanel Parfum** (la cumbre de la elegancia versátil), además de **YSL Libre Le Parfum** para dama. ¡Obras maestras con batch code certificado!';
+      recs = PERFUMES_DATA.filter(p => p.collection === 'disenador');
+    } else if (q.includes('árabe') || q.includes('arabe') || q.includes('dubai') || q.includes('dubái') || q.includes('oriente')) {
+      replyText = 'Nuestra **Colección Árabe** reúne los mayores fenómenos virales de Dubái: **Lattafa Khamrah** (praliné, canela y dátiles) y **Armaf Club de Nuit Intense Man** (la legendaria bestia negra de cumplidos). Ambos ofrecen concentración extrema a un precio inigualable.';
+      recs = PERFUMES_DATA.filter(p => p.id === 'lattafa-khamrah' || p.id === 'armaf-club-de-nuit-intense-man');
+    } else if (q.includes('dulce') || q.includes('vainilla') || q.includes('gourmand') || q.includes('canela')) {
+      replyText = 'Para amantes de lo dulce y gourmand, te recomiendo **Lattafa Khamrah** (licoroso y especiado), **YSL Libre Le Parfum** (miel, azafrán y vainilla bourbon) y **Lattafa Yara** (fresas con crema batida). ¡Sumamente adictivos!';
+      recs = PERFUMES_DATA.filter(p => p.id === 'lattafa-khamrah' || p.id === 'ysl-libre-le-parfum' || p.id === 'lattafa-yara');
+    } else if (q.includes('bestia') || q.includes('duracion') || q.includes('duración') || q.includes('fijacion') || q.includes('fijación')) {
+      replyText = 'Si buscas que el perfume dure más de 14 a 16 horas con estela arrolladora: **Dior Sauvage Elixir** (en diseñador) y **Al Haramain Amber Oud Gold** (en árabe, concentración Extrait puro) son los reyes indiscutibles.';
+      recs = PERFUMES_DATA.filter(p => p.id === 'dior-sauvage-elixir' || p.id === 'al-haramain-amber-oud-gold');
     } else {
-      replyText = '¡Excelente pregunta! En la perfumería árabe destacamos por tener concentraciones altas (Eau de Parfum y Extrait). ¿Para qué ocasión principal deseas tu nueva fragancia? También puedes hablar directamente con uno de nuestros asesores humanos por WhatsApp.';
-      recs = [PERFUMES_DATA[0], PERFUMES_DATA[3]];
+      replyText = '¡Excelente consulta! En **ARKANO PERFUMERÍA** cada fragancia incluye su pirámide olfativa y enlace oficial a Fragrantica. ¿Te gustaría asesoría para alguna ocasión en particular? También puedes escribirnos directamente por WhatsApp.';
+      recs = [PERFUMES_DATA[0], PERFUMES_DATA[4]];
     }
 
     return { replyText, recs };
@@ -105,16 +102,16 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
 
   return (
     <>
-      {/* Floating Avatar Trigger Button in Bottom Right (Ref: Imagen 1, 2, 3, 4) */}
+      {/* Floating Avatar Trigger Button in Bottom Right */}
       <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end">
         
-        {/* Friendly Speech Bubble (Ref: Prompt spec) */}
+        {/* Friendly Speech Bubble */}
         {showGreeting && !isOpen && (
-          <div className="mb-2 bg-white text-gray-800 text-xs py-2 px-3.5 rounded-2xl shadow-xl border border-[#D4AF37]/50 max-w-xs animate-bounce flex items-center gap-2">
-            <span>✨ ¿No sabes cuál elegir? ¡Te ayudo a encontrar tu perfume árabe ideal!</span>
+          <div className="mb-2 bg-[#0E0E0E] text-[#F5F1E8] text-xs py-2 px-3.5 rounded-2xl shadow-xl border border-[#C9A961]/60 max-w-xs animate-bounce flex items-center gap-2">
+            <span>✨ ¿Dudas entre un perfume árabe o de diseñador? ¡Te ayudo al instante!</span>
             <button 
               onClick={() => setShowGreeting(false)} 
-              className="text-gray-400 hover:text-gray-700 ml-1"
+              className="text-gray-400 hover:text-white ml-1"
             >
               &times;
             </button>
@@ -123,22 +120,21 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-[#2E1065] to-[#581C87] text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#D4AF37] group"
+          className="relative w-14 h-14 rounded-full bg-[#0E0E0E] text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#C9A961] group"
           aria-label="Abrir Sommelier de Perfumes IA"
         >
           {isOpen ? (
-            <X className="w-6 h-6 text-white" />
+            <X className="w-6 h-6 text-[#C9A961]" />
           ) : (
             <>
-              {/* Avatar Image representation (matching circular avatar in screenshots) */}
               <div className="w-full h-full rounded-full overflow-hidden p-0.5">
                 <img 
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
-                  alt="Yasmin Sommelier" 
+                  alt="Yasmin Sommelier ARKANO" 
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
-              <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white animate-pulse" />
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#C9A961] rounded-full border-2 border-[#0E0E0E] animate-pulse" />
             </>
           )}
         </button>
@@ -149,9 +145,9 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
         <div className="fixed bottom-22 right-5 z-40 w-96 max-w-[calc(100vw-2rem)] h-[540px] bg-white rounded-3xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
           
           {/* Chat Header */}
-          <div className="bg-[#2E1065] text-white p-4 flex items-center justify-between border-b border-[#D4AF37]/40">
+          <div className="bg-[#0E0E0E] text-white p-4 flex items-center justify-between border-b border-[#C9A961]/40">
             <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#D4AF37]">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C9A961]">
                 <img 
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
                   alt="Yasmin" 
@@ -159,24 +155,24 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                 />
               </div>
               <div>
-                <h4 className="font-arabic-title text-sm font-bold flex items-center gap-1.5">
-                  Yasmin • Sommelier IA <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+                <h4 className="font-arabic-title text-sm font-bold flex items-center gap-1.5 text-white">
+                  Yasmin • Sommelier ARKANO <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
                 </h4>
-                <span className="text-[10px] text-emerald-300 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Conectada y Lista para Asesorarte
+                <span className="text-[10px] text-[#C9A961] flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A961]"></span> Asesoría en Vivo Árabes & Diseñador
                 </span>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="text-white/70 hover:text-white p-1 rounded-full transition-colors"
+              className="text-gray-400 hover:text-white p-1 rounded-full transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Messages Feed */}
-          <div className="flex-grow p-4 overflow-y-auto space-y-3 bg-[#FAF7F2] text-xs">
+          <div className="flex-grow p-4 overflow-y-auto space-y-3 bg-[#F5F1E8] text-xs">
             {messages.map((msg, i) => (
               <div
                 key={i}
@@ -185,8 +181,8 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                 <div
                   className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 leading-relaxed shadow-sm ${
                     msg.sender === 'user'
-                      ? 'bg-[#2E1065] text-white rounded-br-none'
-                      : 'bg-white text-gray-800 border border-gray-100 rounded-bl-none'
+                      ? 'bg-[#0E0E0E] text-[#F5F1E8] rounded-br-none border border-[#C9A961]/40'
+                      : 'bg-white text-gray-900 border border-gray-200 rounded-bl-none'
                   }`}
                 >
                   <p className="whitespace-pre-line">{msg.text}</p>
@@ -197,13 +193,13 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                   <div className="mt-2.5 space-y-2 w-full max-w-[90%]">
                     {msg.recommendations.map((perfume) => {
                       const waText = encodeURIComponent(
-                        `Hola Sultan Parfums! El Sommelier Virtual Yasmin me acaba de recomendar ${perfume.brand} ${perfume.name} ($${perfume.price100ml.toFixed(2)}). Deseo saber si tienen disponibilidad para envío inmediato.`
+                        `¡Hola ARKANO Perfumería! El Sommelier Virtual me acaba de recomendar ${perfume.brand} ${perfume.name} ($${perfume.price100ml.toFixed(2)}). Deseo consultar disponibilidad para envío inmediato.`
                       );
 
                       return (
                         <div
                           key={perfume.id}
-                          className="bg-white p-3 rounded-2xl border border-purple-100 shadow-sm hover:border-[#D4AF37] transition-all"
+                          className="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm hover:border-[#C9A961] transition-all"
                         >
                           <div 
                             className="flex items-center gap-2.5 cursor-pointer mb-2"
@@ -215,17 +211,17 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                             <img 
                               src={perfume.imageMain} 
                               alt={perfume.name} 
-                              className="w-12 h-12 object-contain rounded-xl bg-[#FAF7F2] p-1 border border-gray-100 flex-shrink-0"
+                              className="w-12 h-12 object-contain rounded-xl bg-[#F5F1E8] p-1 border border-gray-100 flex-shrink-0"
                             />
                             <div className="flex-grow">
-                              <span className="text-[9px] font-black text-[#2E1065] uppercase block">
+                              <span className="text-[9px] font-black text-[#0E0E0E] uppercase block">
                                 {perfume.brand}
                               </span>
                               <h5 className="font-bold text-xs text-gray-900 leading-tight">
                                 {perfume.name}
                               </h5>
                               <div className="flex items-baseline gap-1.5 mt-0.5">
-                                <span className="text-xs font-black text-[#2E1065]">
+                                <span className="text-xs font-black text-[#0E0E0E]">
                                   ${perfume.price100ml.toFixed(2)}
                                 </span>
                                 <span className="text-[10px] text-gray-400 line-through">
@@ -235,24 +231,23 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                             </div>
                           </div>
 
-                          {/* Dual Action Buttons: Add to Cart & WhatsApp Direct Order */}
                           <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-gray-100">
                             <button
                               onClick={() => onAddToCart(perfume, '100ml', 1)}
-                              className="bg-purple-50 hover:bg-purple-100 text-[#2E1065] font-bold text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors"
+                              className="bg-[#0E0E0E] text-white hover:text-[#C9A961] font-bold text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors"
                             >
-                              <ShoppingBag className="w-3 h-3 text-[#D4AF37]" />
+                              <ShoppingBag className="w-3 h-3 text-[#C9A961]" />
                               <span>+ Carrito</span>
                             </button>
 
                             <a
-                              href={`https://wa.me/593985911895?text=${waText}`}
+                              href={`https://wa.me/593992851808?text=${waText}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 shadow-sm transition-colors"
+                              className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 shadow-sm transition-colors"
                             >
-                              <MessageCircle className="w-3 h-3 fill-white" />
-                              <span>Pedir en WhatsApp</span>
+                              <MessageCircle className="w-3 h-3 fill-current" />
+                              <span>Pedir WhatsApp</span>
                             </a>
                           </div>
                         </div>
@@ -271,7 +266,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
               <button
                 key={idx}
                 onClick={() => handleSendMessage(p.query)}
-                className="flex-shrink-0 text-[10px] bg-purple-50 hover:bg-purple-100 text-[#2E1065] font-semibold px-2.5 py-1 rounded-full border border-purple-200/50 transition-colors"
+                className="flex-shrink-0 text-[10px] bg-[#F5F1E8] hover:bg-[#0E0E0E] hover:text-[#C9A961] text-[#0E0E0E] font-semibold px-2.5 py-1 rounded-full border border-[#C9A961]/30 transition-colors"
               >
                 {p.label}
               </button>
@@ -289,22 +284,22 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
             >
               <input
                 type="text"
-                placeholder="Escribe tu duda olfativa..."
+                placeholder="Pregunta sobre perfumes árabes o diseñador..."
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                className="flex-grow bg-[#FAF7F2] border border-gray-200 rounded-full py-2 px-3 text-xs focus:outline-none focus:border-[#2E1065]"
+                className="flex-grow bg-[#F5F1E8] border border-gray-300 rounded-full py-2 px-3 text-xs focus:outline-none focus:border-[#0E0E0E]"
               />
               <button
                 type="submit"
-                className="bg-[#2E1065] hover:bg-[#3B0764] text-white p-2 rounded-full transition-all"
+                className="bg-[#0E0E0E] hover:bg-[#1A1A1A] text-white p-2 rounded-full transition-all border border-[#C9A961]/40"
                 aria-label="Enviar mensaje"
               >
-                <Send className="w-4 h-4 text-[#D4AF37]" />
+                <Send className="w-4 h-4 text-[#C9A961]" />
               </button>
             </form>
 
             <a
-              href="https://wa.me/593985911895?text=Hola,%20deseo%20hablar%20con%20un%20asesor%20humano%20sobre%20perfumes%20árabes"
+              href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20hablar%20con%20un%20asesor%20humano"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[10px] text-gray-500 hover:text-emerald-700 flex items-center justify-center gap-1 font-medium transition-colors"
