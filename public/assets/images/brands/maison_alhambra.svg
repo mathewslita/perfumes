@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 130" width="300" height="130">
-  <!-- Elegant Stag / Deer Silhouette -->
-  <g fill="#000000" transform="translate(125, 5) scale(0.7)">
-    <path d="M25 0 C22 5 18 10 12 12 C10 8 6 6 0 6 C4 10 7 15 8 20 C4 20 1 18 -2 15 C-2 19 2 24 6 26 C2 28 -1 28 -4 27 C0 32 6 34 11 34 C12 38 10 43 7 47 C4 51 0 54 -5 55 C-3 58 2 59 7 58 C12 57 16 53 19 48 C22 42 24 35 24 28 C26 24 28 20 31 16 C34 12 38 8 43 6 C38 6 34 8 31 12 C30 16 30 21 31 25 C33 22 36 20 40 19 C37 23 35 28 35 33 C39 31 43 31 47 32 C43 36 38 38 34 38 C34 43 36 48 39 52 C42 56 47 58 52 58 C47 54 44 48 44 42 C44 36 47 30 52 26 C57 22 64 20 70 20 C64 24 61 30 61 36 C61 42 65 48 70 51 C66 47 64 42 64 36 C64 30 68 25 73 22 C68 20 62 18 57 15 C52 12 47 8 44 3 C41 8 36 12 30 14 C32 9 32 4 30 0 Z"/>
-    <path d="M18 45 C15 50 12 56 12 62 C12 68 15 74 18 80 L16 95 L20 95 L23 83 C26 86 30 88 35 88 L35 95 L39 95 L39 84 C43 82 46 78 48 74 C50 70 51 65 50 60 C49 54 46 49 42 45 Z"/>
-  </g>
-  <text x="150" y="105" text-anchor="middle" font-family="'Times New Roman', serif" font-weight="700" font-size="19" letter-spacing="3" fill="#000000">MAISON</text>
-  <text x="150" y="123" text-anchor="middle" font-family="'Times New Roman', serif" font-weight="700" font-size="16" letter-spacing="4" fill="#000000">ALHAMBRA</text>
-</svg>
