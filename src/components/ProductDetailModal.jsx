@@ -73,8 +73,8 @@ export default function ProductDetailModal({
                   
                   {/* Badge de Oferta: Solo si el perfume tiene oferta activa */}
                   {isOnSale && (
-                    <div className="absolute top-3.5 left-3.5 bg-[#0E0E0E] text-[#C9A961] font-black text-xs px-3 py-1 rounded-full shadow-lg border border-[#C9A961]/50 flex items-center gap-1">
-                      <Flame className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961]" />
+                    <div className="absolute top-3.5 left-3.5 bg-rose-600 text-white font-black text-xs px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+                      <Flame className="w-3.5 h-3.5 fill-current" />
                       <span>-{product.discountPercent}% OFF</span>
                     </div>
                   )}
@@ -176,7 +176,7 @@ export default function ProductDetailModal({
                           <span className="text-sm font-bold text-gray-400 line-through decoration-rose-500 decoration-1.5">
                             ${originalPrice.toFixed(2)}
                           </span>
-                          <span className="ml-auto bg-[#0E0E0E] text-[#C9A961] text-xs font-black px-3 py-1 rounded-full border border-[#C9A961]/40 shadow-sm">
+                          <span className="ml-auto bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-black px-3 py-1 rounded-full shadow-xs">
                             Ahorras ${savings.toFixed(2)}
                           </span>
                         </>

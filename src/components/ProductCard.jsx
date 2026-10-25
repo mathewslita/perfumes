@@ -28,8 +28,8 @@ export default function ProductCard({
       {/* Insignias Superiores: Descuento & Categoría Oficial & Día/Noche */}
       <div className="absolute top-2.5 left-2.5 right-2.5 z-10 flex items-center justify-between pointer-events-none">
         {isOnSale ? (
-          <div className="flex items-center gap-1 bg-[#0E0E0E] text-[#C9A961] font-black text-xs px-2.5 py-1 rounded-full shadow-lg border border-[#C9A961]/50">
-            <Flame className="w-3 h-3 text-[#C9A961] fill-[#C9A961]" />
+          <div className="flex items-center gap-1 bg-rose-600 text-white font-black text-xs px-2.5 py-1 rounded-full shadow-md">
+            <Flame className="w-3 h-3 fill-current" />
             <span>-{product.discountPercent}%</span>
           </div>
         ) : (
