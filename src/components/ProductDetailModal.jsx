@@ -122,29 +122,44 @@ export default function ProductDetailModal({
                     {product.name}
                   </h1>
 
-                  {/* Badges de Atributos: Momento de Uso Visible & Autenticidad */}
-                  <div className="flex items-center gap-2 mt-2.5 flex-wrap">
-                    {/* Momento de Uso: NOCHE / DIA visible de forma fija y limpia */}
+                  {/* Badges de Atributos: Icono que expande texto al pasar el mouse & Autenticidad */}
+                  <div className="flex items-center gap-2 mt-2.5 flex-nowrap">
+                    {/* Icono Minimalista de Momento de Uso: Expande texto al pasar el mouse */}
                     {product.timeOfDay === 'dia' && (
-                      <span className="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 border border-amber-200/90 text-xs font-bold px-2.5 py-1 rounded-full shadow-2xs uppercase">
-                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
-                        <span>DIA</span>
-                      </span>
+                      <div 
+                        className="group inline-flex items-center bg-amber-50/90 hover:bg-amber-100 text-amber-900 border border-amber-200/90 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer select-none"
+                        title="MOMENTO: DIA"
+                      >
+                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" />
+                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[45px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out uppercase">
+                          DIA
+                        </span>
+                      </div>
                     )}
                     {product.timeOfDay === 'noche' && (
-                      <span className="inline-flex items-center gap-1.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 text-xs font-bold px-2.5 py-1 rounded-full shadow-2xs uppercase">
-                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] text-[#0E0E0E]" />
-                        <span>NOCHE</span>
-                      </span>
+                      <div 
+                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer select-none"
+                        title="MOMENTO: NOCHE"
+                      >
+                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] group-hover:fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:-rotate-12" />
+                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[55px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out uppercase">
+                          NOCHE
+                        </span>
+                      </div>
                     )}
                     {product.timeOfDay === 'ambas' && (
-                      <span className="inline-flex items-center gap-1.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 text-xs font-bold px-2.5 py-1 rounded-full shadow-2xs uppercase">
-                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
-                        <span>DIA & NOCHE</span>
-                      </span>
+                      <div 
+                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer select-none"
+                        title="MOMENTO: DIA & NOCHE"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] group-hover:text-[#C9A961] fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[85px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out uppercase">
+                          DIA & NOCHE
+                        </span>
+                      </div>
                     )}
 
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200 uppercase">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 uppercase flex-shrink-0">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                       <span>100% ORIGINAL CON SELLO</span>
                     </span>
@@ -241,57 +256,6 @@ export default function ProductDetailModal({
                         </div>
                       </button>
                     </div>
-
-                    {/* Tip y selector de cantidad inteligente para Decant */}
-                    {selectedFormat === 'decant' ? (
-                      <div className="mt-2.5 p-2.5 bg-[#FAF8F5] rounded-xl border border-[#C9A961]/30">
-                        <div className="text-[11px] text-gray-700 leading-snug flex items-start gap-1.5 mb-2">
-                          <span className="text-[#A58B4E] font-bold text-xs flex-shrink-0">💡 Tip:</span>
-                          <span>Un decant de 10ml rinde ~120 atomizaciones completas. Ideal para probar en tu piel antes de comprar el frasco completo.</span>
-                        </div>
-                        <div className="flex items-center gap-1.5 pt-1.5 border-t border-gray-200/70">
-                          <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wider mr-1">Armar Set:</span>
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(1)}
-                            className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
-                              quantity === 1 
-                                ? 'bg-[#0E0E0E] text-[#C9A961] shadow-xs' 
-                                : 'bg-white border border-gray-200 text-gray-700 hover:border-gray-300'
-                            }`}
-                          >
-                            1 Decant
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(2)}
-                            className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
-                              quantity === 2 
-                                ? 'bg-[#0E0E0E] text-[#C9A961] shadow-xs' 
-                                : 'bg-white border border-gray-200 text-gray-700 hover:border-gray-300'
-                            }`}
-                          >
-                            2 Dúo
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => setQuantity(3)}
-                            className={`text-[11px] font-bold px-2.5 py-1 rounded-lg transition-all ${
-                              quantity === 3 
-                                ? 'bg-[#0E0E0E] text-[#C9A961] shadow-xs' 
-                                : 'bg-white border border-gray-200 text-gray-700 hover:border-gray-300'
-                            }`}
-                          >
-                            3 Trío Set
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="mt-2 px-2.5 py-1.5 bg-[#FAF8F5] rounded-lg border border-gray-200/80 text-[11px] text-gray-600 flex items-center gap-1.5">
-                        <span className="text-[#A58B4E]">✨</span>
-                        <span>Frasco 100% original con sello de fábrica y batch code coincidente.</span>
-                      </div>
-                    )}
                   </div>
 
                   {/* Quantity and Primary Conversion Actions */}
