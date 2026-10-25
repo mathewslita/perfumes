@@ -57,7 +57,7 @@ export default function ProductCard({
 
               {/* Tooltip flotante superior sin alterar el ancho ni provocar saltos */}
               <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover/time:opacity-100 transition-opacity pointer-events-none z-30 border border-[#C9A961]/40">
-                {product.timeOfDay === "dia" ? "☀️ Día" : product.timeOfDay === "noche" ? "🌙 Noche" : "✨ Día & Noche"}
+                {product.timeOfDay === "dia" ? "☀️ DIA" : product.timeOfDay === "noche" ? "🌙 NOCHE" : "✨ DIA & NOCHE"}
               </div>
             </div>
           )}
@@ -68,7 +68,7 @@ export default function ProductCard({
               ? "bg-[#C9A961] text-[#0E0E0E] border-[#A58B4E]"
               : "bg-[#F5F1E8] text-[#0E0E0E] border-[#C9A961]/60"
           }`}>
-            {isArabic ? "👑 Árabe" : "✨ Diseñador"}
+            {isArabic ? "👑 ARABE" : "✨ DISENADOR"}
           </span>
         </div>
       </div>
