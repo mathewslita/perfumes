@@ -897,12 +897,12 @@ export const PERFUMES_DATA = [
 ];
 
 export const VIBE_CATEGORIES = [
-  { id: 'all', name: 'Ver Todos', icon: '✨' },
-  { id: 'beast', name: 'Potencia & Fijación Extrema', icon: '🔥', filterTag: '🔥 INTENSOS' },
-  { id: 'gourmand', name: 'Gourmand & Vainilla Licorosa', icon: '🍯', filterTag: '🍯 GOURMAND' },
-  { id: 'office', name: 'Cítricos & Frescura Diaria', icon: '🌿', filterTag: '🌿 FRESCOS' },
-  { id: 'night', name: 'Seducción Nocturna & Veladas', icon: '🌙', filterTag: '🌙 NOCHE' },
-  { id: 'viral', name: 'Éxitos Globales & Más Aclamados', icon: '👑', filterTag: '👑 TOP VENTAS' }
+  { id: 'all', name: 'TODOS', icon: '✨' },
+  { id: 'beast', name: 'INTENSOS', icon: '🔥', filterTag: '🔥 INTENSOS' },
+  { id: 'gourmand', name: 'GOURMAND', icon: '🍯', filterTag: '🍯 GOURMAND' },
+  { id: 'office', name: 'FRESCOS', icon: '🌿', filterTag: '🌿 FRESCOS' },
+  { id: 'night', name: 'NOCHE', icon: '🌙', filterTag: '🌙 NOCHE' },
+  { id: 'viral', name: 'TOP VENTAS', icon: '👑', filterTag: '👑 TOP VENTAS' }
 ];
 
 export const ACORDES_LIST = [
