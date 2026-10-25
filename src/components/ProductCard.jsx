@@ -96,13 +96,13 @@ export default function ProductCard({
       {/* Detalles del Perfume */}
       <div className="p-4 sm:p-5 flex flex-col flex-grow justify-between">
         <div>
-          {/* Marca y Concentración */}
+          {/* Marca y Genero */}
           <div className="flex items-center justify-between text-[11px] mb-1">
             <span className="font-extrabold tracking-widest text-[#0E0E0E] uppercase">
               {product.brand}
             </span>
-            <span className="text-gray-500 font-semibold text-[10px]">
-              {product.concentration}
+            <span className="text-[#A58B4E] font-bold text-[10px] uppercase tracking-wider">
+              {product.gender.toUpperCase()}
             </span>
           </div>
 
@@ -117,9 +117,9 @@ export default function ProductCard({
 
           {/* Autenticidad */}
           <div className="flex items-center justify-between mt-1.5 text-[11px]">
-            <span className="inline-flex items-center gap-1 text-[9.5px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+            <span className="inline-flex items-center gap-1 text-[9.5px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 uppercase">
               <Check className="w-2.5 h-2.5 text-emerald-600" />
-              <span>100% Original con Sello</span>
+              <span>100% ORIGINAL CON SELLO</span>
             </span>
           </div>
 

@@ -384,17 +384,18 @@ export default function Header({
                               {perfume.name}
                             </div>
                             <div className="text-[10px] text-gray-400 flex items-center gap-1.5 mt-0.5">
-                              <span>{perfume.concentration}</span>
-                              <span>•</span>
-                              <span className="text-stone-300">Decant ${(perfume.priceDecant || 15).toFixed(0)}</span>
+                              <span className="text-[#C9A961] font-bold text-[9px] px-1.5 py-0.5 rounded bg-[#C9A961]/15 border border-[#C9A961]/30 uppercase">
+                                {perfume.gender.toUpperCase()}
+                              </span>
+                              <span className="text-stone-300">DECANT ${(perfume.priceDecant || 15).toFixed(0)}</span>
                             </div>
                           </div>
                           <div className="text-right flex-shrink-0">
                             <div className="text-xs font-black text-white">
                               ${perfume.price100ml.toFixed(0)}
                             </div>
-                            <span className="text-[9px] text-[#C9A961] font-mono font-bold block group-hover:translate-x-0.5 transition-transform">
-                              Ver Ficha &rarr;
+                            <span className="text-[9px] text-[#C9A961] font-bold block group-hover:translate-x-0.5 transition-transform uppercase tracking-wider">
+                              VER &rarr;
                             </span>
                           </div>
                         </button>
