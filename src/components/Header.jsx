@@ -182,7 +182,7 @@ export default function Header({
               className="px-3.5 py-2 rounded-full text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5"
             >
               <Crown className="w-3.5 h-3.5" />
-              <span>Árabes Dubái</span>
+              <span>ARABES DUBAI</span>
             </button>
 
             {/* Categoría Diseñador */}
@@ -191,26 +191,26 @@ export default function Header({
               className="px-3.5 py-2 rounded-full text-[#F5F1E8] hover:text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5"
             >
               <Award className="w-3.5 h-3.5 text-[#C9A961]" />
-              <span>Diseñador</span>
+              <span>DISENADOR</span>
             </button>
 
             <button 
               onClick={() => handleNavCategory('Para Él')}
               className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
             >
-              Para Él
+              PARA EL
             </button>
             <button 
               onClick={() => handleNavCategory('Para Ella')}
               className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
             >
-              Para Ella
+              PARA ELLA
             </button>
             <button 
               onClick={() => handleNavCategory('Unisex')}
               className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
             >
-              Unisex
+              UNISEX
             </button>
 
             {/* Mega-Menu Hover Button */}
@@ -223,7 +223,7 @@ export default function Header({
                 onClick={() => setMegaMenuOpen(!megaMenuOpen)}
                 className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#C9A961] bg-[#1A1A1A] hover:bg-[#252525] font-bold transition-all border border-[#C9A961]/30 shadow-sm"
               >
-                <span>Casas & Ocasiones</span>
+                <span>CASAS & OCASIONES</span>
                 <ChevronDown className={`w-3.5 h-3.5 text-[#C9A961] transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -328,7 +328,7 @@ export default function Header({
               <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A961] absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input 
                 type="text" 
-                placeholder="Buscar..."
+                placeholder="BUSCAR PERFUME..."
                 value={searchQuery}
                 onChange={(e) => onSearch(e.target.value)}
                 onFocus={() => setSearchFocused(true)}
@@ -520,9 +520,9 @@ export default function Header({
                       </div>
                       <div>
                         <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
-                          <span>Perfumes Árabes</span>
+                          <span>PERFUMES ARABES</span>
                           <span className="text-[9px] bg-[#C9A961] text-[#0E0E0E] font-black px-1.5 py-0.2 rounded font-sans">
-                            DUBÁI
+                            DUBAI
                           </span>
                         </div>
                         <div className="text-[11px] text-gray-400">
@@ -544,7 +544,7 @@ export default function Header({
                       </div>
                       <div>
                         <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
-                          <span>Perfumes de Diseñador</span>
+                          <span>PERFUMES DE DISENADOR</span>
                           <span className="text-[9px] bg-white/10 text-[#C9A961] font-bold px-1.5 py-0.2 rounded font-sans">
                             ALTA COSTURA
                           </span>
@@ -564,9 +564,9 @@ export default function Header({
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-sm">💼</span>
-                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Para Él (Caballeros)</span>
+                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white uppercase">PARA EL (CABALLEROS)</span>
                     </div>
-                    <span className="text-[10px] text-gray-400">Amaderados & Seducción</span>
+                    <span className="text-[10px] text-gray-400 uppercase">Amaderados & Seduccion</span>
                   </button>
 
                   {/* 4. Para Ella */}
@@ -576,9 +576,9 @@ export default function Header({
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-sm">🌸</span>
-                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Para Ella (Damas)</span>
+                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white uppercase">PARA ELLA (DAMAS)</span>
                     </div>
-                    <span className="text-[10px] text-gray-400">Florales & Gourmand</span>
+                    <span className="text-[10px] text-gray-400 uppercase">Florales & Gourmand</span>
                   </button>
 
                   {/* 5. Unisex */}
@@ -588,9 +588,9 @@ export default function Header({
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-sm">💎</span>
-                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Colección Unisex</span>
+                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white uppercase">COLECCION UNISEX</span>
                     </div>
-                    <span className="text-[10px] text-gray-400">Versatilidad Suprema</span>
+                    <span className="text-[10px] text-gray-400 uppercase">Versatilidad Suprema</span>
                   </button>
 
                   {/* 6. Decants 10ml */}
@@ -600,7 +600,7 @@ export default function Header({
                   >
                     <div className="flex items-center gap-2.5">
                       <span className="text-sm">🧪</span>
-                      <span className="font-semibold text-xs text-[#C9A961]">Decants Muestras 10ml</span>
+                      <span className="font-semibold text-xs text-[#C9A961] uppercase">DECANTS MUESTRAS 10ML</span>
                     </div>
                     <span className="text-[10px] font-mono text-[#C9A961] font-black">$15 / $30</span>
                   </button>
@@ -612,9 +612,9 @@ export default function Header({
                   >
                     <div className="flex items-center gap-2.5">
                       <Flame className="w-4 h-4 text-red-400 fill-red-400" />
-                      <span className="font-semibold text-xs text-red-300">Ofertas Especiales</span>
+                      <span className="font-semibold text-xs text-red-300 uppercase">OFERTAS ESPECIALES</span>
                     </div>
-                    <span className="text-[10px] bg-red-500/20 text-red-300 font-bold px-1.5 py-0.5 rounded">Descuentos</span>
+                    <span className="text-[10px] bg-red-500/20 text-red-300 font-bold px-1.5 py-0.5 rounded uppercase">Descuentos</span>
                   </button>
 
                   {/* 8. Ver Todo el Catálogo */}
@@ -622,7 +622,7 @@ export default function Header({
                     onClick={() => handleNavCategory('all')}
                     className="w-full text-center py-2.5 px-4 rounded-xl bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs uppercase tracking-wider transition-all mt-2 shadow-md active:scale-95"
                   >
-                    Ver Todo el Catálogo
+                    VER TODO EL CATALOGO
                   </button>
                 </div>
               </div>
