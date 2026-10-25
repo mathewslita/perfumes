@@ -1,22 +1,17 @@
 {
   "name": "perfumes",
   "version": "1.0.0",
-  "description": "Una experiencia digital web de alta perfumería artesanal y fragancias de nicho. Desarrollada con estética editorial de lujo en modo oscuro (obsidiana y oro champán), tipografía refinada (*Playfair Display*, *Cormorant Garamond* y *Montserrat*), micro-animaciones interactivas y arquitectura modular en Vanilla HTML5, CSS3 y JavaScript.",
+  "description": "ARKANO PERFUMERÍA - Boutique de Alta Perfumería de Dubái y Diseñador de Alta Costura.",
   "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "dev:vite": "vite --port 5173",
-    "build:vite": "vite build"
+    "start": "next start"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
-    "@tailwindcss/vite": "^4.3.3",
-    "@vitejs/plugin-react": "^4.3.4",
     "postcss": "^8.5.30",
-    "tailwindcss": "^4.3.3",
-    "vite": "^6.2.0"
+    "tailwindcss": "^4.3.3"
   },
   "dependencies": {
     "lucide-react": "^1.59.0",

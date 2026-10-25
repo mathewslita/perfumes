@@ -12,25 +12,16 @@ export default function BestSellersTabs({
 }) {
   const tabs = [
     { id: 'all', label: 'TODOS', icon: null },
-    { id: 'arabes', label: '👑 ÁRABES DUBÁI', icon: Crown },
-    { id: 'disenador', label: '✨ DISEÑADOR', icon: Award },
-    { id: 'Para Él', label: 'PARA ÉL', icon: null },
+    { id: 'arabes', label: '👑 ARABES DUBAI', icon: Crown },
+    { id: 'disenador', label: '✨ DISENADOR', icon: Award },
+    { id: 'Para Él', label: 'PARA EL', icon: null },
     { id: 'Para Ella', label: 'PARA ELLA', icon: null },
     { id: 'Unisex', label: 'UNISEX', icon: null },
     { id: 'decants', label: 'DECANTS 10ML', icon: null }
   ];
 
   const currentTab = selectedCategory || 'all';
-
-  const displayProducts = products.filter(p => {
-    if (currentTab === 'all' || currentTab === 'decants' || currentTab === 'ofertas') return true;
-    if (currentTab === 'arabes') return p.collection === 'arabes';
-    if (currentTab === 'disenador') return p.collection === 'disenador';
-    if (currentTab === 'Para Él') return p.gender === 'Para Él' || p.gender === 'Unisex';
-    if (currentTab === 'Para Ella') return p.gender === 'Para Ella' || p.gender === 'Unisex';
-    if (currentTab === 'Unisex') return p.gender === 'Unisex';
-    return true;
-  });
+  const displayProducts = products;
 
   return (
     <section id="los-mas-vendidos" className="py-12 bg-white scroll-mt-20">
@@ -39,13 +30,13 @@ export default function BestSellersTabs({
         {/* Section Header */}
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <h2 className="font-arabic-title text-2xl sm:text-3xl font-extrabold text-[#0E0E0E]">
-              Catálogo de Alta Gama
+            <h2 className="font-arabic-title text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] uppercase tracking-wide">
+              CATALOGO DE ALTA GAMA
             </h2>
             <span className="text-2xl animate-bounce">🔥</span>
           </div>
-          <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto">
-            Fragancias árabes y de diseñador con estela imponente, fijación prolongada y notas de máxima calidad.
+          <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto uppercase tracking-wider font-medium">
+            FRAGANCIAS ARABES Y DE DISENADOR CON ESTELA IMPONENTE, FIJACION PROLONGADA Y MAXIMA CALIDAD.
           </p>
 
           {/* Dynamic Tabs */}
