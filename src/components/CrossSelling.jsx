@@ -64,6 +64,7 @@ export default function CrossSelling({ products, onOpenProduct, onAddToCart }) {
           >
             {products.map((item) => {
               const isAdded = addedId === item.id;
+              const isOnSale = item.onSale !== false && (item.originalPrice100ml > item.price100ml);
               const savings = (item.originalPrice100ml - item.price100ml).toFixed(2);
               const isArabic = item.collection === 'arabes';
 
@@ -75,22 +76,24 @@ export default function CrossSelling({ products, onOpenProduct, onAddToCart }) {
                   <div>
                     {/* Bottle Image Stage */}
                     <div 
-                      className="relative aspect-square bg-[#F5F1E8] rounded-xl p-3 mb-3 overflow-hidden cursor-pointer flex items-center justify-center border border-gray-100"
+                      className="relative aspect-square bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] rounded-xl pt-8 pb-3 px-3 mb-3 overflow-hidden cursor-pointer flex items-center justify-center border border-gray-100"
                       onClick={() => onOpenProduct(item.id)}
                     >
-                      <div className="absolute top-2.5 right-2.5 z-10 flex items-center gap-1 bg-[#0E0E0E] text-[#C9A961] font-black text-[11px] px-2 py-0.5 rounded-full shadow-md border border-[#C9A961]/40">
-                        <Flame className="w-3 h-3 text-[#C9A961] fill-[#C9A961]" />
-                        <span>-{item.discountPercent}%</span>
-                      </div>
+                      {isOnSale && (
+                        <div className="absolute top-2 right-2 z-10 flex items-center gap-1 bg-[#0E0E0E] text-[#C9A961] font-black text-[10px] px-2 py-0.5 rounded-full shadow-md border border-[#C9A961]/40">
+                          <Flame className="w-3 h-3 text-[#C9A961] fill-[#C9A961]" />
+                          <span>-{item.discountPercent}%</span>
+                        </div>
+                      )}
 
-                      <span className="absolute top-2.5 left-2.5 z-10 text-[9px] font-black bg-white/90 text-gray-800 px-2 py-0.5 rounded-full border border-gray-200">
+                      <span className="absolute top-2 left-2 z-10 text-[9px] font-black bg-white/90 text-gray-800 px-2 py-0.5 rounded-full border border-gray-200">
                         {isArabic ? 'Árabe' : 'Diseñador'}
                       </span>
 
                       <img 
                         src={item.imageMain} 
                         alt={item.name} 
-                        className="w-full h-full object-contain mix-blend-multiply group-hover/card:scale-108 transition-transform duration-500"
+                        className="w-full h-full max-h-[88%] max-w-[88%] object-contain filter drop-shadow-[0_8px_12px_rgba(0,0,0,0.1)] group-hover/card:scale-108 transition-transform duration-500"
                         loading="lazy"
                       />
                     </div>
@@ -119,12 +122,20 @@ export default function CrossSelling({ products, onOpenProduct, onAddToCart }) {
                       <span className="text-base font-black text-[#0E0E0E]">
                         ${item.price100ml.toFixed(2)}
                       </span>
-                      <span className="text-xs text-gray-400 line-through decoration-rose-500">
-                        ${item.originalPrice100ml.toFixed(2)}
-                      </span>
-                      <span className="text-[10px] text-emerald-800 font-bold ml-auto bg-emerald-50 px-1.5 py-0.5 rounded">
-                        Ahorra ${savings}
-                      </span>
+                      {isOnSale ? (
+                        <>
+                          <span className="text-xs text-gray-400 line-through decoration-rose-500">
+                            ${item.originalPrice100ml.toFixed(2)}
+                          </span>
+                          <span className="text-[10px] text-emerald-800 font-bold ml-auto bg-emerald-50 px-1.5 py-0.5 rounded">
+                            Ahorra ${savings}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="text-[10px] text-gray-400 font-bold ml-auto uppercase tracking-wider">
+                          Precio Oficial
+                        </span>
+                      )}
                     </div>
 
                     <button

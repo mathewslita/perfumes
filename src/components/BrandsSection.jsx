@@ -8,14 +8,14 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/lattafa.svg?v=3',
     filterStyle: { filter: 'brightness(0)' },
-    heightClass: 'h-18 sm:h-22 w-auto object-contain max-w-[180px] scale-120 sm:scale-130'
+    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[180px] scale-110 sm:scale-125'
   },
   {
     id: 'armaf',
     name: 'ARMAF',
     category: 'arabes',
     logoImage: '/assets/images/brands/armaf.avif?v=3',
-    heightClass: 'h-18 sm:h-22 w-auto object-contain max-w-[180px] scale-125 sm:scale-135'
+    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[180px] scale-115 sm:scale-125'
   },
   {
     id: 'afnan',
@@ -23,7 +23,7 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/afnan.avif?v=2',
     filterStyle: { filter: 'brightness(0)' },
-    heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[210px]'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
   },
   {
     id: 'al-haramain',
@@ -31,21 +31,21 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/al_haramain.png?v=2',
     filterStyle: { filter: 'grayscale(100%) contrast(150%) brightness(0.2)' },
-    heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[210px]'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
   },
   {
     id: 'bharara',
     name: 'BHARARA',
     category: 'arabes',
     logoImage: '/assets/images/brands/bharara.webp?v=2',
-    heightClass: 'h-15 sm:h-18 w-auto object-contain max-w-[160px] mix-blend-multiply'
+    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[160px] mix-blend-multiply'
   },
   {
     id: 'maison-alhambra',
     name: 'MAISON ALHAMBRA',
     category: 'arabes',
     logoImage: '/assets/images/brands/maison_alhambra.webp?v=2',
-    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[170px] mix-blend-multiply'
+    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[170px] mix-blend-multiply'
   },
   {
     id: 'rasasi',
@@ -53,14 +53,14 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/rasasi.svg?v=2',
     filterStyle: { filter: 'brightness(0)' },
-    heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[210px]'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
   },
   {
     id: 'french-avenue',
     name: 'FRENCH AVENUE',
     category: 'arabes',
     logoImage: '/assets/images/brands/french_avenue.webp?v=2',
-    heightClass: 'h-13 sm:h-16 w-auto object-contain max-w-[200px] mix-blend-multiply'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
   },
 
   // Casas Icónicas de Diseñador
@@ -69,35 +69,35 @@ export const ALL_BRANDS = [
     name: 'DIOR',
     category: 'disenador',
     logoImage: '/assets/images/brands/dior.webp?v=2',
-    heightClass: 'h-13 sm:h-16 w-auto object-contain max-w-[220px] mix-blend-multiply'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[220px] mix-blend-multiply'
   },
   {
     id: 'jean-paul-gaultier',
     name: 'JEAN PAUL GAULTIER',
     category: 'disenador',
     logoImage: '/assets/images/brands/jean_paul_gaultier.jpg?v=2',
-    heightClass: 'h-14 sm:h-17 w-auto object-contain max-w-[190px] mix-blend-multiply'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[190px] mix-blend-multiply'
   },
   {
     id: 'chanel',
     name: 'CHANEL',
     category: 'disenador',
     logoImage: '/assets/images/brands/chanel.svg?v=2',
-    heightClass: 'h-14 sm:h-17 w-auto object-contain max-w-[180px]'
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[180px]'
   },
   {
     id: 'yves-saint-laurent',
     name: 'YVES SAINT LAURENT',
     category: 'disenador',
     logoImage: '/assets/images/brands/ysl.png?v=2',
-    heightClass: 'h-11 sm:h-13 w-auto object-contain max-w-[270px]'
+    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[270px]'
   },
   {
     id: 'versace',
     name: 'VERSACE',
     category: 'disenador',
     logoImage: '/assets/images/brands/versace.svg?v=5',
-    heightClass: 'h-18 sm:h-22 w-auto object-contain max-w-[180px] scale-120 sm:scale-130'
+    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[180px] scale-110 sm:scale-125'
   },
   {
     id: 'tom-ford',
@@ -118,7 +118,7 @@ export const ALL_BRANDS = [
     name: 'XERJOFF',
     category: 'disenador',
     logoImage: '/assets/images/brands/xerjoff.webp?v=2',
-    heightClass: 'h-11 sm:h-13 w-auto object-contain max-w-[270px]'
+    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[270px]'
   }
 ];
 
@@ -158,13 +158,13 @@ export default function BrandsSection({ onSelectBrand }) {
       </div>
 
       {/* Cinta Automática Continua (Infinite Logo Ribbon) */}
-      <div className="relative w-full overflow-hidden pause-marquee-hover py-4 sm:py-6">
+      <div className="relative w-full overflow-hidden py-4 sm:py-6">
         {/* Left & Right Smooth Vignette Fade */}
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-32 lg:w-48 z-10 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-32 lg:w-48 z-10 bg-gradient-to-l from-white to-transparent" />
 
         <div className="overflow-hidden mask-marquee-edges">
-          <div className="animate-marquee-left flex items-center">
+          <div className="animate-marquee-left flex items-center" style={{ willChange: 'transform' }}>
             {MARQUEE_ITEMS.map((brand, idx) => (
               <button
                 key={`${brand.id}-${idx}`}

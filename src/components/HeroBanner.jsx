@@ -75,45 +75,44 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 className="relative bg-white/5 backdrop-blur-md border border-[#C9A961]/30 hover:border-[#C9A961] rounded-3xl p-4 shadow-2xl cursor-pointer group/hero transition-all duration-300 hover:scale-[1.02]"
                 title="Haz clic para ver detalles de Dior Sauvage Elixir"
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-square bg-[#0E0E0E]">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-square bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] pt-12 pb-24 sm:pt-8 sm:pb-20 px-6 flex items-center justify-center">
                   <img 
                     src="/assets/images/dior_sauvage_elixir.jpg" 
-                    alt="Dior Sauvage Elixir en ARKANO Perfumería"
-                    className="w-full h-full object-cover transform group-hover/hero:scale-108 transition-transform duration-700" 
+                    alt="Dior Sauvage Elixir en ARKANO Perfumería" 
+                    className="w-full h-full max-h-[260px] sm:max-h-full object-contain filter drop-shadow-[0_16px_25px_rgba(0,0,0,0.16)] transform group-hover/hero:scale-108 transition-transform duration-700 ease-out" 
                   />
                   
                   {/* Top Badges */}
-                  <div className="absolute top-3 left-3 bg-[#0E0E0E] border border-[#C9A961] text-[#C9A961] text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
+                  <div className="absolute top-3 left-3 bg-[#0E0E0E] border border-[#C9A961] text-[#C9A961] text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1 z-10">
                     <Crown className="w-3.5 h-3.5 fill-[#C9A961]" />
                     <span>Diseñador • Elixir Supremo</span>
                   </div>
 
-                  <div className="absolute top-3 right-3 bg-[#C9A961] text-[#0E0E0E] text-[11px] font-black px-2.5 py-1 rounded-full shadow-md">
-                    -18% OFF
+                  <div className="absolute top-3 right-3 bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961]/40 text-[11px] font-black px-2.5 py-1 rounded-full shadow-md z-10">
+                    👑 Top #1
                   </div>
 
                   {/* Hover Quick View Overlay */}
-                  <div className="absolute inset-0 bg-[#0E0E0E]/40 backdrop-blur-[2px] opacity-0 group-hover/hero:opacity-100 transition-opacity flex items-center justify-center">
+                  <div className="absolute inset-0 bg-[#0E0E0E]/40 backdrop-blur-[2px] opacity-0 group-hover/hero:opacity-100 transition-opacity flex items-center justify-center z-20">
                     <span className="bg-[#0E0E0E] text-[#C9A961] font-black text-xs py-2.5 px-5 rounded-full shadow-2xl flex items-center gap-2 transform translate-y-2 group-hover/hero:translate-y-0 transition-transform border border-[#C9A961]">
                       <Eye className="w-4 h-4 text-[#C9A961]" />
-                      <span>Ver Ficha Técnica & Decant</span>
+                      <span>Ver Perfume & Decant</span>
                     </span>
                   </div>
 
                   {/* Product Info Bar */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-[#0E0E0E]/95 backdrop-blur-md border border-[#C9A961]/30 p-3.5 rounded-2xl flex items-center justify-between gap-2 shadow-xl">
+                  <div className="absolute bottom-3 left-3 right-3 bg-[#0E0E0E]/95 backdrop-blur-md border border-[#C9A961]/30 p-3 sm:p-3.5 rounded-2xl flex items-center justify-between gap-2 shadow-xl z-10">
                     <div>
                       <span className="text-[10px] text-[#C9A961] font-extrabold uppercase tracking-widest block">
                         Christian Dior París
                       </span>
-                      <h4 className="font-bold text-sm text-white group-hover/hero:text-[#C9A961] transition-colors">
+                      <h4 className="font-bold text-xs sm:text-sm text-white group-hover/hero:text-[#C9A961] transition-colors line-clamp-1">
                         Sauvage Elixir
                       </h4>
-                      <p className="text-[11px] text-gray-300">Canela, Lavanda y Sándalo Noble</p>
+                      <p className="text-[10px] sm:text-[11px] text-gray-300">Canela, Lavanda y Sándalo Noble</p>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <span className="text-xs font-bold text-gray-500 line-through decoration-rose-500 block">$225.00</span>
-                      <span className="text-base font-black text-[#C9A961]">$185.00</span>
+                      <span className="text-sm sm:text-base font-black text-[#C9A961] block">$185.00</span>
                     </div>
                   </div>
                 </div>
@@ -125,7 +124,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     <span>Disponible en Botella y Decant 10ml</span>
                   </span>
                   <span className="text-[#C9A961] font-bold text-[11px] flex items-center gap-1 group-hover/hero:underline">
-                    Ver pirámide Fragrantica →
+                    Ver ficha y notas olfativas →
                   </span>
                 </div>
               </div>

@@ -1,18 +1,30 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, X, Send, Bot, MessageCircle, ChevronRight, ShoppingBag } from 'lucide-react';
+import { Sparkles, X, Send, Bot, MessageCircle, ChevronRight, ShoppingBag, RotateCcw, Award, Crown, Check } from 'lucide-react';
 import { PERFUMES_DATA } from '../data/perfumes';
+import { analyzeAndRespond } from '../utils/aiSommelierBrain';
 
 export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
   const [isOpen, setIsOpen] = useState(false);
   const [showGreeting, setShowGreeting] = useState(true);
   const [inputMessage, setInputMessage] = useState('');
-  const [messages, setMessages] = useState([
-    {
-      sender: 'bot',
-      text: '¡Bienvenidos a ARKANO PERFUMERÍA! 👑 Soy Yasmin, tu Sommelier de Alta Perfumería Árabe y Diseñador. ¿Buscas un perfume para ti o para regalar? ¿Prefieres la potencia misteriosa de Oriente o la sofisticación icónica de Diseñador?',
-      recommendations: []
-    }
-  ]);
+  const [isTyping, setIsTyping] = useState(false);
+  
+  const initialBotMessage = {
+    sender: 'bot',
+    text: '¡Bienvenidos a **ARKANO PERFUMERÍA**! 👑 Soy **Yasmin**, tu Sommelier de Alta Perfumería Árabe y Diseñador.\n\nEstoy aquí para guiarte a encontrar tu firma aromática perfecta. ¿Buscas un perfume para ti o para regalar? ¿Prefieres la potencia misteriosa de Oriente o la sofisticación de Diseñador?',
+    recommendations: [
+      PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
+      PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
+    ].filter(Boolean),
+    chips: [
+      '👔 Para Caballero',
+      '🌸 Para Dama',
+      '👑 Lo más viral de Dubái',
+      '🧪 ¿Cómo funcionan los Decants?'
+    ]
+  };
+
+  const [messages, setMessages] = useState([initialBotMessage]);
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
@@ -24,80 +36,40 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
       scrollToBottom();
       setShowGreeting(false);
     }
-  }, [isOpen, messages]);
+  }, [isOpen, messages, isTyping]);
 
-  // Suggested Prompts
-  const quickPrompts = [
-    { label: '✨ Diseñador Alta Costura', query: 'Recomiéndame lo mejor de diseñador como Dior o Chanel' },
-    { label: '👑 Árabes Virales Dubái', query: '¿Cuáles son los perfumes árabes más virales y de mayor duración?' },
-    { label: '🍯 Dulce Gourmand & Vainilla', query: 'Busco un perfume dulce, cremoso con vainilla o canela' },
-    { label: '🔥 Modo Bestia (+12h)', query: 'Quiero un perfume modo bestia que proyecte muchísimo' }
-  ];
-
-  // Sommelier Intelligent Response Engine
-  const generateSommelierResponse = (userQuery) => {
-    const q = userQuery.toLowerCase();
-    let replyText = '';
-    let recs = [];
-
-    if (q.includes('diseñador') || q.includes('disenador') || q.includes('dior') || q.includes('chanel') || q.includes('ysl') || q.includes('tom ford')) {
-      replyText = 'En nuestra **Colección de Diseñador**, contamos con joyas absolutas de la alta costura: **Dior Sauvage Elixir** (el elixir especiado más potente del mercado) y **Bleu de Chanel Parfum** (la cumbre de la elegancia versátil), además de **YSL Libre Le Parfum** para dama. ¡Obras maestras con batch code certificado!';
-      recs = PERFUMES_DATA.filter(p => p.collection === 'disenador');
-    } else if (q.includes('árabe') || q.includes('arabe') || q.includes('dubai') || q.includes('dubái') || q.includes('oriente')) {
-      replyText = 'Nuestra **Colección Árabe** reúne los mayores fenómenos virales de Dubái: **Lattafa Khamrah** (praliné, canela y dátiles) y **Armaf Club de Nuit Intense Man** (la legendaria bestia negra de cumplidos). Ambos ofrecen concentración extrema a un precio inigualable.';
-      recs = PERFUMES_DATA.filter(p => p.id === 'lattafa-khamrah' || p.id === 'armaf-club-de-nuit-intense-man');
-    } else if (q.includes('dulce') || q.includes('vainilla') || q.includes('gourmand') || q.includes('canela')) {
-      replyText = 'Para amantes de lo dulce y gourmand, te recomiendo **Lattafa Khamrah** (licoroso y especiado), **YSL Libre Le Parfum** (miel, azafrán y vainilla bourbon) y **Lattafa Yara** (fresas con crema batida). ¡Sumamente adictivos!';
-      recs = PERFUMES_DATA.filter(p => p.id === 'lattafa-khamrah' || p.id === 'ysl-libre-le-parfum' || p.id === 'lattafa-yara');
-    } else if (q.includes('bestia') || q.includes('duracion') || q.includes('duración') || q.includes('fijacion') || q.includes('fijación')) {
-      replyText = 'Si buscas que el perfume dure más de 14 a 16 horas con estela arrolladora: **Dior Sauvage Elixir** (en diseñador) y **Al Haramain Amber Oud Gold** (en árabe, concentración Extrait puro) son los reyes indiscutibles.';
-      recs = PERFUMES_DATA.filter(p => p.id === 'dior-sauvage-elixir' || p.id === 'al-haramain-amber-oud-gold');
-    } else {
-      replyText = '¡Excelente consulta! En **ARKANO PERFUMERÍA** cada fragancia incluye su pirámide olfativa y enlace oficial a Fragrantica. ¿Te gustaría asesoría para alguna ocasión en particular? También puedes escribirnos directamente por WhatsApp.';
-      recs = [PERFUMES_DATA[0], PERFUMES_DATA[4]];
-    }
-
-    return { replyText, recs };
-  };
-
-  const handleSendMessage = async (textToSend) => {
+  // Handle user sending a message (or tapping a chip)
+  const handleSendMessage = (textToSend) => {
     const query = textToSend || inputMessage;
-    if (!query.trim()) return;
+    if (!query.trim() || isTyping) return;
 
     // Append user message
-    const newMessages = [...messages, { sender: 'user', text: query }];
-    setMessages(newMessages);
+    const updatedMessages = [...messages, { sender: 'user', text: query }];
+    setMessages(updatedMessages);
     setInputMessage('');
+    setIsTyping(true);
 
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: query, history: messages })
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        setMessages([...newMessages, {
-          sender: 'bot',
-          text: data.reply,
-          recommendations: data.recommendations || []
-        }]);
-        return;
-      }
-    } catch (e) {
-      console.warn('Fallback to local engine:', e);
-    }
-
-    // Fallback response engine
+    // Realistic sommelier processing delay
     setTimeout(() => {
-      const { replyText, recs } = generateSommelierResponse(query);
-      setMessages([...newMessages, {
-        sender: 'bot',
-        text: replyText,
-        recommendations: recs
-      }]);
+      const response = analyzeAndRespond(query, updatedMessages);
+      setMessages([
+        ...updatedMessages,
+        {
+          sender: 'bot',
+          text: response.replyText,
+          recommendations: response.recommendations || [],
+          chips: response.chips || []
+        }
+      ]);
+      setIsTyping(false);
     }, 450);
+  };
+
+  // Reset conversation
+  const handleResetChat = () => {
+    setMessages([initialBotMessage]);
+    setInputMessage('');
+    setIsTyping(false);
   };
 
   return (
@@ -108,10 +80,11 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
         {/* Friendly Speech Bubble */}
         {showGreeting && !isOpen && (
           <div className="mb-2 bg-[#0E0E0E] text-[#F5F1E8] text-xs py-2 px-3.5 rounded-2xl shadow-xl border border-[#C9A961]/60 max-w-xs animate-bounce flex items-center gap-2">
-            <span>✨ ¿Dudas entre un perfume árabe o de diseñador? ¡Te ayudo al instante!</span>
+            <span>✨ ¿Dudas entre un perfume árabe o de diseñador? ¡Te ayudo en vivo!</span>
             <button 
               onClick={() => setShowGreeting(false)} 
-              className="text-gray-400 hover:text-white ml-1"
+              className="text-gray-400 hover:text-white ml-1 text-sm font-bold"
+              aria-label="Cerrar saludo"
             >
               &times;
             </button>
@@ -122,6 +95,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
           onClick={() => setIsOpen(!isOpen)}
           className="relative w-14 h-14 rounded-full bg-[#0E0E0E] text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#C9A961] group"
           aria-label="Abrir Sommelier de Perfumes IA"
+          title="Hablar con Yasmin - Sommelier ARKANO"
         >
           {isOpen ? (
             <X className="w-6 h-6 text-[#C9A961]" />
@@ -142,12 +116,12 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
 
       {/* Interactive Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-22 right-5 z-40 w-96 max-w-[calc(100vw-2rem)] h-[540px] bg-white rounded-3xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed bottom-22 right-3 sm:right-5 z-40 w-[94vw] sm:w-[410px] h-[570px] max-h-[85vh] bg-white rounded-3xl shadow-2xl border border-[#C9A961]/35 flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
           
           {/* Chat Header */}
-          <div className="bg-[#0E0E0E] text-white p-4 flex items-center justify-between border-b border-[#C9A961]/40">
-            <div className="flex items-center gap-3">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border border-[#C9A961]">
+          <div className="bg-[#0E0E0E] text-white p-3.5 sm:p-4 flex items-center justify-between border-b border-[#C9A961]/40">
+            <div className="flex items-center gap-2.5">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9A961]">
                 <img 
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
                   alt="Yasmin" 
@@ -159,122 +133,167 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                   Yasmin • Sommelier ARKANO <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
                 </h4>
                 <span className="text-[10px] text-[#C9A961] flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A961]"></span> Asesoría en Vivo Árabes & Diseñador
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span>Experta en Árabes & Diseñador</span>
                 </span>
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-gray-400 hover:text-white p-1 rounded-full transition-colors"
-            >
-              <X className="w-5 h-5" />
-            </button>
+
+            <div className="flex items-center gap-1">
+              <button
+                onClick={handleResetChat}
+                className="text-gray-400 hover:text-[#C9A961] p-1.5 rounded-full hover:bg-white/10 transition-colors"
+                title="Reiniciar conversación"
+                aria-label="Reiniciar conversación"
+              >
+                <RotateCcw className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="text-gray-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Cerrar chat"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
           </div>
 
           {/* Messages Feed */}
-          <div className="flex-grow p-4 overflow-y-auto space-y-3 bg-[#F5F1E8] text-xs">
+          <div className="flex-grow p-3 sm:p-4 overflow-y-auto space-y-3.5 bg-[#F8F5EE] text-xs">
             {messages.map((msg, i) => (
               <div
                 key={i}
                 className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
               >
+                {/* Message Bubble */}
                 <div
-                  className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 leading-relaxed shadow-sm ${
+                  className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 leading-relaxed shadow-sm ${
                     msg.sender === 'user'
                       ? 'bg-[#0E0E0E] text-[#F5F1E8] rounded-br-none border border-[#C9A961]/40'
-                      : 'bg-white text-gray-900 border border-gray-200 rounded-bl-none'
+                      : 'bg-white text-gray-900 border border-stone-200 rounded-bl-none'
                   }`}
                 >
-                  <p className="whitespace-pre-line">{msg.text}</p>
+                  <p className="whitespace-pre-line text-xs sm:text-[12.5px] leading-relaxed">
+                    {msg.text}
+                  </p>
                 </div>
 
                 {/* Clickable Product Recommendation Cards inside Chat */}
                 {msg.recommendations && msg.recommendations.length > 0 && (
-                  <div className="mt-2.5 space-y-2 w-full max-w-[90%]">
+                  <div className="mt-2.5 space-y-2.5 w-full max-w-[94%]">
                     {msg.recommendations.map((perfume) => {
+                      const isArabic = perfume.collection === 'arabes';
+                      const decantPrice = isArabic ? 15.00 : 30.00;
                       const waText = encodeURIComponent(
-                        `¡Hola ARKANO Perfumería! El Sommelier Virtual me acaba de recomendar ${perfume.brand} ${perfume.name} ($${perfume.price100ml.toFixed(2)}). Deseo consultar disponibilidad para envío inmediato.`
+                        `¡Hola ARKANO Perfumería! El Sommelier Virtual Yasmin me acaba de recomendar ${perfume.brand} ${perfume.name}. Deseo consultar disponibilidad para despacho express.`
                       );
 
                       return (
                         <div
                           key={perfume.id}
-                          className="bg-white p-3 rounded-2xl border border-gray-200 shadow-sm hover:border-[#C9A961] transition-all"
+                          className="bg-white p-3 rounded-2xl border border-stone-200 shadow-sm hover:border-[#C9A961] transition-all"
                         >
+                          {/* Card Header & Thumbnail */}
                           <div 
-                            className="flex items-center gap-2.5 cursor-pointer mb-2"
+                            className="flex items-center gap-3 cursor-pointer"
                             onClick={() => {
                               onOpenProduct(perfume.id);
                               setIsOpen(false);
                             }}
+                            title="Ver detalles completos del perfume"
                           >
-                            <img 
-                              src={perfume.imageMain} 
-                              alt={perfume.name} 
-                              className="w-12 h-12 object-contain rounded-xl bg-[#F5F1E8] p-1 border border-gray-100 flex-shrink-0"
-                            />
-                            <div className="flex-grow">
-                              <span className="text-[9px] font-black text-[#0E0E0E] uppercase block">
-                                {perfume.brand}
-                              </span>
-                              <h5 className="font-bold text-xs text-gray-900 leading-tight">
+                            <div className="w-14 h-14 rounded-xl bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] p-1 border border-stone-200 flex-shrink-0 flex items-center justify-center">
+                              <img 
+                                src={perfume.imageMain} 
+                                alt={perfume.name} 
+                                className="w-full h-full object-contain filter drop-shadow-sm"
+                              />
+                            </div>
+                            
+                            <div className="flex-grow min-w-0">
+                              <div className="flex items-center gap-1.5 mb-0.5">
+                                <span className="text-[9px] font-black text-[#0E0E0E] uppercase tracking-wider truncate">
+                                  {perfume.brand}
+                                </span>
+                                <span className={`text-[8.5px] font-bold px-1.5 py-0.2 rounded-full border ${
+                                  isArabic ? 'bg-[#C9A961]/20 text-[#0E0E0E] border-[#C9A961]' : 'bg-[#0E0E0E] text-white border-white/20'
+                                }`}>
+                                  {isArabic ? '👑 Árabe' : '✨ Diseñador'}
+                                </span>
+                              </div>
+
+                              <h5 className="font-bold text-xs text-gray-950 truncate leading-snug">
                                 {perfume.name}
                               </h5>
-                              <div className="flex items-baseline gap-1.5 mt-0.5">
+
+                              {/* Pricing Options */}
+                              <div className="flex items-baseline gap-2 mt-1">
                                 <span className="text-xs font-black text-[#0E0E0E]">
                                   ${perfume.price100ml.toFixed(2)}
                                 </span>
-                                <span className="text-[10px] text-gray-400 line-through">
-                                  ${perfume.originalPrice100ml.toFixed(2)}
+                                <span className="text-[10.5px] text-[#A58B4E] font-semibold">
+                                  Decant 10ml: <strong>${decantPrice.toFixed(2)}</strong>
                                 </span>
                               </div>
                             </div>
                           </div>
 
-                          <div className="grid grid-cols-2 gap-1.5 pt-2 border-t border-gray-100">
+                          {/* Quick Purchase Buttons */}
+                          <div className="grid grid-cols-2 gap-2 mt-2.5 pt-2 border-t border-stone-100">
                             <button
                               onClick={() => onAddToCart(perfume, '100ml', 1)}
-                              className="bg-[#0E0E0E] text-white hover:text-[#C9A961] font-bold text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 transition-colors"
+                              className="bg-[#0E0E0E] hover:bg-[#1F1F1F] text-white hover:text-[#C9A961] font-bold text-[10px] py-1.5 px-2 rounded-xl flex items-center justify-center gap-1 transition-all border border-[#C9A961]/30 active:scale-95"
+                              title="Agregar frasco completo al carrito"
                             >
                               <ShoppingBag className="w-3 h-3 text-[#C9A961]" />
-                              <span>+ Carrito</span>
+                              <span>+ Frasco</span>
                             </button>
 
-                            <a
-                              href={`https://wa.me/593992851808?text=${waText}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-[10px] py-1.5 px-2 rounded-lg flex items-center justify-center gap-1 shadow-sm transition-colors"
+                            <button
+                              onClick={() => onAddToCart(perfume, 'decant', 1)}
+                              className="bg-[#C9A961]/15 hover:bg-[#C9A961]/25 text-[#0E0E0E] font-extrabold text-[10px] py-1.5 px-2 rounded-xl flex items-center justify-center gap-1 border border-[#C9A961]/50 transition-all active:scale-95"
+                              title="Agregar decant muestra 10ml al carrito"
                             >
-                              <MessageCircle className="w-3 h-3 fill-current" />
-                              <span>Pedir WhatsApp</span>
-                            </a>
+                              <span>🧪 + Decant ${decantPrice.toFixed(0)}</span>
+                            </button>
                           </div>
                         </div>
                       );
                     })}
                   </div>
                 )}
+
+                {/* Follow-Up Suggestion Chips */}
+                {msg.chips && msg.chips.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mt-2.5 max-w-[94%]">
+                    {msg.chips.map((chip, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => handleSendMessage(chip)}
+                        className="text-[10.5px] font-semibold bg-white hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/40 py-1 px-2.5 rounded-full shadow-xs transition-all active:scale-95 flex items-center gap-1"
+                      >
+                        <span>{chip}</span>
+                        <ChevronRight className="w-3 h-3 text-[#C9A961]" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
+
+            {/* Typing Indicator */}
+            {isTyping && (
+              <div className="flex items-center gap-2 text-stone-500 text-xs py-2 px-3 bg-white rounded-2xl w-fit shadow-xs border border-stone-200 animate-pulse">
+                <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
+                <span className="italic">Yasmin está preparando tu recomendación...</span>
+              </div>
+            )}
+
             <div ref={messagesEndRef} />
           </div>
 
-          {/* Quick Prompt Pills */}
-          <div className="p-2 bg-white border-t border-gray-100 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-            {quickPrompts.map((p, idx) => (
-              <button
-                key={idx}
-                onClick={() => handleSendMessage(p.query)}
-                className="flex-shrink-0 text-[10px] bg-[#F5F1E8] hover:bg-[#0E0E0E] hover:text-[#C9A961] text-[#0E0E0E] font-semibold px-2.5 py-1 rounded-full border border-[#C9A961]/30 transition-colors"
-              >
-                {p.label}
-              </button>
-            ))}
-          </div>
-
           {/* Chat Input & Human Escalation */}
-          <div className="p-3 bg-white border-t border-gray-100 flex flex-col gap-2">
+          <div className="p-3 bg-white border-t border-stone-200 flex flex-col gap-2">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -284,14 +303,16 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
             >
               <input
                 type="text"
-                placeholder="Pregunta sobre perfumes árabes o diseñador..."
+                placeholder="Escribe tu consulta (notas, ocasión, dudas...)"
                 value={inputMessage}
                 onChange={(e) => setInputMessage(e.target.value)}
-                className="flex-grow bg-[#F5F1E8] border border-gray-300 rounded-full py-2 px-3 text-xs focus:outline-none focus:border-[#0E0E0E]"
+                disabled={isTyping}
+                className="flex-grow bg-[#F8F5EE] border border-stone-300 rounded-full py-2 px-3.5 text-xs focus:outline-none focus:border-[#C9A961] text-gray-900 placeholder:text-stone-400"
               />
               <button
                 type="submit"
-                className="bg-[#0E0E0E] hover:bg-[#1A1A1A] text-white p-2 rounded-full transition-all border border-[#C9A961]/40"
+                disabled={!inputMessage.trim() || isTyping}
+                className="bg-[#0E0E0E] hover:bg-[#252525] disabled:opacity-40 text-white p-2 rounded-full transition-all border border-[#C9A961]/40 active:scale-95"
                 aria-label="Enviar mensaje"
               >
                 <Send className="w-4 h-4 text-[#C9A961]" />
@@ -299,10 +320,10 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
             </form>
 
             <a
-              href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20hablar%20con%20un%20asesor%20humano"
+              href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20asesoría%20personalizada%20con%20un%20sommelier%20humano"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[10px] text-gray-500 hover:text-emerald-700 flex items-center justify-center gap-1 font-medium transition-colors"
+              className="text-[10px] text-stone-600 hover:text-emerald-700 flex items-center justify-center gap-1 font-medium transition-colors"
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
               <span>¿Prefieres hablar con un asesor humano en WhatsApp?</span>

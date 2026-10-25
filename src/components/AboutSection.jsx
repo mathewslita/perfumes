@@ -65,8 +65,8 @@ export default function AboutSection() {
                 coincidente entre el frasco y la caja para verificar en CheckFresh y bases de datos oficiales.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] font-bold text-[#0E0E0E]">
-              <CheckCircle className="w-4 h-4 text-[#C9A961]" />
+            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] font-bold text-emerald-800">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
               <span>Trazabilidad 100% Verificable</span>
             </div>
           </div>
@@ -81,11 +81,11 @@ export default function AboutSection() {
                 3. Transparencia & Cultura del Decant
               </h3>
               <p className="text-xs text-gray-600 leading-relaxed">
-                Incorporamos datos detallados y <strong>enlaces a Fragrantica</strong> para que conozcas las notas antes de comprar. Además, dispones de <strong>Decants de 10ml</strong> (~120 sprays) para probar la evolución en tu piel sin arriesgar en una compra a ciegas.
+                Incorporamos pirámides olfativas completas y notas detalladas para que conozcas cada matiz aromático antes de comprar. Además, dispones de <strong>Decants de 10ml</strong> (~120 sprays) para probar la evolución en tu piel sin arriesgar en una compra a ciegas.
               </p>
             </div>
-            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] font-bold text-[#0E0E0E]">
-              <CheckCircle className="w-4 h-4 text-[#C9A961]" />
+            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] font-bold text-emerald-800">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
               <span>Cero Riesgo de Compra a Ciegas</span>
             </div>
           </div>

@@ -107,39 +107,39 @@
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marqueeScrollLeft 45s linear infinite;
+  animation: marqueeScrollLeft 40s linear infinite;
   will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 .animate-marquee-right {
   display: flex;
   width: max-content;
-  animation: marqueeScrollRight 48s linear infinite;
+  animation: marqueeScrollRight 42s linear infinite;
   will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 .animate-marquee-left-fast {
-  animation: marqueeScrollLeft 30s linear infinite;
+  animation: marqueeScrollLeft 28s linear infinite;
 }
 
 .animate-marquee-right-fast {
-  animation: marqueeScrollRight 32s linear infinite;
+  animation: marqueeScrollRight 30s linear infinite;
 }
 
 .animate-marquee-left-slow {
-  animation: marqueeScrollLeft 65s linear infinite;
+  animation: marqueeScrollLeft 60s linear infinite;
 }
 
 .animate-marquee-right-slow {
-  animation: marqueeScrollRight 68s linear infinite;
-}
-
-/* Pause animation on hover */
-.pause-marquee-hover:hover .animate-marquee-left,
-.pause-marquee-hover:hover .animate-marquee-right,
-.animate-marquee-left:hover,
-.animate-marquee-right:hover {
-  animation-play-state: paused !important;
+  animation: marqueeScrollRight 62s linear infinite;
 }
 
 /* Vignette mask for marquee edges */
@@ -148,11 +148,15 @@
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
+/* Fallback for reduced motion: maintain continuous smooth crawl without freezing */
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee-left,
+  .animate-marquee-left {
+    animation: marqueeScrollLeft 50s linear infinite !important;
+    animation-play-state: running !important;
+  }
   .animate-marquee-right {
-    animation: none;
-    overflow-x: auto;
+    animation: marqueeScrollRight 52s linear infinite !important;
+    animation-play-state: running !important;
   }
 }
 

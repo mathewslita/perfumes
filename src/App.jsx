@@ -183,6 +183,17 @@ export default function App() {
     el?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Select vibe / occasion with smart scroll
+  const handleSelectVibe = (vibe) => {
+    setActiveVibe(vibe);
+    setSelectedBrand(null);
+    setSelectedAcorde(null);
+    setActiveCategory('all');
+    setSearchQuery('');
+    const el = document.getElementById('los-mas-vendidos');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   // Filtered Products Logic
   const filteredProducts = PERFUMES_DATA.filter(p => {
     // Brand filter
@@ -201,7 +212,8 @@ export default function App() {
     if (activeCategory === 'Para Él' && p.gender !== 'Para Él' && p.gender !== 'Unisex') return false;
     if (activeCategory === 'Para Ella' && p.gender !== 'Para Ella' && p.gender !== 'Unisex') return false;
     if (activeCategory === 'Unisex' && p.gender !== 'Unisex') return false;
-    if (activeCategory === 'ofertas' && p.discountPercent < 40) return false;
+    if (activeCategory === 'decants') return true; // Show all products for decants
+    if (activeCategory === 'ofertas' && (p.onSale === false || p.originalPrice100ml <= p.price100ml)) return false;
 
     // Vibe filter
     if (activeVibe !== 'all') {
@@ -262,9 +274,11 @@ export default function App() {
           setActiveCategory(cat);
           setSelectedBrand(null);
           setSelectedAcorde(null);
+          setActiveVibe('all');
         }}
         onSelectBrand={handleSelectBrand}
         onSelectAcorde={handleSelectAcorde}
+        onSelectVibe={handleSelectVibe}
         onSearch={(query) => {
           setSearchQuery(query);
           if (query.trim()) {
