@@ -39,21 +39,36 @@ export default function ProductCard({
         {/* Badges de Categoría y Momento (Día / Noche) */}
         <div className="flex items-center gap-1.5">
           {product.timeOfDay === 'dia' && (
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm bg-amber-50 text-amber-900 border border-amber-200 flex items-center gap-1">
-              <Sun className="w-3 h-3 text-amber-600 fill-amber-400" />
-              <span>Día</span>
+            <span 
+              className="group/time text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm bg-amber-50 text-amber-900 border border-amber-200 flex items-center transition-all duration-300 cursor-pointer"
+              title="Momento: Día"
+            >
+              <Sun className="w-3 h-3 text-amber-600 fill-amber-400 flex-shrink-0" />
+              <span className="max-w-0 opacity-0 group-hover/time:max-w-[35px] group-hover/time:opacity-100 group-hover/time:ml-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
+                Día
+              </span>
             </span>
           )}
           {product.timeOfDay === 'noche' && (
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961]/40 flex items-center gap-1">
-              <Moon className="w-3 h-3 text-[#C9A961] fill-[#C9A961]" />
-              <span>Noche</span>
+            <span 
+              className="group/time text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961]/40 flex items-center transition-all duration-300 cursor-pointer"
+              title="Momento: Noche"
+            >
+              <Moon className="w-3 h-3 text-[#C9A961] fill-[#C9A961] flex-shrink-0" />
+              <span className="max-w-0 opacity-0 group-hover/time:max-w-[45px] group-hover/time:opacity-100 group-hover/time:ml-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
+                Noche
+              </span>
             </span>
           )}
           {product.timeOfDay === 'ambas' && (
-            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm bg-white text-gray-800 border border-[#C9A961]/60 flex items-center gap-1">
-              <Sparkles className="w-3 h-3 text-[#A58B4E] fill-[#C9A961]" />
-              <span>Día & Noche</span>
+            <span 
+              className="group/time text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm bg-white text-gray-800 border border-[#C9A961]/60 flex items-center transition-all duration-300 cursor-pointer"
+              title="Momento: Día & Noche"
+            >
+              <Sparkles className="w-3 h-3 text-[#A58B4E] fill-[#C9A961] flex-shrink-0" />
+              <span className="max-w-0 opacity-0 group-hover/time:max-w-[75px] group-hover/time:opacity-100 group-hover/time:ml-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
+                Día & Noche
+              </span>
             </span>
           )}
 

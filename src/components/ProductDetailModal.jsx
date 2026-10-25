@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, ShoppingBag, Zap, ShieldCheck, Truck, Check, 
-  Maximize2, Flame, Sun, Moon, Sparkles 
+  Flame, Sun, Moon, Sparkles 
 } from 'lucide-react';
 import LightboxModal from './LightboxModal';
 
@@ -78,29 +78,12 @@ export default function ProductDetailModal({
                       <span>-{product.discountPercent}% OFF</span>
                     </div>
                   )}
-
-                  {/* Indicador de Ficha Olfativa si está activa la imagen 2 */}
-                  {activeImgIndex === 1 && (
-                    <div className="absolute top-3.5 right-3.5 bg-[#0E0E0E]/90 text-[#C9A961] text-[11px] font-bold px-3 py-1 rounded-full shadow-lg border border-[#C9A961]/50 flex items-center gap-1.5 backdrop-blur-sm">
-                      <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
-                      <span>Ficha Olfativa • Clic para Zoom</span>
-                    </div>
-                  )}
-
-                  <button 
-                    className="absolute bottom-3.5 right-3.5 bg-white/95 hover:bg-white text-gray-800 p-2 rounded-full shadow-md transition-all flex items-center gap-1.5 text-xs font-bold border border-gray-200 hover:shadow-lg"
-                    title="Ver pantalla completa y hacer zoom"
-                  >
-                    <Maximize2 className="w-3.5 h-3.5 text-[#0E0E0E]" />
-                    <span className="hidden sm:inline">Zoom</span>
-                  </button>
                 </div>
 
-                {/* Thumbnails Strip con distinción de Ficha & Pirámide */}
-                <div className="flex items-center gap-3 overflow-x-auto pb-1">
-                  {images.map((img, idx) => {
-                    const isInfographicThumb = idx === 1;
-                    return (
+                {/* Thumbnails Strip: Solo si hay más de 1 imagen real */}
+                {images.length > 1 && (
+                  <div className="flex items-center gap-3 overflow-x-auto pb-1">
+                    {images.map((img, idx) => (
                       <button
                         key={idx}
                         onClick={() => setActiveImgIndex(idx)}
@@ -111,15 +94,10 @@ export default function ProductDetailModal({
                         }`}
                       >
                         <img src={img} alt={`Vista ${idx + 1}`} className="w-full h-full object-contain mix-blend-multiply" />
-                        {isInfographicThumb && (
-                          <span className="absolute bottom-0 inset-x-0 bg-[#0E0E0E]/90 text-[#C9A961] text-[8px] font-black uppercase text-center py-0.5 leading-tight tracking-tight">
-                            Ficha
-                          </span>
-                        )}
                       </button>
-                    );
-                  })}
-                </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Right Column: Direct Purchase Conversion Engine */}
@@ -144,30 +122,45 @@ export default function ProductDetailModal({
                     {product.name}
                   </h1>
 
-                  {/* Badges de Atributos & Icono Elegante de Momento de Uso */}
+                  {/* Badges de Atributos & Icono Minimalista de Momento de Uso */}
                   <div className="flex items-center gap-2 mt-2.5 flex-wrap">
                     <span className="text-xs bg-[#0E0E0E] text-[#C9A961] font-bold px-2.5 py-0.5 rounded-full">
                       {product.concentration}
                     </span>
 
-                    {/* Icono Sutil y Elegante de Momento de Uso */}
+                    {/* Icono Minimalista de Momento de Uso: Solo icono, expande texto al pasar el mouse */}
                     {product.timeOfDay === 'dia' && (
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-amber-900 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 shadow-xs">
-                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
-                        <span>Uso de Día</span>
-                      </span>
+                      <div 
+                        className="group inline-flex items-center bg-amber-50/90 hover:bg-amber-100 text-amber-900 border border-amber-200/90 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer"
+                        title="Momento: Día"
+                      >
+                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" />
+                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[50px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
+                          Día
+                        </span>
+                      </div>
                     )}
                     {product.timeOfDay === 'noche' && (
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#0E0E0E] bg-[#F5F1E8] px-2.5 py-0.5 rounded-full border border-gray-300 shadow-xs">
-                        <Moon className="w-3.5 h-3.5 text-[#0E0E0E] fill-[#0E0E0E]" />
-                        <span>Uso de Noche</span>
-                      </span>
+                      <div 
+                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-stone-300 hover:border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer"
+                        title="Momento: Noche"
+                      >
+                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] group-hover:fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:-rotate-12" />
+                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[60px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
+                          Noche
+                        </span>
+                      </div>
                     )}
                     {product.timeOfDay === 'ambas' && (
-                      <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#0E0E0E] bg-[#F5F1E8] px-2.5 py-0.5 rounded-full border border-[#C9A961] shadow-xs">
-                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
-                        <span>Día & Noche • Versátil</span>
-                      </span>
+                      <div 
+                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer"
+                        title="Momento: Día & Noche"
+                      >
+                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] group-hover:text-[#C9A961] fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
+                          Día & Noche
+                        </span>
+                      </div>
                     )}
 
                     <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">

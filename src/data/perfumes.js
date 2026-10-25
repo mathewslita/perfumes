@@ -64,8 +64,7 @@ export const PERFUMES_DATA = [
     acordes: ['oud_maderas', 'especiados', 'citricos'],
     imageMain: '/assets/images/dior_sauvage_elixir.jpg',
     gallery: [
-      '/assets/images/dior_sauvage_elixir.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/dior_sauvage_elixir.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Dior/Sauvage-Elixir-68415.html',
     fraganticaQuery: 'Dior Sauvage Elixir',
@@ -122,8 +121,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'oud_maderas'],
     imageMain: '/assets/images/bleu_de_chanel.jpg',
     gallery: [
-      '/assets/images/bleu_de_chanel.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/bleu_de_chanel.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Chanel/Bleu-de-Chanel-Parfum-49912.html',
     fraganticaQuery: 'Bleu de Chanel Parfum',
@@ -180,8 +178,7 @@ export const PERFUMES_DATA = [
     acordes: ['vainilla', 'gourmand', 'rosas'],
     imageMain: '/assets/images/ysl_libre_parfum.jpg',
     gallery: [
-      '/assets/images/ysl_libre_parfum.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/ysl_libre_parfum.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Yves-Saint-Laurent/Libre-Le-Parfum-75691.html',
     fraganticaQuery: 'Yves Saint Laurent Libre Le Parfum',
@@ -238,8 +235,7 @@ export const PERFUMES_DATA = [
     acordes: ['oud_maderas', 'especiados'],
     imageMain: '/assets/images/tom_ford_oud_wood.jpg',
     gallery: [
-      '/assets/images/tom_ford_oud_wood.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/tom_ford_oud_wood.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Tom-Ford/Oud-Wood-1826.html',
     fraganticaQuery: 'Tom Ford Oud Wood',
@@ -296,8 +292,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'especiados', 'vainilla'],
     imageMain: '/assets/images/versace_eros_flame.jpg',
     gallery: [
-      '/assets/images/versace_eros_flame.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/versace_eros_flame.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Versace/Eros-Flame-52180.html',
     fraganticaQuery: 'Versace Eros Flame',
@@ -354,8 +349,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'gourmand', 'vainilla'],
     imageMain: '/assets/images/xerjoff_erba_pura.jpg',
     gallery: [
-      '/assets/images/xerjoff_erba_pura.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/xerjoff_erba_pura.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Xerjoff/Erba-Pura-55157.html',
     fraganticaQuery: 'Xerjoff Erba Pura',
@@ -414,9 +408,7 @@ export const PERFUMES_DATA = [
     acordes: ['gourmand', 'vainilla', 'oud_maderas'],
     imageMain: '/assets/images/lattafa_khamrah.jpg',
     gallery: [
-      '/assets/images/lattafa_khamrah.jpg',
-      '/assets/images/lattafa_asad.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/lattafa_khamrah.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Lattafa-Perfumes/Khamrah-75805.html',
     fraganticaQuery: 'Lattafa Khamrah',
@@ -473,9 +465,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'oud_maderas'],
     imageMain: '/assets/images/armaf_cdn_intense.jpg',
     gallery: [
-      '/assets/images/armaf_cdn_intense.jpg',
-      '/assets/images/armaf_urban_elixir.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/armaf_cdn_intense.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Armaf/Club-de-Nuit-Intense-Man-34696.html',
     fraganticaQuery: 'Armaf Club de Nuit Intense Man',
@@ -532,9 +522,7 @@ export const PERFUMES_DATA = [
     acordes: ['gourmand', 'vainilla', 'rosas'],
     imageMain: '/assets/images/lattafa_yara.jpg',
     gallery: [
-      '/assets/images/lattafa_yara.jpg',
-      '/assets/images/armaf_cdn_woman.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/lattafa_yara.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Lattafa-Perfumes/Yara-76890.html',
     fraganticaQuery: 'Lattafa Yara Pink',
@@ -591,8 +579,7 @@ export const PERFUMES_DATA = [
     acordes: ['vainilla', 'gourmand', 'especiados'],
     imageMain: '/assets/images/afnan_9pm.jpg',
     gallery: [
-      '/assets/images/afnan_9pm.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/afnan_9pm.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Afnan/9-PM-65414.html',
     fraganticaQuery: 'Afnan 9 PM',
@@ -649,8 +636,7 @@ export const PERFUMES_DATA = [
     acordes: ['rosas', 'citricos', 'vainilla'],
     imageMain: '/assets/images/armaf_cdn_woman.jpg',
     gallery: [
-      '/assets/images/armaf_cdn_woman.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/armaf_cdn_woman.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Armaf/Club-de-Nuit-Woman-27655.html',
     fraganticaQuery: 'Armaf Club de Nuit Woman',
@@ -707,8 +693,7 @@ export const PERFUMES_DATA = [
     acordes: ['especiados', 'oud_maderas', 'vainilla'],
     imageMain: '/assets/images/lattafa_asad.jpg',
     gallery: [
-      '/assets/images/lattafa_asad.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/lattafa_asad.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Lattafa-Perfumes/Asad-72810.html',
     fraganticaQuery: 'Lattafa Asad',
@@ -765,8 +750,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'gourmand', 'vainilla'],
     imageMain: '/assets/images/al_haramain_amber_oud.jpg',
     gallery: [
-      '/assets/images/al_haramain_amber_oud.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/al_haramain_amber_oud.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Al-Haramain-Perfumes/Amber-Oud-Gold-Edition-50341.html',
     fraganticaQuery: 'Al Haramain Amber Oud Gold Edition',
@@ -823,8 +807,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'frescos'],
     imageMain: '/assets/images/rasasi_hawas.jpg',
     gallery: [
-      '/assets/images/rasasi_hawas.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/rasasi_hawas.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Rasasi/Hawas-for-Him-33758.html',
     fraganticaQuery: 'Rasasi Hawas for Him',
@@ -881,8 +864,7 @@ export const PERFUMES_DATA = [
     acordes: ['citricos', 'vainilla', 'gourmand'],
     imageMain: '/assets/images/bharara_king.jpg',
     gallery: [
-      '/assets/images/bharara_king.jpg',
-      '/assets/images/mega_menu_discovery.jpg'
+      '/assets/images/bharara_king.jpg'
     ],
     fraganticaUrl: 'https://www.fragrantica.es/perfume/Bharara/King-72545.html',
     fraganticaQuery: 'Bharara King Parfum',

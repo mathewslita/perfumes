@@ -67,21 +67,16 @@ export default function LightboxModal({
         {/* Top Bar: Infographic Notice + Zoom Controls + Close */}
         <div className="w-full flex items-center justify-between pb-3 border-b border-white/10 gap-2">
           
-          {/* Infographic / View indicator */}
+          {/* Image indicator */}
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono text-[#C9A961] font-bold bg-[#C9A961]/15 px-2.5 py-1 rounded-full border border-[#C9A961]/30">
-              {currentIndex + 1} / {images.length}
-            </span>
-            {isInfographic ? (
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#C9A961] bg-[#C9A961]/15 px-3 py-1 rounded-full border border-[#C9A961]/40">
-                <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
-                <span>Ficha & Pirámide Olfativa</span>
-              </span>
-            ) : (
-              <span className="text-xs text-gray-400 font-medium hidden sm:inline">
-                Fotografía Oficial de Alta Resolución
+            {images.length > 1 && (
+              <span className="text-[11px] font-mono text-[#C9A961] font-bold bg-[#C9A961]/15 px-2.5 py-1 rounded-full border border-[#C9A961]/30">
+                {currentIndex + 1} / {images.length}
               </span>
             )}
+            <span className="text-xs text-gray-300 font-medium hidden sm:inline">
+              Fotografía Oficial de Alta Resolución
+            </span>
           </div>
 
           {/* Center Zoom Controls */}
@@ -183,17 +178,12 @@ export default function LightboxModal({
             </button>
           )}
 
-          {/* Double-click hint pill */}
-          <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 pointer-events-none bg-[#0E0E0E]/80 backdrop-blur-sm border border-white/10 px-3 py-1 rounded-full text-[11px] text-gray-300 shadow-md flex items-center gap-1.5">
-            <span>💡 Doble clic para {zoomLevel > 1 ? 'alejar' : 'acercar'} • Zoom con rueda o botones</span>
-          </div>
         </div>
 
-        {/* Bottom Thumbnail Strip */}
-        <div className="w-full flex items-center justify-center gap-3 pt-3 border-t border-white/10 overflow-x-auto">
-          {images.map((img, idx) => {
-            const isThumbInfographic = idx === 1 || (img && img.includes('infographic'));
-            return (
+        {/* Bottom Thumbnail Strip: Solo si hay más de 1 imagen */}
+        {images.length > 1 && (
+          <div className="w-full flex items-center justify-center gap-3 pt-3 border-t border-white/10 overflow-x-auto">
+            {images.map((img, idx) => (
               <button
                 key={idx}
                 onClick={() => onSelectIndex(idx)}
@@ -204,15 +194,10 @@ export default function LightboxModal({
                 }`}
               >
                 <img src={img} alt={`Miniatura ${idx + 1}`} className="w-full h-full object-contain" />
-                {isThumbInfographic && (
-                  <span className="absolute bottom-0 inset-x-0 bg-[#0E0E0E]/90 text-[#C9A961] text-[8px] font-black uppercase text-center py-0.5 leading-none">
-                    Ficha
-                  </span>
-                )}
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
 
       </div>
     </div>
