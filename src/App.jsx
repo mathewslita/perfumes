@@ -15,7 +15,7 @@ import BrandsSection from './components/BrandsSection';
 import AboutSection from './components/AboutSection';
 import NewsletterBanner from './components/NewsletterBanner';
 import Footer from './components/Footer';
-import { PERFUMES_DATA } from './data/perfumes';
+import { PERFUMES_DATA, VIBE_CATEGORIES } from './data/perfumes';
 import { Sparkles, ShieldCheck, Check, RotateCcw, Crown, Award } from 'lucide-react';
 
 export default function App() {
@@ -218,11 +218,11 @@ export default function App() {
     // Vibe filter
     if (activeVibe !== 'all') {
       const vibeObj = {
-        beast: '🔥 Modo Bestia',
-        gourmand: '🍯 Dulces y Gourmand',
-        office: '💼 Oficina / Diario',
-        night: '🌙 Seducción y Noche',
-        viral: '👑 Más Virales de TikTok'
+        beast: '🔥 Potencia & Fijación Extrema',
+        gourmand: '🍯 Gourmand & Vainilla Licorosa',
+        office: '🌿 Cítricos & Frescura Diaria',
+        night: '🌙 Seducción Nocturna & Veladas',
+        viral: '👑 Éxitos Globales & Más Aclamados'
       }[activeVibe];
       if (vibeObj && !p.vibes.includes(vibeObj)) return false;
     }
@@ -345,7 +345,7 @@ export default function App() {
 
               {activeVibe !== 'all' && (
                 <span className="inline-flex items-center gap-1.5 bg-white/10 text-[#C9A961] px-3 py-1 rounded-full font-bold border border-[#C9A961]/30">
-                  <span>Vibe seleccionada</span>
+                  <span>Estilo: {VIBE_CATEGORIES.find(v => v.id === activeVibe)?.name || activeVibe}</span>
                   <button 
                     onClick={() => setActiveVibe('all')} 
                     className="hover:text-white ml-0.5 text-sm leading-none"

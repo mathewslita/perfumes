@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Search, ShoppingBag, ChevronDown, Sparkles, X, Flame, ShieldCheck, Crown, Award, Menu, MessageCircle, ChevronRight } from 'lucide-react';
 import { BRANDS_LIST, PERFUMES_DATA } from '../data/perfumes';
 import Logo from './Logo';
@@ -6,43 +7,43 @@ import Logo from './Logo';
 export const OCCASIONS_LIST = [
   {
     id: 'night',
-    name: 'Citas & Romance',
+    name: 'Seducción Nocturna & Veladas',
     vibe: 'night',
-    icon: '🌹',
-    badge: 'Seductor',
-    desc: 'Vainilla, Ámbar & Especias cálidas'
+    icon: '🌙',
+    badge: 'Enigmático',
+    desc: 'Vainilla negra, ámbar & maderas cálidas'
   },
   {
     id: 'office',
-    name: 'Oficina & Diario',
+    name: 'Cítricos & Frescura Diaria',
     vibe: 'office',
-    icon: '💼',
-    badge: 'Versátil',
-    desc: 'Cítricos limpios & Maderas frescas'
+    icon: '🌿',
+    badge: 'Sofisticado',
+    desc: 'Frescura limpia, bergamota & vetiver'
   },
   {
     id: 'beast',
-    name: 'Fiestas & Modo Bestia',
+    name: 'Potencia & Fijación Extrema',
     vibe: 'beast',
     icon: '🔥',
     badge: '14+ Horas',
-    desc: 'Proyección nuclear y estela imponente'
+    desc: 'Estela imponente y fijación nuclear'
   },
   {
     id: 'viral',
-    name: 'Virales de TikTok',
+    name: 'Éxitos Globales & Más Aclamados',
     vibe: 'viral',
     icon: '👑',
-    badge: 'Top Elogios',
-    desc: 'Los más comentados y comprados'
+    badge: 'Top Mundial',
+    desc: 'Las creaciones maestras más codiciadas'
   },
   {
     id: 'gourmand',
-    name: 'Dulces & Gourmand',
+    name: 'Gourmand & Vainilla Licorosa',
     vibe: 'gourmand',
     icon: '🍯',
     badge: 'Adictivo',
-    desc: 'Vainilla, Canela, Praliné & Dátiles'
+    desc: 'Vainilla bourbon, canela, praliné & dátiles'
   },
   {
     id: 'decants',
@@ -50,7 +51,7 @@ export const OCCASIONS_LIST = [
     category: 'decants',
     icon: '🧪',
     badge: '$15 / $30',
-    desc: 'Prueba ~120 sprays antes del frasco'
+    desc: 'Prueba ~120 sprays en atomizador de viaje'
   }
 ];
 
@@ -68,7 +69,23 @@ export default function Header({
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const menuTimeoutRef = useRef(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Category navigation that filters and smooth-scrolls to the catalog
   const handleNavCategory = (category) => {
@@ -152,7 +169,8 @@ export default function Header({
               className="text-left group flex items-center transition-transform hover:scale-[1.02]"
               title="ARKANO Perfumería - Inicio"
             >
-              <Logo variant="horizontal" theme="light" size="md" />
+              <Logo variant="horizontal" theme="light" size="sm" className="sm:hidden" />
+              <Logo variant="horizontal" theme="light" size="md" className="hidden sm:flex" />
             </button>
           </div>
 
@@ -306,11 +324,11 @@ export default function Header({
           {/* Right Actions: Search + Cart */}
           <div className="flex items-center gap-3">
             {/* Live Search Input with Predictive Floating Dropdown */}
-            <div className={`relative transition-all duration-300 ${searchFocused ? 'w-56 sm:w-72' : 'w-40 sm:w-56'}`}>
-              <Search className="w-4 h-4 text-[#C9A961] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className={`relative transition-all duration-300 ${searchFocused ? 'w-36 xs:w-48 sm:w-72' : 'w-24 xs:w-32 sm:w-56'}`}>
+              <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A961] absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input 
                 type="text" 
-                placeholder="Buscar perfume, notas..."
+                placeholder="Buscar..."
                 value={searchQuery}
                 onChange={(e) => onSearch(e.target.value)}
                 onFocus={() => setSearchFocused(true)}
@@ -318,7 +336,7 @@ export default function Header({
                   // Pequeño timeout para permitir que el clic en el dropdown se ejecute
                   setTimeout(() => setSearchFocused(false), 220);
                 }}
-                className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-full py-1.5 pl-9 pr-8 text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#C9A961] transition-all shadow-inner"
+                className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-full py-1.5 pl-7 sm:pl-9 pr-6 sm:pr-8 text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#C9A961] transition-all shadow-inner"
               />
               {searchQuery && (
                 <button 
@@ -424,234 +442,266 @@ export default function Header({
         </div>
       </div>
 
-      {/* Responsive Mobile Drawer Menu ("Las 3 rayitas" con todas las categorías) */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 overflow-hidden lg:hidden">
-          {/* Backdrop */}
+      {/* Responsive Mobile Drawer Menu via Portal ("Las 3 rayitas" con todas las categorías de PC) */}
+      {mobileMenuOpen && mounted && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[9999] flex justify-start overflow-hidden">
+          {/* Backdrop con desenfoque de pantalla completa */}
           <div 
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
+            className="fixed inset-0 bg-black/85 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"
             onClick={() => setMobileMenuOpen(false)}
           />
 
-          {/* Slide-in Drawer from Left */}
-          <div className="fixed inset-y-0 left-0 max-w-full flex">
-            <div className="w-[88vw] max-w-sm bg-[#0E0E0E] border-r border-[#C9A961]/35 shadow-2xl flex flex-col justify-between h-full text-[#F5F1E8] animate-in slide-in-from-left duration-300">
+          {/* Slide-in Drawer desde la izquierda con altura completa real */}
+          <div className="relative w-[88vw] max-w-sm h-[100dvh] max-h-[100dvh] bg-[#0E0E0E] text-[#F5F1E8] border-r border-[#C9A961]/35 shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-300">
+            
+            {/* Drawer Header */}
+            <div className="p-4 sm:p-5 border-b border-[#C9A961]/25 flex items-center justify-between bg-[#141414] flex-shrink-0">
+              <button 
+                onClick={() => {
+                  handleNavCategory('all');
+                  setMobileMenuOpen(false);
+                }}
+                className="text-left"
+              >
+                <Logo variant="horizontal" theme="light" size="sm" />
+              </button>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-2 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-gray-300 hover:text-white border border-[#C9A961]/30 transition-colors"
+                aria-label="Cerrar menú"
+              >
+                <X className="w-5 h-5 text-[#C9A961]" />
+              </button>
+            </div>
+
+            {/* Scrollable Category & Navigation Content */}
+            <div className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 space-y-6">
               
-              {/* Drawer Header */}
-              <div className="p-4 sm:p-5 border-b border-[#C9A961]/25 flex items-center justify-between bg-[#141414]">
-                <button 
-                  onClick={() => {
-                    handleNavCategory('all');
-                    setMobileMenuOpen(false);
+              {/* Buscador Rápido Dentro del Menú */}
+              <div className="relative">
+                <Search className="w-4 h-4 text-[#C9A961] absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <input 
+                  type="text" 
+                  placeholder="Buscar fragancia, casa, notas..."
+                  value={searchQuery}
+                  onChange={(e) => {
+                    onSearch(e.target.value);
                   }}
-                  className="text-left"
-                >
-                  <Logo variant="horizontal" theme="light" size="sm" />
-                </button>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-gray-300 hover:text-white border border-[#C9A961]/30 transition-colors"
-                  aria-label="Cerrar menú"
-                >
-                  <X className="w-5 h-5 text-[#C9A961]" />
-                </button>
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      setMobileMenuOpen(false);
+                      const el = document.getElementById('los-mas-vendidos');
+                      el?.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-xl py-2 pl-9 pr-3 text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none"
+                />
               </div>
 
-              {/* Scrollable Category & Navigation Content */}
-              <div className="flex-grow overflow-y-auto p-4 sm:p-5 space-y-6">
-                
-                {/* Section 1: Categorías Principales */}
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] flex items-center gap-1.5">
-                      <Sparkles className="w-3 h-3 text-[#C9A961]" />
-                      TODAS LAS CATEGORÍAS
-                    </span>
-                    <span className="text-[10px] text-gray-400 font-mono">8 Colecciones</span>
-                  </div>
-
-                  <div className="space-y-2">
-                    {/* 1. Árabes Dubái */}
-                    <button
-                      onClick={() => handleNavCategory('arabes')}
-                      className="w-full text-left p-3 rounded-2xl bg-gradient-to-r from-[#1E1911] to-[#141414] hover:from-[#292215] hover:to-[#1A1A1A] border border-[#C9A961]/50 flex items-center justify-between group transition-all shadow-sm"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-[#C9A961]/20 border border-[#C9A961]/40 flex items-center justify-center text-[#C9A961] flex-shrink-0">
-                          <Crown className="w-5 h-5 text-[#C9A961]" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
-                            <span>Perfumes Árabes</span>
-                            <span className="text-[9px] bg-[#C9A961] text-[#0E0E0E] font-black px-1.5 py-0.2 rounded font-sans">
-                              DUBÁI
-                            </span>
-                          </div>
-                          <div className="text-[11px] text-gray-400">
-                            Lattafa, Armaf, Afnan, Al Haramain
-                          </div>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                    </button>
-
-                    {/* 2. Diseñador */}
-                    <button
-                      onClick={() => handleNavCategory('disenador')}
-                      className="w-full text-left p-3 rounded-2xl bg-[#171717] hover:bg-[#202020] border border-white/10 hover:border-[#C9A961]/40 flex items-center justify-between group transition-all"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white flex-shrink-0">
-                          <Award className="w-5 h-5 text-[#C9A961]" />
-                        </div>
-                        <div>
-                          <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
-                            <span>Perfumes de Diseñador</span>
-                            <span className="text-[9px] bg-white/10 text-[#C9A961] font-bold px-1.5 py-0.2 rounded font-sans">
-                              ALTA COSTURA
-                            </span>
-                          </div>
-                          <div className="text-[11px] text-gray-400">
-                            Dior, Chanel, YSL, Tom Ford, Versace
-                          </div>
-                        </div>
-                      </div>
-                      <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-[#C9A961] group-hover:translate-x-1 transition-transform flex-shrink-0" />
-                    </button>
-
-                    {/* 3. Para Él */}
-                    <button
-                      onClick={() => handleNavCategory('Para Él')}
-                      className="w-full text-left p-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-between group transition-colors border border-transparent hover:border-white/10"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-sm">💼</span>
-                        <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Para Él (Caballeros)</span>
-                      </div>
-                      <span className="text-[10px] text-gray-400">Amaderados & Seducción</span>
-                    </button>
-
-                    {/* 4. Para Ella */}
-                    <button
-                      onClick={() => handleNavCategory('Para Ella')}
-                      className="w-full text-left p-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-between group transition-colors border border-transparent hover:border-white/10"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-sm">🌸</span>
-                        <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Para Ella (Damas)</span>
-                      </div>
-                      <span className="text-[10px] text-gray-400">Florales & Gourmand</span>
-                    </button>
-
-                    {/* 5. Unisex */}
-                    <button
-                      onClick={() => handleNavCategory('Unisex')}
-                      className="w-full text-left p-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-between group transition-colors border border-transparent hover:border-white/10"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-sm">💎</span>
-                        <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Colección Unisex</span>
-                      </div>
-                      <span className="text-[10px] text-gray-400">Versatilidad Suprema</span>
-                    </button>
-
-                    {/* 6. Decants 10ml */}
-                    <button
-                      onClick={() => handleNavCategory('decants')}
-                      className="w-full text-left p-2.5 px-3 rounded-xl bg-[#C9A961]/10 hover:bg-[#C9A961]/20 border border-[#C9A961]/35 flex items-center justify-between group transition-colors"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <span className="text-sm">🧪</span>
-                        <span className="font-semibold text-xs text-[#C9A961]">Decants Muestras 10ml</span>
-                      </div>
-                      <span className="text-[10px] font-mono text-[#C9A961] font-black">$15 / $30</span>
-                    </button>
-
-                    {/* 7. Ofertas Especiales */}
-                    <button
-                      onClick={() => handleNavCategory('ofertas')}
-                      className="w-full text-left p-2.5 px-3 rounded-xl bg-red-950/30 hover:bg-red-950/50 border border-red-500/30 flex items-center justify-between group transition-colors"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Flame className="w-4 h-4 text-red-400 fill-red-400" />
-                        <span className="font-semibold text-xs text-red-300">Ofertas Exclusivas</span>
-                      </div>
-                      <span className="text-[10px] bg-red-500/20 text-red-300 font-bold px-1.5 py-0.5 rounded">Descuentos</span>
-                    </button>
-
-                    {/* 8. Ver Todo el Catálogo */}
-                    <button
-                      onClick={() => handleNavCategory('all')}
-                      className="w-full text-center py-2.5 px-4 rounded-xl bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs uppercase tracking-wider transition-all mt-2 shadow-md active:scale-95"
-                    >
-                      Ver Todo el Catálogo
-                    </button>
-                  </div>
+              {/* Section 1: Categorías Principales (Modo PC) */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] flex items-center gap-1.5">
+                    <Sparkles className="w-3 h-3 text-[#C9A961]" />
+                    COLECCIONES DE ALTA GAMA
+                  </span>
+                  <span className="text-[10px] text-gray-400 font-mono">8 Opciones</span>
                 </div>
 
-                {/* Section 2: Casas de Perfumería */}
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] block mb-2.5">
-                    CASAS OFICIALES
-                  </span>
-                  <div className="flex flex-wrap gap-1.5">
-                    {BRANDS_LIST.map((brand, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleSelectBrandNav(brand.name)}
-                        className="text-[11px] font-semibold py-1.5 px-2.5 rounded-lg bg-[#1A1A1A] hover:bg-[#252525] hover:text-[#C9A961] border border-white/10 hover:border-[#C9A961]/40 text-gray-300 transition-colors"
-                      >
-                        {brand.name}
-                      </button>
-                    ))}
-                  </div>
-                </div>
+                <div className="space-y-2">
+                  {/* 1. Árabes Dubái */}
+                  <button
+                    onClick={() => handleNavCategory('arabes')}
+                    className="w-full text-left p-3 rounded-2xl bg-gradient-to-r from-[#1E1911] to-[#141414] hover:from-[#292215] hover:to-[#1A1A1A] border border-[#C9A961]/50 flex items-center justify-between group transition-all shadow-sm"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-[#C9A961]/20 border border-[#C9A961]/40 flex items-center justify-center text-[#C9A961] flex-shrink-0">
+                        <Crown className="w-5 h-5 text-[#C9A961]" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
+                          <span>Perfumes Árabes</span>
+                          <span className="text-[9px] bg-[#C9A961] text-[#0E0E0E] font-black px-1.5 py-0.2 rounded font-sans">
+                            DUBÁI
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-gray-400">
+                          Lattafa, Armaf, Afnan, Al Haramain
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                  </button>
 
-                {/* Section 3: Momentos y Ocasiones de Uso */}
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] block mb-2.5">
-                    MOMENTOS & ESTILOS DE USO
+                  {/* 2. Diseñador */}
+                  <button
+                    onClick={() => handleNavCategory('disenador')}
+                    className="w-full text-left p-3 rounded-2xl bg-[#171717] hover:bg-[#202020] border border-white/10 hover:border-[#C9A961]/40 flex items-center justify-between group transition-all"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white flex-shrink-0">
+                        <Award className="w-5 h-5 text-[#C9A961]" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
+                          <span>Perfumes de Diseñador</span>
+                          <span className="text-[9px] bg-white/10 text-[#C9A961] font-bold px-1.5 py-0.2 rounded font-sans">
+                            ALTA COSTURA
+                          </span>
+                        </div>
+                        <div className="text-[11px] text-gray-400">
+                          Dior, Chanel, YSL, Tom Ford, Versace
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-gray-400 group-hover:text-[#C9A961] group-hover:translate-x-1 transition-transform flex-shrink-0" />
+                  </button>
+
+                  {/* 3. Para Él */}
+                  <button
+                    onClick={() => handleNavCategory('Para Él')}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-between group transition-colors border border-transparent hover:border-white/10"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-sm">💼</span>
+                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Para Él (Caballeros)</span>
+                    </div>
+                    <span className="text-[10px] text-gray-400">Amaderados & Seducción</span>
+                  </button>
+
+                  {/* 4. Para Ella */}
+                  <button
+                    onClick={() => handleNavCategory('Para Ella')}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-between group transition-colors border border-transparent hover:border-white/10"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-sm">🌸</span>
+                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Para Ella (Damas)</span>
+                    </div>
+                    <span className="text-[10px] text-gray-400">Florales & Gourmand</span>
+                  </button>
+
+                  {/* 5. Unisex */}
+                  <button
+                    onClick={() => handleNavCategory('Unisex')}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 flex items-center justify-between group transition-colors border border-transparent hover:border-white/10"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-sm">💎</span>
+                      <span className="font-semibold text-xs text-gray-200 group-hover:text-white">Colección Unisex</span>
+                    </div>
+                    <span className="text-[10px] text-gray-400">Versatilidad Suprema</span>
+                  </button>
+
+                  {/* 6. Decants 10ml */}
+                  <button
+                    onClick={() => handleNavCategory('decants')}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-[#C9A961]/10 hover:bg-[#C9A961]/20 border border-[#C9A961]/35 flex items-center justify-between group transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <span className="text-sm">🧪</span>
+                      <span className="font-semibold text-xs text-[#C9A961]">Decants Muestras 10ml</span>
+                    </div>
+                    <span className="text-[10px] font-mono text-[#C9A961] font-black">$15 / $30</span>
+                  </button>
+
+                  {/* 7. Ofertas Especiales */}
+                  <button
+                    onClick={() => handleNavCategory('ofertas')}
+                    className="w-full text-left p-2.5 px-3 rounded-xl bg-red-950/30 hover:bg-red-950/50 border border-red-500/30 flex items-center justify-between group transition-colors"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <Flame className="w-4 h-4 text-red-400 fill-red-400" />
+                      <span className="font-semibold text-xs text-red-300">Ofertas Especiales</span>
+                    </div>
+                    <span className="text-[10px] bg-red-500/20 text-red-300 font-bold px-1.5 py-0.5 rounded">Descuentos</span>
+                  </button>
+
+                  {/* 8. Ver Todo el Catálogo */}
+                  <button
+                    onClick={() => handleNavCategory('all')}
+                    className="w-full text-center py-2.5 px-4 rounded-xl bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs uppercase tracking-wider transition-all mt-2 shadow-md active:scale-95"
+                  >
+                    Ver Todo el Catálogo
+                  </button>
+                </div>
+              </div>
+
+              {/* Section 2: Descubrimiento por Estilo & Ocasión (Nombres de Alta Gama) */}
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] block">
+                    DESCUBRIMIENTO POR OCASIÓN
                   </span>
-                  <div className="grid grid-cols-2 gap-2">
-                    {OCCASIONS_LIST.map((occ, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => handleSelectOccasionNav(occ)}
-                        className="text-[11px] font-medium p-2 rounded-xl bg-[#1A1A1A] hover:bg-[#252525] hover:text-[#C9A961] border border-white/10 hover:border-[#C9A961]/40 text-gray-200 transition-colors flex items-center gap-2 text-left"
-                      >
+                  <span className="text-[10px] text-gray-400 font-mono">5 Estilos</span>
+                </div>
+                <div className="grid grid-cols-1 gap-2">
+                  {OCCASIONS_LIST.map((occ, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSelectOccasionNav(occ)}
+                      className="w-full text-left p-2.5 rounded-xl bg-[#171717] hover:bg-[#222222] border border-white/10 hover:border-[#C9A961]/40 text-gray-200 transition-colors flex items-center justify-between group"
+                    >
+                      <div className="flex items-center gap-2.5">
                         <span className="text-base">{occ.icon}</span>
-                        <div className="min-w-0">
-                          <div className="font-bold text-xs truncate leading-tight">{occ.name.split('&')[0]}</div>
-                          <div className="text-[9px] text-[#C9A961] font-mono">{occ.badge}</div>
+                        <div>
+                          <div className="font-bold text-xs text-white group-hover:text-[#C9A961] transition-colors leading-tight">
+                            {occ.name}
+                          </div>
+                          <div className="text-[10px] text-gray-400 font-normal">
+                            {occ.desc}
+                          </div>
                         </div>
-                      </button>
-                    ))}
-                  </div>
+                      </div>
+                      <span className="text-[9px] text-[#C9A961] font-mono bg-[#C9A961]/10 px-2 py-0.5 rounded border border-[#C9A961]/30">
+                        {occ.badge}
+                      </span>
+                    </button>
+                  ))}
                 </div>
-
               </div>
 
-              {/* Drawer Footer: WhatsApp Support CTA */}
-              <div className="p-4 border-t border-[#C9A961]/25 bg-[#141414] space-y-2.5">
-                <a
-                  href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20asesoría%20sobre%20fragancias"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-all active:scale-95"
-                >
-                  <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
-                  <span>Asesoría Directa por WhatsApp</span>
-                </a>
-                <div className="flex items-center justify-between text-[10px] text-gray-400 pt-1 font-medium px-1">
-                  <span>🛡️ 100% Original</span>
-                  <span>✨ Batch Code</span>
-                  <span>🚀 Entrega Express</span>
+              {/* Section 3: Casas Oficiales de Perfumería */}
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] block mb-2.5">
+                  CASAS DE ALTA PERFUMERÍA
+                </span>
+                <div className="flex flex-wrap gap-1.5">
+                  {BRANDS_LIST.map((brand, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSelectBrandNav(brand.name)}
+                      className="text-[11px] font-semibold py-1.5 px-2.5 rounded-lg bg-[#1A1A1A] hover:bg-[#252525] hover:text-[#C9A961] border border-white/10 hover:border-[#C9A961]/40 text-gray-300 transition-colors"
+                    >
+                      {brand.name}
+                    </button>
+                  ))}
                 </div>
               </div>
 
             </div>
+
+            {/* Drawer Footer: WhatsApp Support CTA & Sellos de Garantía */}
+            <div className="p-4 border-t border-[#C9A961]/25 bg-[#141414] space-y-2.5 flex-shrink-0">
+              <a
+                href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20asesoría%20sobre%20fragancias"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs py-2.5 px-4 rounded-xl shadow-md transition-all active:scale-95"
+              >
+                <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
+                <span>Asesoría Directa por WhatsApp</span>
+              </a>
+              <div className="flex items-center justify-between text-[10px] text-gray-400 pt-1 font-medium px-1">
+                <span>🛡️ 100% Original</span>
+                <span>✨ Batch Code</span>
+                <span>🚀 Entrega Express</span>
+              </div>
+            </div>
+
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </header>
   );

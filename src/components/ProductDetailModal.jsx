@@ -110,8 +110,8 @@ export default function ProductDetailModal({
                     </span>
                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
                       isArabic 
-                        ? 'bg-[#C9A961]/15 text-[#0E0E0E] border-[#C9A961]' 
-                        : 'bg-[#0E0E0E] text-white border-[#C9A961]/40'
+                        ? 'bg-[#C9A961]/15 text-[#8F7432] border-[#C9A961]/60' 
+                        : 'bg-stone-100 text-stone-800 border-stone-300'
                     }`}>
                       {isArabic ? '👑 Colección Árabe' : '✨ Alta Costura Diseñador'}
                     </span>
@@ -122,44 +122,40 @@ export default function ProductDetailModal({
                     {product.name}
                   </h1>
 
-                  {/* Badges de Atributos & Icono Minimalista de Momento de Uso */}
+                  {/* Badges de Atributos & Icono Minimalista de Momento de Uso con Tooltip Flotante Estable */}
                   <div className="flex items-center gap-2 mt-2.5 flex-wrap">
-                    <span className="text-xs bg-[#0E0E0E] text-[#C9A961] font-bold px-2.5 py-0.5 rounded-full">
+                    {/* Concentración sin fondo negro */}
+                    <span className="text-xs bg-stone-100 text-stone-800 font-bold px-2.5 py-0.5 rounded-full border border-stone-200">
                       {product.concentration}
                     </span>
 
-                    {/* Icono Minimalista de Momento de Uso: Solo icono, expande texto al pasar el mouse */}
-                    {product.timeOfDay === 'dia' && (
-                      <div 
-                        className="group inline-flex items-center bg-amber-50/90 hover:bg-amber-100 text-amber-900 border border-amber-200/90 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer"
-                        title="Momento: Día"
-                      >
-                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" />
-                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[50px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
-                          Día
-                        </span>
-                      </div>
-                    )}
-                    {product.timeOfDay === 'noche' && (
-                      <div 
-                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-stone-300 hover:border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer"
-                        title="Momento: Noche"
-                      >
-                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] group-hover:fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:-rotate-12" />
-                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[60px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
-                          Noche
-                        </span>
-                      </div>
-                    )}
-                    {product.timeOfDay === 'ambas' && (
-                      <div 
-                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer"
-                        title="Momento: Día & Noche"
-                      >
-                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] group-hover:text-[#C9A961] fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
-                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[80px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
-                          Día & Noche
-                        </span>
+                    {/* Icono Minimalista de Momento de Uso: Tamaño fijo con Tooltip Flotante Absoluto (Cero desborde ni salto hacia abajo) */}
+                    {product.timeOfDay && (
+                      <div className="relative group inline-flex items-center justify-center">
+                        <div 
+                          className="w-6 h-6 rounded-full flex items-center justify-center bg-[#F5F1E8] border border-[#C9A961]/60 text-[#0E0E0E] cursor-help shadow-2xs hover:border-[#0E0E0E] transition-colors"
+                          aria-label={`Momento: ${product.timeOfDay === 'dia' ? 'Día' : product.timeOfDay === 'noche' ? 'Noche' : 'Día & Noche'}`}
+                        >
+                          {product.timeOfDay === 'dia' && (
+                            <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
+                          )}
+                          {product.timeOfDay === 'noche' && (
+                            <Moon className="w-3.5 h-3.5 fill-[#0E0E0E]" />
+                          )}
+                          {product.timeOfDay === 'ambas' && (
+                            <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
+                          )}
+                        </div>
+
+                        {/* Tooltip flotante hacia arriba con flecha: no altera el flex ni empuja elementos */}
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2.5 py-1 bg-[#0E0E0E] text-[#F5F1E8] text-[10px] font-bold rounded-md shadow-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-30 flex items-center gap-1 border border-[#C9A961]/40">
+                          <span>
+                            {product.timeOfDay === 'dia' && '☀️ Ideal para el Día'}
+                            {product.timeOfDay === 'noche' && '🌙 Ideal para la Noche'}
+                            {product.timeOfDay === 'ambas' && '✨ Versátil: Día y Noche'}
+                          </span>
+                          <div className="absolute top-full left-1/2 -translate-x-1/2 -mt-0.5 border-4 border-transparent border-t-[#0E0E0E]" />
+                        </div>
                       </div>
                     )}
 

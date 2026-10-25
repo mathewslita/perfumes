@@ -36,49 +36,39 @@ export default function ProductCard({
           <div />
         )}
         
-        {/* Badges de Categoría y Momento (Día / Noche) */}
+        {/* Badges de Categoría y Momento (Día / Noche) Estable */}
         <div className="flex items-center gap-1.5">
-          {product.timeOfDay === 'dia' && (
-            <span 
-              className="group/time text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm bg-amber-50 text-amber-900 border border-amber-200 flex items-center transition-all duration-300 cursor-pointer"
-              title="Momento: Día"
-            >
-              <Sun className="w-3 h-3 text-amber-600 fill-amber-400 flex-shrink-0" />
-              <span className="max-w-0 opacity-0 group-hover/time:max-w-[35px] group-hover/time:opacity-100 group-hover/time:ml-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
-                Día
+          {product.timeOfDay && (
+            <div className="relative group/time inline-flex items-center">
+              <span
+                className="w-6 h-6 rounded-full shadow-sm bg-white/95 text-[#0E0E0E] border border-gray-200 flex items-center justify-center cursor-help transition-colors hover:border-[#C9A961]"
+                title={`Momento recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día & Noche"}`}
+              >
+                {product.timeOfDay === "dia" && (
+                  <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
+                )}
+                {product.timeOfDay === "noche" && (
+                  <Moon className="w-3.5 h-3.5 text-[#0E0E0E] fill-[#0E0E0E]" />
+                )}
+                {product.timeOfDay === "ambas" && (
+                  <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
+                )}
               </span>
-            </span>
-          )}
-          {product.timeOfDay === 'noche' && (
-            <span 
-              className="group/time text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961]/40 flex items-center transition-all duration-300 cursor-pointer"
-              title="Momento: Noche"
-            >
-              <Moon className="w-3 h-3 text-[#C9A961] fill-[#C9A961] flex-shrink-0" />
-              <span className="max-w-0 opacity-0 group-hover/time:max-w-[45px] group-hover/time:opacity-100 group-hover/time:ml-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
-                Noche
-              </span>
-            </span>
-          )}
-          {product.timeOfDay === 'ambas' && (
-            <span 
-              className="group/time text-[10px] font-bold px-1.5 py-0.5 rounded-full shadow-sm bg-white text-gray-800 border border-[#C9A961]/60 flex items-center transition-all duration-300 cursor-pointer"
-              title="Momento: Día & Noche"
-            >
-              <Sparkles className="w-3 h-3 text-[#A58B4E] fill-[#C9A961] flex-shrink-0" />
-              <span className="max-w-0 opacity-0 group-hover/time:max-w-[75px] group-hover/time:opacity-100 group-hover/time:ml-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out">
-                Día & Noche
-              </span>
-            </span>
+
+              {/* Tooltip flotante superior sin alterar el ancho ni provocar saltos */}
+              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover/time:opacity-100 transition-opacity pointer-events-none z-30 border border-[#C9A961]/40">
+                {product.timeOfDay === "dia" ? "☀️ Día" : product.timeOfDay === "noche" ? "🌙 Noche" : "✨ Día & Noche"}
+              </div>
+            </div>
           )}
 
-          {/* Badge de Categoría (Árabe vs Diseñador) */}
-          <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md border ${
+          {/* Badge de Categoría (Árabe vs Diseñador) sin fondo negro */}
+          <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm border ${
             isArabic
-              ? 'bg-[#C9A961] text-[#0E0E0E] border-[#A58B4E]' 
-              : 'bg-[#0E0E0E] text-white border-[#C9A961]/40'
+              ? "bg-[#C9A961] text-[#0E0E0E] border-[#A58B4E]"
+              : "bg-[#F5F1E8] text-[#0E0E0E] border-[#C9A961]/60"
           }`}>
-            {isArabic ? '👑 Árabe' : '✨ Diseñador'}
+            {isArabic ? "👑 Árabe" : "✨ Diseñador"}
           </span>
         </div>
       </div>
