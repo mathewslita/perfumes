@@ -7,51 +7,51 @@ import Logo from './Logo';
 export const OCCASIONS_LIST = [
   {
     id: 'night',
-    name: 'Seducción Nocturna & Veladas',
+    name: 'NOCHE',
     vibe: 'night',
     icon: '🌙',
-    badge: 'Enigmático',
-    desc: 'Vainilla negra, ámbar & maderas cálidas'
+    badge: 'Enigmatico',
+    desc: 'Vainilla negra, ambar & maderas calidas'
   },
   {
     id: 'office',
-    name: 'Cítricos & Frescura Diaria',
+    name: 'FRESCOS',
     vibe: 'office',
     icon: '🌿',
-    badge: 'Sofisticado',
+    badge: 'Uso Diario',
     desc: 'Frescura limpia, bergamota & vetiver'
   },
   {
     id: 'beast',
-    name: 'Potencia & Fijación Extrema',
+    name: 'INTENSOS',
     vibe: 'beast',
     icon: '🔥',
-    badge: '14+ Horas',
-    desc: 'Estela imponente y fijación nuclear'
+    badge: '+14 Horas',
+    desc: 'Estela imponente y maxima fijacion'
   },
   {
     id: 'viral',
-    name: 'Éxitos Globales & Más Aclamados',
+    name: 'TOP VENTAS',
     vibe: 'viral',
     icon: '👑',
-    badge: 'Top Mundial',
-    desc: 'Las creaciones maestras más codiciadas'
+    badge: 'Favoritos',
+    desc: 'Las creaciones mas aclamadas'
   },
   {
     id: 'gourmand',
-    name: 'Gourmand & Vainilla Licorosa',
+    name: 'GOURMAND',
     vibe: 'gourmand',
     icon: '🍯',
     badge: 'Adictivo',
-    desc: 'Vainilla bourbon, canela, praliné & dátiles'
+    desc: 'Vainilla bourbon, canela & praline'
   },
   {
     id: 'decants',
-    name: 'Decants Muestra 10ml',
+    name: 'DECANTS 10ML',
     category: 'decants',
     icon: '🧪',
     badge: '$15 / $30',
-    desc: 'Prueba ~120 sprays en atomizador de viaje'
+    desc: 'Prueba ~120 atomizaciones de viaje'
   }
 ];
 

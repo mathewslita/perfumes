@@ -218,11 +218,11 @@ export default function App() {
     // Vibe filter
     if (activeVibe !== 'all') {
       const vibeObj = {
-        beast: '🔥 Potencia & Fijación Extrema',
-        gourmand: '🍯 Gourmand & Vainilla Licorosa',
-        office: '🌿 Cítricos & Frescura Diaria',
-        night: '🌙 Seducción Nocturna & Veladas',
-        viral: '👑 Éxitos Globales & Más Aclamados'
+        beast: '🔥 INTENSOS',
+        gourmand: '🍯 GOURMAND',
+        office: '🌿 FRESCOS',
+        night: '🌙 NOCHE',
+        viral: '👑 TOP VENTAS'
       }[activeVibe];
       if (vibeObj && !p.vibes.includes(vibeObj)) return false;
     }
@@ -344,12 +344,12 @@ export default function App() {
               )}
 
               {activeVibe !== 'all' && (
-                <span className="inline-flex items-center gap-1.5 bg-white/10 text-[#C9A961] px-3 py-1 rounded-full font-bold border border-[#C9A961]/30">
-                  <span>Estilo: {VIBE_CATEGORIES.find(v => v.id === activeVibe)?.name || activeVibe}</span>
+                <span className="inline-flex items-center gap-1.5 bg-white/10 text-[#C9A961] px-3 py-1 rounded-full font-bold border border-[#C9A961]/30 uppercase">
+                  <span>ESTILO: {VIBE_CATEGORIES.find(v => v.id === activeVibe)?.name || activeVibe}</span>
                   <button 
                     onClick={() => setActiveVibe('all')} 
                     className="hover:text-white ml-0.5 text-sm leading-none"
-                    title="Quitar filtro de vibe"
+                    title="Quitar filtro de estilo"
                   >
                     &times;
                   </button>
