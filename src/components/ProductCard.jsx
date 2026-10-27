@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon } from 'lucide-react';
+import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
 
 export default function ProductCard({ 
   product, 
   onOpenProduct, 
-  onAddToCart 
+  onAddToCart,
+  isFavorite = false,
+  onToggleFavorite
 }) {
   const [isAdded, setIsAdded] = useState(false);
 
@@ -23,18 +25,35 @@ export default function ProductCard({
   const fragranticaTarget = product.fraganticaUrl || `https://www.fragrantica.es/buscar/?query=${encodeURIComponent(product.fraganticaQuery || product.name)}`;
 
   return (
-    <article className="group bg-white rounded-2xl border border-gray-200 shadow-soft-card hover:border-[#C9A961]/80 hover:shadow-xl flex flex-col justify-between overflow-hidden relative transition-all duration-300">
+    <article className="group bg-white rounded-2xl border border-gray-200 shadow-soft-card hover:border-[#C9A961]/80 hover:shadow-xl flex flex-col justify-between overflow-hidden relative transition-all duration-300 h-full">
       
-      {/* Insignias Superiores: Descuento & Categoría Oficial & Día/Noche */}
+      {/* Insignias Superiores: Descuento & Botón Favoritos & Categoría Oficial */}
       <div className="absolute top-2.5 left-2.5 right-2.5 z-10 flex items-center justify-between pointer-events-none">
-        {isOnSale ? (
-          <div className="flex items-center gap-1 bg-rose-600 text-white font-black text-xs px-2.5 py-1 rounded-full shadow-md">
-            <Flame className="w-3 h-3 fill-current" />
-            <span>-{product.discountPercent}%</span>
-          </div>
-        ) : (
-          <div />
-        )}
+        <div className="flex items-center gap-1.5 pointer-events-auto">
+          {isOnSale && (
+            <div className="flex items-center gap-1 bg-rose-600 text-white font-black text-xs px-2.5 py-1 rounded-full shadow-md">
+              <Flame className="w-3 h-3 fill-current" />
+              <span>-{product.discountPercent}%</span>
+            </div>
+          )}
+
+          {/* Botón de Favoritos con Corazón */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onToggleFavorite && onToggleFavorite(product.id);
+            }}
+            className={`w-7 h-7 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
+              isFavorite
+                ? 'bg-rose-50 border border-rose-300 text-rose-500 shadow-md scale-105'
+                : 'bg-white/95 text-stone-400 hover:text-rose-500 border border-stone-200 hover:border-rose-300'
+            }`}
+            title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
+            aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
+          >
+            <Heart className={`w-3.5 h-3.5 transition-transform duration-200 ${isFavorite ? 'fill-rose-500 text-rose-500 scale-110' : ''}`} />
+          </button>
+        </div>
         
         {/* Badges de Categoría y Momento (Día / Noche) Estable */}
         <div className="flex items-center gap-1.5">

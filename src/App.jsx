@@ -10,6 +10,7 @@ import BestSellersTabs from './components/BestSellersTabs';
 import CrossSelling from './components/CrossSelling';
 import ProductDetailModal from './components/ProductDetailModal';
 import CartDrawer from './components/CartDrawer';
+import FavoritesDrawer from './components/FavoritesDrawer';
 import AiSommelierWidget from './components/AiSommelierWidget';
 import BrandsSection from './components/BrandsSection';
 import AboutSection from './components/AboutSection';
@@ -25,6 +26,8 @@ export default function App() {
 
   // UI States
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'arabes', 'disenador', 'Para Él', 'Para Ella', 'Unisex', 'decants'
   const [activeVibe, setActiveVibe] = useState('all');
@@ -33,7 +36,7 @@ export default function App() {
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
-  // Load cart on client mount to prevent SSR hydration mismatch
+  // Load cart & favorites on client mount to prevent SSR hydration mismatch
   useEffect(() => {
     try {
       const saved = localStorage.getItem('arkano_cart') || localStorage.getItem('sultan_cart');
@@ -43,13 +46,20 @@ export default function App() {
           setCart(parsed);
         }
       }
+      const savedFavs = localStorage.getItem('arkano_favorites');
+      if (savedFavs) {
+        const parsedFavs = JSON.parse(savedFavs);
+        if (Array.isArray(parsedFavs)) {
+          setFavorites(parsedFavs);
+        }
+      }
     } catch (e) {
-      console.error('Error loading cart:', e);
+      console.error('Error loading cart or favorites:', e);
     }
     setIsMounted(true);
   }, []);
 
-  // Sync cart to localStorage after mounted
+  // Sync cart & favorites to localStorage after mounted
   useEffect(() => {
     if (!isMounted) return;
     try {
@@ -58,6 +68,36 @@ export default function App() {
       console.error('Error saving cart:', e);
     }
   }, [cart, isMounted]);
+
+  useEffect(() => {
+    if (!isMounted) return;
+    try {
+      localStorage.setItem('arkano_favorites', JSON.stringify(favorites));
+    } catch (e) {
+      console.error('Error saving favorites:', e);
+    }
+  }, [favorites, isMounted]);
+
+  // Toggle favorite perfume
+  const handleToggleFavorite = (productId) => {
+    const prod = PERFUMES_DATA.find(p => p.id === productId);
+    const prodName = prod?.name || 'Perfume';
+    setFavorites(prev => {
+      const exists = prev.includes(productId);
+      if (exists) {
+        showToast(`🤍 "${prodName}" eliminado de tus favoritos`);
+        return prev.filter(id => id !== productId);
+      } else {
+        showToast(`❤️ ¡"${prodName}" añadido a tus favoritos!`);
+        return [...prev, productId];
+      }
+    });
+  };
+
+  const handleClearFavorites = () => {
+    setFavorites([]);
+    showToast('Tus favoritos han sido vaciados 🤍');
+  };
 
   // Show Toast Alert
   const showToast = (msg) => {
@@ -221,10 +261,14 @@ export default function App() {
         beast: '🔥 INTENSOS',
         gourmand: '🍯 GOURMAND',
         office: '🌿 FRESCOS',
+        day: '☀️ DÍA',
         night: '🌙 NOCHE',
         viral: '👑 TOP VENTAS'
       }[activeVibe];
-      if (vibeObj && !p.vibes.includes(vibeObj)) return false;
+      if (vibeObj) {
+        const matches = p.vibes?.includes(vibeObj) || (activeVibe === 'day' && (p.timeOfDay === 'dia' || p.timeOfDay === 'ambas'));
+        if (!matches) return false;
+      }
     }
 
     // Live search query
@@ -270,6 +314,8 @@ export default function App() {
       <Header
         cartCount={cartItemCount}
         onOpenCart={() => setIsCartOpen(true)}
+        favoritesCount={favorites.length}
+        onOpenFavorites={() => setIsFavoritesOpen(true)}
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
           setSelectedBrand(null);
@@ -424,6 +470,8 @@ export default function App() {
           selectedCategory={activeCategory}
           onTabChange={(tabId) => setActiveCategory(tabId)}
           onResetFilters={handleResetFilters}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
         />
 
         {/* 7. Cross-Selling Carousel ("También Compraron") */}
@@ -431,6 +479,8 @@ export default function App() {
           products={PERFUMES_DATA}
           onOpenProduct={(id) => setSelectedProductId(id)}
           onAddToCart={handleAddToCart}
+          favorites={favorites}
+          onToggleFavorite={handleToggleFavorite}
         />
 
         {/* 8. Brands Showcase Section */}
@@ -461,6 +511,8 @@ export default function App() {
           onClose={() => setSelectedProductId(null)}
           onAddToCart={handleAddToCart}
           onBuyNowWhatsApp={handleBuyNowWhatsApp}
+          isFavorite={favorites.includes(selectedProductId)}
+          onToggleFavorite={handleToggleFavorite}
         />
       )}
 
@@ -474,6 +526,22 @@ export default function App() {
         onRemoveItem={handleRemoveItem}
         onExploreCatalog={() => {
           setIsCartOpen(false);
+          const el = document.getElementById('los-mas-vendidos');
+          el?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
+
+      {/* 14. Slide-Over Favorites Drawer */}
+      <FavoritesDrawer
+        isOpen={isFavoritesOpen}
+        onClose={() => setIsFavoritesOpen(false)}
+        favorites={favorites}
+        onAddToCart={handleAddToCart}
+        onRemoveFavorite={handleToggleFavorite}
+        onOpenProduct={(id) => setSelectedProductId(id)}
+        onClearFavorites={handleClearFavorites}
+        onExploreCatalog={() => {
+          setIsFavoritesOpen(false);
           const el = document.getElementById('los-mas-vendidos');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { Search, ShoppingBag, ChevronDown, Sparkles, X, Flame, ShieldCheck, Crown, Award, Menu, MessageCircle, ChevronRight } from 'lucide-react';
+import { Search, ShoppingBag, ChevronDown, Sparkles, X, Flame, ShieldCheck, Crown, Award, Menu, MessageCircle, ChevronRight, Heart } from 'lucide-react';
 import { BRANDS_LIST, PERFUMES_DATA } from '../data/perfumes';
 import Logo from './Logo';
 
@@ -58,6 +58,8 @@ export const OCCASIONS_LIST = [
 export default function Header({ 
   cartCount, 
   onOpenCart, 
+  favoritesCount = 0,
+  onOpenFavorites,
   onSelectCategory, 
   onSelectBrand,
   onSelectAcorde,
@@ -176,19 +178,10 @@ export default function Header({
 
           {/* Center Navigation Links with Categories */}
           <nav className="hidden lg:flex items-center space-x-1 font-medium text-xs tracking-wider uppercase">
-            {/* Categoría Árabe con Corona */}
-            <button 
-              onClick={() => handleNavCategory('arabes')}
-              className="px-3.5 py-2 rounded-full text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5"
-            >
-              <Crown className="w-3.5 h-3.5" />
-              <span>ARABES DUBAI</span>
-            </button>
-
             {/* Categoría Diseñador */}
             <button 
               onClick={() => handleNavCategory('disenador')}
-              className="px-3.5 py-2 rounded-full text-[#F5F1E8] hover:text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5"
+              className="px-3.5 py-2 rounded-full text-[#F5F1E8] hover:text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5 cursor-pointer"
             >
               <Award className="w-3.5 h-3.5 text-[#C9A961]" />
               <span>DISENADOR</span>
@@ -196,19 +189,19 @@ export default function Header({
 
             <button 
               onClick={() => handleNavCategory('Para Él')}
-              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
+              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold cursor-pointer"
             >
               PARA EL
             </button>
             <button 
               onClick={() => handleNavCategory('Para Ella')}
-              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
+              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold cursor-pointer"
             >
               PARA ELLA
             </button>
             <button 
               onClick={() => handleNavCategory('Unisex')}
-              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold"
+              className="px-3 py-2 rounded-full text-gray-300 hover:text-white hover:bg-white/10 transition-all font-semibold cursor-pointer"
             >
               UNISEX
             </button>
@@ -221,9 +214,9 @@ export default function Header({
             >
               <button 
                 onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#C9A961] bg-[#1A1A1A] hover:bg-[#252525] font-bold transition-all border border-[#C9A961]/30 shadow-sm"
+                className="px-3.5 py-2 rounded-full flex items-center gap-1 text-[#C9A961] bg-[#1A1A1A] hover:bg-[#252525] font-bold transition-all border border-[#C9A961]/30 shadow-sm cursor-pointer"
               >
-                <span>CASAS & OCASIONES</span>
+                <span>CASAS - OCASIONES</span>
                 <ChevronDown className={`w-3.5 h-3.5 text-[#C9A961] transition-transform duration-200 ${megaMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -425,11 +418,27 @@ export default function Header({
               )}
             </div>
 
+            {/* Favorites Trigger with Heart Icon */}
+            <button
+              onClick={onOpenFavorites}
+              className="relative p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-rose-400 hover:text-rose-300 border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              aria-label="Ver lista de favoritos"
+              title="Mis perfumes favoritos"
+            >
+              <Heart className={`w-5 h-5 transition-colors ${favoritesCount > 0 ? 'fill-rose-500 text-rose-500' : ''}`} />
+              {favoritesCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse-gently">
+                  {favoritesCount}
+                </span>
+              )}
+            </button>
+
             {/* Cart Trigger */}
             <button 
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95"
+              className="relative p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer"
               aria-label="Ver carrito"
+              title="Mi carrito de compras"
             >
               <ShoppingBag className="w-5 h-5" />
               {cartCount > 0 && (
@@ -497,6 +506,30 @@ export default function Header({
                   }}
                   className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-xl py-2 pl-9 pr-3 text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none"
                 />
+              </div>
+
+              {/* Quick Actions: Favoritos & Carrito */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenFavorites();
+                  }}
+                  className="p-2.5 rounded-xl bg-white/5 border border-rose-500/30 hover:bg-rose-500/10 flex items-center justify-center gap-2 text-xs font-bold text-rose-300 transition-colors cursor-pointer"
+                >
+                  <Heart className={`w-4 h-4 text-rose-400 ${favoritesCount > 0 ? 'fill-rose-400' : ''}`} />
+                  <span>Favoritos ({favoritesCount})</span>
+                </button>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenCart();
+                  }}
+                  className="p-2.5 rounded-xl bg-[#C9A961]/15 border border-[#C9A961]/40 hover:bg-[#C9A961]/25 flex items-center justify-center gap-2 text-xs font-bold text-[#C9A961] transition-colors cursor-pointer"
+                >
+                  <ShoppingBag className="w-4 h-4 text-[#C9A961]" />
+                  <span>Carrito ({cartCount})</span>
+                </button>
               </div>
 
               {/* Section 1: Categorías Principales (Modo PC) */}

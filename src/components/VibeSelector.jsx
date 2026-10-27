@@ -6,23 +6,21 @@ export default function VibeSelector({ activeVibe, onSelectVibe }) {
     <div className="bg-[#F5F1E8] py-5 border-b border-[#C9A961]/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
-        {/* Title */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-3.5">
-          <div>
-            <span className="text-[10px] font-black tracking-[0.25em] text-[#A58B4E] uppercase">
-              DESCUBRIMIENTO POR OCASION
-            </span>
-            <h3 className="font-arabic-title text-base sm:text-lg font-bold text-[#0E0E0E] uppercase tracking-wide">
-              ¿QUE ESTILO BUSCAS HOY?
-            </h3>
-          </div>
-          <span className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">
-            FILTRA POR ESTELA Y PERSONALIDAD ✨
+        {/* Centered Title & Subtitle */}
+        <div className="text-center mb-4 sm:mb-5">
+          <span className="text-[10px] sm:text-[11px] font-black tracking-[0.25em] text-[#A58B4E] uppercase block mb-1">
+            DESCUBRIMIENTO POR OCASIÓN
+          </span>
+          <h3 className="font-arabic-title text-lg sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
+            ¿QUÉ ESTILO BUSCAS HOY?
+          </h3>
+          <span className="text-[11px] text-gray-500 font-medium uppercase tracking-wider block mt-1">
+            FILTRA POR ESTELA Y PERSONALIDAD
           </span>
         </div>
 
-        {/* Responsive Pills: No se corta el texto, se adapta y envuelve con elegancia */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+        {/* Responsive Centered Pills: No se corta el texto, se adapta y envuelve con elegancia */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5">
           {VIBE_CATEGORIES.map((vibe) => {
             const isActive = activeVibe === vibe.id;
             return (

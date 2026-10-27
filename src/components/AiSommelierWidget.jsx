@@ -11,7 +11,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
   
   const initialBotMessage = {
     sender: 'bot',
-    text: '¡Bienvenidos a **ARKANO PERFUMERÍA**! 👑 Soy **Yasmin**, tu Sommelier de Alta Perfumería Árabe y Diseñador.\n\nEstoy aquí para guiarte a encontrar tu firma aromática perfecta. ¿Buscas un perfume para ti o para regalar? ¿Prefieres la potencia misteriosa de Oriente o la sofisticación de Diseñador?',
+    text: '¡Hola! Estoy aquí para ayudarte 😊\n\n¡Bienvenidos a **ARKANO PERFUMERÍA**! 👑 Soy tu asesor y Sommelier de Alta Perfumería Árabe y Diseñador.\n\nEstoy aquí para guiarte a encontrar tu firma aromática perfecta. ¿Buscas un perfume para ti o para regalar? ¿Prefieres la potencia misteriosa de Oriente o la sofisticación de Diseñador?',
     recommendations: [
       PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
       PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
@@ -20,6 +20,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
       '👔 Para Caballero',
       '🌸 Para Dama',
       '👑 Lo más viral de Dubái',
+      '☀️ Perfumes para el Día',
       '🧪 ¿Cómo funcionan los Decants?'
     ]
   };
@@ -77,10 +78,10 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
       {/* Floating Avatar Trigger Button in Bottom Right */}
       <div className="fixed bottom-5 right-5 z-40 flex flex-col items-end">
         
-        {/* Friendly Speech Bubble */}
+        {/* Friendly Speech Bubble - Mascot Image 1 */}
         {showGreeting && !isOpen && (
-          <div className="mb-2 bg-[#0E0E0E] text-[#F5F1E8] text-xs py-2 px-3.5 rounded-2xl shadow-xl border border-[#C9A961]/60 max-w-xs animate-bounce flex items-center gap-2">
-            <span>✨ ¿Dudas entre un perfume árabe o de diseñador? ¡Te ayudo en vivo!</span>
+          <div className="mb-2 bg-[#0E0E0E] text-[#F5F1E8] text-xs py-2 px-3.5 rounded-2xl shadow-xl border border-[#C9A961]/70 max-w-xs animate-bounce flex items-center gap-2">
+            <span className="font-semibold text-[#F5F1E8]">¡Hola! Estoy aquí para ayudarte 😊</span>
             <button 
               onClick={() => setShowGreeting(false)} 
               className="text-gray-400 hover:text-white ml-1 text-sm font-bold"
@@ -93,18 +94,20 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 rounded-full bg-[#0E0E0E] text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#C9A961] group"
-          aria-label="Abrir Sommelier de Perfumes IA"
-          title="Hablar con Yasmin - Sommelier ARKANO"
+          className="relative w-14 h-14 rounded-full bg-white text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#C9A961] group"
+          aria-label="Abrir Asistente de Perfumes ARKANO"
+          title="Asistente ARKANO Perfumes - ¡Estoy aquí para ayudarte!"
         >
           {isOpen ? (
-            <X className="w-6 h-6 text-[#C9A961]" />
+            <div className="w-full h-full rounded-full bg-[#0E0E0E] flex items-center justify-center">
+              <X className="w-6 h-6 text-[#C9A961]" />
+            </div>
           ) : (
             <>
-              <div className="w-full h-full rounded-full overflow-hidden p-0.5">
+              <div className="w-full h-full rounded-full overflow-hidden p-0.5 bg-white">
                 <img 
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
-                  alt="Yasmin Sommelier ARKANO" 
+                  src="/assets/images/arkano_mascot.jpg" 
+                  alt="Asistente ARKANO Perfumes" 
                   className="w-full h-full object-cover rounded-full"
                 />
               </div>
@@ -121,20 +124,20 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
           {/* Chat Header */}
           <div className="bg-[#0E0E0E] text-white p-3.5 sm:p-4 flex items-center justify-between border-b border-[#C9A961]/40">
             <div className="flex items-center gap-2.5">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9A961]">
+              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#C9A961] bg-white">
                 <img 
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
-                  alt="Yasmin" 
+                  src="/assets/images/arkano_mascot.jpg" 
+                  alt="Asistente ARKANO" 
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
                 <h4 className="font-arabic-title text-sm font-bold flex items-center gap-1.5 text-white">
-                  Yasmin • Sommelier ARKANO <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
+                  Asistente ARKANO <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
                 </h4>
                 <span className="text-[10px] text-[#C9A961] flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span>Experta en Árabes & Diseñador</span>
+                  <span>¡Hola! Estoy aquí para ayudarte :)</span>
                 </span>
               </div>
             </div>
@@ -165,6 +168,18 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                 key={i}
                 className={`flex flex-col ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
               >
+                {/* Bot Identity Header */}
+                {msg.sender !== 'user' && (
+                  <div className="flex items-center gap-1.5 mb-1 pl-1">
+                    <img 
+                      src="/assets/images/arkano_mascot.jpg" 
+                      alt="ARKANO" 
+                      className="w-4 h-4 rounded-full object-cover border border-[#C9A961]"
+                    />
+                    <span className="text-[10px] font-bold text-stone-600">Asistente ARKANO</span>
+                  </div>
+                )}
+
                 {/* Message Bubble */}
                 <div
                   className={`max-w-[88%] rounded-2xl px-3.5 py-2.5 leading-relaxed shadow-sm ${

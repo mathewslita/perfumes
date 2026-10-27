@@ -149,7 +149,7 @@ export default function BrandsSection({ onSelectBrand }) {
           CASAS OFICIALES
         </span>
         <h2 className="font-arabic-title text-2xl sm:text-3xl lg:text-4xl font-light text-[#0E0E0E] tracking-[0.18em] uppercase">
-          NUESTRAS MARCAS
+          MARCAS CON LAS QUE TRABAJAMOS
         </h2>
         <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3 mb-2.5" />
         <p className="text-xs text-stone-500 uppercase tracking-widest font-medium">

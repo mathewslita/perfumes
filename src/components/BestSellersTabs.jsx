@@ -1,5 +1,5 @@
-import React from 'react';
-import { Sparkles, MessageCircle, RotateCcw, Crown, Award } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Sparkles, MessageCircle, RotateCcw, Crown, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 export default function BestSellersTabs({ 
@@ -8,7 +8,9 @@ export default function BestSellersTabs({
   onAddToCart,
   selectedCategory,
   onTabChange,
-  onResetFilters
+  onResetFilters,
+  favorites = [],
+  onToggleFavorite
 }) {
   const tabs = [
     { id: 'all', label: 'TODOS', icon: null },
@@ -21,7 +23,41 @@ export default function BestSellersTabs({
   ];
 
   const currentTab = selectedCategory || 'all';
-  const displayProducts = products;
+  
+  // Paginación Responsive: 8 en PC (>= 768px), 4 en Móviles (< 768px)
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const itemsPerPage = isMobile ? 4 : 8;
+
+  // Restablecer a página 1 al cambiar de categoría o tamaño de pantalla
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, isMobile]);
+
+  const totalItems = products.length;
+  const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
+  const safePage = Math.min(Math.max(1, currentPage), totalPages);
+  const startIndex = (safePage - 1) * itemsPerPage;
+  const displayProducts = products.slice(startIndex, startIndex + itemsPerPage);
+
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > totalPages || newPage === safePage) return;
+    setCurrentPage(newPage);
+    const catalogEl = document.getElementById('los-mas-vendidos');
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <section id="los-mas-vendidos" className="py-12 bg-white scroll-mt-20">
@@ -47,7 +83,7 @@ export default function BestSellersTabs({
                 <button
                   key={tab.id}
                   onClick={() => onTabChange(tab.id)}
-                  className={`pb-3 px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap ${
+                  className={`pb-3 px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer ${
                     isActive
                       ? 'text-[#0E0E0E] font-black'
                       : 'text-gray-400 hover:text-gray-800'
@@ -62,7 +98,7 @@ export default function BestSellersTabs({
             })}
           </div>
 
-          {/* Banner de Categoría con su Frase de Alta Calidad */}
+          {/* Banner de Categoría con su Frase Actualizada */}
           {currentTab === 'arabes' && (
             <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F5F1E8] border border-[#C9A961]/40 text-center max-w-3xl mx-auto shadow-sm animate-in fade-in">
               <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-[#C9A961] text-[10px] font-black px-3.5 py-1 rounded-full uppercase tracking-widest border border-[#C9A961]/40 mb-1.5">
@@ -70,7 +106,7 @@ export default function BestSellersTabs({
                 <span>CATEGORÍA ÁRABE • DUBÁI</span>
               </span>
               <p className="font-serif italic text-sm sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
-                "El misticismo milenario de Oriente en su máxima expresión: concentración pura, estela imponente y fijación legendaria que cautiva los sentidos."
+                "Oler bien, sentirse bien consigo mismo nunca antes fue tan accesible"
               </p>
             </div>
           )}
@@ -88,8 +124,10 @@ export default function BestSellersTabs({
           )}
         </div>
 
+
+
         {/* Product Cards Grid */}
-        {displayProducts.length === 0 ? (
+        {totalItems === 0 ? (
           <div className="bg-[#F5F1E8] rounded-3xl p-8 sm:p-12 border border-[#C9A961]/30 text-center max-w-xl mx-auto shadow-sm my-6">
             <div className="w-16 h-16 rounded-full bg-[#0E0E0E] text-[#C9A961] flex items-center justify-center mx-auto mb-4 border border-[#C9A961]/50">
               <Sparkles className="w-8 h-8 text-[#C9A961]" />
@@ -103,7 +141,7 @@ export default function BestSellersTabs({
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={onResetFilters}
-                className="inline-flex items-center gap-2 bg-[#0E0E0E] hover:bg-[#252525] text-[#C9A961] font-bold text-xs py-3 px-6 rounded-full shadow-md transition-all active:scale-95 border border-[#C9A961]/40"
+                className="inline-flex items-center gap-2 bg-[#0E0E0E] hover:bg-[#252525] text-[#C9A961] font-bold text-xs py-3 px-6 rounded-full shadow-md transition-all active:scale-95 border border-[#C9A961]/40 cursor-pointer"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span>Restablecer Filtros y Ver Todo</span>
@@ -120,16 +158,80 @@ export default function BestSellersTabs({
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {displayProducts.map((perfume) => (
-              <ProductCard
-                key={perfume.id}
-                product={perfume}
-                onOpenProduct={onOpenProduct}
-                onAddToCart={onAddToCart}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {displayProducts.map((perfume) => (
+                <ProductCard
+                  key={perfume.id}
+                  product={perfume}
+                  onOpenProduct={onOpenProduct}
+                  onAddToCart={onAddToCart}
+                  isFavorite={favorites.includes(perfume.id)}
+                  onToggleFavorite={onToggleFavorite}
+                />
+              ))}
+            </div>
+
+            {/* Paginación Limpia y Minimalista (8 en PC / 4 en Móvil) */}
+            {totalPages > 1 && (
+              <nav 
+                aria-label="Paginación del catálogo"
+                className="mt-10 pt-4 flex items-center justify-center gap-2"
+              >
+                {/* Botón Anterior */}
+                <button
+                  onClick={() => handlePageChange(safePage - 1)}
+                  disabled={safePage === 1}
+                  className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
+                    safePage === 1
+                      ? 'opacity-30 border-gray-200 text-gray-400 cursor-not-allowed'
+                      : 'bg-white text-[#0E0E0E] border-gray-200 hover:border-[#C9A961] hover:text-[#C9A961] hover:shadow-xs active:scale-95'
+                  }`}
+                  aria-label="Página anterior"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  <span className="hidden sm:inline">Anterior</span>
+                </button>
+
+                {/* Botones de Páginas Numéricas */}
+                <div className="flex items-center gap-1.5">
+                  {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => {
+                    const isActive = pageNum === safePage;
+                    return (
+                      <button
+                        key={pageNum}
+                        onClick={() => handlePageChange(pageNum)}
+                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer ${
+                          isActive
+                            ? 'bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961] font-black shadow-sm'
+                            : 'bg-white text-gray-700 border border-gray-200 hover:border-[#C9A961]/60 hover:text-black'
+                        }`}
+                        aria-label={`Ir a página ${pageNum}`}
+                        aria-current={isActive ? 'page' : undefined}
+                      >
+                        {pageNum}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Botón Siguiente */}
+                <button
+                  onClick={() => handlePageChange(safePage + 1)}
+                  disabled={safePage === totalPages}
+                  className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
+                    safePage === totalPages
+                      ? 'opacity-30 border-gray-200 text-gray-400 cursor-not-allowed'
+                      : 'bg-white text-[#0E0E0E] border-gray-200 hover:border-[#C9A961] hover:text-[#C9A961] hover:shadow-xs active:scale-95'
+                  }`}
+                  aria-label="Página siguiente"
+                >
+                  <span className="hidden sm:inline">Siguiente</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </nav>
+            )}
+          </>
         )}
 
       </div>

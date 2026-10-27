@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   X, ShoppingBag, Zap, ShieldCheck, Truck, Check, 
-  Flame, Sun, Moon, Sparkles 
+  Flame, Sun, Moon, Sparkles, Heart 
 } from 'lucide-react';
 import LightboxModal from './LightboxModal';
 
@@ -9,7 +9,9 @@ export default function ProductDetailModal({
   product, 
   onClose, 
   onAddToCart,
-  onBuyNowWhatsApp
+  onBuyNowWhatsApp,
+  isFavorite = false,
+  onToggleFavorite
 }) {
   if (!product) return null;
 
@@ -283,10 +285,24 @@ export default function ProductDetailModal({
                       {/* Add to Cart Button */}
                       <button
                         onClick={handleAddToCart}
-                        className="flex-grow bg-[#0E0E0E] hover:bg-[#1C1C1C] active:scale-98 text-white font-bold text-sm py-3 px-6 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all border border-[#C9A961]/40"
+                        className="flex-grow bg-[#0E0E0E] hover:bg-[#1C1C1C] active:scale-98 text-white font-bold text-sm py-3 px-6 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all border border-[#C9A961]/40 cursor-pointer"
                       >
                         <ShoppingBag className="w-4 h-4 text-[#C9A961]" />
                         <span>Agregar al Carrito</span>
+                      </button>
+
+                      {/* Favorite Button */}
+                      <button
+                        onClick={() => onToggleFavorite && onToggleFavorite(product.id)}
+                        className={`p-3 rounded-full border transition-all active:scale-90 cursor-pointer flex items-center justify-center ${
+                          isFavorite
+                            ? 'bg-rose-50 border-rose-300 text-rose-500 shadow-md'
+                            : 'bg-white border-stone-200 text-stone-500 hover:text-rose-500 hover:border-rose-300'
+                        }`}
+                        title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
+                        aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
+                      >
+                        <Heart className={`w-5 h-5 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
                       </button>
                     </div>
 
@@ -331,6 +347,18 @@ export default function ProductDetailModal({
             </div>
 
             <div className="flex items-center gap-2">
+              <button
+                onClick={() => onToggleFavorite && onToggleFavorite(product.id)}
+                className={`p-2.5 rounded-full border transition-all active:scale-90 cursor-pointer ${
+                  isFavorite
+                    ? 'bg-rose-50 border-rose-300 text-rose-500'
+                    : 'bg-white/10 border-white/20 text-stone-300 hover:text-rose-400'
+                }`}
+                title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
+                aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
+              >
+                <Heart className={`w-4 h-4 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
+              </button>
               <button
                 onClick={handleAddToCart}
                 className="bg-[#1C1C1C] hover:bg-[#2A2A2A] active:scale-95 text-[#F5F1E8] border border-[#C9A961]/40 py-2.5 px-3 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Shield, Flame, ArrowRight, Award, Eye, Crown, ExternalLink } from 'lucide-react';
+import { Sparkles, ArrowRight, Award, Eye, Crown, ExternalLink, Check } from 'lucide-react';
 import Logo from './Logo';
 
 export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, onAddToCart }) {
@@ -14,11 +14,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           {/* Left Text Column */}
-          <div className="lg:col-span-7 space-y-4 text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 bg-[#C9A961]/15 border border-[#C9A961]/40 px-3.5 py-1.5 rounded-full text-xs font-bold text-[#C9A961] tracking-wider uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
-              <span>Boutique de Alta Perfumería • Dubái & Diseñador Original</span>
-            </div>
+          <div className="lg:col-span-7 space-y-5 text-center lg:text-left">
 
             <h1 className="font-arabic-title text-3xl sm:text-5xl font-black leading-tight tracking-tight text-white">
               El Arte de la Alta Perfumería,<br />
@@ -35,7 +31,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
             <div className="pt-2 flex flex-wrap items-center justify-center lg:justify-start gap-3">
               <button
                 onClick={onExplore}
-                className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-sm px-6 py-3.5 rounded-full flex items-center gap-2 shadow-lg hover:shadow-[#C9A961]/25 hover:scale-105 active:scale-95 transition-all"
+                className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-sm px-6 py-3.5 rounded-full flex items-center gap-2 shadow-lg hover:shadow-[#C9A961]/25 hover:scale-105 active:scale-95 transition-all cursor-pointer"
               >
                 <span>Explorar Catálogo Exclusivo</span>
                 <ArrowRight className="w-4 h-4" />
@@ -43,26 +39,26 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               
               <button
                 onClick={onOpenAiModal}
-                className="bg-white/5 hover:bg-white/10 text-white border border-[#C9A961]/30 font-semibold text-sm px-5 py-3.5 rounded-full flex items-center gap-2 backdrop-blur-sm transition-all hover:border-[#C9A961]"
+                className="bg-white/5 hover:bg-white/10 text-white border border-[#C9A961]/30 font-semibold text-sm px-5 py-3.5 rounded-full flex items-center gap-2 backdrop-blur-sm transition-all hover:border-[#C9A961] cursor-pointer"
               >
                 <Sparkles className="w-4 h-4 text-[#C9A961]" />
-                <span>Sommelier IA de Fragancias</span>
+                <span>ASESOR IA de fragancias</span>
               </button>
             </div>
 
             {/* Micro Trust Proofs */}
             <div className="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-gray-400">
               <div className="flex items-center gap-1.5">
-                <Shield className="w-4 h-4 text-[#C9A961]" />
+                <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
                 <span className="text-gray-200">Batch Code & Sello de Origen</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <Flame className="w-4 h-4 text-[#C9A961]" />
-                <span className="text-gray-200">12h+ Fijación Comprobada</span>
+                <Check className="w-4 h-4 text-emerald-400 stroke-[3]" />
+                <span className="text-gray-200">DURACION Y FIJACION COMPROBADA</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <Award className="w-4 h-4 text-[#C9A961]" />
-                <span className="text-gray-200">Botella o Decant 10ml</span>
+                <span className="text-gray-200">Decants disponibles.</span>
               </div>
             </div>
           </div>
