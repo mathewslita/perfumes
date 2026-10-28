@@ -6,6 +6,14 @@ import Logo from './Logo';
 
 export const OCCASIONS_LIST = [
   {
+    id: 'day',
+    name: 'DÍA',
+    vibe: 'day',
+    icon: '☀️',
+    badge: 'Luminoso',
+    desc: 'Cítricos chispeantes & elegancia diurna'
+  },
+  {
     id: 'night',
     name: 'NOCHE',
     vibe: 'night',
@@ -231,7 +239,7 @@ export default function Header({
 
               {/* Mega-Menu Dropdown Panel */}
               {megaMenuOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[760px] animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-[840px] animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                   <div className="bg-[#0E0E0E] rounded-3xl shadow-2xl border border-[#C9A961]/40 p-6 grid grid-cols-12 gap-6 text-[#F5F1E8]">
                     
                     {/* Columna 1: Casas de Diseñador & Árabes */}
@@ -303,11 +311,11 @@ export default function Header({
                           Prueba ~120 sprays en tu piel con atomizador de vidrio de alta precisión antes de invertir en la botella completa.
                         </p>
                         <div className="mt-3 p-2 bg-black/40 rounded-xl border border-white/5 flex items-center justify-between text-[11px]">
-                          <span className="text-gray-300">Árabes Dubái</span>
+                          <span className="text-gray-300">Perfumes Árabes</span>
                           <span className="font-black text-[#C9A961]">$15.00</span>
                         </div>
                         <div className="mt-1 p-2 bg-black/40 rounded-xl border border-white/5 flex items-center justify-between text-[11px]">
-                          <span className="text-gray-300">Diseñador París</span>
+                          <span className="text-gray-300">Perfumes Diseñador</span>
                           <span className="font-black text-[#C9A961]">$30.00</span>
                         </div>
                       </div>
@@ -673,7 +681,7 @@ export default function Header({
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] block">
                     DESCUBRIMIENTO POR OCASIÓN
                   </span>
-                  <span className="text-[10px] text-gray-400 font-mono">5 Estilos</span>
+                  <span className="text-[10px] text-gray-400 font-mono">{OCCASIONS_LIST.length} Opciones</span>
                 </div>
                 <div className="grid grid-cols-1 gap-2">
                   {OCCASIONS_LIST.map((occ, idx) => (

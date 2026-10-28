@@ -28,11 +28,11 @@ export default function ProductCard({
     <article className="group bg-white rounded-2xl border border-gray-200 shadow-soft-card hover:border-[#C9A961]/80 hover:shadow-xl flex flex-col justify-between overflow-hidden relative transition-all duration-300 h-full">
       
       {/* Insignias Superiores: Descuento & Botón Favoritos & Categoría Oficial */}
-      <div className="absolute top-2.5 left-2.5 right-2.5 z-10 flex items-center justify-between pointer-events-none">
-        <div className="flex items-center gap-1.5 pointer-events-auto">
+      <div className="absolute top-2 left-2 right-2 z-10 flex items-center justify-between gap-1 pointer-events-none">
+        <div className="flex items-center gap-1 sm:gap-1.5 pointer-events-auto flex-shrink-0">
           {isOnSale && (
-            <div className="flex items-center gap-1 bg-rose-600 text-white font-black text-xs px-2.5 py-1 rounded-full shadow-md">
-              <Flame className="w-3 h-3 fill-current" />
+            <div className="flex items-center gap-0.5 bg-rose-600 text-white font-black text-[10px] sm:text-xs px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow-md">
+              <Flame className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-current" />
               <span>-{product.discountPercent}%</span>
             </div>
           )}
@@ -43,7 +43,7 @@ export default function ProductCard({
               e.stopPropagation();
               onToggleFavorite && onToggleFavorite(product.id);
             }}
-            className={`w-7 h-7 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
+            className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
               isFavorite
                 ? 'bg-rose-50 border border-rose-300 text-rose-500 shadow-md scale-105'
                 : 'bg-white/95 text-stone-400 hover:text-rose-500 border border-stone-200 hover:border-rose-300'
@@ -51,38 +51,38 @@ export default function ProductCard({
             title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
             aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
           >
-            <Heart className={`w-3.5 h-3.5 transition-transform duration-200 ${isFavorite ? 'fill-rose-500 text-rose-500 scale-110' : ''}`} />
+            <Heart className={`w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 ${isFavorite ? 'fill-rose-500 text-rose-500 scale-110' : ''}`} />
           </button>
         </div>
         
         {/* Badges de Categoría y Momento (Día / Noche) Estable */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
           {product.timeOfDay && (
             <div className="relative group/time inline-flex items-center">
               <span
-                className="w-6 h-6 rounded-full shadow-sm bg-white/95 text-[#0E0E0E] border border-gray-200 flex items-center justify-center cursor-help transition-colors hover:border-[#C9A961]"
+                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-sm bg-white/95 text-[#0E0E0E] border border-gray-200 flex items-center justify-center cursor-help transition-colors hover:border-[#C9A961]"
                 title={`Momento recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día & Noche"}`}
               >
                 {product.timeOfDay === "dia" && (
-                  <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
+                  <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-600 fill-amber-400" />
                 )}
                 {product.timeOfDay === "noche" && (
-                  <Moon className="w-3.5 h-3.5 text-[#0E0E0E] fill-[#0E0E0E]" />
+                  <Moon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#0E0E0E] fill-[#0E0E0E]" />
                 )}
                 {product.timeOfDay === "ambas" && (
-                  <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
+                  <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A58B4E] fill-[#C9A961]" />
                 )}
               </span>
 
               {/* Tooltip flotante superior sin alterar el ancho ni provocar saltos */}
-              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover/time:opacity-100 transition-opacity pointer-events-none z-30 border border-[#C9A961]/40">
+              <div className="absolute bottom-full right-0 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover/time:opacity-100 transition-opacity pointer-events-none z-30 border border-[#C9A961]/40">
                 {product.timeOfDay === "dia" ? "☀️ DIA" : product.timeOfDay === "noche" ? "🌙 NOCHE" : "✨ DIA & NOCHE"}
               </div>
             </div>
           )}
 
           {/* Badge de Categoría (Árabe vs Diseñador) sin fondo negro */}
-          <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm border ${
+          <span className={`text-[9px] sm:text-[10px] font-extrabold px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full shadow-sm border ${
             isArabic
               ? "bg-[#C9A961] text-[#0E0E0E] border-[#A58B4E]"
               : "bg-[#F5F1E8] text-[#0E0E0E] border-[#C9A961]/60"

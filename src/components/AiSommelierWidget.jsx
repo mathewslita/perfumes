@@ -39,6 +39,14 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
     }
   }, [isOpen, messages, isTyping]);
 
+  // Auto dismiss greeting bubble after 6 seconds so it doesn't block screen on mobile
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowGreeting(false);
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Handle user sending a message (or tapping a chip) with real API integration
   const handleSendMessage = async (textToSend) => {
     const query = textToSend || inputMessage;
