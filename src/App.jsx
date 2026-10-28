@@ -335,101 +335,7 @@ export default function App() {
         onOpenProduct={(id) => setSelectedProductId(id)}
       />
 
-      {/* Active Filter Notice if brand, acorde, category or search is active */}
-      {(selectedBrand || selectedAcorde || searchQuery || activeCategory !== 'all' || activeVibe !== 'all') && (
-        <div className="bg-[#0E0E0E] text-[#F5F1E8] border-b border-[#C9A961]/30 py-3 px-4 text-xs sticky top-20 z-30 backdrop-blur-md shadow-md">
-          <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-extrabold text-[#C9A961] flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" /> Filtros activos:
-              </span>
 
-              {selectedBrand && (
-                <span className="inline-flex items-center gap-1.5 bg-[#C9A961] text-[#0E0E0E] px-3 py-1 rounded-full font-black shadow-sm">
-                  <span>Casa: {selectedBrand}</span>
-                  <button 
-                    onClick={() => setSelectedBrand(null)} 
-                    className="hover:text-black ml-0.5 text-sm leading-none"
-                    title="Quitar filtro de casa"
-                  >
-                    &times;
-                  </button>
-                </span>
-              )}
-
-              {selectedAcorde && (
-                <span className="inline-flex items-center gap-1.5 bg-white/20 text-[#F5F1E8] px-3 py-1 rounded-full font-bold shadow-sm border border-[#C9A961]/40">
-                  <span>{getAcordeLabel(selectedAcorde)}</span>
-                  <button 
-                    onClick={() => setSelectedAcorde(null)} 
-                    className="hover:text-[#C9A961] ml-0.5 text-sm leading-none"
-                    title="Quitar filtro de acorde"
-                  >
-                    &times;
-                  </button>
-                </span>
-              )}
-
-              {activeCategory !== 'all' && (
-                <span className="inline-flex items-center gap-1.5 bg-[#C9A961]/25 text-[#C9A961] border border-[#C9A961]/40 px-3 py-1 rounded-full font-bold">
-                  <span>
-                    {activeCategory === 'arabes' 
-                      ? '👑 Colección Árabe' 
-                      : activeCategory === 'disenador' 
-                        ? '✨ Diseñador Alta Costura' 
-                        : activeCategory}
-                  </span>
-                  <button 
-                    onClick={() => setActiveCategory('all')} 
-                    className="hover:text-white ml-0.5 text-sm leading-none"
-                    title="Quitar filtro de categoría"
-                  >
-                    &times;
-                  </button>
-                </span>
-              )}
-
-              {activeVibe !== 'all' && (
-                <span className="inline-flex items-center gap-1.5 bg-white/10 text-[#C9A961] px-3 py-1 rounded-full font-bold border border-[#C9A961]/30 uppercase">
-                  <span>ESTILO: {VIBE_CATEGORIES.find(v => v.id === activeVibe)?.name || activeVibe}</span>
-                  <button 
-                    onClick={() => setActiveVibe('all')} 
-                    className="hover:text-white ml-0.5 text-sm leading-none"
-                    title="Quitar filtro de estilo"
-                  >
-                    &times;
-                  </button>
-                </span>
-              )}
-
-              {searchQuery && (
-                <span className="inline-flex items-center gap-1.5 bg-white/10 text-white px-3 py-1 rounded-full border border-gray-600 font-medium">
-                  <span>Búsqueda: "{searchQuery}"</span>
-                  <button 
-                    onClick={() => setSearchQuery('')} 
-                    className="hover:text-[#C9A961] ml-0.5 text-sm leading-none"
-                    title="Limpiar búsqueda"
-                  >
-                    &times;
-                  </button>
-                </span>
-              )}
-
-              <span className="text-gray-300 font-semibold bg-white/10 px-2.5 py-1 rounded-full border border-[#C9A961]/20">
-                {filteredProducts.length} fragancia{filteredProducts.length === 1 ? '' : 's'} encontrada{filteredProducts.length === 1 ? '' : 's'}
-              </span>
-            </div>
-
-            <button
-              onClick={handleResetFilters}
-              className="text-xs text-[#0E0E0E] bg-[#C9A961] hover:bg-[#B89228] font-black px-3.5 py-1.5 rounded-full transition-all flex items-center gap-1 shadow-sm active:scale-95"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Ver Todo el Catálogo</span>
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* 3. Hero Banner (ARKANO PERFUMERÍA) */}
       <HeroBanner
@@ -472,6 +378,16 @@ export default function App() {
           onResetFilters={handleResetFilters}
           favorites={favorites}
           onToggleFavorite={handleToggleFavorite}
+          selectedBrand={selectedBrand}
+          onClearBrand={() => setSelectedBrand(null)}
+          selectedAcorde={selectedAcorde}
+          onClearAcorde={() => setSelectedAcorde(null)}
+          searchQuery={searchQuery}
+          onClearSearch={() => setSearchQuery('')}
+          activeVibe={activeVibe}
+          onClearVibe={() => setActiveVibe('all')}
+          getAcordeLabel={getAcordeLabel}
+          vibeCategories={VIBE_CATEGORIES}
         />
 
         {/* 7. Cross-Selling Carousel ("También Compraron") */}

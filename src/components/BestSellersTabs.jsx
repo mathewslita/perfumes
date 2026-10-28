@@ -10,7 +10,17 @@ export default function BestSellersTabs({
   onTabChange,
   onResetFilters,
   favorites = [],
-  onToggleFavorite
+  onToggleFavorite,
+  selectedBrand,
+  onClearBrand,
+  selectedAcorde,
+  onClearAcorde,
+  searchQuery,
+  onClearSearch,
+  activeVibe,
+  onClearVibe,
+  getAcordeLabel,
+  vibeCategories = []
 }) {
   const tabs = [
     { id: 'all', label: 'TODOS', icon: null },
@@ -23,6 +33,14 @@ export default function BestSellersTabs({
   ];
 
   const currentTab = selectedCategory || 'all';
+  
+  const hasActiveFilters = Boolean(
+    selectedBrand || 
+    selectedAcorde || 
+    searchQuery || 
+    (selectedCategory && selectedCategory !== 'all') || 
+    (activeVibe && activeVibe !== 'all')
+  );
   
   // Paginación Responsive: 8 en PC (>= 768px), 4 en Móviles (< 768px)
   const [isMobile, setIsMobile] = useState(false);
@@ -124,9 +142,107 @@ export default function BestSellersTabs({
           )}
         </div>
 
+        {/* Barra de Filtros Activos - Ubicada en la propia sección del Catálogo */}
+        {hasActiveFilters && (
+          <div className="mb-6 p-3 sm:p-4 rounded-2xl bg-[#0E0E0E] text-[#F5F1E8] border border-[#C9A961]/40 shadow-md flex flex-wrap items-center justify-between gap-3 animate-in fade-in duration-200">
+            <div className="flex flex-wrap items-center gap-2 text-xs">
+              <span className="font-extrabold text-[#C9A961] flex items-center gap-1.5 mr-1">
+                <Sparkles className="w-3.5 h-3.5" /> Filtros activos:
+              </span>
 
+              {selectedBrand && (
+                <span className="inline-flex items-center gap-1.5 bg-[#C9A961] text-[#0E0E0E] px-3 py-1 rounded-full font-black shadow-xs">
+                  <span>Casa: {selectedBrand}</span>
+                  <button 
+                    onClick={onClearBrand} 
+                    className="hover:text-black ml-0.5 text-sm leading-none cursor-pointer"
+                    title="Quitar filtro de casa"
+                    aria-label="Quitar filtro de casa"
+                  >
+                    &times;
+                  </button>
+                </span>
+              )}
 
-        {/* Product Cards Grid */}
+              {selectedAcorde && (
+                <span className="inline-flex items-center gap-1.5 bg-white/20 text-[#F5F1E8] px-3 py-1 rounded-full font-bold shadow-xs border border-[#C9A961]/40">
+                  <span>{getAcordeLabel ? getAcordeLabel(selectedAcorde) : selectedAcorde}</span>
+                  <button 
+                    onClick={onClearAcorde} 
+                    className="hover:text-[#C9A961] ml-0.5 text-sm leading-none cursor-pointer"
+                    title="Quitar filtro de acorde"
+                    aria-label="Quitar filtro de acorde"
+                  >
+                    &times;
+                  </button>
+                </span>
+              )}
+
+              {selectedCategory && selectedCategory !== 'all' && (
+                <span className="inline-flex items-center gap-1.5 bg-[#C9A961]/25 text-[#C9A961] border border-[#C9A961]/40 px-3 py-1 rounded-full font-bold">
+                  <span>
+                    {selectedCategory === 'arabes' 
+                      ? '👑 Colección Árabe' 
+                      : selectedCategory === 'disenador' 
+                        ? '✨ Diseñador Alta Costura' 
+                        : selectedCategory === 'decants'
+                          ? '🧪 Decants 10ml'
+                          : selectedCategory}
+                  </span>
+                  <button 
+                    onClick={() => onTabChange('all')} 
+                    className="hover:text-white ml-0.5 text-sm leading-none cursor-pointer"
+                    title="Quitar filtro de categoría"
+                    aria-label="Quitar filtro de categoría"
+                  >
+                    &times;
+                  </button>
+                </span>
+              )}
+
+              {activeVibe && activeVibe !== 'all' && (
+                <span className="inline-flex items-center gap-1.5 bg-white/10 text-[#C9A961] px-3 py-1 rounded-full font-bold border border-[#C9A961]/30 uppercase">
+                  <span>ESTILO: {vibeCategories?.find(v => v.id === activeVibe)?.name || activeVibe}</span>
+                  <button 
+                    onClick={onClearVibe} 
+                    className="hover:text-white ml-0.5 text-sm leading-none cursor-pointer"
+                    title="Quitar filtro de estilo"
+                    aria-label="Quitar filtro de estilo"
+                  >
+                    &times;
+                  </button>
+                </span>
+              )}
+
+              {searchQuery && (
+                <span className="inline-flex items-center gap-1.5 bg-white/10 text-white px-3 py-1 rounded-full border border-gray-600 font-medium">
+                  <span>Búsqueda: "{searchQuery}"</span>
+                  <button 
+                    onClick={onClearSearch} 
+                    className="hover:text-[#C9A961] ml-0.5 text-sm leading-none cursor-pointer"
+                    title="Limpiar búsqueda"
+                    aria-label="Limpiar búsqueda"
+                  >
+                    &times;
+                  </button>
+                </span>
+              )}
+
+              <span className="text-gray-300 font-semibold bg-white/10 px-2.5 py-1 rounded-full border border-[#C9A961]/20">
+                {products.length} fragancia{products.length === 1 ? '' : 's'} encontrada{products.length === 1 ? '' : 's'}
+              </span>
+            </div>
+
+            <button
+              onClick={onResetFilters}
+              className="text-xs text-[#0E0E0E] bg-[#C9A961] hover:bg-[#B89228] font-black px-3.5 py-1.5 rounded-full transition-all flex items-center gap-1.5 shadow-xs active:scale-95 cursor-pointer ml-auto sm:ml-0"
+              title="Restablecer todos los filtros"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Ver Todo el Catálogo</span>
+            </button>
+          </div>
+        )}
         {totalItems === 0 ? (
           <div className="bg-[#F5F1E8] rounded-3xl p-8 sm:p-12 border border-[#C9A961]/30 text-center max-w-xl mx-auto shadow-sm my-6">
             <div className="w-16 h-16 rounded-full bg-[#0E0E0E] text-[#C9A961] flex items-center justify-center mx-auto mb-4 border border-[#C9A961]/50">
