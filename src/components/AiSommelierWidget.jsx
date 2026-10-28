@@ -11,17 +11,17 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
   
   const initialBotMessage = {
     sender: 'bot',
-    text: '¡Hola! Estoy aquí para ayudarte 😊\n\n¡Bienvenidos a **ARKANO PERFUMERÍA**! 👑 Soy tu asesor y Sommelier de Alta Perfumería Árabe y Diseñador.\n\nEstoy aquí para guiarte a encontrar tu firma aromática perfecta. ¿Buscas un perfume para ti o para regalar? ¿Prefieres la potencia misteriosa de Oriente o la sofisticación de Diseñador?',
+    text: '¡Hola! Qué gusto saludarte 👑 Soy tu asesor personal de fragancias en **ARKANO PERFUMERÍA**.\n\nMi meta es ayudarte a encontrar ese aroma que de verdad vaya contigo y te haga recibir cumplidos, sin enredos ni tecnicismos aburridos.\n\nCuéntame: ¿buscas un perfume para ti o para hacer un regalo? ¿Y para qué ocasiones te gustaría usarlo (diario, trabajo, citas románticas o salir de fiesta)?',
     recommendations: [
       PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
-      PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
+      PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man')
     ].filter(Boolean),
     chips: [
-      '👔 Para Caballero',
-      '🌸 Para Dama',
-      '👑 Lo más viral de Dubái',
-      '☀️ Perfumes para el Día',
-      '🧪 ¿Cómo funcionan los Decants?'
+      '👔 Para el día a día / Trabajo',
+      '🌙 Para citas o salir de noche',
+      '👑 Árabes con fijación extrema',
+      '🎁 Quiero hacer un regalo',
+      '🧪 ¿Cómo son los Decants de 10ml?'
     ]
   };
 
@@ -39,8 +39,8 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
     }
   }, [isOpen, messages, isTyping]);
 
-  // Handle user sending a message (or tapping a chip)
-  const handleSendMessage = (textToSend) => {
+  // Handle user sending a message (or tapping a chip) with real API integration
+  const handleSendMessage = async (textToSend) => {
     const query = textToSend || inputMessage;
     if (!query.trim() || isTyping) return;
 
@@ -50,20 +50,55 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
     setInputMessage('');
     setIsTyping(true);
 
-    // Realistic sommelier processing delay
-    setTimeout(() => {
-      const response = analyzeAndRespond(query, updatedMessages);
+    try {
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: query,
+          history: updatedMessages
+        })
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        setMessages([
+          ...updatedMessages,
+          {
+            sender: 'bot',
+            text: data.reply,
+            recommendations: data.recommendations || [],
+            chips: data.chips || []
+          }
+        ]);
+      } else {
+        // Fallback to local advisor brain
+        const fallback = analyzeAndRespond(query, updatedMessages);
+        setMessages([
+          ...updatedMessages,
+          {
+            sender: 'bot',
+            text: fallback.replyText,
+            recommendations: fallback.recommendations || [],
+            chips: fallback.chips || []
+          }
+        ]);
+      }
+    } catch (err) {
+      // Offline fallback
+      const fallback = analyzeAndRespond(query, updatedMessages);
       setMessages([
         ...updatedMessages,
         {
           sender: 'bot',
-          text: response.replyText,
-          recommendations: response.recommendations || [],
-          chips: response.chips || []
+          text: fallback.replyText,
+          recommendations: fallback.recommendations || [],
+          chips: fallback.chips || []
         }
       ]);
+    } finally {
       setIsTyping(false);
-    }, 450);
+    }
   };
 
   // Reset conversation

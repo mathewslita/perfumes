@@ -1,19 +1,17 @@
 import { PERFUMES_DATA } from '../data/perfumes.js';
 
 /**
- * Motor de Inteligencia del Sommelier ARKANO PERFUMERÍA (Yasmin)
+ * Motor de Asesoría Real de Alta Perfumería ARKANO
  * 
- * Ofrece respuestas ultra realistas, cálidas y consultivas adaptadas a:
- * - Ocasión (citas, oficina, fiesta, calor/verano, frío, diario)
- * - Género (hombre, mujer, unisex)
- * - Notas y acordes (dulce/vainilla, cítrico/fresco, amaderado/oud, especiado)
- * - Decants de 10ml ($15 árabes / $30 diseñador)
- * - Rendimiento y fijación ("modo bestia" +14h)
- * - Autenticidad, sellos de fábrica y batch codes
- * - Consultas específicas por nombre de perfume o casa
+ * Enfoque: Asesor de ventas de boutique de lujo real:
+ * - Cercano, empático, profesional y seguro.
+ * - Cero tecnicismos crípticos (pirámides olfativas rígidas, compuestos químicos o fórmulas).
+ * - Explicaciones prácticas y sensoriales: a qué huele en la vida real, qué cumplidos genera y en qué momentos usarlo.
+ * - Recomendaciones orientadas a soluciones: decants de 10ml para probar en piel antes de comprar frascos enteros.
+ * - Preguntas consultivas inteligentes para ayudar a decidir.
  */
 
-// Helper para normalizar texto
+// Normalizador de texto para emparejamiento semántico
 const clean = (str) => {
   return (str || '')
     .toLowerCase()
@@ -24,260 +22,228 @@ const clean = (str) => {
 export function analyzeAndRespond(userQuery, conversationHistory = []) {
   const q = clean(userQuery);
 
-  // Detectar si la consulta menciona directamente un perfume específico
-  const mentionsSpecificPerfume = 
-    q.includes('khamrah') || q.includes('sauvage') || q.includes('elixir') ||
-    q.includes('club de nuit') || q.includes('cdnim') || q.includes('yara') ||
-    q.includes('9 pm') || q.includes('9pm') || q.includes('amber oud') ||
-    q.includes('hawas') || q.includes('bleu') || q.includes('libre') ||
-    q.includes('oud wood') || q.includes('eros flame') || q.includes('erba pura') ||
-    q.includes('asad') || (q.includes('king') && !q.includes('parking'));
-
-  // 1. SALUDOS Y CONTACTO INICIAL (solo si no pregunta por un perfume específico)
+  // 1. SALUDOS Y CONTACTO INICIAL
   if (
-    !mentionsSpecificPerfume && (
-      /^(hola|buenas|buen dia|buenos dias|buenas tardes|buenas noches|hey|saludos|hola yasmin|quien eres)\b/.test(q) ||
-      q === 'hola' || q === 'buenas' || q === 'que tal' || q === 'como estas' || q === 'que me recomiendas' || q === 'ayuda'
-    )
+    /^(hola|buenas|buen dia|buenos dias|buenas tardes|buenas noches|hey|saludos|que tal|como estas|quien eres)\b/.test(q) ||
+    q === 'hola' || q === 'buenas' || q === 'que tal' || q === 'ayuda' || q === 'asesoria'
   ) {
     return {
-      replyText: `¡Hola! Qué placer saludarte 👑 Soy **Yasmin**, Sommelier de Alta Perfumería de **ARKANO PERFUMERÍA**.\n\nEstoy aquí para guiarte de forma personalizada entre el misterio y fijación legendaria de los **Perfumes Árabes de Dubái** y la distinción atemporal de las casas de **Diseñador (Dior, Chanel, YSL)**.\n\n¿Para quién sería tu próxima joya aromática? ¿Para ti o para un regalo especial? Cuéntame también qué notas o qué ocasión tienes en mente.`,
+      replyText: `¡Hola! Qué gusto saludarte 👑 Soy tu asesor de fragancias aquí en **ARKANO PERFUMERÍA**.\n\nMi trabajo es ayudarte a encontrar ese aroma que de verdad vaya con tu estilo y te haga sentir increíble, sin enredos ni tecnicismos aburridos.\n\nCuéntame un poco sobre ti: ¿buscas un perfume para ti o para hacer un regalo? ¿Y en qué ocasiones te gustaría lucirlo (trabajo diario, citas, salidas de noche o para llamar la atención)?`,
       recommendations: [
         PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
-        PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
+        PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man')
       ].filter(Boolean),
       chips: [
-        '👔 Para Caballero',
-        '🌸 Para Dama',
-        '👑 Árabes Virales de Dubái',
-        '🧪 ¿Cómo funcionan los Decants?'
+        '👔 Para el trabajo / Diario',
+        '🌙 Para citas y salidas',
+        '👑 Árabes con fijación extrema',
+        '🎁 Quiero hacer un regalo',
+        '🧪 ¿Cómo son los Decants de 10ml?'
       ]
     };
   }
 
-  // 2. CONSULTAS SOBRE DECANTS (10ML)
+  // 2. EXPLICACIÓN PRÁCTICA DE DECANTS DE 10ML
   if (
-    q.includes('decant') || q.includes('decants') || q.includes('muestra') || 
-    q.includes('muestras') || q.includes('10ml') || q.includes('viaje') ||
-    q.includes('probar antes') || q.includes('tamaño pequeño') || q.includes('atomizador')
+    q.includes('decant') || q.includes('muestra') || q.includes('10ml') || 
+    q.includes('probar antes') || q.includes('pequeño') || q.includes('atomizador') ||
+    q.includes('viaje') || q.includes('como funciona el decant')
   ) {
     return {
-      replyText: `¡Los **Decants de 10ml** son la mejor forma de explorar la alta perfumería sin comprometerte con un frasco entero! 🧪✨\n\n• **¿Qué es un decant?** Es una muestra de 10ml extraída cuidadosamente de la botella 100% original con sello de fábrica, envasada en un atomizador de vidrio de alta gama con spray dosificador.\n• **Rendimiento:** Te entrega entre **120 y 140 atomizaciones**, suficiente para 3 a 4 semanas de uso diario.\n• **Nuestros precios fijos:**\n  - 👑 **Perfumería Árabe de Dubái:** **$15.00 USD**\n  - ✨ **Diseñador Alta Costura:** **$30.00 USD**\n\n¿Te gustaría armar un set de 2 o 3 decants para encontrar tu fragancia firma?`,
+      replyText: `Los **Decants de 10ml** son la opción más práctica e inteligente si quieres probar un perfume en tu propia piel antes de decidirte por la botella entera. 🧪✨\n\n• **¿Cómo lo preparamos?** Extraemos 10ml directamente de la botella 100% original con sello de fábrica y lo envasamos en un atomizador de vidrio de viaje con spray dosificador.\n• **¿Cuánto rinde?** Te da entre **120 y 140 aplicaciones**, lo que significa que puedes usarlo todos los días durante casi un mes.\n• **Precios fijos:**\n  - **Perfumes Árabes:** **$15.00 USD**\n  - **Perfumes de Diseñador:** **$30.00 USD**\n\nMuchos clientes se llevan un set de 2 o 3 decants para rotar según el día o la noche. ¿Te gustaría que te arme una selección personalizada?`,
       recommendations: [
         PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
         PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir'),
-        PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man')
+        PERFUMES_DATA.find(p => p.id === 'rasasi-hawas-for-him')
       ].filter(Boolean),
       chips: [
         '👑 Ver Árabes en Decant ($15)',
         '✨ Ver Diseñador en Decant ($30)',
-        '💬 Armar pedido por WhatsApp'
+        '💬 Armar mi set por WhatsApp'
       ]
     };
   }
 
-  // 3. CITAS ROMÁNTICAS / SEDUCCIÓN / MAGNETISMO
+  // 3. CITAS ROMÁNTICAS / SEDUCCIÓN / CONQUISTAR / NOCHES ÍNTIMAS
   if (
-    q.includes('cita') || q.includes('citas') || q.includes('seduc') || 
-    q.includes('romance') || q.includes('pareja') || q.includes('conquistar') ||
-    q.includes('sexy') || q.includes('atractivo') || q.includes('intimo') || 
-    q.includes('cumplido') || q.includes('enamorar') || q.includes('ligar')
+    q.includes('cita') || q.includes('seduc') || q.includes('romant') || 
+    q.includes('conquistar') || q.includes('sexy') || q.includes('atractiv') || 
+    q.includes('pareja') || q.includes('novia') || q.includes('novio') ||
+    q.includes('cumplido') || q.includes('llamar la atencion')
   ) {
-    const isFemale = q.includes('mujer') || q.includes('dama') || q.includes('chica') || q.includes('femenin');
-    
+    const isFemale = q.includes('mujer') || q.includes('dama') || q.includes('chica') || q.includes('ella');
+
     if (isFemale) {
       return {
-        replyText: `Para una cita romántica inolvidable, necesitas notas cálidas, dulces y sensuales que inviten a acercarse. 🌹\n\nTe recomiendo con los ojos cerrados:\n1. **YSL Libre Le Parfum**: Flor de azahar, miel dorada, azafrán y vainilla bourbon. Es magnética, sofisticada y empoderada.\n2. **Lattafa Khamrah**: Praliné belga, dátiles y canela sobre fondo de vainilla. Es adictiva al olfato y despierta fascinación inmediata.\n\nAmbas tienen fijación prolongada para brillar durante toda la velada.`,
+        replyText: `Para una cita romántica, el secreto está en un aroma cálido, femenino y envolvente que invite a acercarse. 🌹\n\nMis dos recomendaciones favoritas son:\n• **YSL Libre Le Parfum**: Huele a flores blancas con miel tibia y un toque de vainilla dulce. Transmite seguridad, elegancia y sensualidad pura.\n• **Lattafa Khamrah**: Es una delicia que recuerda a canela fina, dátiles y chocolate belga praliné. Es adictivo y deja una estela imposible de olvidar.\n\nAmbos tienen fijación de más de 10 horas. ¿Prefieres una vibra más elegante de diseñador o algo más dulce y acogedor?`,
         recommendations: [
           PERFUMES_DATA.find(p => p.id === 'ysl-libre-le-parfum'),
           PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah')
         ].filter(Boolean),
-        chips: ['🧪 Probar en Decant 10ml', '🌸 Ver más opciones de dama', '💬 Consultar en WhatsApp']
+        chips: ['🧪 Probar Decant de 10ml', '🌸 Ver más opciones de dama', '💬 Consultar por WhatsApp']
       };
     }
 
     return {
-      replyText: `Para citas y momentos íntimos, la clave es un perfume con calidez ambarada, especias seductoras y una estela que invite al contacto cercano. ✨\n\nMis dos recomendaciones infalibles para caballero son:\n1. **Lattafa Khamrah**: El mayor fenómeno viral de Oriente. Huele a licor fino, canela, praliné belga y dátiles con vainilla. ¡Las mujeres lo adoran instantáneamente!\n2. **Dior Sauvage Elixir**: La cumbre de la seducción masculina madura. Canela noble, lavanda y sándalo amaderado. Imponente, misterioso y arrollador.\n3. **Afnan 9 PM**: Manzana acaramelada, vainilla y haba tonka (estilo Ultra Male). Divertido, juvenil y sumamente seductor.`,
+      replyText: `Para una cita, quieres un aroma que se sienta seductor, masculino y cálido al acercarse, no algo estridente que agobie. ✨\n\nAquí tienes dos ganadores absolutos:\n• **Lattafa Khamrah**: El perfume árabe más viral por una buena razón. Huele a licor fino, canela dulce, dátiles y vainilla cremosa. A las mujeres les fascina y siempre preguntan qué llevas puesto.\n• **Dior Sauvage Elixir**: Si buscas presencia imponente, masculinidad madura y misterio, este es el rey. Canela noble, lavanda suave y maderas oscuras con solo 2 atomizaciones.\n• **Afnan 9 PM**: Más juvenil y coqueto. Manzana acaramelada con vainilla, perfecto para salir a cenar o tomar algo.\n\n¿Te inclinas más por ese toque dulce licoroso o algo más especiado y formal?`,
       recommendations: [
         PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
         PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir'),
         PERFUMES_DATA.find(p => p.id === 'afnan-9-pm')
       ].filter(Boolean),
-      chips: ['🧪 Ver Decant de $15 (Khamrah)', '✨ Ver Decant de $30 (Dior)', '🌙 Para fiestas nocturnas']
+      chips: ['🧪 Probar Khamrah en Decant ($15)', '✨ Ver Sauvage Elixir ($30)', '💬 Pedir por WhatsApp']
     };
   }
 
-  // 4. OFICINA / TRABAJO / DIARIO / PROFESIONAL
+  // 4. TRABAJO / OFICINA / DÍA A DÍA / PROFESIONAL / UNIVERSIDAD
   if (
-    q.includes('oficina') || q.includes('trabajo') || q.includes('formal') || 
-    q.includes('diario') || q.includes('dia a dia') || q.includes('reunion') ||
-    q.includes('profesional') || q.includes('firma') || q.includes('elegante para el dia')
+    q.includes('oficina') || q.includes('trabajo') || q.includes('diario') || 
+    q.includes('dia a dia') || q.includes('profesional') || q.includes('formal') || 
+    q.includes('reunion') || q.includes('universidad') || q.includes('firma')
   ) {
     return {
-      replyText: `Para el ámbito profesional y oficina buscamos distinción, frescura impecable y presencia que transmita pulcritud sin hostigar el espacio. 💼👔\n\n• **Bleu de Chanel Parfum**: La obra maestra de la elegancia atemporal. Cedro noble, sándalo y un acorde cítrico refinado que proyecta éxito y liderazgo.\n• **Club de Nuit Intense Man**: Limón chispeante, abedul ahumado y almizcle. El rey absoluto de los cumplidos masculinos para uso diario.\n• **Club de Nuit Woman** (para dama): Rosa fresca, naranja y pachulí delicado estilo Coco Mademoiselle. Sumamente distinguida.`,
+      replyText: `Para el trabajo o el día a día, la clave es oler a pulcritud, clase y éxito sin cansar ni invadir el espacio de los demás. 💼👔\n\nTe recomiendo:\n• **Armaf Club de Nuit Intense Man**: El indiscutible rey de los cumplidos masculinos. Abre con un limón fresco y luego se transforma en una madera ahumada limpia muy atractiva. Es un caballo de batalla para todos los días.\n• **Bleu de Chanel Parfum**: La cúspide de la elegancia corporativa. Cítricos nobles con madera de cedro y sándalo cremoso. Transmite autoridad y pulcritud absoluta.\n• **Club de Nuit Woman** (para dama): Elegancia estilo Chanel Coco Mademoiselle con rosa fresca, naranja y pachulí limpio.\n\n¿Buscas algo de uso rudo para todos los días o más enfocado a reuniones ejecutivas?`,
       recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'bleu-de-chanel-parfum'),
         PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man'),
+        PERFUMES_DATA.find(p => p.id === 'bleu-de-chanel-parfum'),
         PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-woman')
       ].filter(Boolean),
-      chips: ['✨ Ver Bleu de Chanel', '👑 Ver Club de Nuit ($54.90)', '🧪 Probar en Decant 10ml']
+      chips: ['👑 Ver Club de Nuit ($54.90)', '✨ Ver Bleu de Chanel', '🧪 Pedir Decant de 10ml']
     };
   }
 
-  // 5. CLIMA CÁLIDO / VERANO / CALOR / PLAYA / GYM / FRESCURA
+  // 5. CLIMA CÁLIDO / CALOR / VERANO / PLAYA / GIMNASIO / RECIÉN BAÑADO
   if (
-    q.includes('calor') || q.includes('verano') || q.includes('fresco') || 
-    q.includes('fresca') || q.includes('playa') || q.includes('sol') || 
-    q.includes('acuatico') || q.includes('marino') || q.includes('citrico') || 
-    q.includes('limpio') || q.includes('gym')
+    q.includes('calor') || q.includes('verano') || q.includes('fresc') || 
+    q.includes('playa') || q.includes('acuatic') || q.includes('marino') || 
+    q.includes('limpio') || q.includes('gym') || q.includes('sol') || q.includes('frescura')
   ) {
     return {
-      replyText: `Para el calor y días soleados necesitas notas efervescentes, acuáticas y frutales que proyecten frescura sin volverse pesadas. 🌊☀️\n\n• **Rasasi Hawas for Him**: Una maravilla acuática de Dubái. Manzana verde crujiente, ciruela, notas marinas y ámbar gris. Tiene una duración que supera a casi cualquier perfume de diseñador veraniego.\n• **Armaf Club de Nuit Intense Man**: Su salida cítrica de limón de Sicilia y bergamota te mantiene fresco, con un secado ahumado muy masculino.\n• **Bleu de Chanel Parfum**: Limpieza y sofisticación fresca para los días de calor en ciudad.`,
+      replyText: `Cuando hace calor, los perfumes pesados o muy dulces pueden empalagar. Necesitas aromas chispeantes, frutales y marinos que den sensación de recién salido de la ducha. 🌊☀️\n\nMis mejores recomendaciones prácticas:\n• **Rasasi Hawas for Him**: Una maravilla de Dubái. Huele a manzana verde crujiente, ciruela jugosa y una brisa marina muy fresca. A diferencia de otros perfumes frescos que desaparecen a las 3 horas, Hawas dura más de 10 horas en piel.\n• **Armaf Club de Nuit Intense Man**: Su salida cítrica efervescente de limón y piña aguanta perfectamente las altas temperaturas.\n• **Xerjoff Erba Pura**: Frutas mediterráneas exquisitas con almizcle blanco que proyecta frescura de lujo.\n\n¿Lo usarías para el día en exteriores o para oficina con aire acondicionado?`,
       recommendations: [
         PERFUMES_DATA.find(p => p.id === 'rasasi-hawas-for-him'),
         PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man'),
-        PERFUMES_DATA.find(p => p.id === 'bleu-de-chanel-parfum')
+        PERFUMES_DATA.find(p => p.id === 'xerjoff-erba-pura')
       ].filter(Boolean),
-      chips: ['🍏 Ver Hawas de Rasasi', '👑 Ver Club de Nuit ($54.90)', '🧪 Pedir Decant de $15']
+      chips: ['🍏 Ver Hawas de Rasasi', '👑 Ver Club de Nuit ($54.90)', '🧪 Probar en Decant ($15)']
     };
   }
 
-  // 6. FIJACIÓN EXTREMA / "MODO BESTIA" / DURACIÓN TITÁNICA (+14H)
+  // 6. FIJACIÓN / DURACIÓN / "MODO BESTIA" / QUE DURE TODO EL DÍA
   if (
-    q.includes('bestia') || q.includes('duracion') || q.includes('duracion') || 
-    q.includes('dure') || q.includes('fijacion') || q.includes('estela') || 
-    q.includes('proyeccion') || q.includes('potente') || q.includes('fuerte') ||
-    q.includes('horas') || q.includes('mucho tiempo')
+    q.includes('durac') || q.includes('dure') || q.includes('fijac') || 
+    q.includes('bestia') || q.includes('estela') || q.includes('proyecc') || 
+    q.includes('potente') || q.includes('fuerte') || q.includes('horas') ||
+    q.includes('todo el dia') || q.includes('en la ropa')
   ) {
     return {
-      replyText: `Si tu prioridad número uno es que el perfume permanezca en tu piel de **12 a 16+ horas** y se quede impregnado en tu ropa durante días, estos son nuestros "Modos Bestia" oficiales: 🔥👑\n\n1. **Al Haramain Amber Oud (Gold Edition)**: Concentración *Extrait de Parfum* pura. Melón dulce, piña, bergamota y ámbar. Su proyección llena habitaciones enteras.\n2. **Dior Sauvage Elixir**: El perfume de diseñador más potente jamás creado. Basta con 2 o 3 atomizaciones para una estela densa que dura más de 16 horas.\n3. **Armaf Club de Nuit Intense Man**: Famoso mundialmente por su estela pesada de más de 2 metros que genera cumplidos a tu paso.`,
+      replyText: `Si lo que buscas es ponértelo a primera hora de la mañana y que al llegar la noche la gente siga notándolo a metros de distancia, estos son nuestros verdaderos "Modos Bestia": 🔥👑\n\n1. **Al Haramain Amber Oud (Gold Edition)**: En concentración pura de extracto. Huele a melón dulce, piña jugosa y ámbar dorado. Llena cuartos enteros y dura fácilmente **14 a 16+ horas** comprobadas.\n2. **Dior Sauvage Elixir**: Una concentración brutal de diseñador. Con 2 atomizaciones basta para todo el día y se queda en la ropa hasta lavarla.\n3. **Bharara King**: Una bomba cítrica frutal avainillada con una fijación titánica que supera las 16 horas.\n\nTip de asesor: Con estas fragancias, menos es más. 2 a 3 atomizaciones son más que suficientes. ¿Te llama más el toque frutal de Amber Oud o lo especiado de Sauvage?`,
       recommendations: [
         PERFUMES_DATA.find(p => p.id === 'al-haramain-amber-oud-gold'),
         PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir'),
-        PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man')
+        PERFUMES_DATA.find(p => p.id === 'bharara-king')
       ].filter(Boolean),
-      chips: ['👑 Ver Amber Oud Gold (Extrait)', '✨ Ver Dior Sauvage Elixir', '🧪 Probar Decant de 10ml']
+      chips: ['🍈 Ver Amber Oud Gold', '✨ Ver Sauvage Elixir', '👑 Ver Bharara King', '🧪 Pedir Decant de 10ml']
     };
   }
 
-  // 7. DULCES / VAINILLA / GOURMAND / CANELA
+  // 7. DULCES / VAINILLA / GOURMAND / CANELA / CHOCOLATE
   if (
-    q.includes('dulce') || q.includes('vainilla') || q.includes('gourmand') || 
-    q.includes('canela') || q.includes('caramelo') || q.includes('praline') || 
-    q.includes('datil') || q.includes('cremoso') || q.includes('miel') || q.includes('postre')
+    q.includes('dulce') || q.includes('vainilla') || q.includes('canela') || 
+    q.includes('gourmand') || q.includes('caramel') || q.includes('chocolate') || 
+    q.includes('postre') || q.includes('cremos') || q.includes('miel')
   ) {
     return {
-      replyText: `Para paladares olfativos que aman la dulzura rica, cremosa y embriagadora: 🍯🧁\n\n• **Lattafa Khamrah** (Unisex): Praliné de avellana, canela, dátiles orientales y vainilla bourbon. Es cálido, licoroso y ultra adictivo.\n• **Lattafa Yara (Pink)** (Dama): Fresas maduras con crema batida, malvaviscos y vainilla aterciopelada. Es tierno, juvenil y dulce.\n• **YSL Libre Le Parfum** (Dama): Miel pura, flor de azahar, azafrán y vainilla bourbon intensa. Lujo supremo.\n• **Afnan 9 PM** (Caballero): Manzana horneada con canela, haba tonka y vainilla. El rey dulce nocturno.`,
+      replyText: `Para quienes disfrutan los aromas cálidos, dulces y acogedores que huelen a tentación: 🍯🧁\n\n• **Lattafa Khamrah** (Unisex): Huele a postre fino de canela, praliné belga, dátiles orientales y vainilla con licor. Es el perfume dulce más vendido y halagado de Dubái.\n• **Lattafa Yara Rosa** (Mujer): Una nube suave de fresas con crema batida y malvavisco. Dulce, delicado y tierno sin llegar a empalagar.\n• **Afnan 9 PM** (Hombre): Manzana dulce acaramelada con vainilla seductora, inspirado en Ultra Male. Perfecto para salir de fiesta.\n• **YSL Libre Le Parfum** (Mujer): Miel dorada tibia con flor de azahar y vainilla bourbon de alta costura.\n\n¿Buscas algo más para salir de noche o para usar en cualquier momento?`,
       recommendations: [
         PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
         PERFUMES_DATA.find(p => p.id === 'lattafa-yara'),
-        PERFUMES_DATA.find(p => p.id === 'ysl-libre-le-parfum'),
         PERFUMES_DATA.find(p => p.id === 'afnan-9-pm')
       ].filter(Boolean),
-      chips: ['👑 Ver Lattafa Khamrah ($58)', '🌸 Ver Yara Rosa ($46.90)', '🧪 Decant de 10ml ($15)']
+      chips: ['👑 Ver Khamrah ($58)', '🍓 Ver Yara Rosa ($46.90)', '🧪 Probar en Decant ($15)']
     };
   }
 
-  // 8. AMADERADOS / OUD / CUERO / TABACO / ESPECIADOS NOBLES
+  // 8. REGALOS / NO SÉ QUÉ REGALAR / REGALO A CIEGAS
   if (
-    q.includes('madera') || q.includes('amaderad') || q.includes('oud') || 
-    q.includes('cuero') || q.includes('tabaco') || q.includes('humo') || 
-    q.includes('sandalo') || q.includes('cedro') || q.includes('cafe') || q.includes('especiad')
+    q.includes('regalo') || q.includes('regalar') || q.includes('novi') || 
+    q.includes('espos') || q.includes('cumplea') || q.includes('papa') || 
+    q.includes('mama') || q.includes('ciegas')
+  ) {
+    const isForHer = q.includes('ella') || q.includes('mujer') || q.includes('novia') || q.includes('esposa') || q.includes('mama');
+
+    if (isForHer) {
+      return {
+        replyText: `¡Un perfume para regalo es un detalle inolvidable! Si quieres acertar al 100% sin miedo a equivocarte: 🎁🌸\n\n• **Lattafa Yara Rosa** ($46.90): Es el regalo estrella para mujer. Su frasco es precioso y el aroma a fresas con crema y vainilla gusta a todas las edades sin excepción.\n• **YSL Libre Le Parfum** ($178): Si buscas un regalo de súper lujo con estatus de alta costura que deslumbre.\n• **Club de Nuit Woman** ($60.01): Elegante, floral y distinguida estilo Chanel.\n\n¿Qué edad tiene y qué estilo de vestir suele tener?`,
+        recommendations: [
+          PERFUMES_DATA.find(p => p.id === 'lattafa-yara'),
+          PERFUMES_DATA.find(p => p.id === 'ysl-libre-le-parfum'),
+          PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-woman')
+        ].filter(Boolean),
+        chips: ['🍓 Ver Yara ($46.90)', '✨ Ver YSL Libre', '💬 Asesoría por WhatsApp']
+      };
+    }
+
+    return {
+      replyText: `Regalar un perfume a un hombre es fácil cuando eliges opciones que tienen aprobación garantizada: 🎁👔\n\n• **Armaf Club de Nuit Intense** ($54.90): La opción más segura del mundo. Limón fresco y madera ahumada. Le gusta a prácticamente cualquier hombre y recibe cumplidos diarios.\n• **Bleu de Chanel Parfum** ($198): Si buscas un regalo imponente de máxima gama para alguien especial o un ejecutivo.\n• **Afnan 9 PM** ($52): Si es un chico joven o le gusta salir de fiesta y reuniones con amigos.\n\nAdemás, todas las botellas vienen 100% selladas de fábrica con batch code para regalo impecable. ¿Qué estilo tiene él?`,
+      recommendations: [
+        PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man'),
+        PERFUMES_DATA.find(p => p.id === 'bleu-de-chanel-parfum'),
+        PERFUMES_DATA.find(p => p.id === 'afnan-9-pm')
+      ].filter(Boolean),
+      chips: ['👑 Ver Club de Nuit ($54.90)', '✨ Ver Bleu de Chanel', '🧪 Armar set de Decants']
+    };
+  }
+
+  // 9. PRECIOS / PRESUPUESTO / ECONÓMICO / OFERTAS
+  if (
+    q.includes('precio') || q.includes('costo') || q.includes('cuanto') || 
+    q.includes('barat') || q.includes('econom') || q.includes('presupuesto') || 
+    q.includes('oferta') || q.includes('descuento') || q.includes('alcanza')
   ) {
     return {
-      replyText: `Las maderas nobles y el Oud son el corazón de la alta perfumería tradicional. Aportan una presencia aristocrática, madura y misteriosa: 🌲🪵\n\n• **Tom Ford Oud Wood**: La madera de Oud más refinada y lujosa de Occidente. Cardamomo, sándalo, palo de rosa y ámbar. Pura elegancia silenciosa.\n• **Lattafa Asad**: Pimienta negra, café tostado, tabaco noble, iris y ámbar seco. Es un clon brillante y accesible de Sauvage Elixir.\n• **Dior Sauvage Elixir**: Canela fina, lavanda francesa y sándalo cremoso de Nueva Caledonia. Potencia amaderada inigualable.`,
+      replyText: `En **ARKANO** tenemos alternativas prácticas para todos los bolsillos: 💰✨\n\n• **Decants de 10ml** ($15 Árabes / $30 Diseñador): La mejor forma de tener 3 o 4 perfumes de lujo en casa por una fracción de lo que cuesta una botella.\n• **Perfumes Árabes en Botella Completa**: Desde **$46.90 hasta $79.90 USD**. Rinden y duran más que muchos perfumes de $200.\n• **Perfumes de Diseñador Sellados**: Desde **$125.00** (Versace Eros Flame) hasta piezas icónicas como Sauvage Elixir ($185) y Chanel ($198).\n\nSi me cuentas con qué presupuesto te gustaría trabajar, te doy la mejor recomendación para que le saques el máximo valor a tu dinero.`,
       recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'tom-ford-oud-wood'),
+        PERFUMES_DATA.find(p => p.id === 'lattafa-asad'),
+        PERFUMES_DATA.find(p => p.id === 'afnan-9-pm'),
+        PERFUMES_DATA.find(p => p.id === 'lattafa-yara')
+      ].filter(Boolean),
+      chips: ['👑 Perfumes de menos de $60', '🧪 Decants de $15', '💬 Consultar en WhatsApp']
+    };
+  }
+
+  // 10. ORIGINALIDAD / BATCH CODES / AUTENTICIDAD
+  if (
+    q.includes('original') || q.includes('autentic') || q.includes('copia') || 
+    q.includes('fals') || q.includes('replica') || q.includes('batch') || 
+    q.includes('sello') || q.includes('garantia') || q.includes('confian')
+  ) {
+    return {
+      replyText: `Te entiendo perfectamente: con tantos perfumes adulterados en el mercado, la autenticidad es lo más importante. 🛡️🔒\n\nEn **ARKANO PERFUMERÍA** nuestra garantía es 100% estricta:\n1. **Sellado de Origen**: Cada frasco viene en su celofán sellado de fábrica con sello holográfico oficial de Dubái o de las casas de diseñador europeas.\n2. **Batch Code Coincidente**: El código grabado en la botella coincide con el de la caja exterior, verificable en bases de datos cosméticas internacionales.\n3. **Garantía Total**: Si tu producto presenta cualquier anomalía de originalidad, te devolvemos el 100% de tu dinero de inmediato.\n\nCompramos directamente a importadores certificados para garantizar pureza y calidad. ¿Deseas consultar algún perfume en particular?`,
+      recommendations: [
+        PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir'),
+        PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah')
+      ].filter(Boolean),
+      chips: ['📦 Ver Catálogo Completo', '🧪 Probar en Decant 10ml', '💬 Hablar por WhatsApp']
+    };
+  }
+
+  // 11. COMPARACIONES POPULARES (ASAD VS SAUVAGE, KHAMRAH VS ANGELS' SHARE, ETC.)
+  if (q.includes('asad') && (q.includes('sauvage') || q.includes('elixir') || q.includes('diferencia') || q.includes('cual'))) {
+    return {
+      replyText: `¡Una de las comparativas más consultadas! 👑 vs ✨\n\n• **Lattafa Asad ($49.90)**: Es la mejor alternativa árabe a Sauvage Elixir. Tiene esa misma pimienta negra, café y vainilla cálida. Es potente, maduro y accesible para usar sin miedo a que se acabe.\n• **Dior Sauvage Elixir ($185.00)**: La obra maestra original. Su lavanda silvestre y sándalo son de una calidad suprema y su fijación es descomunal (+16 horas).\n\n**Mi consejo práctico:** Si quieres la vibra elegante y masculina para el día a día, llévate **Asad**. Si quieres la pieza de colección de lujo definitivo para eventos clave, llévate **Dior** (o pruébalo en decant de $30).`,
+      recommendations: [
         PERFUMES_DATA.find(p => p.id === 'lattafa-asad'),
         PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
       ].filter(Boolean),
-      chips: ['✨ Ver Tom Ford Oud Wood', '👑 Ver Lattafa Asad ($49.90)', '🧪 Probar Decant de 10ml']
+      chips: ['👑 Ver Lattafa Asad ($49.90)', '✨ Ver Dior Sauvage Elixir', '🧪 Decant de $15 (Asad)']
     };
   }
 
-  // 9. EXCLUSIVO PARA MUJER / DAMA / FEMENINO
-  if (
-    q.includes('mujer') || q.includes('dama') || q.includes('femenin') || 
-    q.includes('esposa') || q.includes('novia') || q.includes('chica') || 
-    q.includes('para ella') || q.includes('madre') || q.includes('mama')
-  ) {
-    return {
-      replyText: `Nuestra colección femenina reúne verdaderas joyas para resaltar la belleza, elegancia y magnetismo: 🌸💎\n\n1. **Lattafa Yara (Pink)** ($46.90): El perfume más viral de Dubái para mujer. Fresas con crema, orquídea heliotropo y vainilla suave. Dulce, delicado y súper halagado.\n2. **YSL Libre Le Parfum** ($178): Para la mujer imponente. Miel tibia, azafrán, flor de azahar y vainilla bourbon. Sofisticación de pasarela parisina.\n3. **Armaf Club de Nuit Woman** ($60.01): Elegancia clásica estilo Coco Mademoiselle. Naranja brillante, rosa de Damasco, jazmín y pachulí limpio.`,
-      recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'lattafa-yara'),
-        PERFUMES_DATA.find(p => p.id === 'ysl-libre-le-parfum'),
-        PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-woman')
-      ].filter(Boolean),
-      chips: ['🍓 Ver Yara ($46.90)', '✨ Ver YSL Libre Le Parfum', '🧪 Ver Decant de $15 o $30']
-    };
-  }
-
-  // 10. EXCLUSIVO PARA HOMBRE / CABALLERO / MASCULINO
-  if (
-    q.includes('hombre') || q.includes('caballero') || q.includes('masculin') || 
-    q.includes('esposo') || q.includes('novio') || q.includes('chico') || 
-    q.includes('para el') || q.includes('padre') || q.includes('papa')
-  ) {
-    return {
-      replyText: `Para caballeros disponemos de las fragancias más elogiadas y magnéticas del mercado: 👔👑\n\n1. **Armaf Club de Nuit Intense Man** ($54.90): El rey indiscutible de cumplidos. Limón ahumado, abedul y almizcle. Imponente para el día y la noche.\n2. **Dior Sauvage Elixir** ($185): Máxima presencia y estatus. Canela, lavanda fina y sándalo amaderado. Potencia pura.\n3. **Afnan 9 PM** ($52): Manzana dulce, lavanda y vainilla. La fragancia favorita para salir de fiesta y conquistar.\n4. **Bleu de Chanel Parfum** ($198): Elegancia sobria, versatilidad y estatus corporativo.`,
-      recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man'),
-        PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir'),
-        PERFUMES_DATA.find(p => p.id === 'afnan-9-pm'),
-        PERFUMES_DATA.find(p => p.id === 'bleu-de-chanel-parfum')
-      ].filter(Boolean),
-      chips: ['👑 Ver Club de Nuit ($54.90)', '✨ Ver Dior Sauvage Elixir', '🧪 Decants de 10ml']
-    };
-  }
-
-  // 11. UNISEX / PARA COMPARTIR EN PAREJA
-  if (q.includes('unisex') || q.includes('compartir') || q.includes('ambos') || q.includes('neutro')) {
-    return {
-      replyText: `Los perfumes unisex son creaciones donde no hay etiquetas, solo arte olfativo puro y magnetismo universal: 💎✨\n\n• **Lattafa Khamrah**: Elixir dulce licoroso con canela y dátiles. Queda fabuloso tanto en hombre como en mujer.\n• **Al Haramain Amber Oud Gold**: Frutas tropicales, melón dulce y ámbar dorado con fijación de +16h.\n• **Xerjoff Erba Pura**: Una explosión cítrica mediterránea con almizcle sensual.\n• **Tom Ford Oud Wood**: Maderas aristocráticas y cardamomo distinguido.`,
-      recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
-        PERFUMES_DATA.find(p => p.id === 'al-haramain-amber-oud-gold'),
-        PERFUMES_DATA.find(p => p.id === 'xerjoff-erba-pura')
-      ].filter(Boolean),
-      chips: ['👑 Ver Khamrah ($58)', '🍈 Ver Amber Oud Gold', '🧪 Probar Decants de $15']
-    };
-  }
-
-  // 12. AUTENTICIDAD, SELLOS DE FÁBRICA Y BATCH CODES
-  if (
-    q.includes('original') || q.includes('autentic') || q.includes('copia') || 
-    q.includes('falso') || q.includes('replica') || q.includes('batch') || 
-    q.includes('sello') || q.includes('seguridad') || q.includes('garantia')
-  ) {
-    return {
-      replyText: `En **ARKANO PERFUMERÍA** la autenticidad es innegociable y nuestro mayor pilar de confianza: 🛡️🔒\n\n1. **100% Originales Sellados**: Todos nuestros perfumes provienen de distribuidores oficiales de Dubái (Emiratos Árabes Unidos) y de las casas matrices de diseñador en Francia e Italia.\n2. **Sello Holográfico de Fábrica**: Cada caja de perfumería árabe incluye su sello holográfico 3D de alta seguridad que certifica que no ha sido alterado.\n3. **Batch Code Coincidente**: El código de lote grabado con láser en la base de la botella coincide exactamente con el código impreso en la caja, verificable en bases de datos cosméticas internacionales.\n4. **Garantía Total**: Si tu producto no cumple con los estándares de originalidad oficial, te devolvemos el 100% de tu dinero.`,
-      recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
-        PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
-      ].filter(Boolean),
-      chips: ['📦 Ver Catálogo Completo', '🧪 Probar Decants de 10ml', '💬 Consultar Asesor Humano']
-    };
-  }
-
-  // 13. PRECIOS / OFERTAS / PROMOCIONES
-  if (
-    q.includes('precio') || q.includes('costo') || q.includes('cuanto vale') || 
-    q.includes('cuanto cuesta') || q.includes('oferta') || q.includes('descuento') || 
-    q.includes('rebaja') || q.includes('barato') || q.includes('economico')
-  ) {
-    const saleItems = PERFUMES_DATA.filter(p => p.onSale);
-    return {
-      replyText: `Nuestros precios son directos y justos, con opciones para todos los presupuestos: 💰✨\n\n• **Decants Muestras 10ml**: Desde **$15.00 USD** (Árabes) y **$30.00 USD** (Diseñador).\n• **Perfumes Árabes en Botella Completa**: Desde **$46.90 USD** hasta **$79.90 USD** (concentraciones de lujo a una fracción del costo de diseñador).\n• **Perfumes de Diseñador en Botella Completa**: Desde **$125.00 USD** (Versace Eros Flame) hasta piezas icónicas como Dior Sauvage Elixir ($185) y Chanel ($198).\n\nActualmente tenemos fragancias selectas con precio especial de descuento:`,
-      recommendations: saleItems.slice(0, 3),
-      chips: ['🔥 Ver Ofertas Activas', '🧪 Ver Decants de $15', '💬 Consultar por WhatsApp']
-    };
-  }
-
-  // 14. CONSULTAS ESPECÍFICAS POR NOMBRE DE PERFUME
   if (q.includes('khamrah')) {
     const p = PERFUMES_DATA.find(x => x.id === 'lattafa-khamrah');
     return {
-      replyText: `**Lattafa Khamrah** es la joya más codiciada de la perfumería árabe actual. 👑\n\n• **A qué huele:** Canela tibia, praliné belga cremoso, dátiles dulces, haba tonka y vainilla con un toque licoroso sofisticado (inspirado en la vibra de Angels' Share).\n• **Cuándo usarlo:** Noches frescas, citas románticas, salidas de otoño e invierno y eventos especiales.\n• **Fijación:** 12h a 14h en piel, días enteros en ropa.\n• **Disponible en:** Frasco de 100ml ($58.00) y Decant de 10ml ($15.00).`,
+      replyText: `**Lattafa Khamrah** es sencillamente una locura de perfume. 👑\n\nHuele a postre fino con canela recién rallada, dátiles dulces, chocolate belga praliné y un fondo licoroso avainillado que enamora a cualquiera. No es un perfume discreto: es para que la gente te pregunte en la calle qué llevas puesto.\n\n• **Cuándo usarlo:** Salidas de noche, citas, días frescos o eventos especiales.\n• **Fijación:** 12 a 14 horas en piel y días en la ropa.\n• **Presentaciones:** Frasco de 100ml ($58.00) o Decant de 10ml ($15.00).`,
       recommendations: [p],
       chips: ['🧪 Pedir Decant de $15', '🛒 Comprar Frasco ($58)', '💬 Pedir por WhatsApp']
     };
@@ -286,198 +252,99 @@ export function analyzeAndRespond(userQuery, conversationHistory = []) {
   if (q.includes('sauvage') || q.includes('elixir')) {
     const p = PERFUMES_DATA.find(x => x.id === 'dior-sauvage-elixir');
     return {
-      replyText: `**Dior Sauvage Elixir** no es un perfume ordinario, es un elixir concentrado de alta costura de Christian Dior París. 👑✨\n\n• **A qué huele:** Una explosión de canela noble y cardamomo, corazón de lavanda francesa silvestre y fondo opulento de maderas nobles y sándalo de Nueva Caledonia.\n• **Por qué es legendario:** Proyecta como una bestia con apenas 2 o 3 atomizaciones y se mantiene vivo más de 16 horas.\n• **Presentaciones:** Frasco de 60ml ($185.00) y Decant de 10ml ($30.00).`,
+      replyText: `**Dior Sauvage Elixir** es el estándar de oro de la perfumería masculina de diseñador. ✨\n\nNo tiene nada que ver con el Sauvage tradicional: este es oscuro, noble y ultra concentrado. Huele a canela fina, cardamomo, lavanda francesa y sándalo amaderado. Transmite respeto, presencia y estatus elevado.\n\n• **Rendimiento:** Con 2 atomizaciones tienes para todo el día y noche.\n• **Presentaciones:** Frasco de 60ml ($185.00) o Decant de 10ml ($30.00) para probarlo en piel.`,
       recommendations: [p],
-      chips: ['🧪 Probar Decant ($30)', '🛒 Comprar Frasco ($185)', '💬 Consultar en WhatsApp']
+      chips: ['🧪 Probar Decant ($30)', '🛒 Ver Frasco ($185)', '💬 Consultar en WhatsApp']
     };
   }
 
-  if (q.includes('club de nuit') || q.includes('cdnim')) {
+  if (q.includes('club de nuit') || q.includes('cdnim') || q.includes('aventus')) {
     const p = PERFUMES_DATA.find(x => x.id === 'armaf-club-de-nuit-intense-man');
     return {
-      replyText: `**Armaf Club de Nuit Intense Man** es conocido mundialmente como "la bestia negra de los cumplidos". 🖤🔥\n\n• **Perfil:** Salida fresca y cítrica de limón, lima y grosella negra, que evoluciona hacia un abedul ahumado sumamente masculino, jazmín y fondo de ámbar gris y almizcle (la mejor alternativa a Creed Aventus).\n• **Ideal para:** Diario, oficina, salidas nocturnas y clima templado a cálido. ¡Genera elogios garantizados!\n• **Presentaciones:** Frasco de 105ml ($54.90) y Decant de 10ml ($15.00).`,
+      replyText: `**Armaf Club de Nuit Intense Man** es legendario en todo el mundo como "el rey de los cumplidos". 🖤🔥\n\nInspirado en la vibra de Creed Aventus, abre con un limón fresco y piña ahumada, y seca en una madera oscura muy masculina que a la gente le fascina en el aire. Es versátil: sirve para oficina, citas, calor o noche.\n\n• **Fijación:** Fácilmente 10 a 12 horas con gran estela.\n• **Presentaciones:** Frasco de 105ml ($54.90) o Decant de 10ml ($15.00).`,
       recommendations: [p],
-      chips: ['🧪 Decant de 10ml ($15)', '🛒 Frasco Completo ($54.90)', '💬 Pedir por WhatsApp']
+      chips: ['🧪 Decant de 10ml ($15)', '🛒 Frasco ($54.90)', '💬 Pedir por WhatsApp']
     };
   }
 
   if (q.includes('yara')) {
     const p = PERFUMES_DATA.find(x => x.id === 'lattafa-yara');
     return {
-      replyText: `**Lattafa Yara (Pink)** es el perfume árabe femenino más viral de todas las redes sociales. 🍓🌸\n\n• **A qué huele:** A fresas maduras con crema batida, orquídea heliotropo tropical, malvaviscos esponjosos y vainilla cremosa. Es un aroma tierno, dulce y juvenil que enamora al primer olfato.\n• **Uso:** Perfecto para uso diario, primavera, citas y salidas informales.\n• **Presentaciones:** Frasco de 100ml ($46.90) y Decant de 10ml ($15.00).`,
+      replyText: `**Lattafa Yara Rosa** es el perfume femenino más vendido y viral de Oriente. 🍓🌸\n\nHuele literalmente a fresas dulces con crema batida, orquídea suave y malvaviscos esponjosos. Es tierno, coqueto, limpio y muy agradable para el día a día o citas.\n\n• **Precio:** Frasco de 100ml por solo **$46.90 USD** (o Decant de 10ml por **$15.00 USD**). Un regalo con el que es imposible fallar.`,
       recommendations: [p],
-      chips: ['🧪 Decant de 10ml ($15)', '🛒 Frasco Yara ($46.90)', '💬 Pedir por WhatsApp']
+      chips: ['🍓 Frasco Yara ($46.90)', '🧪 Decant de $15', '💬 Pedir por WhatsApp']
     };
   }
 
-  if (q.includes('9 pm') || q.includes('9pm') || q.includes('afnan')) {
+  if (q.includes('9 pm') || q.includes('9pm') || q.includes('afnan') || q.includes('ultra male')) {
     const p = PERFUMES_DATA.find(x => x.id === 'afnan-9-pm');
     return {
-      replyText: `**Afnan 9 PM** es el rey supremo de las salidas nocturnas y fiestas de fin de semana. 🌙🎉\n\n• **A qué huele:** Manzana roja dulce con canela y lavanda fresca, con un secado cálido y seductor de vainilla, ámbar y haba tonka (inspirado en Jean Paul Gaultier Ultra Male con mayor duración).\n• **Estela:** Más de 12 horas con proyección llamativa que destaca en ambientes con música y gente.\n• **Presentaciones:** Frasco de 100ml ($52.00) y Decant de 10ml ($15.00).`,
+      replyText: `**Afnan 9 PM** es el indiscutible rey de la fiesta y la noche. 🌙🎉\n\nHuele a manzana roja acaramelada, canela tibia y vainilla seductora (inspirado en JPG Ultra Male pero con mayor potencia). Si vas a salir de fiesta, a un bar o a una reunión con amigos, este perfume destaca por encima de la música y el ambiente.\n\n• **Duración:** 12+ horas garantizadas.\n• **Presentaciones:** Frasco de 100ml ($52.00) o Decant de 10ml ($15.00).`,
       recommendations: [p],
-      chips: ['🧪 Decant de 10ml ($15)', '🛒 Frasco 9 PM ($52)', '💬 Pedir por WhatsApp']
+      chips: ['🧪 Decant de $15', '🛒 Frasco 9 PM ($52)', '💬 Pedir por WhatsApp']
     };
   }
 
-  if (q.includes('amber oud') || q.includes('al haramain')) {
+  if (q.includes('amber oud') || q.includes('gold')) {
     const p = PERFUMES_DATA.find(x => x.id === 'al-haramain-amber-oud-gold');
     return {
-      replyText: `**Al Haramain Amber Oud (Gold Edition)** es la definición de opulencia dorada en concentración *Extrait de Parfum*. 👑🍈\n\n• **Notas:** Melón jugoso, piña dulce, bergamota verde, ámbar cálido y notas amaderadas de fondo.\n• **Rendimiento:** Considerado un monstruo de proyección (+16 horas comprobadas). 3 atomizaciones son más que suficientes para todo el día.\n• **Presentaciones:** Frasco de 60ml ($79.90) y Decant de 10ml ($15.00).`,
+      replyText: `**Al Haramain Amber Oud (Gold Edition)** es opulencia pura. 👑🍈\n\nEn concentración de extracto, huele a melón dulce maduro, piña jugosa y ámbar dorado. Tiene una estela gigante que se siente a metros de distancia y se queda en la ropa por días. Es unisex y perfecto si quieres que tu perfume sea tu carta de presentación.\n\n• **Presentaciones:** Frasco de 60ml ($79.90) o Decant de 10ml ($15.00).`,
       recommendations: [p],
-      chips: ['🧪 Decant de 10ml ($15)', '🛒 Frasco Gold ($79.90)', '💬 Pedir por WhatsApp']
+      chips: ['🍈 Ver Amber Oud Gold', '🧪 Decant de $15', '💬 Pedir por WhatsApp']
     };
   }
 
-  if (q.includes('hawas') || q.includes('rasasi')) {
+  if (q.includes('hawas') || q.includes('rasasi') || q.includes('invictus')) {
     const p = PERFUMES_DATA.find(x => x.id === 'rasasi-hawas-for-him');
     return {
-      replyText: `**Rasasi Hawas for Him** es el titán acuático de Dubái. 🌊🍏\n\n• **Notas:** Manzana verde crocante, bergamota italiana, canela sutil, ciruela jugosa, notas marinas y una base magnética de ámbar gris y almizcle.\n• **Por qué destaca:** A diferencia de la mayoría de perfumes frescos que duran poco, Hawas dura fácilmente 10 a 12 horas proyectando una frescura limpia y sensual.\n• **Presentaciones:** Frasco de 100ml ($64.90) y Decant de 10ml ($15.00).`,
+      replyText: `**Rasasi Hawas for Him** es el titán de la frescura en Dubái. 🌊🍏\n\nCombina manzana verde crujiente, ciruela jugosa, un toque marino y ámbar gris. A diferencia de casi todos los perfumes acuáticos que se evaporan rápido, Hawas dura más de 10 horas proyectando frescura limpia y sensual. Ideal para calor y uso diario.\n\n• **Presentaciones:** Frasco de 100ml ($64.90) o Decant de 10ml ($15.00).`,
       recommendations: [p],
-      chips: ['🧪 Decant de 10ml ($15)', '🛒 Frasco Hawas ($64.90)', '💬 Pedir por WhatsApp']
+      chips: ['🍏 Ver Hawas ($64.90)', '🧪 Decant de $15', '💬 Pedir por WhatsApp']
     };
   }
 
-  if (q.includes('chanel') || q.includes('bleu')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'bleu-de-chanel-parfum');
-    return {
-      replyText: `**Bleu de Chanel Parfum** es la expresión más pura y concentrada del clásico de Chanel París. 💙✨\n\n• **A qué huele:** Notas cítricas nobles, menta fresca, madera de cedro majestuosa y sándalo de Nueva Caledonia ultra cremoso.\n• **El aura que proyecta:** Autoridad, estatus elevado, caballerosidad y pulcritud absoluta en cualquier circunstancia.\n• **Presentaciones:** Frasco de 100ml ($198.00) y Decant de 10ml ($30.00).`,
-      recommendations: [p],
-      chips: ['🧪 Probar Decant ($30)', '🛒 Frasco Bleu Chanel', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  if (q.includes('libre') || q.includes('ysl')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'ysl-libre-le-parfum');
-    return {
-      replyText: `**YSL Libre Le Parfum** es la versión más intensa, cálida y opulenta de la saga Libre de Yves Saint Laurent. 🌸🔥\n\n• **A qué huele:** Acorde de miel tibia, azafrán de los jardines de Ourika en Marruecos, flor de azahar radiante y vainilla bourbon de Madagascar.\n• **Para quién es:** Para una mujer con personalidad magnética, sofisticada y segura de sí misma.\n• **Presentaciones:** Frasco de 90ml ($178.00) y Decant de 10ml ($30.00).`,
-      recommendations: [p],
-      chips: ['🧪 Probar Decant ($30)', '🛒 Frasco Libre Le Parfum', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  // 15. INSPIRACIONES Y PARECIDOS FAMOSOS (CLONES DE ÉXITO MUNDIAL)
-  if (q.includes('aventus') || q.includes('creed')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'armaf-club-de-nuit-intense-man');
-    return {
-      replyText: `¡Para los amantes de **Creed Aventus**, tenemos el clon número 1 del mundo! 👑🔥\n\n**Armaf Club de Nuit Intense Man** captura magistralmente la esencia de Aventus: limón ahumado, abedul oscuro, grosella negra y almizcle. En pruebas a ciegas, la mayoría de expertos no puede distinguirlos, pero Club de Nuit cuesta una fracción del precio ($54.90 vs +$400) y tiene mayor duración comprobada.\n\nDisponible en botella de 105ml ($54.90) y en Decant de 10ml ($15.00).`,
-      recommendations: [p],
-      chips: ['🧪 Pedir Decant de $15', '🛒 Frasco Club de Nuit ($54.90)', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  if (q.includes('angels share') || q.includes('angel share') || q.includes('kilian')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'lattafa-khamrah');
-    return {
-      replyText: `¡Si buscas la vibra licorosa y gourmand de **Angels' Share de Kilian**, tu perfume indiscutible es **Lattafa Khamrah**! 🍯👑\n\nKhamrah ofrece esa misma apertura embriagadora de canela fina, praliné de chocolate belga, dátiles y vainilla aterciopelada, en un frasco de cristal pesado deslumbrante. Es el mayor éxito viral de Dubái.\n\nDisponible en 100ml ($58.00) y Decant de 10ml ($15.00).`,
-      recommendations: [p],
-      chips: ['🧪 Decant de $15 (Khamrah)', '🛒 Frasco Khamrah ($58)', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  if (q.includes('ultra male') || q.includes('ultramale') || q.includes('gaultier') || q.includes('le male')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'afnan-9-pm');
-    return {
-      replyText: `¡Si te gusta **Jean Paul Gaultier Ultra Male**, te va a fascinar **Afnan 9 PM**! 🌙🔥\n\n9 PM toma la manzana acaramelada, canela y vainilla seductora de Ultra Male pero con una calidad de aceites árabes que lo hace proyectar por más de 12 horas seguidas. Es el rey de las fiestas y discotecas.\n\nDisponible en 100ml ($52.00) y Decant de 10ml ($15.00).`,
-      recommendations: [p],
-      chips: ['🧪 Pedir Decant ($15)', '🛒 Frasco 9 PM ($52)', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  if (q.includes('erba pura') || q.includes('xerjoff')) {
-    const p1 = PERFUMES_DATA.find(x => x.id === 'xerjoff-erba-pura');
-    const p2 = PERFUMES_DATA.find(x => x.id === 'al-haramain-amber-oud-gold');
-    return {
-      replyText: `¡Una de las firmas más aclamadas de la perfumería nicho! 🍈✨\n\nEn ARKANO tenemos dos joyas absolutas con este ADN de frutas mediterráneas, melón dulce y almizcle blanco seductor:\n1. **Xerjoff Erba Pura Original** ($275.00): La obra de arte italiana original en frasco de terciopelo turquesa.\n2. **Al Haramain Amber Oud Gold Edition** ($79.90): El clon árabe más potente en concentración *Extrait de Parfum*, con estela de +16 horas.\n\nAmbos disponibles en botella completa o Decant de 10ml.`,
-      recommendations: [p1, p2].filter(Boolean),
-      chips: ['✨ Ver Xerjoff Erba Pura', '👑 Ver Amber Oud Gold ($79.90)', '🧪 Probar en Decant']
-    };
-  }
-
-  if (q.includes('coco mademoiselle') || q.includes('mademoiselle')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'armaf-club-de-nuit-woman');
-    return {
-      replyText: `¡Para recrear la elegancia parisina de **Chanel Coco Mademoiselle**, te recomendamos **Armaf Club de Nuit Woman**! 🌸✨\n\nCombina naranja bergamota brillante, corazón de rosa de Damasco y jazmín silvestre, con una base limpia de pachulí y vainilla. Una alternativa de altísima calidad por solo **$60.01 USD** (o **$15.00 USD** en decant).`,
-      recommendations: [p],
-      chips: ['🧪 Decant de $15', '🛒 Frasco Completo ($60.01)', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  if (q.includes('invictus') || q.includes('paco rabanne')) {
-    const p = PERFUMES_DATA.find(x => x.id === 'rasasi-hawas-for-him');
-    return {
-      replyText: `¡Si te fascina la vibra acuática y cumplidora de **Invictus Aqua**, **Rasasi Hawas for Him** te va a encantar y la supera en duración! 🌊🍏\n\nCombina manzana crujiente, ciruela, canela noble, notas marinas y un fondo magnético de ámbar gris que dura más de 12 horas en piel. Un éxito garantizado para el día a día y calor.\n\nDisponible en 100ml ($64.90) y Decant de 10ml ($15.00).`,
-      recommendations: [p],
-      chips: ['🍏 Ver Hawas ($64.90)', '🧪 Pedir Decant de $15', '💬 Pedir por WhatsApp']
-    };
-  }
-
-  // 16. COMPARACIÓN: ÁRABES VS DISEÑADOR
-  if (
-    (q.includes('arabe') && q.includes('disenador')) || 
-    q.includes('diferencia') || q.includes('cual es mejor')
-  ) {
-    return {
-      replyText: `¡Una de las preguntas más fascinantes en perfumería! 👑 vs ✨\n\n• **Perfumes Árabes (Dubái):**\n  - Destacan por su **concentración altísima de aceites (18% a 28%)** y fijación que supera las 12 a 16 horas.\n  - Son fragancias potentes, especiadas, gourmand o ambaradas con un valor inigualable ($46 - $79 USD).\n\n• **Perfumes de Diseñador (Francia/Italia):**\n  - Destacan por el **balance olfativo magistral**, estatus internacional y materias primas aristocráticas (Chanel, Dior, Tom Ford).\n  - Son sinónimo de lujo atemporal y sofisticación global ($125 - $275 USD).\n\nEn ARKANO tenemos ambas opciones 100% originales para que elijas según tu gusto o las pruebes en **Decants de 10ml** ($15 y $30).`,
-      recommendations: [
-        PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
-        PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir')
-      ].filter(Boolean),
-      chips: ['👑 Ver Joyas Árabes', '✨ Ver Joyas de Diseñador', '🧪 Probar en Decants']
-    };
-  }
-
-  // 16. RESPUESTA INTELIGENTE DINÁMICA (Búsqueda semántica por palabras clave o similitud)
+  // 12. BÚSQUEDA DINÁMICA CONSULTIVA POR PALABRAS CLAVE
+  const words = q.split(/\s+/).filter(w => w.length > 2);
   const matchingPerfumes = PERFUMES_DATA.filter(p => {
-    const textToMatch = clean(`${p.name} ${p.brand} ${p.collection} ${p.gender} ${p.fragranceProfile?.family || ''} ${p.acordes?.join(' ') || ''}`);
-    const words = q.split(/\s+/).filter(w => w.length > 2);
+    const textToMatch = clean(`${p.name} ${p.brand} ${p.collection} ${p.gender} ${p.description || ''} ${p.vibe || ''} ${p.acordes?.join(' ') || ''}`);
     return words.some(w => textToMatch.includes(w));
   });
 
   if (matchingPerfumes.length > 0) {
-    const topMatches = matchingPerfumes.slice(0, 3);
-    const names = topMatches.map(p => `**${p.brand} ${p.name}**`).join(', ');
+    const topMatches = matchingPerfumes.slice(0, 2);
+    const firstName = topMatches[0].name;
     return {
-      replyText: `Basándome en lo que buscas, estas opciones de nuestro catálogo encajan magníficamente: ${names}.\n\nCada una cuenta con sello holográfico, batch code verificado y disponibilidad inmediata en botella completa o en **Decant de 10ml** para que pruebes su fijación en tu piel. ¿Te gustaría conocer las notas específicas de alguna de ellas?`,
+      replyText: `Para lo que tienes en mente, te recomendaría fijarte especialmente en **${topMatches[0].brand} ${topMatches[0].name}**.\n\nEs una opción fantástica porque encaja con lo que buscas sin saturar, tiene excelente fijación comprobada y puedes probarlo en **Decant de 10ml** o llevarte la botella completa sellada de fábrica.\n\n¿Te gustaría que te cuente a qué huele en la piel o para qué momentos lo prefieres usar?`,
       recommendations: topMatches,
       chips: [
-        `Ver ${topMatches[0].name}`,
+        `Ver ${firstName}`,
         '🧪 Probar en Decant 10ml',
         '💬 Asesoría por WhatsApp'
       ]
     };
   }
 
-  // 17. FALLBACK ELEGANTE Y CONSULTIVO (NUNCA DICE SIEMPRE LO MISMO)
+  // 13. RESPUESTA CONSULTIVA PROFESIONAL (FALLBACK CON PREGUNTAS CLAVE DE ASESOR)
   const fallbacks = [
     {
-      replyText: `¡Interesante consulta! En el universo de **ARKANO PERFUMERÍA** cada piel reacciona de manera única a las notas aromáticas.\n\nPara orientarte con total precisión: ¿te inclinas más por un aroma **dulce y cálido** (vainilla, canela, praliné), algo **fresco y cítrico** para el día a día, o una **madera especiada** con presencia imponente?\n\nAquí tienes dos de nuestras fragancias más deseadas de la temporada:`,
+      replyText: `¡Buena pregunta! En perfumería de alta gama cada piel y ocasión piden algo distinto.\n\nPara guiarte con total certeza: ¿te gustan más los aromas **frescos y limpios** (como cítricos o brisa marina), los aromas **dulces y cálidos** (vainilla, canela, licor), o algo **amaderado y con presencia**?\n\nAquí tienes dos de nuestros favoritos que nunca fallan:`,
       recs: [
         PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man'),
         PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah')
       ].filter(Boolean),
-      chips: ['🍯 Busco algo Dulce', '🌊 Busco algo Fresco', '🔥 Quiero Máxima Duración']
+      chips: ['🍯 Prefiero algo dulce', '🌊 Prefiero algo fresco', '🔥 Busco máxima duración']
     },
     {
-      replyText: `Con gusto te asesoro personalmente. Si estás buscando dar con tu próximo aroma firma, te recomiendo empezar decidiendo la ocasión de uso: ¿lo prefieres para el **trabajo/oficina**, para **salir de noche y fiestas**, o para **citas románticas**?\n\nRecuerda que todas nuestras fragancias están disponibles en **Decants de 10ml** ($15 Árabes / $30 Diseñador) para probar antes de comprar.`,
+      replyText: `Con gusto te asesoro de manera personalizada. Para recomendarte la opción ideal, cuéntame: ¿es para **uso diario en el trabajo**, para **citas románticas** o para **eventos y salidas de noche**?\n\nRecuerda que si dudas entre dos fragancias, siempre puedes pedir los **Decants de 10ml** para probarlas en tu piel antes de comprar el frasco grande.`,
       recs: [
         PERFUMES_DATA.find(p => p.id === 'dior-sauvage-elixir'),
-        PERFUMES_DATA.find(p => p.id === 'afnan-9-pm')
+        PERFUMES_DATA.find(p => p.id === 'rasasi-hawas-for-him')
       ].filter(Boolean),
-      chips: ['💼 Para el Trabajo', '🌙 Para la Noche', '🧪 Ver Decants de 10ml']
-    },
-    {
-      replyText: `¡Excelente inquietud! En perfumería de nicho y de diseñador tenemos alternativas para cada gusto. Si me dices si buscas algo para **caballero**, para **dama** o un aroma **unisex** para compartir, te daré la selección exacta que mejor se adapte a ti.\n\nTambién puedes hablar con uno de nuestros sommeliers humanos en WhatsApp para atención inmediata.`,
-      recs: [
-        PERFUMES_DATA.find(p => p.id === 'lattafa-yara'),
-        PERFUMES_DATA.find(p => p.id === 'bleu-de-chanel-parfum')
-      ].filter(Boolean),
-      chips: ['👔 Para Caballero', '🌸 Para Dama', '💎 Colección Unisex']
+      chips: ['💼 Para la oficina / Diario', '🌙 Para la noche', '🧪 ¿Cómo son los Decants?']
     }
   ];
 
-  // Alterna dinámicamente según la longitud del mensaje o turno para no repetir nunca
   const selectedFallback = fallbacks[q.length % fallbacks.length];
-
   return {
     replyText: selectedFallback.replyText,
     recommendations: selectedFallback.recs,
