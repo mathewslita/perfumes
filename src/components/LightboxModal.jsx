@@ -24,7 +24,7 @@ export default function LightboxModal({
 
   return (
     <div 
-      className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-in fade-in duration-200 select-none"
+      className="fixed inset-0 z-[120] bg-black/95 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-in fade-in duration-200 select-none"
       onClick={onClose}
     >
       {/* Lightbox Container */}

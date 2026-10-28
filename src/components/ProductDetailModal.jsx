@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, ShoppingBag, Zap, ShieldCheck, Truck, Check, 
   Flame, Sun, Moon, Sparkles, Heart 
@@ -8,10 +8,10 @@ import LightboxModal from './LightboxModal';
 export default function ProductDetailModal({ 
   product, 
   onClose, 
-  onAddToCart,
-  onBuyNowWhatsApp,
-  isFavorite = false,
-  onToggleFavorite
+  onAddToCart, 
+  onBuyNowWhatsApp, 
+  isFavorite = false, 
+  onToggleFavorite 
 }) {
   if (!product) return null;
 
@@ -19,6 +19,14 @@ export default function ProductDetailModal({
   const [selectedFormat, setSelectedFormat] = useState('100ml'); // '100ml' or 'decant'
   const [quantity, setQuantity] = useState(1);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  // Bloquear el scroll del fondo mientras el modal está abierto
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
 
   const isOnSale = product.onSale !== false && (product.originalPrice100ml > product.price100ml);
   const currentPrice = selectedFormat === '100ml' ? product.price100ml : product.priceDecant;
@@ -39,18 +47,19 @@ export default function ProductDetailModal({
   return (
     <>
       <div 
-        className="fixed inset-0 z-40 bg-black/80 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4 overflow-y-auto animate-in fade-in duration-200"
+        className="fixed inset-0 z-[100] bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5 md:p-6 overflow-y-auto animate-in fade-in duration-200"
         onClick={onClose}
       >
         <div 
-          className="relative bg-white w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden my-6 border border-[#C9A961]/30 flex flex-col max-h-[92vh]"
+          className="relative bg-white w-full max-w-4xl rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden my-auto border border-[#C9A961]/40 flex flex-col max-h-[92vh] sm:max-h-[90vh]"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header Close Button */}
+          {/* Header Close Button - Siempre visible, perfectamente cuadrado */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 bg-gray-100 hover:bg-[#0E0E0E] hover:text-[#C9A961] text-gray-700 p-2.5 rounded-full transition-colors border border-gray-200 shadow-sm"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 z-30 bg-[#0E0E0E]/85 hover:bg-[#0E0E0E] text-[#C9A961] hover:text-white p-2.5 rounded-full transition-all border border-[#C9A961]/40 shadow-xl cursor-pointer active:scale-90"
             aria-label="Cerrar ventana"
+            title="Cerrar"
           >
             <X className="w-5 h-5" />
           </button>
@@ -337,19 +346,19 @@ export default function ProductDetailModal({
 
           {/* Sticky Mobile Bottom Bar: Permite añadir al carrito y comprar en WhatsApp sin scroll */}
           <div className="md:hidden sticky bottom-0 left-0 right-0 bg-[#0E0E0E]/95 backdrop-blur-md border-t border-[#C9A961]/35 p-3 flex items-center justify-between gap-2 shadow-2xl z-30">
-            <div className="flex flex-col">
-              <span className="text-[10px] text-gray-400 font-medium">
+            <div className="flex flex-col flex-shrink-0">
+              <span className="text-[10px] text-gray-400 font-medium leading-none">
                 {selectedFormat === '100ml' ? 'Frasco' : 'Decant'} • {quantity}x
               </span>
-              <span className="text-base font-black text-[#C9A961]">
+              <span className="text-sm sm:text-base font-black text-[#C9A961] mt-0.5">
                 ${(currentPrice * quantity).toFixed(2)}
               </span>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <button
                 onClick={() => onToggleFavorite && onToggleFavorite(product.id)}
-                className={`p-2.5 rounded-full border transition-all active:scale-90 cursor-pointer ${
+                className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all active:scale-90 cursor-pointer flex-shrink-0 ${
                   isFavorite
                     ? 'bg-rose-50 border-rose-300 text-rose-500'
                     : 'bg-white/10 border-white/20 text-stone-300 hover:text-rose-400'
@@ -361,14 +370,14 @@ export default function ProductDetailModal({
               </button>
               <button
                 onClick={handleAddToCart}
-                className="bg-[#1C1C1C] hover:bg-[#2A2A2A] active:scale-95 text-[#F5F1E8] border border-[#C9A961]/40 py-2.5 px-3 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm"
+                className="bg-[#1C1C1C] hover:bg-[#2A2A2A] active:scale-95 text-[#F5F1E8] border border-[#C9A961]/40 py-2 px-2.5 sm:py-2.5 sm:px-3 rounded-full text-xs font-bold flex items-center gap-1 sm:gap-1.5 shadow-sm whitespace-nowrap cursor-pointer"
               >
                 <ShoppingBag className="w-3.5 h-3.5 text-[#C9A961]" />
                 <span>+ Carrito</span>
               </button>
               <button
                 onClick={handleBuyNow}
-                className="bg-[#C9A961] hover:bg-[#B89228] active:scale-95 text-[#0E0E0E] py-2.5 px-3.5 rounded-full text-xs font-black flex items-center gap-1 shadow-md"
+                className="bg-[#C9A961] hover:bg-[#B89228] active:scale-95 text-[#0E0E0E] py-2 px-3 sm:py-2.5 sm:px-3.5 rounded-full text-xs font-black flex items-center gap-1 shadow-md whitespace-nowrap cursor-pointer"
               >
                 <Zap className="w-3.5 h-3.5 fill-current" />
                 <span>WhatsApp</span>
