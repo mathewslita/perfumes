@@ -52,7 +52,7 @@ export default function FavoritesDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden animate-in fade-in duration-300">
+    <div className="fixed inset-0 z-[100] overflow-hidden animate-in fade-in duration-300">
       {/* Backdrop */}
       <div 
         onClick={onClose}
@@ -60,7 +60,7 @@ export default function FavoritesDrawer({
         aria-hidden="true"
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col border-l border-[#C9A961]/35 animate-in slide-in-from-right duration-300">
           
           {/* Header */}

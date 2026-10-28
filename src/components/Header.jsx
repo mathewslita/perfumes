@@ -159,27 +159,27 @@ export default function Header({
 
   return (
     <header className="sticky top-0 z-50 sticky-nav-header bg-[#0E0E0E]/95 backdrop-blur-md border-b border-[#C9A961]/25 text-[#F5F1E8] shadow-lg transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex items-center justify-between h-20 gap-4">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6">
+        <div className="flex items-center justify-between h-16 sm:h-20 gap-2 sm:gap-4">
           
           {/* Brand Logo ARKANO PERFUMERÍA + Mobile Menu Hamburger Button */}
-          <div className="flex items-center gap-2.5 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-4 flex-shrink-0 min-w-0">
             {/* Hamburger 3-rayitas Button (Visible on mobile/tablet) */}
             <button 
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-2 rounded-xl bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/35 transition-all active:scale-95 flex items-center justify-center shadow-sm"
+              className="lg:hidden p-1.5 sm:p-2 rounded-xl bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/35 transition-all active:scale-95 flex items-center justify-center shadow-sm flex-shrink-0"
               aria-label="Abrir menú de categorías"
               title="Todas las categorías"
             >
-              <Menu className="w-5 h-5 text-[#C9A961]" />
+              <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-[#C9A961]" />
             </button>
 
             <button 
               onClick={() => handleNavCategory('all')} 
-              className="text-left group flex items-center transition-transform hover:scale-[1.02]"
+              className="text-left group flex items-center transition-transform hover:scale-[1.02] flex-shrink-0"
               title="ARKANO Perfumería - Inicio"
             >
-              <Logo variant="horizontal" theme="light" size="sm" className="sm:hidden" />
+              <Logo variant="horizontal" theme="light" size="xs" className="sm:hidden" />
               <Logo variant="horizontal" theme="light" size="md" className="hidden sm:flex" />
             </button>
           </div>
@@ -331,14 +331,14 @@ export default function Header({
             </div>
           </nav>
 
-          {/* Right Actions: Search + Cart */}
-          <div className="flex items-center gap-3">
+          {/* Right Actions: Search + Favorites + Cart */}
+          <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
             {/* Live Search Input with Predictive Floating Dropdown */}
-            <div className={`relative transition-all duration-300 ${searchFocused ? 'w-36 xs:w-48 sm:w-72' : 'w-24 xs:w-32 sm:w-56'}`}>
-              <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A961] absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <div className={`relative transition-all duration-300 ${searchFocused ? 'w-28 xs:w-40 sm:w-72' : 'w-18 xs:w-26 sm:w-56'}`}>
+              <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A961] absolute left-2 sm:left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input 
                 type="text" 
-                placeholder="BUSCAR PERFUME..."
+                placeholder="BUSCAR..."
                 value={searchQuery}
                 onChange={(e) => onSearch(e.target.value)}
                 onFocus={() => setSearchFocused(true)}
@@ -346,15 +346,15 @@ export default function Header({
                   // Pequeño timeout para permitir que el clic en el dropdown se ejecute
                   setTimeout(() => setSearchFocused(false), 220);
                 }}
-                className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-full py-1.5 pl-7 sm:pl-9 pr-6 sm:pr-8 text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#C9A961] transition-all shadow-inner"
+                className="w-full bg-[#1A1A1A] border border-[#C9A961]/30 focus:border-[#C9A961] rounded-full py-1.5 pl-6 sm:pl-9 pr-5 sm:pr-8 text-[11px] sm:text-xs text-[#F5F1E8] placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#C9A961] transition-all shadow-inner"
               />
               {searchQuery && (
                 <button 
                   onClick={() => onSearch('')} 
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
                   title="Limpiar búsqueda"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 </button>
               )}
 
@@ -438,28 +438,28 @@ export default function Header({
             {/* Favorites Trigger with Heart Icon */}
             <button
               onClick={onOpenFavorites}
-              className="relative p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-rose-400 hover:text-rose-300 border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="relative p-2 sm:p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-rose-400 hover:text-rose-300 border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0"
               aria-label="Ver lista de favoritos"
               title="Mis perfumes favoritos"
             >
-              <Heart className={`w-5 h-5 transition-colors ${favoritesCount > 0 ? 'fill-rose-500 text-rose-500' : ''}`} />
+              <Heart className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors ${favoritesCount > 0 ? 'fill-rose-500 text-rose-500' : ''}`} />
               {favoritesCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse-gently">
+                <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] sm:text-[10px] font-black w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-md animate-pulse-gently">
                   {favoritesCount}
                 </span>
               )}
             </button>
 
-            {/* Cart Trigger */}
+            {/* Cart Trigger - Siempre visible, nunca comprimido ni recortado en móviles */}
             <button 
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+              className="relative p-2 sm:p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/40 transition-all hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0 shadow-sm"
               aria-label="Ver carrito"
               title="Mi carrito de compras"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-[#C9A961]" />
               {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#C9A961] text-[#0E0E0E] text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-md animate-pulse-gently">
+                <span className="absolute -top-1 -right-1 bg-[#C9A961] text-[#0E0E0E] text-[9px] sm:text-[10px] font-black w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center shadow-md animate-pulse-gently">
                   {cartCount}
                 </span>
               )}

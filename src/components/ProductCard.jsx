@@ -9,6 +9,7 @@ export default function ProductCard({
   onToggleFavorite
 }) {
   const [isAdded, setIsAdded] = useState(false);
+  const [showTimeTooltip, setShowTimeTooltip] = useState(false);
 
   const handleAddWithFeedback = (e) => {
     e.stopPropagation();
@@ -56,12 +57,27 @@ export default function ProductCard({
         </div>
         
         {/* Badges de Categoría y Momento (Día / Noche) Estable */}
-        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0">
+        <div className="flex items-center gap-1 sm:gap-1.5 flex-shrink-0 pointer-events-auto">
           {product.timeOfDay && (
             <div className="relative group/time inline-flex items-center">
-              <span
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-sm bg-white/95 text-[#0E0E0E] border border-gray-200 flex items-center justify-center cursor-help transition-colors hover:border-[#C9A961]"
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowTimeTooltip(prev => {
+                    const next = !prev;
+                    if (next) setTimeout(() => setShowTimeTooltip(false), 3500);
+                    return next;
+                  });
+                }}
+                onTouchStart={(e) => {
+                  e.stopPropagation();
+                  setShowTimeTooltip(true);
+                  setTimeout(() => setShowTimeTooltip(false), 3500);
+                }}
+                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-sm bg-white/95 text-[#0E0E0E] border border-gray-200 flex items-center justify-center cursor-pointer transition-colors hover:border-[#C9A961] active:scale-90"
                 title={`Momento recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día & Noche"}`}
+                aria-label={`Momento: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día & Noche"}`}
               >
                 {product.timeOfDay === "dia" && (
                   <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-600 fill-amber-400" />
@@ -72,11 +88,11 @@ export default function ProductCard({
                 {product.timeOfDay === "ambas" && (
                   <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A58B4E] fill-[#C9A961]" />
                 )}
-              </span>
+              </button>
 
               {/* Tooltip flotante superior sin alterar el ancho ni provocar saltos */}
-              <div className="absolute bottom-full right-0 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap opacity-0 group-hover/time:opacity-100 transition-opacity pointer-events-none z-30 border border-[#C9A961]/40">
-                {product.timeOfDay === "dia" ? "☀️ DIA" : product.timeOfDay === "noche" ? "🌙 NOCHE" : "✨ DIA & NOCHE"}
+              <div className={`absolute bottom-full right-0 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap transition-all duration-200 pointer-events-none z-30 border border-[#C9A961]/40 ${showTimeTooltip ? 'opacity-100 scale-100' : 'opacity-0 scale-95 group-hover/time:opacity-100 group-hover/time:scale-100'}`}>
+                {product.timeOfDay === "dia" ? "☀️ DÍA" : product.timeOfDay === "noche" ? "🌙 NOCHE" : "✨ DÍA & NOCHE"}
               </div>
             </div>
           )}

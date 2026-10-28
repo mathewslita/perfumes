@@ -73,38 +73,39 @@ export default function Logo({
 
   // Variante: Horizontal (Isotipo A· al lado de ARKANO PERFUMERÍA)
   if (variant === 'horizontal') {
+    const isXs = size === 'xs';
     return (
-      <div className={`flex items-center gap-3 ${className}`}>
+      <div className={`flex items-center ${isXs ? 'gap-1.5' : size === 'sm' ? 'gap-2.5' : 'gap-3'} ${className}`}>
         <SymbolSvg 
-          width={size === 'sm' ? 26 : size === 'lg' ? 38 : 32} 
-          height={size === 'sm' ? 30 : size === 'lg' ? 42 : 36} 
+          width={isXs ? 19 : size === 'sm' ? 24 : size === 'lg' ? 38 : 32} 
+          height={isXs ? 22 : size === 'sm' ? 28 : size === 'lg' ? 42 : 36} 
           color={goldColor} 
         />
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5">
             <span 
-              className="font-serif tracking-[0.28em] font-extrabold uppercase leading-none"
+              className="font-serif tracking-[0.2em] sm:tracking-[0.28em] font-extrabold uppercase leading-none"
               style={{ 
                 color: textColor,
-                fontSize: size === 'sm' ? '1.1rem' : size === 'lg' ? '1.75rem' : '1.4rem'
+                fontSize: isXs ? '0.9rem' : size === 'sm' ? '1.05rem' : size === 'lg' ? '1.75rem' : '1.4rem'
               }}
             >
               ARKANO
             </span>
           </div>
-          <div className="flex items-center gap-2 mt-1">
+          <div className="flex items-center gap-1 sm:gap-2 mt-0.5 sm:mt-1">
             <span 
-              className="h-[1px] w-4"
+              className="h-[1px] w-2 sm:w-4"
               style={{ backgroundColor: mutedGold }}
             />
             <span 
-              className="tracking-[0.32em] font-medium uppercase text-[8px] sm:text-[9px]"
+              className="tracking-[0.22em] sm:tracking-[0.32em] font-medium uppercase text-[7px] sm:text-[9px]"
               style={{ color: goldColor }}
             >
               PERFUMERÍA
             </span>
             <span 
-              className="h-[1px] w-4"
+              className="h-[1px] w-2 sm:w-4"
               style={{ backgroundColor: mutedGold }}
             />
           </div>

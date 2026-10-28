@@ -19,6 +19,17 @@ export default function ProductDetailModal({
   const [selectedFormat, setSelectedFormat] = useState('100ml'); // '100ml' or 'decant'
   const [quantity, setQuantity] = useState(1);
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [showMomentText, setShowMomentText] = useState(false);
+
+  // Toggle para expandir el momento (Día / Noche) al tocar o pasar el dedo en móviles
+  const handleToggleMoment = (e) => {
+    e.stopPropagation();
+    setShowMomentText(prev => {
+      const next = !prev;
+      if (next) setTimeout(() => setShowMomentText(false), 4000);
+      return next;
+    });
+  };
 
   // Bloquear el scroll del fondo mientras el modal está abierto
   useEffect(() => {
@@ -135,37 +146,37 @@ export default function ProductDetailModal({
 
                   {/* Badges de Atributos: Icono que expande texto al pasar el mouse & Autenticidad */}
                   <div className="flex items-center gap-2 mt-2.5 flex-nowrap">
-                    {/* Icono Minimalista de Momento de Uso: Expande texto al pasar el mouse */}
+                    {/* Icono de Momento de Uso: Claramente visible y elegante en todos los dispositivos */}
                     {product.timeOfDay === 'dia' && (
                       <div 
-                        className="group inline-flex items-center bg-amber-50/90 hover:bg-amber-100 text-amber-900 border border-amber-200/90 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer select-none"
-                        title="MOMENTO: DIA"
+                        className="inline-flex items-center rounded-full h-6 px-2.5 bg-amber-50 text-amber-900 border border-amber-200/90 shadow-2xs select-none flex-shrink-0"
+                        title="Momento recomendado: Día"
                       >
-                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400 flex-shrink-0 transition-transform duration-300 group-hover:rotate-45" />
-                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[45px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out uppercase">
-                          DIA
+                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400 flex-shrink-0 mr-1.5" />
+                        <span className="text-[10px] font-extrabold tracking-wide uppercase">
+                          DÍA
                         </span>
                       </div>
                     )}
                     {product.timeOfDay === 'noche' && (
                       <div 
-                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer select-none"
-                        title="MOMENTO: NOCHE"
+                        className="inline-flex items-center rounded-full h-6 px-2.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
+                        title="Momento recomendado: Noche"
                       >
-                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] group-hover:fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:-rotate-12" />
-                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[55px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out uppercase">
+                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] text-[#0E0E0E] flex-shrink-0 -rotate-12 mr-1.5" />
+                        <span className="text-[10px] font-extrabold tracking-wide uppercase">
                           NOCHE
                         </span>
                       </div>
                     )}
                     {product.timeOfDay === 'ambas' && (
                       <div 
-                        className="group inline-flex items-center bg-[#F5F1E8] hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] border border-[#C9A961]/50 rounded-full h-6 px-1.5 transition-all duration-300 shadow-2xs cursor-pointer select-none"
-                        title="MOMENTO: DIA & NOCHE"
+                        className="inline-flex items-center rounded-full h-6 px-2.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
+                        title="Momento recomendado: Día & Noche"
                       >
-                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] group-hover:text-[#C9A961] fill-[#C9A961] flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
-                        <span className="text-[10px] font-bold tracking-wide max-w-0 opacity-0 group-hover:max-w-[85px] group-hover:opacity-100 group-hover:ml-1.5 group-hover:mr-1 overflow-hidden whitespace-nowrap transition-all duration-300 ease-out uppercase">
-                          DIA & NOCHE
+                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961] flex-shrink-0 mr-1.5" />
+                        <span className="text-[10px] font-extrabold tracking-wide uppercase">
+                          DÍA & NOCHE
                         </span>
                       </div>
                     )}

@@ -115,14 +115,14 @@ export default function CartDrawer({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
+    <div className="fixed inset-0 z-[100] overflow-hidden">
       {/* Translucent Backdrop */}
       <div 
         className="absolute inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
         onClick={onClose}
       />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
+      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between animate-in slide-in-from-right duration-300 border-l border-[#C9A961]/30">
           
           {/* Header */}
