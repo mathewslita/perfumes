@@ -178,6 +178,15 @@ export default function Header({
 
           {/* Center Navigation Links with Categories */}
           <nav className="hidden lg:flex items-center space-x-1 font-medium text-xs tracking-wider uppercase">
+            {/* Categoría Árabe */}
+            <button 
+              onClick={() => handleNavCategory('arabes')}
+              className="px-3.5 py-2 rounded-full text-[#F5F1E8] hover:text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5 cursor-pointer"
+            >
+              <Crown className="w-3.5 h-3.5 text-[#C9A961]" />
+              <span>ARABES</span>
+            </button>
+
             {/* Categoría Diseñador */}
             <button 
               onClick={() => handleNavCategory('disenador')}
@@ -555,9 +564,6 @@ export default function Header({
                       <div>
                         <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
                           <span>PERFUMES ARABES</span>
-                          <span className="text-[9px] bg-[#C9A961] text-[#0E0E0E] font-black px-1.5 py-0.2 rounded font-sans">
-                            DUBAI
-                          </span>
                         </div>
                         <div className="text-[11px] text-gray-400">
                           Lattafa, Armaf, Afnan, Al Haramain

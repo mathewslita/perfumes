@@ -24,7 +24,7 @@ export default function BestSellersTabs({
 }) {
   const tabs = [
     { id: 'all', label: 'TODOS', icon: null },
-    { id: 'arabes', label: '👑 ARABES DUBAI', icon: Crown },
+    { id: 'arabes', label: '👑 ARABES', icon: Crown },
     { id: 'disenador', label: '✨ DISENADOR', icon: Award },
     { id: 'Para Él', label: 'PARA EL', icon: null },
     { id: 'Para Ella', label: 'PARA ELLA', icon: null },
@@ -121,7 +121,7 @@ export default function BestSellersTabs({
             <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F5F1E8] border border-[#C9A961]/40 text-center max-w-3xl mx-auto shadow-sm animate-in fade-in">
               <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-[#C9A961] text-[10px] font-black px-3.5 py-1 rounded-full uppercase tracking-widest border border-[#C9A961]/40 mb-1.5">
                 <Crown className="w-3.5 h-3.5" />
-                <span>CATEGORÍA ÁRABE • DUBÁI</span>
+                <span>CATEGORÍA ÁRABE</span>
               </span>
               <p className="font-serif italic text-sm sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
                 "Oler bien, sentirse bien consigo mismo nunca antes fue tan accesible"
