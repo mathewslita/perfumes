@@ -22,11 +22,10 @@ export default function CategoryBanner({
         
         {/* Minimalist Editorial Title */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
-          <span className="text-[11px] tracking-[0.35em] font-extrabold uppercase text-[#A58B4E] block mb-1">
+          <span className="text-[11px] tracking-[0.35em] font-extrabold uppercase text-[#A58B4E] block mb-2">
             UNIVERSOS OLFATIVOS
           </span>
-          <div className="w-10 h-px bg-[#C9A961]/70 mx-auto mb-3" />
-          <h2 className="font-arabic-title text-2xl sm:text-3xl lg:text-4xl font-light text-[#0E0E0E] tracking-[0.16em] uppercase">
+                    <h2 className="font-arabic-title text-2xl sm:text-3xl lg:text-4xl font-light text-[#0E0E0E] tracking-[0.16em] uppercase">
             NUESTRAS CATEGORÍAS
           </h2>
           <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3.5 mb-2.5" />

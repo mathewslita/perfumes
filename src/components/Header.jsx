@@ -6,6 +6,30 @@ import Logo from './Logo';
 
 export const OCCASIONS_LIST = [
   {
+    id: 'dulces',
+    name: 'DULCES',
+    vibe: 'dulces',
+    icon: '🍬',
+    badge: 'Adictivo',
+    desc: 'Vainilla bourbon, canela, praliné & caramelo'
+  },
+  {
+    id: 'amaderados',
+    name: 'AMADERADOS',
+    vibe: 'amaderados',
+    icon: '🪵',
+    badge: 'Elegancia',
+    desc: 'Oud sagrado, sándalo & cedro noble'
+  },
+  {
+    id: 'citricos',
+    name: 'CÍTRICOS',
+    vibe: 'citricos',
+    icon: '🍋',
+    badge: 'Frescura',
+    desc: 'Limón italiano, bergamota & notas acuáticas'
+  },
+  {
     id: 'day',
     name: 'DÍA',
     vibe: 'day',
@@ -18,24 +42,8 @@ export const OCCASIONS_LIST = [
     name: 'NOCHE',
     vibe: 'night',
     icon: '🌙',
-    badge: 'Enigmatico',
-    desc: 'Vainilla negra, ambar & maderas calidas'
-  },
-  {
-    id: 'office',
-    name: 'FRESCOS',
-    vibe: 'office',
-    icon: '🌿',
-    badge: 'Uso Diario',
-    desc: 'Frescura limpia, bergamota & vetiver'
-  },
-  {
-    id: 'beast',
-    name: 'INTENSOS',
-    vibe: 'beast',
-    icon: '🔥',
-    badge: '+14 Horas',
-    desc: 'Estela imponente y maxima fijacion'
+    badge: 'Enigmático',
+    desc: 'Vainilla negra, ámbar & maderas cálidas'
   },
   {
     id: 'viral',
@@ -43,15 +51,7 @@ export const OCCASIONS_LIST = [
     vibe: 'viral',
     icon: '👑',
     badge: 'Favoritos',
-    desc: 'Las creaciones mas aclamadas'
-  },
-  {
-    id: 'gourmand',
-    name: 'GOURMAND',
-    vibe: 'gourmand',
-    icon: '🍯',
-    badge: 'Adictivo',
-    desc: 'Vainilla bourbon, canela & praline'
+    desc: 'Las creaciones más aclamadas'
   },
   {
     id: 'decants',

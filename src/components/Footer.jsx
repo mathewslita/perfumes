@@ -6,10 +6,10 @@ export default function Footer({ onSelectCategory }) {
   return (
     <footer className="bg-[#0E0E0E] text-[#F5F1E8] pt-14 pb-8 border-t border-[#C9A961]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        
+
         {/* 4 Perfectly Balanced Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-12 border-b border-white/10">
-          
+
           {/* Col 1: Identidad ARKANO */}
           <div className="space-y-4">
             <div className="flex flex-col items-start">
@@ -36,25 +36,25 @@ export default function Footer({ onSelectCategory }) {
             </h4>
             <ul className="space-y-2.5 text-xs text-gray-300">
               <li>
-                <button 
+                <button
                   onClick={() => onSelectCategory && onSelectCategory('arabes')}
                   className="hover:text-[#C9A961] transition-colors flex items-center gap-1.5 text-left"
                 >
                   <Crown className="w-3.5 h-3.5 text-[#C9A961]" />
-                  <span>Perfumes Árabes (Dubái) 🌙</span>
+                  <span>Perfumes Árabes (Dubái) </span>
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => onSelectCategory && onSelectCategory('disenador')}
                   className="hover:text-[#C9A961] transition-colors flex items-center gap-1.5 text-left"
                 >
                   <Award className="w-3.5 h-3.5 text-[#C9A961]" />
-                  <span>Perfumes de Diseñador ✨</span>
+                  <span>Perfumes de Diseñador </span>
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => onSelectCategory && onSelectCategory('Para Él')}
                   className="hover:text-[#C9A961] transition-colors block text-left"
                 >
@@ -62,7 +62,7 @@ export default function Footer({ onSelectCategory }) {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => onSelectCategory && onSelectCategory('Para Ella')}
                   className="hover:text-[#C9A961] transition-colors block text-left"
                 >
@@ -70,11 +70,11 @@ export default function Footer({ onSelectCategory }) {
                 </button>
               </li>
               <li>
-                <button 
+                <button
                   onClick={() => onSelectCategory && onSelectCategory('decants')}
                   className="hover:text-[#C9A961] transition-colors block text-left"
                 >
-                  Decants de Muestra 10ml
+                  Decants de Muestra
                 </button>
               </li>
             </ul>
@@ -97,11 +97,7 @@ export default function Footer({ onSelectCategory }) {
                 </li>
                 <li className="flex items-center gap-1.5">
                   <span className="text-[#C9A961]">✓</span>
-                  <span>Integración de Enlaces a Fragrantica.es</span>
-                </li>
-                <li className="flex items-center gap-1.5">
-                  <span className="text-[#C9A961]">✓</span>
-                  <span>Envíos Asegurados a Todo el País</span>
+                  <span>Envíos Seguros a Todo el País</span>
                 </li>
               </ul>
             </div>
@@ -112,14 +108,14 @@ export default function Footer({ onSelectCategory }) {
             <h4 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
               <Phone className="w-3.5 h-3.5 text-[#C9A961]" /> Contacto Directo
             </h4>
-            
+
             <div className="space-y-3 text-xs">
               {/* WhatsApp Express */}
               <div className="bg-[#171717] p-3 rounded-xl border border-[#C9A961]/25">
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
                   Asesoría & Pedidos WhatsApp
                 </span>
-                <a 
+                <a
                   href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20asesoría%20sobre%20un%20perfume"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -137,7 +133,7 @@ export default function Footer({ onSelectCategory }) {
 
               <div className="flex items-center gap-2 text-gray-400 text-xs">
                 <MapPin className="w-4 h-4 text-[#C9A961]" />
-                <span>Envíos nacionales con empaque blindado</span>
+                <span>Envíos nacionales con empaque seguro</span>
               </div>
             </div>
           </div>

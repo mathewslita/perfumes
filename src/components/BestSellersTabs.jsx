@@ -24,12 +24,12 @@ export default function BestSellersTabs({
 }) {
   const tabs = [
     { id: 'all', label: 'TODOS', icon: null },
-    { id: 'arabes', label: '👑 ARABES', icon: Crown },
-    { id: 'disenador', label: '✨ DISENADOR', icon: Award },
+    { id: 'arabes', label: 'ARABES', icon: Crown },
+    { id: 'disenador', label: 'DISENADOR', icon: Award },
     { id: 'Para Él', label: 'PARA EL', icon: null },
     { id: 'Para Ella', label: 'PARA ELLA', icon: null },
     { id: 'Unisex', label: 'UNISEX', icon: null },
-    { id: 'decants', label: 'DECANTS 10ML', icon: null }
+    { id: 'decants', label: 'DECANTS', icon: null }
   ];
 
   const currentTab = selectedCategory || 'all';
@@ -85,7 +85,7 @@ export default function BestSellersTabs({
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-2">
             <h2 className="font-arabic-title text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] uppercase tracking-wide">
-              CATALOGO DE ALTA GAMA
+              NUESTRO CATALOGO DE PERFUMES
             </h2>
             <span className="text-2xl animate-bounce">🔥</span>
           </div>
@@ -136,7 +136,7 @@ export default function BestSellersTabs({
                 <span>CATEGORÍA DISEÑADOR • ALTA COSTURA</span>
               </span>
               <p className="font-serif italic text-sm sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
-                "La cumbre de la sofisticación y el lujo global: creaciones maestras de las casas de moda más prestigiosas del mundo, emblema de elegancia atemporal y distinción."
+                "Ser inolvidable nunca se sintió tan bien."
               </p>
             </div>
           )}

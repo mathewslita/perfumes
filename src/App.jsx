@@ -14,7 +14,6 @@ import FavoritesDrawer from './components/FavoritesDrawer';
 import AiSommelierWidget from './components/AiSommelierWidget';
 import BrandsSection from './components/BrandsSection';
 import AboutSection from './components/AboutSection';
-import NewsletterBanner from './components/NewsletterBanner';
 import Footer from './components/Footer';
 import { PERFUMES_DATA, VIBE_CATEGORIES } from './data/perfumes';
 import { Sparkles, ShieldCheck, Check, RotateCcw, Crown, Award } from 'lucide-react';
@@ -257,14 +256,18 @@ export default function App() {
 
     // Vibe filter
     if (activeVibe !== 'all') {
-      const vibeObj = {
-        beast: '🔥 INTENSOS',
-        gourmand: '🍯 GOURMAND',
-        office: '🌿 FRESCOS',
+      const vibeMap = {
+        dulces: '🍬 DULCES',
+        beast: '🍬 DULCES',
+        amaderados: '🪵 AMADERADOS',
+        gourmand: '🪵 AMADERADOS',
+        citricos: '🍋 CÍTRICOS',
+        office: '🍋 CÍTRICOS',
         day: '☀️ DÍA',
         night: '🌙 NOCHE',
         viral: '👑 TOP VENTAS'
-      }[activeVibe];
+      };
+      const vibeObj = vibeMap[activeVibe];
       if (vibeObj) {
         const matches = p.vibes?.includes(vibeObj) || (activeVibe === 'day' && (p.timeOfDay === 'dia' || p.timeOfDay === 'ambas'));
         if (!matches) return false;
@@ -351,6 +354,11 @@ export default function App() {
         }}
       />
 
+      {/* Brands Showcase Section */}
+      <BrandsSection
+        onSelectBrand={handleSelectBrand}
+      />
+
       {/* 4. Category Showcase Banner: Árabes & Diseñador con Frases de Alta Calidad */}
       <CategoryBanner
         activeCollection={activeCategory}
@@ -399,16 +407,8 @@ export default function App() {
           onToggleFavorite={handleToggleFavorite}
         />
 
-        {/* 8. Brands Showcase Section */}
-        <BrandsSection
-          onSelectBrand={handleSelectBrand}
-        />
-
         {/* 9. About Us & Authenticity Guarantee Section */}
         <AboutSection />
-
-        {/* 10. WhatsApp VIP Club Banner */}
-        <NewsletterBanner />
       </main>
 
       {/* 11. Footer */}

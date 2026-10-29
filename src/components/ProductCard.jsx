@@ -66,33 +66,40 @@ export default function ProductCard({
                   e.stopPropagation();
                   setShowTimeTooltip(prev => {
                     const next = !prev;
-                    if (next) setTimeout(() => setShowTimeTooltip(false), 3500);
+                    if (next) setTimeout(() => setShowTimeTooltip(false), 3000);
                     return next;
                   });
                 }}
-                onTouchStart={(e) => {
-                  e.stopPropagation();
-                  setShowTimeTooltip(true);
-                  setTimeout(() => setShowTimeTooltip(false), 3500);
-                }}
-                className="w-5 h-5 sm:w-6 sm:h-6 rounded-full shadow-sm bg-white/95 text-[#0E0E0E] border border-gray-200 flex items-center justify-center cursor-pointer transition-colors hover:border-[#C9A961] active:scale-90"
-                title={`Momento recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día & Noche"}`}
-                aria-label={`Momento: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día & Noche"}`}
+                className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full shadow-sm flex items-center justify-center cursor-pointer transition-all duration-200 border active:scale-90 ${
+                  product.timeOfDay === 'dia'
+                    ? 'bg-amber-50/95 text-amber-600 border-amber-200 hover:border-amber-400 hover:bg-amber-100'
+                    : product.timeOfDay === 'noche'
+                    ? 'bg-[#0E0E0E]/90 text-[#C9A961] border-[#C9A961]/40 hover:border-[#C9A961] hover:bg-black'
+                    : 'bg-[#F5F1E8] text-[#0E0E0E] border-[#C9A961]/50 hover:border-[#C9A961]'
+                }`}
+                title={`Uso recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día y Noche"}`}
+                aria-label={`Momento: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día y Noche"}`}
               >
                 {product.timeOfDay === "dia" && (
-                  <Sun className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-600 fill-amber-400" />
+                  <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
                 )}
                 {product.timeOfDay === "noche" && (
-                  <Moon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#0E0E0E] fill-[#0E0E0E]" />
+                  <Moon className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961] -rotate-12" />
                 )}
                 {product.timeOfDay === "ambas" && (
-                  <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#A58B4E] fill-[#C9A961]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
                 )}
               </button>
 
-              {/* Tooltip flotante superior sin alterar el ancho ni provocar saltos */}
-              <div className={`absolute bottom-full right-0 mb-1 px-2 py-0.5 bg-[#0E0E0E] text-[#F5F1E8] text-[9px] font-bold rounded shadow-md whitespace-nowrap transition-all duration-200 pointer-events-none z-30 border border-[#C9A961]/40 ${showTimeTooltip ? 'opacity-100 scale-100' : 'opacity-0 scale-95 group-hover/time:opacity-100 group-hover/time:scale-100'}`}>
-                {product.timeOfDay === "dia" ? "☀️ DÍA" : product.timeOfDay === "noche" ? "🌙 NOCHE" : "✨ DÍA & NOCHE"}
+              {/* Tooltip hacia abajo: 100% visible sin ser recortado por overflow-hidden en PC y Móvil */}
+              <div 
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-1.5 px-2.5 py-1 bg-[#0E0E0E]/95 backdrop-blur-sm text-[#F5F1E8] text-[9.5px] font-bold rounded-md shadow-xl whitespace-nowrap transition-all duration-200 pointer-events-none z-30 border border-[#C9A961]/50 ${
+                  showTimeTooltip 
+                    ? 'opacity-100 translate-y-0 scale-100' 
+                    : 'opacity-0 -translate-y-1 scale-95 group-hover/time:opacity-100 group-hover/time:translate-y-0 group-hover/time:scale-100'
+                }`}
+              >
+                {product.timeOfDay === "dia" ? "☀️ USO DÍA" : product.timeOfDay === "noche" ? "🌙 USO NOCHE" : "✨ DÍA & NOCHE"}
               </div>
             </div>
           )}
