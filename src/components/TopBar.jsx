@@ -11,7 +11,7 @@ export default function TopBar() {
             <ShieldCheck className="w-2.5 h-2.5" /> 100% ORIGINAL
           </span>
           <span className="text-gray-300 font-semibold text-[10.5px] truncate uppercase">
-            ARABES & DISENADOR • ENVIOS EXPRESS
+            ARABES & DISEÑADOR • ENVIOS EXPRESS
           </span>
         </div>
 

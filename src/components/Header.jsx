@@ -201,7 +201,7 @@ export default function Header({
               className="px-3.5 py-2 rounded-full text-[#F5F1E8] hover:text-[#C9A961] hover:bg-white/10 transition-all font-bold flex items-center gap-1.5 cursor-pointer"
             >
               <Award className="w-3.5 h-3.5 text-[#C9A961]" />
-              <span>DISENADOR</span>
+              <span>DISEÑADOR</span>
             </button>
 
             <button 
@@ -592,7 +592,7 @@ export default function Header({
                       </div>
                       <div>
                         <div className="font-bold text-sm text-white group-hover:text-[#C9A961] transition-colors flex items-center gap-1.5">
-                          <span>PERFUMES DE DISENADOR</span>
+                          <span>PERFUMES DE DISEÑADOR</span>
                           <span className="text-[9px] bg-white/10 text-[#C9A961] font-bold px-1.5 py-0.2 rounded font-sans">
                             ALTA COSTURA
                           </span>

@@ -110,7 +110,7 @@ export default function ProductCard({
               ? "bg-[#C9A961] text-[#0E0E0E] border-[#A58B4E]"
               : "bg-[#F5F1E8] text-[#0E0E0E] border-[#C9A961]/60"
           }`}>
-            {isArabic ? "👑 ARABE" : "✨ DISENADOR"}
+            {isArabic ? "👑 ARABE" : "✨ DISEÑADOR"}
           </span>
         </div>
       </div>

@@ -25,7 +25,7 @@ export default function BestSellersTabs({
   const tabs = [
     { id: 'all', label: 'TODOS', icon: null },
     { id: 'arabes', label: 'ARABES', icon: Crown },
-    { id: 'disenador', label: 'DISENADOR', icon: Award },
+    { id: 'disenador', label: 'DISEÑADOR', icon: Award },
     { id: 'Para Él', label: 'PARA EL', icon: null },
     { id: 'Para Ella', label: 'PARA ELLA', icon: null },
     { id: 'Unisex', label: 'UNISEX', icon: null },
@@ -90,7 +90,7 @@ export default function BestSellersTabs({
             <span className="text-2xl animate-bounce">🔥</span>
           </div>
           <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto uppercase tracking-wider font-medium">
-            FRAGANCIAS ARABES Y DE DISENADOR CON ESTELA IMPONENTE, FIJACION PROLONGADA Y MAXIMA CALIDAD.
+            FRAGANCIAS ARABES Y DE DISEÑADOR CON ESTELA IMPONENTE, FIJACION PROLONGADA Y MAXIMA CALIDAD.
           </p>
 
           {/* Dynamic Tabs */}

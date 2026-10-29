@@ -135,7 +135,7 @@ export default function ProductDetailModal({
                         ? 'bg-[#C9A961]/15 text-[#8F7432] border-[#C9A961]/60' 
                         : 'bg-stone-100 text-stone-800 border-stone-300'
                     }`}>
-                      {isArabic ? '👑 COLECCION ARABE' : '✨ ALTA COSTURA DISENADOR'}
+                      {isArabic ? '👑 COLECCION ARABE' : '✨ ALTA COSTURA DISEÑADOR'}
                     </span>
                   </div>
 
