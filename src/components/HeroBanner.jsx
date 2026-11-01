@@ -6,9 +6,10 @@ const NEW_ARRIVALS = [
     id: 'rasasi-hawas-verde',
     brand: 'RASASI DUBÁI',
     name: 'Hawas Verde For Him',
-    price: 68.00,
-    notes: 'Fresco para el Día • Cítricos, Conífera y Pachulí',
-    image: '/assets/images/rasasi_hawas_verde.jpg',
+    price: 85.00,
+    notes: 'Lima, Romero, Manzana, Pachulí y Ámbar',
+    image: '/assets/images/rasasi_hawas_verde_infografia.jpg',
+    bottleImage: '/assets/images/rasasi_hawas_verde.jpg',
     categoryBadge: 'Árabe • Nuevo Lanzamiento'
   },
   {
@@ -43,6 +44,7 @@ const NEW_ARRIVALS = [
 export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, onAddToCart }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [hawasViewMode, setHawasViewMode] = useState('infografia'); // 'infografia' | 'solo'
 
   // Auto-transición limpia y fluida cada 2.5 segundos
   useEffect(() => {
@@ -145,28 +147,67 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 <div className="relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-square bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] pt-12 pb-24 sm:pt-10 sm:pb-22 px-6 flex items-center justify-center">
                   
                   {/* Slide Images con transición fluida tipo cross-fade y micro-escala */}
-                  {NEW_ARRIVALS.map((perfume, idx) => (
-                    <div
-                      key={perfume.id}
-                      className={`absolute inset-0 flex items-center justify-center pt-10 pb-24 sm:pt-8 sm:pb-20 px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                        currentSlide === idx 
-                          ? 'opacity-100 scale-100 z-10' 
-                          : 'opacity-0 scale-95 pointer-events-none z-0'
-                      }`}
-                    >
-                      <img 
-                        src={perfume.image} 
-                        alt={`${perfume.brand} ${perfume.name}`} 
-                        className="w-full h-full max-h-[265px] sm:max-h-full object-contain rounded-2xl filter drop-shadow-[0_16px_25px_rgba(0,0,0,0.18)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
-                      />
-                    </div>
-                  ))}
+                  {NEW_ARRIVALS.map((perfume, idx) => {
+                    const imgSrc = (perfume.id === 'rasasi-hawas-verde' && hawasViewMode === 'solo' && perfume.bottleImage)
+                      ? perfume.bottleImage
+                      : perfume.image;
+
+                    return (
+                      <div
+                        key={perfume.id}
+                        className={`absolute inset-0 flex items-center justify-center pt-10 pb-24 sm:pt-8 sm:pb-20 px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                          currentSlide === idx 
+                            ? 'opacity-100 scale-100 z-10' 
+                            : 'opacity-0 scale-95 pointer-events-none z-0'
+                        }`}
+                      >
+                        <img 
+                          src={imgSrc} 
+                          alt={`${perfume.brand} ${perfume.name}`} 
+                          className="w-full h-full max-h-[265px] sm:max-h-full object-contain rounded-2xl filter drop-shadow-[0_16px_25px_rgba(0,0,0,0.18)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
+                        />
+                      </div>
+                    );
+                  })}
                   
                   {/* Badge Superior Izquierdo: NUEVOS LANZAMIENTOS */}
                   <div className="absolute top-3 left-3 bg-[#0E0E0E]/90 backdrop-blur-md border border-[#C9A961] text-[#C9A961] text-[10px] font-black tracking-wider uppercase px-2.5 py-1 rounded-full shadow-md flex items-center gap-1.5 z-20">
                     <Sparkles className="w-3.5 h-3.5 fill-[#C9A961]" />
                     <span>NUEVOS LANZAMIENTOS</span>
                   </div>
+
+                  {/* Toggle para alternar entre Ficha Infográfica y Perfume Solo (en Hawas Verde) */}
+                  {currentProduct.bottleImage && (
+                    <div 
+                      onClick={(e) => e.stopPropagation()} 
+                      className="absolute top-12 left-3 z-30 flex items-center bg-[#0E0E0E]/90 backdrop-blur-md p-0.5 rounded-full border border-[#C9A961]/40 shadow-lg text-[9.5px] font-bold"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setHawasViewMode('infografia')}
+                        className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
+                          hawasViewMode === 'infografia'
+                            ? 'bg-[#C9A961] text-[#0E0E0E] font-black shadow-xs'
+                            : 'text-gray-300 hover:text-white'
+                        }`}
+                        title="Ver ficha infográfica"
+                      >
+                        📊 Ficha
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setHawasViewMode('solo')}
+                        className={`px-2.5 py-0.5 rounded-full transition-all cursor-pointer ${
+                          hawasViewMode === 'solo'
+                            ? 'bg-[#C9A961] text-[#0E0E0E] font-black shadow-xs'
+                            : 'text-gray-300 hover:text-white'
+                        }`}
+                        title="Ver frasco solo"
+                      >
+                        🧴 Frasco solo
+                      </button>
+                    </div>
+                  )}
 
                   {/* Indicadores de Slide con barra de progreso fluida (2.5s) */}
                   <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-[#C9A961]/35 shadow-sm">
