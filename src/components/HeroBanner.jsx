@@ -3,13 +3,13 @@ import { Sparkles, ArrowRight, Eye, Check, ChevronLeft, ChevronRight } from 'luc
 
 const NEW_ARRIVALS = [
   {
-    id: 'rasasi-hawas-for-him',
+    id: 'rasasi-hawas-verde',
     brand: 'RASASI DUBÁI',
-    name: 'Hawas for Him',
-    price: 64.90,
-    notes: 'Fresco para el Día • Manzana Verde y Brisa Marina',
-    image: '/assets/images/rasasi_hawas.jpg',
-    categoryBadge: 'Árabe • Dubái Original'
+    name: 'Hawas Verde For Him',
+    price: 68.00,
+    notes: 'Fresco para el Día • Cítricos, Conífera y Pachulí',
+    image: '/assets/images/rasasi_hawas_verde.jpg',
+    categoryBadge: 'Árabe • Nuevo Lanzamiento'
   },
   {
     id: 'dior-sauvage-elixir',
@@ -44,12 +44,12 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-transición fluida cada 4.5 segundos
+  // Auto-transición limpia y fluida cada 2.5 segundos
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % NEW_ARRIVALS.length);
-    }, 4500);
+    }, 2500);
     return () => clearInterval(interval);
   }, [isPaused]);
 
@@ -64,6 +64,14 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
       {/* Decorative Golden Ambient Aura */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#C9A961]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#A58B4E]/10 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Embedded Keyframe for Fluid Progress Fill */}
+      <style>{`
+        @keyframes heroProgressFill {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+      `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -124,11 +132,11 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
 
           </div>
 
-          {/* Right Column: Vitrina de Nuevos Lanzamientos con Transición */}
+          {/* Right Column: Vitrina de Nuevos Lanzamientos con Transición Fluida & Estilizada */}
           <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-md">
               <div 
-                className="relative bg-white/5 backdrop-blur-md border border-[#C9A961]/35 hover:border-[#C9A961] rounded-3xl p-3.5 sm:p-4 shadow-2xl cursor-pointer group/hero transition-all duration-300 hover:shadow-[#C9A961]/10"
+                className="relative bg-white/5 backdrop-blur-md border border-[#C9A961]/35 hover:border-[#C9A961] rounded-3xl p-3.5 sm:p-4 shadow-2xl cursor-pointer group/hero transition-all duration-500 hover:shadow-[#C9A961]/15"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
                 onClick={() => onOpenProduct && onOpenProduct(currentProduct.id)}
@@ -136,20 +144,20 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               >
                 <div className="relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-square bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] pt-12 pb-24 sm:pt-10 sm:pb-22 px-6 flex items-center justify-center">
                   
-                  {/* Slide Images con transición fluida */}
+                  {/* Slide Images con transición fluida tipo cross-fade y micro-escala */}
                   {NEW_ARRIVALS.map((perfume, idx) => (
                     <div
                       key={perfume.id}
-                      className={`absolute inset-0 flex items-center justify-center pt-10 pb-24 sm:pt-8 sm:pb-20 px-6 transition-all duration-700 ease-in-out ${
+                      className={`absolute inset-0 flex items-center justify-center pt-10 pb-24 sm:pt-8 sm:pb-20 px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         currentSlide === idx 
                           ? 'opacity-100 scale-100 z-10' 
-                          : 'opacity-0 scale-105 pointer-events-none z-0'
+                          : 'opacity-0 scale-95 pointer-events-none z-0'
                       }`}
                     >
                       <img 
                         src={perfume.image} 
                         alt={`${perfume.brand} ${perfume.name}`} 
-                        className="w-full h-full max-h-[260px] sm:max-h-full object-contain filter drop-shadow-[0_16px_25px_rgba(0,0,0,0.18)] transform group-hover/hero:scale-105 transition-transform duration-500 ease-out" 
+                        className="w-full h-full max-h-[265px] sm:max-h-full object-contain rounded-2xl filter drop-shadow-[0_16px_25px_rgba(0,0,0,0.18)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
                       />
                     </div>
                   ))}
@@ -160,8 +168,8 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     <span>NUEVOS LANZAMIENTOS</span>
                   </div>
 
-                  {/* Indicadores de Slide elegantes e interactivos */}
-                  <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-[#C9A961]/35">
+                  {/* Indicadores de Slide con barra de progreso fluida (2.5s) */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-[#C9A961]/35 shadow-sm">
                     {NEW_ARRIVALS.map((_, idx) => (
                       <button
                         key={idx}
@@ -170,14 +178,24 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                           e.stopPropagation();
                           setCurrentSlide(idx);
                         }}
-                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer overflow-hidden relative ${
                           currentSlide === idx 
-                            ? 'w-4 bg-[#C9A961]' 
+                            ? 'w-6 bg-white/20' 
                             : 'w-1.5 bg-white/40 hover:bg-white/80'
                         }`}
                         title={`Ver perfume ${idx + 1}`}
                         aria-label={`Ver perfume ${idx + 1}`}
-                      />
+                      >
+                        {currentSlide === idx && (
+                          <span 
+                            key={`${idx}-${currentSlide}`}
+                            className="absolute inset-0 bg-[#C9A961] rounded-full"
+                            style={{
+                              animation: isPaused ? 'none' : 'heroProgressFill 2.5s linear forwards'
+                            }}
+                          />
+                        )}
+                      </button>
                     ))}
                   </div>
 
@@ -210,9 +228,12 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     </span>
                   </div>
 
-                  {/* Product Info Bar: Dinámico con el perfume en pantalla */}
+                  {/* Product Info Bar: Transición suave de textos y precio */}
                   <div className="absolute bottom-3 left-3 right-3 bg-[#0E0E0E]/95 backdrop-blur-md border border-[#C9A961]/35 p-3 sm:p-3.5 rounded-2xl flex items-center justify-between gap-2 shadow-xl z-20">
-                    <div className="min-w-0 pr-2">
+                    <div 
+                      key={currentProduct.id} 
+                      className="min-w-0 pr-2 transition-all duration-500 ease-out"
+                    >
                       <span className="text-[10px] text-[#C9A961] font-extrabold uppercase tracking-widest block truncate">
                         {currentProduct.brand}
                       </span>
@@ -223,9 +244,15 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                         {currentProduct.notes}
                       </p>
                     </div>
-                    <div className="text-right flex-shrink-0">
+                    <div 
+                      key={`price-${currentProduct.id}`}
+                      className="text-right flex-shrink-0 transition-all duration-500 ease-out"
+                    >
                       <span className="text-sm sm:text-base font-black text-[#C9A961] block">
                         ${currentProduct.price.toFixed(2)}
+                      </span>
+                      <span className="text-[9px] text-emerald-400 font-bold uppercase tracking-wider block">
+                        Original
                       </span>
                     </div>
                   </div>

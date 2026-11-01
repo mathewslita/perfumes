@@ -838,6 +838,63 @@ export const PERFUMES_DATA = [
     historyText: 'Creado por la legendaria casa Rasasi de Dubái, fundada en 1979.'
   },
   {
+    id: 'rasasi-hawas-verde',
+    name: 'Hawas Verde',
+    brand: 'RASASI',
+    collection: 'arabes',
+    collectionBadge: 'Árabe • Dubái Original',
+    sku: 'RS-55203',
+    concentration: 'Eau de Parfum',
+    volume100ml: '100 ml / 3.4 FL. OZ.',
+    volumeDecant: '10 ml (Atomizador de Viaje)',
+    price100ml: 68.00,
+    originalPrice100ml: 115.00,
+    priceDecant: 15.00,
+    originalPriceDecant: 15.00,
+    discountPercent: 41,
+    onSale: true,
+    timeOfDay: 'dia',
+    infographicImage: null,
+    rating: 5.0,
+    reviewCount: 420,
+    gender: 'Para Él',
+    vibes: ['🍋 CÍTRICOS', '🪵 AMADERADOS', '☀️ DÍA', '👑 TOP VENTAS'],
+    vibeBadge: '🍃 Nuevo Lanzamiento Verde',
+    badgeColor: 'bg-emerald-700 text-white',
+    acordes: ['citricos', 'frescos', 'oud_maderas'],
+    imageMain: '/assets/images/rasasi_hawas_verde.jpg',
+    gallery: [
+      '/assets/images/rasasi_hawas_verde.jpg'
+    ],
+    fraganticaUrl: 'https://www.fragrantica.es/perfume/Rasasi/Hawas-Verde-103328.html',
+    fraganticaQuery: 'Rasasi Hawas Verde',
+    noteIcons: [
+      { emoji: '🍋', name: 'Cítricos & Bergamota' },
+      { emoji: '🌲', name: 'Conífera & Fresco Verde' },
+      { emoji: '🪵', name: 'Pachulí & Maderas' }
+    ],
+    technicalTable: {
+      headNotes: 'Cítricos vibrantes, Bergamota brillante, Manzana verde y Acordes aromáticos',
+      heartNotes: 'Fresco especiado, Notas verdes naturales, Conífera aromática y Frutas jugosas',
+      baseNotes: 'Pachulí terroso, Maderas nobles, Ámbar cálido y Almizcle seductor',
+      fragranceType: 'Cítrico Aromático Verde Amaderado',
+      concentrationPct: '22% Eau de Parfum de Larga Duración',
+      batchCodePrefix: 'BATCH# RS-VRD-2026-DXB',
+      origin: 'Dubái, Emiratos Árabes Unidos'
+    },
+    performance: {
+      durationLabel: '12+ Horas en Piel (Estela Fresca Imponente)',
+      durationPct: 96,
+      projectionLabel: 'Potente / Proyección Verde Cítrica',
+      projectionPct: 95,
+      seasonLabel: 'Primavera / Verano / Calor / Todo el Año',
+      seasonPct: 98
+    },
+    inspiration: 'La esperada y exclusiva evolución verde de la legendaria saga Hawas. Cítricos luminosos, acordes aromáticos coníferos y pachulí noble.',
+    compositionText: 'Una apertura electrizante de cítricos y notas verdes silvestres que da paso a un corazón especiado fresco y una base profunda amaderada.',
+    historyText: 'Nuevo lanzamiento de Rasasi Perfumes, la icónica casa de Dubái.'
+  },
+  {
     id: 'bharara-king-parfum',
     name: 'King',
     brand: 'BHARARA',
