@@ -354,47 +354,6 @@ export default function ProductDetailModal({
             </div>
 
           </div>
-
-          {/* Sticky Mobile Bottom Bar: Permite añadir al carrito y comprar en WhatsApp sin scroll */}
-          <div className="md:hidden sticky bottom-0 left-0 right-0 bg-[#0E0E0E]/95 backdrop-blur-md border-t border-[#C9A961]/35 p-3 flex items-center justify-between gap-2 shadow-2xl z-30">
-            <div className="flex flex-col flex-shrink-0">
-              <span className="text-[10px] text-gray-400 font-medium leading-none">
-                {selectedFormat === '100ml' ? 'Frasco' : 'Decant'} • {quantity}x
-              </span>
-              <span className="text-sm sm:text-base font-black text-[#C9A961] mt-0.5">
-                ${(currentPrice * quantity).toFixed(2)}
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              <button
-                onClick={() => onToggleFavorite && onToggleFavorite(product.id)}
-                className={`w-9 h-9 rounded-full border flex items-center justify-center transition-all active:scale-90 cursor-pointer flex-shrink-0 ${
-                  isFavorite
-                    ? 'bg-rose-50 border-rose-300 text-rose-500'
-                    : 'bg-white/10 border-white/20 text-stone-300 hover:text-rose-400'
-                }`}
-                title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
-                aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
-              >
-                <Heart className={`w-4 h-4 ${isFavorite ? 'fill-rose-500 text-rose-500' : ''}`} />
-              </button>
-              <button
-                onClick={handleAddToCart}
-                className="bg-[#1C1C1C] hover:bg-[#2A2A2A] active:scale-95 text-[#F5F1E8] border border-[#C9A961]/40 py-2 px-2.5 sm:py-2.5 sm:px-3 rounded-full text-xs font-bold flex items-center gap-1 sm:gap-1.5 shadow-sm whitespace-nowrap cursor-pointer"
-              >
-                <ShoppingBag className="w-3.5 h-3.5 text-[#C9A961]" />
-                <span>+ Carrito</span>
-              </button>
-              <button
-                onClick={handleBuyNow}
-                className="bg-[#C9A961] hover:bg-[#B89228] active:scale-95 text-[#0E0E0E] py-2 px-3 sm:py-2.5 sm:px-3.5 rounded-full text-xs font-black flex items-center gap-1 shadow-md whitespace-nowrap cursor-pointer"
-              >
-                <Zap className="w-3.5 h-3.5 fill-current" />
-                <span>WhatsApp</span>
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 
