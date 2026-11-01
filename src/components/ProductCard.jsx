@@ -135,15 +135,15 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* Detalles del Perfume */}
-      <div className="p-4 sm:p-5 flex flex-col flex-grow justify-between">
+      {/* Detalles del Perfume Limpios y Optimizados para Móvil */}
+      <div className="p-3 sm:p-5 flex flex-col flex-grow justify-between">
         <div>
-          {/* Marca y Genero */}
-          <div className="flex items-center justify-between text-[11px] mb-1">
-            <span className="font-extrabold tracking-widest text-[#0E0E0E] uppercase">
+          {/* Marca y Género */}
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] mb-1">
+            <span className="font-extrabold tracking-widest text-[#0E0E0E] uppercase truncate mr-1">
               {product.brand}
             </span>
-            <span className="text-[#A58B4E] font-bold text-[10px] uppercase tracking-wider">
+            <span className="text-[#A58B4E] font-bold text-[9px] sm:text-[10px] uppercase tracking-wider flex-shrink-0">
               {product.gender.toUpperCase()}
             </span>
           </div>
@@ -151,22 +151,14 @@ export default function ProductCard({
           {/* Nombre del Perfume */}
           <h4 
             onClick={() => onOpenProduct(product.id)}
-            className="font-bold text-sm text-[#0E0E0E] group-hover:text-[#A58B4E] transition-colors cursor-pointer line-clamp-1"
+            className="font-bold text-xs sm:text-sm text-[#0E0E0E] group-hover:text-[#A58B4E] transition-colors cursor-pointer line-clamp-1"
             title={product.name}
           >
             {product.name}
           </h4>
 
-          {/* Autenticidad */}
-          <div className="flex items-center justify-between mt-1.5 text-[11px]">
-            <span className="inline-flex items-center gap-1 text-[9.5px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 uppercase">
-              <Check className="w-2.5 h-2.5 text-emerald-600" />
-              <span>100% ORIGINAL CON SELLO</span>
-            </span>
-          </div>
-
-          {/* 3 Notas Olfativas Principales */}
-          <div className="flex items-center gap-1.5 mt-2.5 py-1 px-1.5 bg-[#F5F1E8] rounded-lg border border-gray-200/80">
+          {/* 3 Notas Olfativas Principales: visibles en desktop, limpias en móvil */}
+          <div className="hidden sm:flex items-center gap-1.5 mt-2.5 py-1 px-1.5 bg-[#F5F1E8] rounded-lg border border-gray-200/80">
             {product.noteIcons.map((note, idx) => (
               <span key={idx} className="text-[10px] text-[#0E0E0E] flex items-center gap-0.5" title={note.name}>
                 <span>{note.emoji}</span>
@@ -177,47 +169,34 @@ export default function ProductCard({
           </div>
         </div>
 
-        {/* Precios y Botón de Carrito */}
-        <div className="mt-4 pt-3 border-t border-gray-100">
-          <div className="flex items-baseline gap-2 mb-1.5">
-            <span className="text-xl font-black text-[#0E0E0E]">
-              ${product.price100ml.toFixed(2)}
-            </span>
-            {isOnSale ? (
-              <>
-                <span className="text-xs font-bold text-gray-400 line-through decoration-rose-500 decoration-1.5">
+        {/* Precios y Botón de Carrito sin cajas redundantes */}
+        <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-100">
+          <div className="flex items-baseline justify-between gap-1 mb-1.5 sm:mb-2">
+            <div className="flex items-baseline gap-1.5">
+              <span className="text-base sm:text-xl font-black text-[#0E0E0E]">
+                ${product.price100ml.toFixed(2)}
+              </span>
+              {isOnSale && (
+                <span className="text-[10px] sm:text-xs font-bold text-gray-400 line-through decoration-rose-500 decoration-1">
                   ${product.originalPrice100ml.toFixed(2)}
                 </span>
-                <span className="text-[10px] text-emerald-800 font-black bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full ml-auto">
-                  Ahorras ${savings}
-                </span>
-              </>
-            ) : (
-              <span className="text-[10px] text-gray-500 font-bold ml-auto uppercase tracking-wider">
-                Frasco Completo
-              </span>
-            )}
-          </div>
-
-          {/* Opción en Decant 10ml */}
-          <div 
-            onClick={() => onOpenProduct(product.id)}
-            className="flex items-center justify-between py-1.5 px-2.5 mb-2.5 rounded-xl bg-[#F5F1E8] hover:bg-[#EFE8DA] cursor-pointer transition-colors border border-[#C9A961]/35 group/decant"
-            title="Ver presentación en decant de viaje 10ml"
-          >
-            <span className="text-[10.5px] font-semibold text-stone-700 flex items-center gap-1.5">
-              <span className="text-xs">🧪</span>
-              <span>o en Decant 10ml por</span>
-            </span>
-            <span className="text-xs font-black text-[#0E0E0E] group-hover/decant:text-[#A58B4E] transition-colors">
-              ${(product.priceDecant || (isArabic ? 15 : 30)).toFixed(2)}
+              )}
+            </div>
+            
+            {/* Indicador sutil de Decant sin caja gigante */}
+            <span 
+              onClick={() => onOpenProduct(product.id)} 
+              className="text-[9.5px] sm:text-[10.5px] font-semibold text-[#A58B4E] hover:text-[#0E0E0E] transition-colors cursor-pointer"
+              title="Ver presentación en decant de viaje 10ml"
+            >
+              Decant ${(product.priceDecant || (isArabic ? 15 : 30)).toFixed(0)}
             </span>
           </div>
 
           {/* Botón Añadir al Carrito ARKANO */}
           <button
             onClick={handleAddWithFeedback}
-            className={`w-full font-bold text-xs py-2.5 px-4 rounded-full flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95 ${
+            className={`w-full font-bold text-xs py-2 sm:py-2.5 px-3 sm:px-4 rounded-full flex items-center justify-center gap-1.5 sm:gap-2 shadow-sm transition-all active:scale-95 cursor-pointer ${
               isAdded 
                 ? 'bg-emerald-600 text-white scale-102 ring-2 ring-emerald-300' 
                 : 'bg-[#0E0E0E] hover:bg-[#1F1F1F] text-[#F5F1E8] hover:shadow-md border border-[#C9A961]/40 hover:border-[#C9A961]'
@@ -225,8 +204,8 @@ export default function ProductCard({
           >
             {isAdded ? (
               <>
-                <Check className="w-4 h-4 text-white animate-bounce" />
-                <span>¡Añadido al Carrito!</span>
+                <Check className="w-3.5 h-3.5 text-white animate-bounce" />
+                <span>¡Añadido!</span>
               </>
             ) : (
               <>

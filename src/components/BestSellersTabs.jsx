@@ -78,30 +78,30 @@ export default function BestSellersTabs({
   };
 
   return (
-    <section id="los-mas-vendidos" className="py-12 bg-white scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section id="los-mas-vendidos" className="py-8 sm:py-12 bg-white scroll-mt-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6">
         
         {/* Section Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <h2 className="font-arabic-title text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] uppercase tracking-wide">
-              NUESTRO CATALOGO DE PERFUMES
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex items-center justify-center gap-2 mb-1.5 sm:mb-2">
+            <h2 className="font-arabic-title text-xl sm:text-3xl font-extrabold text-[#0E0E0E] uppercase tracking-wide">
+              NUESTRO CATÁLOGO DE PERFUMES
             </h2>
-            <span className="text-2xl animate-bounce">🔥</span>
+            <span className="text-xl sm:text-2xl animate-bounce">🔥</span>
           </div>
-          <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto uppercase tracking-wider font-medium">
-            FRAGANCIAS ARABES Y DE DISEÑADOR CON ESTELA IMPONENTE, FIJACION PROLONGADA Y MAXIMA CALIDAD.
+          <p className="text-[11px] sm:text-sm text-gray-600 max-w-xl mx-auto uppercase tracking-wider font-medium px-2">
+            FRAGANCIAS ÁRABES Y DE DISEÑADOR CON ESTELA IMPONENTE, FIJACIÓN PROLONGADA Y MÁXIMA CALIDAD.
           </p>
 
-          {/* Dynamic Tabs */}
-          <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-4 mt-6 border-b border-gray-200 pb-1">
+          {/* Dynamic Tabs: Cinta Deslizable Horizontal en Móvil, Centrada en Desktop */}
+          <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-4 mt-4 sm:mt-6 border-b border-gray-200 pb-1 px-1">
             {tabs.map((tab) => {
               const isActive = currentTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => onTabChange(tab.id)}
-                  className={`pb-3 px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer ${
+                  className={`pb-2.5 sm:pb-3 px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer flex-shrink-0 ${
                     isActive
                       ? 'text-[#0E0E0E] font-black'
                       : 'text-gray-400 hover:text-gray-800'
@@ -116,26 +116,26 @@ export default function BestSellersTabs({
             })}
           </div>
 
-          {/* Banner de Categoría con su Frase Actualizada */}
+          {/* Banner de Categoría con su Frase Actualizada (Compacto en Móvil) */}
           {currentTab === 'arabes' && (
-            <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F5F1E8] border border-[#C9A961]/40 text-center max-w-3xl mx-auto shadow-sm animate-in fade-in">
-              <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-[#C9A961] text-[10px] font-black px-3.5 py-1 rounded-full uppercase tracking-widest border border-[#C9A961]/40 mb-1.5">
-                <Crown className="w-3.5 h-3.5" />
+            <div className="mt-4 sm:mt-6 p-3.5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#F5F1E8] border border-[#C9A961]/40 text-center max-w-3xl mx-auto shadow-sm animate-in fade-in">
+              <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-[#C9A961] text-[9.5px] sm:text-[10px] font-black px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-widest border border-[#C9A961]/40 mb-1">
+                <Crown className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 <span>CATEGORÍA ÁRABE</span>
               </span>
-              <p className="font-serif italic text-sm sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
+              <p className="font-serif italic text-xs sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
                 "Oler bien, sentirse bien consigo mismo nunca antes fue tan accesible"
               </p>
             </div>
           )}
 
           {currentTab === 'disenador' && (
-            <div className="mt-6 p-5 sm:p-6 rounded-2xl bg-[#F5F1E8] border border-[#0E0E0E]/20 text-center max-w-3xl mx-auto shadow-sm animate-in fade-in">
-              <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-white text-[10px] font-black px-3.5 py-1 rounded-full uppercase tracking-widest border border-[#C9A961]/40 mb-1.5">
-                <Award className="w-3.5 h-3.5 text-[#C9A961]" />
+            <div className="mt-4 sm:mt-6 p-3.5 sm:p-6 rounded-xl sm:rounded-2xl bg-[#F5F1E8] border border-[#0E0E0E]/20 text-center max-w-3xl mx-auto shadow-sm animate-in fade-in">
+              <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-white text-[9.5px] sm:text-[10px] font-black px-3 py-0.5 sm:py-1 rounded-full uppercase tracking-widest border border-[#C9A961]/40 mb-1">
+                <Award className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A961]" />
                 <span>CATEGORÍA DISEÑADOR • ALTA COSTURA</span>
               </span>
-              <p className="font-serif italic text-sm sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
+              <p className="font-serif italic text-xs sm:text-base text-[#0E0E0E] leading-relaxed max-w-2xl mx-auto mt-1">
                 "Ser inolvidable nunca se sintió tan bien."
               </p>
             </div>

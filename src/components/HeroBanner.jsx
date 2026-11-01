@@ -59,7 +59,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
   const currentProduct = NEW_ARRIVALS[currentSlide];
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#0E0E0E] via-[#161616] to-[#0E0E0E] text-[#F5F1E8] py-12 md:py-16 border-b border-[#C9A961]/30">
+    <div className="relative overflow-hidden bg-gradient-to-r from-[#0E0E0E] via-[#161616] to-[#0E0E0E] text-[#F5F1E8] py-8 sm:py-12 md:py-16 border-b border-[#C9A961]/30">
       
       {/* Decorative Golden Ambient Aura */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#C9A961]/10 rounded-full blur-3xl pointer-events-none" />
@@ -77,7 +77,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Headline, Description & CTAs */}
-          <div className="lg:col-span-7 flex flex-col justify-center space-y-6 text-center lg:text-left py-2">
+          <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left py-1 sm:py-2">
 
             {/* Headline and Narrative */}
             <div className="space-y-3">
@@ -114,7 +114,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               </div>
 
               {/* Micro Trust Proofs con 3 Vistos Verdes */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-xs text-gray-300 pt-2">
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[11px] sm:text-xs text-gray-300 pt-1 sm:pt-2">
                 <div className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
                   <span className="text-gray-200">Batch Code & Sello de Origen</span>
