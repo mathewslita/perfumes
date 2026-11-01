@@ -139,7 +139,8 @@ export default function App() {
       }
     });
 
-    showToast(`✨ ¡"${product.name} (${format === '100ml' ? 'Botella' : 'Decant 10ml'})" añadido al carrito!`);
+    const formatLabel = format === '100ml' ? '' : ' (Decant)';
+    showToast(`¡"${product.name}${formatLabel}" añadido al carrito!`);
     if (openCart) {
       setIsFavoritesOpen(false);
       setIsCartOpen(true);
