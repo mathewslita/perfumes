@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
@@ -98,16 +98,21 @@ export default function App() {
     showToast('Tus favoritos han sido vaciados 🤍');
   };
 
+  const toastTimeoutRef = useRef(null);
+
   // Show Toast Alert
   const showToast = (msg) => {
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
     setToastMessage(msg);
-    setTimeout(() => {
+    toastTimeoutRef.current = setTimeout(() => {
       setToastMessage(null);
     }, 3500);
   };
 
-  // Add to Cart
-  const handleAddToCart = (product, format = '100ml', quantity = 1) => {
+  // Add to Cart (con soporte para no interrumpir la navegación en favoritos)
+  const handleAddToCart = (product, format = '100ml', quantity = 1, openCart = true) => {
     const isFull = format === '100ml';
     const price = isFull ? product.price100ml : product.priceDecant;
     const originalPrice = isFull ? product.originalPrice100ml : product.originalPriceDecant;
@@ -135,7 +140,10 @@ export default function App() {
     });
 
     showToast(`✨ ¡"${product.name} (${format === '100ml' ? 'Botella' : 'Decant 10ml'})" añadido al carrito!`);
-    setIsCartOpen(true);
+    if (openCart) {
+      setIsFavoritesOpen(false);
+      setIsCartOpen(true);
+    }
   };
 
   // Update item quantity in cart
@@ -461,6 +469,10 @@ export default function App() {
           const el = document.getElementById('los-mas-vendidos');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
+        onOpenCart={() => {
+          setIsFavoritesOpen(false);
+          setIsCartOpen(true);
+        }}
       />
 
       {/* 14. AI Sommelier Floating Concierge Widget */}
@@ -471,15 +483,27 @@ export default function App() {
         }}
       />
 
-      {/* Toast Alert Notification */}
+      {/* Toast Alert Notification de Alta Visibilidad */}
       {toastMessage && (
-        <div className="fixed bottom-6 left-6 z-50 bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961]/50 px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          <div className="w-6 h-6 rounded-full bg-[#C9A961] text-[#0E0E0E] flex items-center justify-center flex-shrink-0">
-            <Check className="w-4 h-4 font-black" />
+        <div className="fixed bottom-5 sm:bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[150] w-[92%] sm:w-auto max-w-md bg-[#0E0E0E]/95 backdrop-blur-md text-[#F5F1E8] border border-[#C9A961] px-4 py-3 rounded-2xl shadow-2xl flex items-center justify-between gap-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <div className="w-7 h-7 rounded-full bg-[#C9A961] text-[#0E0E0E] flex items-center justify-center flex-shrink-0 shadow-sm">
+              <Check className="w-4 h-4 font-black stroke-[3]" />
+            </div>
+            <span className="text-xs sm:text-sm font-bold text-white truncate">
+              {toastMessage}
+            </span>
           </div>
-          <span className="text-xs sm:text-sm font-bold text-white">
-            {toastMessage}
-          </span>
+          <button
+            onClick={() => {
+              setIsFavoritesOpen(false);
+              setIsCartOpen(true);
+              setToastMessage(null);
+            }}
+            className="text-xs font-black text-[#C9A961] hover:text-white uppercase tracking-wider flex-shrink-0 ml-2 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-[#C9A961]/20 border border-[#C9A961]/30 transition-colors cursor-pointer"
+          >
+            Ver Carrito →
+          </button>
         </div>
       )}
 

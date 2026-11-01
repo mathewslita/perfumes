@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { X, Trash2, Heart, ShoppingBag, MessageCircle, ArrowRight, Sparkles, Check, ExternalLink } from 'lucide-react';
 import { PERFUMES_DATA } from '../data/perfumes';
 
@@ -10,7 +10,8 @@ export default function FavoritesDrawer({
   onRemoveFavorite,
   onOpenProduct,
   onClearFavorites,
-  onExploreCatalog
+  onExploreCatalog,
+  onOpenCart
 }) {
   if (!isOpen) return null;
 
@@ -21,6 +22,21 @@ export default function FavoritesDrawer({
 
   const totalCount = favoriteProducts.length;
   const totalValue = favoriteProducts.reduce((sum, p) => sum + (p.price100ml || 0), 0);
+
+  const [recentlyAddedId, setRecentlyAddedId] = useState(null);
+  const [drawerAlert, setDrawerAlert] = useState(null);
+
+  const handleItemAddToCart = (product) => {
+    onAddToCart(product, '100ml', 1, false);
+    setRecentlyAddedId(product.id);
+    setDrawerAlert(`¡"${product.name}" añadido al carrito!`);
+    setTimeout(() => {
+      setRecentlyAddedId(null);
+    }, 2000);
+    setTimeout(() => {
+      setDrawerAlert(null);
+    }, 3200);
+  };
 
   // WhatsApp Wishlist Share
   const handleShareFavoritesWhatsApp = () => {
@@ -46,9 +62,12 @@ export default function FavoritesDrawer({
   const handleAddAllToCart = () => {
     if (favoriteProducts.length === 0) return;
     favoriteProducts.forEach(p => {
-      onAddToCart(p, '100ml', 1);
+      onAddToCart(p, '100ml', 1, false);
     });
     onClose();
+    if (onOpenCart) {
+      onOpenCart();
+    }
   };
 
   return (
@@ -104,6 +123,28 @@ export default function FavoritesDrawer({
 
           {/* Body */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5 bg-[#FAF8F5]">
+            {/* Notificación Instantánea Dentro de Favoritos */}
+            {drawerAlert && (
+              <div className="p-3 rounded-xl bg-[#0E0E0E] text-white border border-[#C9A961]/60 shadow-lg flex items-center justify-between gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="flex items-center gap-2 text-xs font-semibold truncate">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 stroke-[3]" />
+                  </span>
+                  <span className="truncate">{drawerAlert}</span>
+                </div>
+                {onOpenCart && (
+                  <button
+                    onClick={() => {
+                      onClose();
+                      onOpenCart();
+                    }}
+                    className="text-[11px] font-bold text-[#C9A961] hover:text-white underline flex-shrink-0 cursor-pointer ml-1"
+                  >
+                    Ver Carrito →
+                  </button>
+                )}
+              </div>
+            )}
             {totalCount === 0 ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-16 px-4">
                 <div className="w-20 h-20 rounded-full bg-[#F5F1E8] border-2 border-dashed border-[#C9A961]/50 flex items-center justify-center mb-4 shadow-inner">
@@ -206,13 +247,24 @@ export default function FavoritesDrawer({
                           </div>
 
                           <button
-                            onClick={() => {
-                              onAddToCart(product, '100ml', 1);
-                            }}
-                            className="inline-flex items-center gap-1.5 bg-[#0E0E0E] hover:bg-[#252525] text-[#C9A961] text-[11px] font-bold py-1.5 px-3 rounded-full transition-all active:scale-95 cursor-pointer shadow-xs border border-[#C9A961]/30"
+                            onClick={() => handleItemAddToCart(product)}
+                            className={`inline-flex items-center gap-1.5 text-[11px] font-bold py-1.5 px-3 rounded-full transition-all active:scale-95 cursor-pointer shadow-xs ${
+                              recentlyAddedId === product.id
+                                ? 'bg-emerald-600 text-white border border-emerald-400 scale-102'
+                                : 'bg-[#0E0E0E] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/30'
+                            }`}
                           >
-                            <ShoppingBag className="w-3 h-3 text-[#C9A961]" />
-                            <span>+ Carrito</span>
+                            {recentlyAddedId === product.id ? (
+                              <>
+                                <Check className="w-3 h-3 text-white animate-bounce" />
+                                <span>¡Añadido!</span>
+                              </>
+                            ) : (
+                              <>
+                                <ShoppingBag className="w-3 h-3 text-[#C9A961]" />
+                                <span>+ Carrito</span>
+                              </>
+                            )}
                           </button>
                         </div>
                       </div>
