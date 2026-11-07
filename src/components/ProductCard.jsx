@@ -1,5 +1,32 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, SunMoon, Heart } from 'lucide-react';
+import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
+
+// Icono armónico y estilizado de Sol y Luna para fragancias Versátiles
+export function VersatileSunMoon({ className = "w-3.5 h-3.5" }) {
+  return (
+    <svg 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      className={className}
+      aria-hidden="true"
+    >
+      {/* Sol (Ámbar con rayos definidos en la parte superior izquierda) */}
+      <circle cx="9.5" cy="9.5" r="4" fill="#FBBF24" stroke="#D97706" strokeWidth="1.6" />
+      <line x1="9.5" y1="2" x2="9.5" y2="4" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+      <line x1="4.2" y1="4.2" x2="5.6" y2="5.6" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+      <line x1="2" y1="9.5" x2="4" y2="9.5" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+      <line x1="4.2" y1="14.8" x2="5.6" y2="13.4" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
+      {/* Luna creciente (Dorado noble entrelazado abajo a la derecha) */}
+      <path 
+        d="M11.5 7.5 A 6.5 6.5 0 1 0 18.5 14.5 A 5.5 5.5 0 0 1 11.5 7.5 Z" 
+        fill="#C9A961" 
+        stroke="#A58B4E" 
+        strokeWidth="1.6" 
+        strokeLinejoin="round" 
+      />
+    </svg>
+  );
+}
 
 export default function ProductCard({ 
   product, 
@@ -87,7 +114,7 @@ export default function ProductCard({
                   <Moon className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961] -rotate-12" />
                 )}
                 {product.timeOfDay === "ambas" && (
-                  <SunMoon className="w-3.5 h-3.5 text-[#A58B4E]" />
+                  <VersatileSunMoon className="w-3.5 h-3.5 flex-shrink-0" />
                 )}
               </button>
 
@@ -99,7 +126,7 @@ export default function ProductCard({
                     : 'opacity-0 -translate-y-1 scale-95 group-hover/time:opacity-100 group-hover/time:translate-y-0 group-hover/time:scale-100'
                 }`}
               >
-                {product.timeOfDay === "dia" ? "☀️ USO DÍA" : product.timeOfDay === "noche" ? "🌙 USO NOCHE" : "🌓 VERSÁTIL"}
+                {product.timeOfDay === "dia" ? "☀️ USO DÍA" : product.timeOfDay === "noche" ? "🌙 USO NOCHE" : "☀️🌙 VERSÁTIL"}
               </div>
             </div>
           )}
