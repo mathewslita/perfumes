@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
 
 // Icono exacto de Sol con rayos, Luna creciente y 3 Estrellas (fiel al diseño de referencia)
-export function VersatileSunMoon({ className = "w-4 h-4" }) {
+export function VersatileSunMoon({ className = "w-5 h-5" }) {
   return (
     <svg 
-      viewBox="0 0 24 24" 
+      viewBox="1.5 2.5 21 19" 
       fill="currentColor" 
       className={className}
       aria-hidden="true"
@@ -74,7 +74,7 @@ export default function ProductCard({
               e.stopPropagation();
               onToggleFavorite && onToggleFavorite(product.id);
             }}
-            className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
+            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
               isFavorite
                 ? 'bg-rose-50 border border-rose-300 text-rose-500 shadow-md scale-105'
                 : 'bg-white/95 text-stone-400 hover:text-rose-500 border border-stone-200 hover:border-rose-300'
@@ -82,7 +82,7 @@ export default function ProductCard({
             title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
             aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
           >
-            <Heart className={`w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform duration-200 ${isFavorite ? 'fill-rose-500 text-rose-500 scale-110' : ''}`} />
+            <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-200 ${isFavorite ? 'fill-rose-500 text-rose-500 scale-110' : ''}`} />
           </button>
         </div>
         
@@ -100,7 +100,7 @@ export default function ProductCard({
                     return next;
                   });
                 }}
-                className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full shadow-sm flex items-center justify-center cursor-pointer transition-all duration-200 border active:scale-90 ${
+                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full shadow-sm flex items-center justify-center cursor-pointer transition-all duration-200 border active:scale-90 ${
                   product.timeOfDay === 'dia'
                     ? 'bg-amber-50/95 text-amber-600 border-amber-200 hover:border-amber-400 hover:bg-amber-100'
                     : product.timeOfDay === 'noche'
@@ -111,13 +111,13 @@ export default function ProductCard({
                 aria-label={`Momento: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día y Noche"}`}
               >
                 {product.timeOfDay === "dia" && (
-                  <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400" />
+                  <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-600 fill-amber-400" />
                 )}
                 {product.timeOfDay === "noche" && (
-                  <Moon className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961] -rotate-12" />
+                  <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-[#C9A961] fill-[#C9A961] -rotate-12" />
                 )}
                 {product.timeOfDay === "ambas" && (
-                  <VersatileSunMoon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0E0E0E] flex-shrink-0" />
+                  <VersatileSunMoon className="w-5 h-5 sm:w-5.5 sm:h-5.5 text-[#0E0E0E] flex-shrink-0" />
                 )}
               </button>
 

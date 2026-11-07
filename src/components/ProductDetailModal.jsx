@@ -150,39 +150,39 @@ export default function ProductDetailModal({
                     {/* Icono de Momento de Uso: Claramente visible y elegante en todos los dispositivos */}
                     {product.timeOfDay === 'dia' && (
                       <div 
-                        className="inline-flex items-center rounded-full h-6 px-2.5 bg-amber-50 text-amber-900 border border-amber-200/90 shadow-2xs select-none flex-shrink-0"
+                        className="inline-flex items-center rounded-full h-7 sm:h-8 px-3 bg-amber-50 text-amber-900 border border-amber-200/90 shadow-2xs select-none flex-shrink-0"
                         title="Momento recomendado: Día"
                       >
-                        <Sun className="w-3.5 h-3.5 text-amber-600 fill-amber-400 flex-shrink-0 mr-1.5" />
-                        <span className="text-[10px] font-extrabold tracking-wide uppercase">
+                        <Sun className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-amber-600 fill-amber-400 flex-shrink-0 mr-1.5" />
+                        <span className="text-[11px] font-extrabold tracking-wide uppercase">
                           DÍA
                         </span>
                       </div>
                     )}
                     {product.timeOfDay === 'noche' && (
                       <div 
-                        className="inline-flex items-center rounded-full h-6 px-2.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
+                        className="inline-flex items-center rounded-full h-7 sm:h-8 px-3 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
                         title="Momento recomendado: Noche"
                       >
-                        <Moon className="w-3.5 h-3.5 fill-[#0E0E0E] text-[#0E0E0E] flex-shrink-0 -rotate-12 mr-1.5" />
-                        <span className="text-[10px] font-extrabold tracking-wide uppercase">
+                        <Moon className="w-4 h-4 sm:w-4.5 sm:h-4.5 fill-[#0E0E0E] text-[#0E0E0E] flex-shrink-0 -rotate-12 mr-1.5" />
+                        <span className="text-[11px] font-extrabold tracking-wide uppercase">
                           NOCHE
                         </span>
                       </div>
                     )}
                     {product.timeOfDay === 'ambas' && (
                       <div 
-                        className="inline-flex items-center rounded-full h-6 px-2.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
+                        className="inline-flex items-center rounded-full h-7 sm:h-8 px-3 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
                         title="Momento recomendado: Versátil (Día y Noche)"
                       >
-                        <VersatileSunMoon className="w-4 h-4 flex-shrink-0 mr-1.5 text-[#0E0E0E]" />
-                        <span className="text-[10px] font-extrabold tracking-wide uppercase">
+                        <VersatileSunMoon className="w-5 h-5 sm:w-5.5 sm:h-5.5 flex-shrink-0 mr-1.5 text-[#0E0E0E]" />
+                        <span className="text-[11px] font-extrabold tracking-wide uppercase">
                           VERSÁTIL
                         </span>
                       </div>
                     )}
 
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 uppercase flex-shrink-0">
+                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-800 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 uppercase flex-shrink-0 h-7 sm:h-8">
                       <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
                       <span>100% ORIGINAL CON SELLO</span>
                     </span>
