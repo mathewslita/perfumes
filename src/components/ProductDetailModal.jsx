@@ -175,7 +175,7 @@ export default function ProductDetailModal({
                         className="inline-flex items-center rounded-full h-6 px-2.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
                         title="Momento recomendado: Versátil (Día y Noche)"
                       >
-                        <VersatileSunMoon className="w-3.5 h-3.5 flex-shrink-0 mr-1.5" />
+                        <VersatileSunMoon className="w-4 h-4 flex-shrink-0 mr-1.5 text-[#0E0E0E]" />
                         <span className="text-[10px] font-extrabold tracking-wide uppercase">
                           VERSÁTIL
                         </span>
