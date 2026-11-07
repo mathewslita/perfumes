@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
 
-// Icono armónico y estilizado de Sol y Luna para fragancias Versátiles
-export function VersatileSunMoon({ className = "w-3.5 h-3.5" }) {
+// Icono exacto de Sol con rayos, Luna creciente y 3 Estrellas (fiel al diseño solicitado)
+export function VersatileSunMoon({ className = "w-3.5 h-3.5", dualColor = true }) {
+  const sunFill = dualColor ? "#D97706" : "currentColor";
+  const moonFill = dualColor ? "#C9A961" : "currentColor";
+
   return (
     <svg 
       viewBox="0 0 24 24" 
@@ -10,20 +13,23 @@ export function VersatileSunMoon({ className = "w-3.5 h-3.5" }) {
       className={className}
       aria-hidden="true"
     >
-      {/* Sol (Ámbar con rayos definidos en la parte superior izquierda) */}
-      <circle cx="9.5" cy="9.5" r="4" fill="#FBBF24" stroke="#D97706" strokeWidth="1.6" />
-      <line x1="9.5" y1="2" x2="9.5" y2="4" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
-      <line x1="4.2" y1="4.2" x2="5.6" y2="5.6" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
-      <line x1="2" y1="9.5" x2="4" y2="9.5" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
-      <line x1="4.2" y1="14.8" x2="5.6" y2="13.4" stroke="#D97706" strokeWidth="2" strokeLinecap="round" />
-      {/* Luna creciente (Dorado noble entrelazado abajo a la derecha) */}
-      <path 
-        d="M11.5 7.5 A 6.5 6.5 0 1 0 18.5 14.5 A 5.5 5.5 0 0 1 11.5 7.5 Z" 
-        fill="#C9A961" 
-        stroke="#A58B4E" 
-        strokeWidth="1.6" 
-        strokeLinejoin="round" 
-      />
+      {/* Rayos del Sol */}
+      <path d="M10.48 3.45L9.88 4.84L11.10 4.83L10.48 3.45Z" fill={sunFill} />
+      <path d="M3.95 6.45L4.58 7.87L5.39 6.93L3.95 6.45Z" fill={sunFill} />
+      <path d="M3.33 11.32L2.00 11.93L3.38 12.57L3.39 11.33L3.33 11.32Z" fill={sunFill} />
+      <path d="M4.55 16.10L3.95 17.49L5.42 17.01L4.55 16.10Z" fill={sunFill} />
+      <path d="M11.08 19.13L9.87 19.17L10.48 20.55L11.13 19.20L11.08 19.13Z" fill={sunFill} />
+      
+      {/* Cuerpo del Sol */}
+      <path d="M9.86 6.81L8.98 6.97L7.86 7.44L7.07 7.98L6.29 8.79L5.83 9.50L5.39 10.59L5.22 11.58L5.25 12.59L5.44 13.46L5.88 14.47L6.51 15.35L7.37 16.13L8.16 16.59L8.95 16.89L9.77 17.05L10.95 17.05L12.26 16.73L13.01 16.33L12.05 15.57L11.48 14.88L11.07 14.23L10.66 13.24L10.42 11.77L10.52 10.43L10.83 9.42L11.45 8.27L11.86 7.75L12.41 7.23L11.28 6.86L9.86 6.81Z" fill={sunFill} />
+      
+      {/* Luna Creciente */}
+      <path d="M14.53 6.43L13.71 6.75L12.81 7.33L11.97 8.13L11.37 9.04L10.99 9.96L10.77 11.08L10.77 12.04L10.99 13.16L11.45 14.23L11.92 14.91L12.61 15.63L13.57 16.29L14.64 16.73L15.67 16.92L16.80 16.89L17.78 16.67L18.82 16.21L19.27 15.89L18.30 15.88L17.31 15.69L16.63 15.44L15.65 14.90L15.16 14.51L14.19 13.43L13.67 12.51L13.45 11.93L13.20 10.70L13.20 9.69L13.28 9.12L13.69 7.83L14.05 7.18L14.60 6.47L14.53 6.43Z" fill={moonFill} />
+      
+      {/* 3 Estrellas Acompañantes */}
+      <path d="M17.78 5.72L17.37 6.54L17.15 6.59L16.40 6.52L16.99 7.03L17.08 7.20L16.77 8.04L17.48 7.63L17.61 7.63L18.30 8.20L18.15 7.31L18.27 7.16L18.94 6.77L18.05 6.64L17.93 6.47L17.78 5.72Z" fill={moonFill} />
+      <path d="M16.96 10.52L16.63 11.15L15.96 11.14L16.43 11.58L16.22 12.27L16.71 11.97L16.88 11.97L17.34 12.38L17.25 11.74L17.40 11.56L17.82 11.33L17.20 11.23L17.08 11.08L16.96 10.52Z" fill={moonFill} />
+      <path d="M20.84 11.92L20.43 12.74L20.27 12.79L19.46 12.72L20.14 13.38L19.83 14.24L20.54 13.83L20.67 13.83L21.36 14.40L21.21 13.52L21.33 13.37L22.00 12.97L21.08 12.82L20.84 11.92Z" fill={moonFill} />
     </svg>
   );
 }
