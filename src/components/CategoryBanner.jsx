@@ -88,7 +88,7 @@ export default function CategoryBanner({
                   <Crown className="w-3 h-3 text-[#C9A961]" />
                   COLECCIÓN REAL ORIENTAL
                 </span>
-                <span className="text-[10.5px] font-mono text-stone-400">
+                <span className="text-[10.5px] font-medium tracking-wider text-stone-400">
                   Dubái, EAU
                 </span>
               </div>
@@ -199,7 +199,7 @@ export default function CategoryBanner({
                   <Award className="w-3 h-3 text-[#C9A961]" />
                   ALTA COSTURA GLOBAL
                 </span>
-                <span className="text-[10.5px] font-mono text-stone-400">
+                <span className="text-[10.5px] font-medium tracking-wider text-stone-400">
                   París & Milán
                 </span>
               </div>

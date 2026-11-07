@@ -257,7 +257,7 @@ export default function Header({
                               <span className="font-semibold text-gray-200 group-hover:text-[#C9A961]">
                                 {brand.name}
                               </span>
-                              <span className="text-[10px] bg-white/10 text-[#C9A961] px-1.5 py-0.5 rounded font-mono">
+                              <span className="text-[10px] bg-white/10 text-[#C9A961] px-1.5 py-0.5 rounded font-medium">
                                 {brand.badge}
                               </span>
                             </button>
@@ -289,7 +289,7 @@ export default function Header({
                                   </div>
                                 </div>
                               </div>
-                              <span className="text-[10px] bg-white/10 text-[#C9A961] px-1.5 py-0.5 rounded font-mono ml-1 flex-shrink-0">
+                              <span className="text-[10px] bg-white/10 text-[#C9A961] px-1.5 py-0.5 rounded font-medium ml-1 flex-shrink-0">
                                 {occ.badge}
                               </span>
                             </button>
@@ -556,7 +556,7 @@ export default function Header({
                     <Sparkles className="w-3 h-3 text-[#C9A961]" />
                     COLECCIONES DE ALTA GAMA
                   </span>
-                  <span className="text-[10px] text-gray-400 font-mono">8 Opciones</span>
+                  <span className="text-[10px] text-gray-400 font-medium">8 Opciones</span>
                 </div>
 
                 <div className="space-y-2">
@@ -650,7 +650,7 @@ export default function Header({
                       <span className="text-sm">🧪</span>
                       <span className="font-semibold text-xs text-[#C9A961] uppercase">DECANTS MUESTRAS 10ML</span>
                     </div>
-                    <span className="text-[10px] font-mono text-[#C9A961] font-black">$15 / $30</span>
+                    <span className="text-[10px] font-medium text-[#C9A961] font-black">$15 / $30</span>
                   </button>
 
                   {/* 7. Ofertas Especiales */}
@@ -681,7 +681,7 @@ export default function Header({
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#C9A961] block">
                     DESCUBRIMIENTO POR OCASIÓN
                   </span>
-                  <span className="text-[10px] text-gray-400 font-mono">{OCCASIONS_LIST.length} Opciones</span>
+                  <span className="text-[10px] text-gray-400 font-medium">{OCCASIONS_LIST.length} Opciones</span>
                 </div>
                 <div className="grid grid-cols-1 gap-2">
                   {OCCASIONS_LIST.map((occ, idx) => (
@@ -701,7 +701,7 @@ export default function Header({
                           </div>
                         </div>
                       </div>
-                      <span className="text-[9px] text-[#C9A961] font-mono bg-[#C9A961]/10 px-2 py-0.5 rounded border border-[#C9A961]/30">
+                      <span className="text-[9px] text-[#C9A961] font-medium bg-[#C9A961]/10 px-2 py-0.5 rounded border border-[#C9A961]/30">
                         {occ.badge}
                       </span>
                     </button>

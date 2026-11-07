@@ -79,17 +79,20 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
           {/* Left Column: Headline, Description & CTAs */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left py-1 sm:py-2">
 
-            {/* Headline and Narrative */}
+            {/* Headline and Narrative - Homogéneo al estilo editorial de referencia */}
             <div className="space-y-3">
-              <h1 className="font-arabic-title text-2xl sm:text-4xl lg:text-[42px] font-black leading-tight tracking-tight text-white">
-                PERFUMES 100% ORIGINALES GARANTIZADOS,<br />
-                <span className="text-[#C9A961] italic font-serif">
-                  Árabes de Leyenda & Diseñador de Alta Categoría.
+              <h1 className="font-serif text-2xl sm:text-4xl lg:text-[42px] font-bold leading-tight tracking-tight text-white uppercase">
+                PERFUMES 100% ORIGINALES
+                <span className="block text-[#C9A961] italic font-serif font-normal normal-case text-lg sm:text-2xl lg:text-[30px] mt-1 sm:mt-2 tracking-normal">
+                  Árabes de leyenda y diseñador de alta categoría.
                 </span>
               </h1>
 
-              <p className="text-gray-300 text-xs sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-light leading-relaxed pt-1">
-                En <strong>ARKANO PERFUMERÍA</strong> fusionamos el misticismo y fijación titánica de los elixires árabes con la sofisticación universal de las grandes casas de diseñador.
+              {/* Sutil divisor dorado editorial */}
+              <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A961]/70 to-transparent lg:from-[#C9A961]/70 lg:to-transparent mx-auto lg:mx-0 my-2.5 sm:my-3" />
+
+              <p className="text-gray-300 text-xs sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+                En <strong>ARKANO PERFUMERÍA</strong> fusionamos el misticismo y la fijación de los elixires árabes con la sofisticación universal de las grandes casas de diseñador.
               </p>
             </div>
 

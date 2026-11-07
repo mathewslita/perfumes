@@ -149,7 +149,7 @@ export default function CartDrawer({
               <span className="text-[#0E0E0E] text-[11px] leading-tight">
                 {nextGoalMsg}
               </span>
-              <span className="text-[10px] text-gray-500 font-mono ml-2 flex-shrink-0">
+              <span className="text-[10px] text-gray-500 font-medium ml-2 flex-shrink-0">
                 ${total.toFixed(0)} / $170
               </span>
             </div>
@@ -384,15 +384,15 @@ export default function CartDrawer({
               <div className="space-y-1.5 text-xs pt-2">
                 <div className="flex justify-between text-gray-600">
                   <span>Subtotal:</span>
-                  <span className="font-mono font-medium">${subtotal.toFixed(2)}</span>
+                  <span className="font-medium text-gray-900">${subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-emerald-800 font-bold">
                   <span>Ahorro en tienda ARKANO:</span>
-                  <span className="font-mono">-${totalDiscount.toFixed(2)}</span>
+                  <span className="font-medium">-${totalDiscount.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between items-baseline text-base font-extrabold text-[#0E0E0E] border-t border-gray-300 pt-2">
                   <span>Total a pagar:</span>
-                  <span className="font-black text-xl font-mono text-[#0E0E0E]">${total.toFixed(2)} USD</span>
+                  <span className="font-black text-xl text-[#0E0E0E]">${total.toFixed(2)} USD</span>
                 </div>
               </div>
 

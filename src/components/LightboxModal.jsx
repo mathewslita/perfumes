@@ -93,7 +93,7 @@ export default function LightboxModal({
               aria-label={`Imagen ${idx + 1}`}
             />
           ))}
-          <span className="text-[10px] font-mono text-gray-300 ml-1 font-bold">
+          <span className="text-[10px] font-semibold text-gray-300 ml-1">
             {currentIndex + 1}/{images.length}
           </span>
         </div>

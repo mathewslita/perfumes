@@ -86,7 +86,7 @@ export default function FavoritesDrawer({
               <div>
                 <h3 className="font-arabic-title text-base sm:text-lg font-bold text-white flex items-center gap-2">
                   <span>MIS FAVORITOS</span>
-                  <span className="text-xs font-mono font-bold bg-[#C9A961] text-[#0E0E0E] px-2 py-0.5 rounded-full">
+                  <span className="text-xs font-bold bg-[#C9A961] text-[#0E0E0E] px-2 py-0.5 rounded-full">
                     {totalCount}
                   </span>
                 </h3>

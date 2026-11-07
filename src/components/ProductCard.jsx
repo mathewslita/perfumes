@@ -151,7 +151,7 @@ export default function ProductCard({
           {/* Nombre del Perfume */}
           <h4 
             onClick={() => onOpenProduct(product.id)}
-            className="font-bold text-xs sm:text-sm text-[#0E0E0E] group-hover:text-[#A58B4E] transition-colors cursor-pointer line-clamp-1"
+            className="font-serif font-bold text-xs sm:text-[14px] text-[#0E0E0E] group-hover:text-[#A58B4E] transition-colors cursor-pointer line-clamp-1 tracking-tight"
             title={product.name}
           >
             {product.name}
