@@ -175,7 +175,7 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                 />
               </div>
               <div>
-                <h4 className="font-arabic-title text-sm font-bold flex items-center gap-1.5 text-white">
+                <h4 className="font-serif text-sm font-bold flex items-center gap-1.5 text-white">
                   Asistente ARKANO <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
                 </h4>
                 <span className="text-[10px] text-[#C9A961] flex items-center gap-1">

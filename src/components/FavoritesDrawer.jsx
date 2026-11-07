@@ -84,7 +84,7 @@ export default function FavoritesDrawer({
                 <Heart className="w-5 h-5 fill-rose-500" />
               </div>
               <div>
-                <h3 className="font-arabic-title text-base sm:text-lg font-bold text-white flex items-center gap-2">
+                <h3 className="font-serif text-base sm:text-lg font-bold text-white flex items-center gap-2">
                   <span>MIS FAVORITOS</span>
                   <span className="text-xs font-bold bg-[#C9A961] text-[#0E0E0E] px-2 py-0.5 rounded-full">
                     {totalCount}
@@ -124,10 +124,10 @@ export default function FavoritesDrawer({
                 <div className="w-20 h-20 rounded-full bg-[#F5F1E8] border-2 border-dashed border-[#C9A961]/50 flex items-center justify-center mb-4 shadow-inner">
                   <Heart className="w-9 h-9 text-rose-300" />
                 </div>
-                <h4 className="font-arabic-title text-lg font-bold text-gray-900 mb-1.5">
+                <h4 className="font-serif text-lg font-bold text-stone-900 mb-1.5">
                   Aún no tienes perfumes en favoritos
                 </h4>
-                <p className="text-xs text-gray-500 max-w-xs leading-relaxed mb-6">
+                <p className="text-xs text-stone-600 max-w-xs leading-relaxed mb-6">
                   Toca el icono del corazón en cualquier fragancia árabe o de diseñador para guardarla aquí y tenerla siempre lista.
                 </p>
                 <button
@@ -197,7 +197,7 @@ export default function FavoritesDrawer({
                               onOpenProduct(product.id);
                               onClose();
                             }}
-                            className="font-arabic-title text-sm font-bold text-gray-900 truncate hover:text-[#C9A961] cursor-pointer transition-colors"
+                            className="font-serif text-[14px] font-bold text-stone-900 truncate hover:text-[#8F7432] cursor-pointer transition-colors"
                           >
                             {product.name}
                           </h4>

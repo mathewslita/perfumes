@@ -6,15 +6,14 @@ export default function VibeSelector({ activeVibe, onSelectVibe }) {
     <div className="bg-[#F5F1E8] py-3 sm:py-5 border-b border-[#C9A961]/25">
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
         
-        {/* Centered Title & Subtitle - Compacto y elegante en móvil */}
-        <div className="text-center mb-2.5 sm:mb-5">
-          <span className="hidden sm:block text-[10px] sm:text-[11px] font-black tracking-[0.25em] text-[#A58B4E] uppercase mb-1">
+        {/* Centered Title & Subtitle */}
+        <div className="text-center mb-3 sm:mb-5">
+          <span className="text-[10px] sm:text-[11px] font-extrabold tracking-[0.25em] text-[#A58B4E] uppercase block mb-1">
             DESCUBRIMIENTO POR OCASIÓN
           </span>
-          <h3 className="font-arabic-title text-sm sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
+          <h3 className="font-serif text-base sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
             ¿QUÉ ESTILO BUSCAS HOY?
           </h3>
-
         </div>
 
         {/* Píldoras Horizontales Fluidas en Móvil y Centradas en Desktop */}

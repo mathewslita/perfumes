@@ -14,7 +14,7 @@ export default function Footer({ onSelectCategory }) {
           <div className="space-y-4">
             <div className="flex flex-col items-start">
               <Logo variant="horizontal" theme="light" size="sm" />
-              <p className="text-xs text-gray-400 mt-3 leading-relaxed">
+              <p className="text-xs text-stone-300 mt-3 leading-relaxed font-normal">
                 Boutique de Alta Perfumería especializada en fragancias árabes importadas de Dubái y creaciones maestras de diseñador de alta costura internacional.
               </p>
             </div>
@@ -23,7 +23,7 @@ export default function Footer({ onSelectCategory }) {
               <h5 className="font-bold text-[11px] uppercase tracking-wider text-[#C9A961] mb-2">
                 Compra Directa por WhatsApp
               </h5>
-              <p className="text-xs text-gray-400 leading-relaxed">
+              <p className="text-xs text-stone-300 leading-relaxed font-normal">
                 Atención personalizada sin necesidad de registros engorrosos. Eliges tu perfume y coordinamos el despacho en minutos.
               </p>
             </div>
@@ -141,16 +141,16 @@ export default function Footer({ onSelectCategory }) {
         </div>
 
         {/* Bottom Bar: Copyright & Fragrantica Disclaimer */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-          <div className="flex items-center gap-2">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-400">
+          <div className="flex items-center gap-2 text-stone-300">
             <Logo variant="icon" size="sm" />
             <span>
-              © {new Date().getFullYear()} <strong>ARKANO PERFUMERÍA</strong>. Todos los derechos reservados.
+              © {new Date().getFullYear()} <strong className="text-white font-semibold">ARKANO PERFUMERÍA</strong>. Todos los derechos reservados.
             </span>
           </div>
 
-          <p className="text-[11px] text-gray-400 text-center sm:text-right">
-            Las marcas mencionadas (Dior, Chanel, YSL, Tom Ford, Lattafa, Armaf, etc.) son propiedad de sus respectivos titulares. Las referencias a Fragrantica se proveen con fines informativos de la pirámide olfativa.
+          <p className="text-[11px] text-stone-400 text-center sm:text-right leading-relaxed max-w-xl">
+            Las marcas mencionadas (Dior, Chanel, YSL, Tom Ford, Lattafa, Armaf, etc.) son propiedad de sus respectivos titulares. Las referencias olfativas se proveen con fines de orientación del consumidor.
           </p>
         </div>
 

@@ -91,8 +91,8 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               {/* Sutil divisor dorado editorial */}
               <div className="w-16 h-px bg-gradient-to-r from-transparent via-[#C9A961]/70 to-transparent lg:from-[#C9A961]/70 lg:to-transparent mx-auto lg:mx-0 my-2.5 sm:my-3" />
 
-              <p className="text-gray-300 text-xs sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-                En <strong>ARKANO PERFUMERÍA</strong> fusionamos el misticismo y la fijación de los elixires árabes con la sofisticación universal de las grandes casas de diseñador.
+              <p className="text-stone-300 text-xs sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                En <strong className="text-white font-semibold">ARKANO PERFUMERÍA</strong> fusionamos el misticismo y la fijación de los elixires árabes con la sofisticación universal de las grandes casas de diseñador.
               </p>
             </div>
 
@@ -116,19 +116,19 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 </button>
               </div>
 
-              {/* Micro Trust Proofs con 3 Vistos Verdes */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[11px] sm:text-xs text-gray-300 pt-1 sm:pt-2">
+              {/* Micro Trust Proofs con 3 Vistos Verdes Homogéneos */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-[11px] sm:text-xs text-stone-300 pt-1 sm:pt-2">
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
-                  <span className="text-gray-200">Batch Code & Sello de Origen</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3] flex-shrink-0" />
+                  <span className="text-stone-200 font-medium">Batch Code & Sello de Origen</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
-                  <span className="text-gray-200">DURACION Y FIJACION COMPROBADA</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3] flex-shrink-0" />
+                  <span className="text-stone-200 font-medium">Duración y Fijación Comprobada</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3]" />
-                  <span className="text-gray-200">Decants disponibles.</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-400 stroke-[3] flex-shrink-0" />
+                  <span className="text-stone-200 font-medium">Decants de 10ml Disponibles</span>
                 </div>
               </div>
             </div>

@@ -80,7 +80,7 @@ export default function CategoryBanner({
                 {arabicBrands.map((brand, i) => (
                   <span 
                     key={i} 
-                    className="text-[10px] font-semibold bg-white/5 text-stone-300 px-2.5 py-0.5 rounded-full border border-white/10 group-hover:border-[#C9A961]/30 transition-colors"
+                    className="text-[10px] sm:text-[11px] font-semibold bg-white/10 text-stone-200 px-3 py-1 rounded-full border border-white/15 group-hover:border-[#C9A961]/40 transition-colors"
                   >
                     {brand}
                   </span>
@@ -88,9 +88,9 @@ export default function CategoryBanner({
               </div>
 
               {/* High-Fashion Poetic Quote */}
-              <div className="p-3.5 sm:p-5 rounded-2xl bg-white/5 border border-[#C9A961]/30 my-3 sm:my-4 backdrop-blur-sm relative shadow-sm">
-                <span className="text-[#C9A961]/50 text-3xl font-serif absolute top-1.5 left-2.5 select-none leading-none">“</span>
-                <p className="font-serif italic text-xs sm:text-[13px] text-stone-200 leading-relaxed pl-3">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-[#C9A961]/35 my-3 sm:my-4 backdrop-blur-sm relative shadow-sm">
+                <span className="text-[#C9A961]/60 text-3xl font-serif absolute top-2 left-3 select-none leading-none">“</span>
+                <p className="font-serif italic text-xs sm:text-[14px] text-[#F5F1E8] leading-relaxed pl-4">
                   {arabicData.phrase}
                 </p>
               </div>
@@ -158,7 +158,7 @@ export default function CategoryBanner({
                 {designerBrands.map((brand, i) => (
                   <span 
                     key={i} 
-                    className="text-[10px] font-semibold bg-white/5 text-stone-300 px-2.5 py-0.5 rounded-full border border-white/10 group-hover:border-[#C9A961]/30 transition-colors"
+                    className="text-[10px] sm:text-[11px] font-semibold bg-white/10 text-stone-200 px-3 py-1 rounded-full border border-white/15 group-hover:border-[#C9A961]/40 transition-colors"
                   >
                     {brand}
                   </span>
@@ -166,9 +166,9 @@ export default function CategoryBanner({
               </div>
 
               {/* High-Fashion Poetic Quote */}
-              <div className="p-3.5 sm:p-5 rounded-2xl bg-white/5 border border-white/15 my-3 sm:my-4 backdrop-blur-sm relative shadow-sm">
-                <span className="text-[#C9A961]/50 text-3xl font-serif absolute top-1.5 left-2.5 select-none leading-none">“</span>
-                <p className="font-serif italic text-xs sm:text-[13px] text-stone-200 leading-relaxed pl-3">
+              <div className="p-4 sm:p-5 rounded-2xl bg-white/5 border border-white/20 my-3 sm:my-4 backdrop-blur-sm relative shadow-sm">
+                <span className="text-[#C9A961]/60 text-3xl font-serif absolute top-2 left-3 select-none leading-none">“</span>
+                <p className="font-serif italic text-xs sm:text-[14px] text-[#F5F1E8] leading-relaxed pl-4">
                   {designerData.phrase}
                 </p>
               </div>

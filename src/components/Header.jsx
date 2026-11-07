@@ -304,7 +304,7 @@ export default function Header({
                         <div className="inline-flex items-center gap-1 bg-[#C9A961]/20 text-[#C9A961] text-[9px] font-black px-2 py-0.5 rounded uppercase mb-2">
                           Decants Oficiales 10ml
                         </div>
-                        <h5 className="font-arabic-title text-sm font-bold text-white leading-snug">
+                        <h5 className="font-serif text-sm font-bold text-white leading-snug">
                           Descubre tu Firma Olfativa
                         </h5>
                         <p className="text-[11px] text-gray-300 mt-2 leading-relaxed">

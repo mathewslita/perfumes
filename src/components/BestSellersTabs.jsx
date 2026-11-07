@@ -83,14 +83,16 @@ export default function BestSellersTabs({
         
         {/* Section Header */}
         <div className="text-center mb-6 sm:mb-8">
-          <div className="flex items-center justify-center gap-2 mb-1.5 sm:mb-2">
-            <h2 className="font-serif text-xl sm:text-3xl font-bold text-[#0E0E0E] uppercase tracking-wide">
-              NUESTRO CATÁLOGO DE PERFUMES
-            </h2>
-          </div>
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0E0E0E] tracking-[0.16em] uppercase">
+            NUESTRO CATÁLOGO DE PERFUMES
+          </h2>
+          <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3.5 mb-2.5" />
+          <p className="text-xs text-stone-600 uppercase tracking-widest font-semibold">
+            Fragancias 100% Originales con Sello de Fábrica y Batch Code
+          </p>
 
           {/* Dynamic Tabs: Cinta Deslizable Horizontal en Móvil, Centrada en Desktop */}
-          <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-4 mt-4 sm:mt-6 border-b border-gray-200 pb-1 px-1">
+          <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-4 mt-5 sm:mt-7 border-b border-stone-200 pb-1 px-1">
             {tabs.map((tab) => {
               const isActive = currentTab === tab.id;
               return (
@@ -100,7 +102,7 @@ export default function BestSellersTabs({
                   className={`pb-2.5 sm:pb-3 px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer flex-shrink-0 ${
                     isActive
                       ? 'text-[#0E0E0E] font-black'
-                      : 'text-gray-400 hover:text-gray-800'
+                      : 'text-stone-400 hover:text-stone-900'
                   }`}
                 >
                   <span>{tab.label}</span>
@@ -244,7 +246,7 @@ export default function BestSellersTabs({
             <div className="w-16 h-16 rounded-full bg-[#0E0E0E] text-[#C9A961] flex items-center justify-center mx-auto mb-4 border border-[#C9A961]/50">
               <Sparkles className="w-8 h-8 text-[#C9A961]" />
             </div>
-            <h4 className="font-arabic-title text-xl font-bold text-gray-950 mb-2">
+            <h4 className="font-serif text-xl font-bold text-gray-950 mb-2">
               No hay coincidencias con esos filtros combinados
             </h4>
             <p className="text-xs text-gray-600 leading-relaxed mb-6">

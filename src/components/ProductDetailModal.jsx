@@ -128,7 +128,7 @@ export default function ProductDetailModal({
                 <div>
                   {/* Brand & Collection Badge */}
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
-                    <span className="font-extrabold tracking-widest text-[#0E0E0E] uppercase text-sm">
+                    <span className="font-extrabold tracking-widest text-[#8F7432] uppercase text-sm">
                       {product.brand}
                     </span>
                     <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
@@ -141,7 +141,7 @@ export default function ProductDetailModal({
                   </div>
 
                   {/* Title */}
-                  <h1 className="font-arabic-title text-2xl sm:text-3xl font-black text-[#0E0E0E] leading-tight">
+                  <h1 className="font-serif text-2xl sm:text-3xl font-bold text-[#0E0E0E] leading-tight tracking-tight">
                     {product.name}
                   </h1>
 

@@ -38,10 +38,10 @@ export default function CrossSelling({
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#C9A961] ring-4 ring-[#C9A961]/20 flex-shrink-0"></span>
             <div>
-              <h3 className="font-arabic-title text-base sm:text-lg md:text-xl font-black text-[#0E0E0E] uppercase tracking-wide">
+              <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
                 Nuestras Recomendaciones Para Ti
               </h3>
-              <p className="text-[11px] text-gray-500 font-medium hidden sm:block">
+              <p className="text-xs text-stone-600 font-medium hidden sm:block mt-0.5">
                 Selección basada en las fragancias más deseadas de nuestra colección
               </p>
             </div>

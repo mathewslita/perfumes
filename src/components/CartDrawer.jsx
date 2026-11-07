@@ -129,7 +129,7 @@ export default function CartDrawer({
           <div className="p-4 sm:p-5 border-b border-gray-100 flex items-center justify-between bg-[#0E0E0E] text-[#F5F1E8]">
             <div className="flex items-center gap-2">
               <ShoppingBag className="w-5 h-5 text-[#C9A961]" />
-              <h2 className="font-arabic-title text-base sm:text-lg font-bold text-white tracking-wide">
+              <h2 className="font-serif text-base sm:text-lg font-bold text-white tracking-wide">
                 Tu Carrito ARKANO ({cart.reduce((s, i) => s + i.quantity, 0)})
               </h2>
             </div>
@@ -235,10 +235,10 @@ export default function CartDrawer({
                 <div className="w-16 h-16 rounded-full bg-[#0E0E0E] text-[#C9A961] flex items-center justify-center mx-auto mb-3 border border-[#C9A961]/40">
                   <ShoppingBag className="w-8 h-8 text-[#C9A961]" />
                 </div>
-                <h4 className="font-arabic-title text-base font-bold text-gray-900">
+                <h4 className="font-serif text-base font-bold text-stone-900">
                   Tu carrito está vacío
                 </h4>
-                <p className="text-xs text-gray-500 mt-1 max-w-xs mx-auto">
+                <p className="text-xs text-stone-600 mt-1 max-w-xs mx-auto">
                   Agrega una fragancia árabe o de diseñador para disfrutar de la experiencia sensorial ARKANO.
                 </p>
                 <button

@@ -145,14 +145,14 @@ export default function BrandsSection({ onSelectBrand }) {
       className="py-12 sm:py-16 bg-white border-t border-b border-[#C9A961]/20 scroll-mt-20 overflow-hidden relative"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10 text-center">
-        <span className="text-[10px] sm:text-[11px] tracking-[0.35em] font-extrabold uppercase text-[#A58B4E] block mb-2">
+        <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-extrabold uppercase text-[#A58B4E] block mb-2">
           CASAS OFICIALES
         </span>
-        <h2 className="font-arabic-title text-2xl sm:text-3xl lg:text-4xl font-light text-[#0E0E0E] tracking-[0.18em] uppercase">
+        <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0E0E0E] tracking-[0.16em] uppercase">
           MARCAS CON LAS QUE TRABAJAMOS
         </h2>
-        <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3 mb-2.5" />
-        <p className="text-xs text-stone-500 uppercase tracking-widest font-medium">
+        <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3.5 mb-2.5" />
+        <p className="text-xs text-stone-600 uppercase tracking-widest font-semibold">
           Fragancias Árabes de Dubái & Casas Icónicas de Diseñador
         </p>
       </div>

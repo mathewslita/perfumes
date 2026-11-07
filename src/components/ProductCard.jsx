@@ -167,10 +167,10 @@ export default function ProductCard({
         <div>
           {/* Marca y Género */}
           <div className="flex items-center justify-between text-[10px] sm:text-[11px] mb-1">
-            <span className="font-extrabold tracking-widest text-[#0E0E0E] uppercase truncate mr-1">
+            <span className="font-extrabold tracking-widest text-[#8F7432] uppercase truncate mr-1">
               {product.brand}
             </span>
-            <span className="text-[#A58B4E] font-bold text-[9px] sm:text-[10px] uppercase tracking-wider flex-shrink-0">
+            <span className="text-stone-500 font-semibold text-[9px] sm:text-[10px] uppercase tracking-wider flex-shrink-0">
               {product.gender.toUpperCase()}
             </span>
           </div>
@@ -178,42 +178,42 @@ export default function ProductCard({
           {/* Nombre del Perfume */}
           <h4 
             onClick={() => onOpenProduct(product.id)}
-            className="font-serif font-bold text-xs sm:text-[14px] text-[#0E0E0E] group-hover:text-[#A58B4E] transition-colors cursor-pointer line-clamp-1 tracking-tight"
+            className="font-serif font-bold text-[13px] sm:text-[15px] text-[#0E0E0E] group-hover:text-[#8F7432] transition-colors cursor-pointer line-clamp-1 tracking-tight leading-snug"
             title={product.name}
           >
             {product.name}
           </h4>
 
           {/* 3 Notas Olfativas Principales: visibles en desktop, limpias en móvil */}
-          <div className="hidden sm:flex items-center gap-1.5 mt-2.5 py-1 px-1.5 bg-[#F5F1E8] rounded-lg border border-gray-200/80">
+          <div className="hidden sm:flex items-center gap-1.5 mt-2.5 py-1 px-2 bg-[#F5F1E8] rounded-lg border border-stone-200/80">
             {product.noteIcons.map((note, idx) => (
-              <span key={idx} className="text-[10px] text-[#0E0E0E] flex items-center gap-0.5" title={note.name}>
+              <span key={idx} className="text-[10px] text-stone-800 flex items-center gap-1" title={note.name}>
                 <span>{note.emoji}</span>
-                <span className="font-medium text-[9px] line-clamp-1">{note.name}</span>
-                {idx < product.noteIcons.length - 1 && <span className="text-gray-300">•</span>}
+                <span className="font-medium text-[9.5px] line-clamp-1">{note.name}</span>
+                {idx < product.noteIcons.length - 1 && <span className="text-stone-300">•</span>}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Precios y Botón de Carrito sin cajas redundantes */}
-        <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-100">
-          <div className="flex items-baseline justify-between gap-1 mb-1.5 sm:mb-2">
+        {/* Precios y Botón de Carrito */}
+        <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-stone-100">
+          <div className="flex items-baseline justify-between gap-1 mb-2">
             <div className="flex items-baseline gap-1.5">
               <span className="text-base sm:text-xl font-black text-[#0E0E0E]">
                 ${product.price100ml.toFixed(2)}
               </span>
               {isOnSale && (
-                <span className="text-[10px] sm:text-xs font-bold text-gray-400 line-through decoration-rose-500 decoration-1">
+                <span className="text-[10px] sm:text-xs font-bold text-stone-400 line-through decoration-rose-500 decoration-1">
                   ${product.originalPrice100ml.toFixed(2)}
                 </span>
               )}
             </div>
             
-            {/* Indicador sutil de Decant sin caja gigante */}
+            {/* Indicador refinado de Decant con micro-badge */}
             <span 
               onClick={() => onOpenProduct(product.id)} 
-              className="text-[9.5px] sm:text-[10.5px] font-semibold text-[#A58B4E] hover:text-[#0E0E0E] transition-colors cursor-pointer"
+              className="text-[9.5px] sm:text-[10px] font-bold text-[#8F7432] hover:text-[#0E0E0E] transition-all cursor-pointer bg-[#F5F1E8] px-2 py-0.5 rounded-full border border-[#C9A961]/35 shadow-2xs hover:border-[#C9A961]"
               title="Ver presentación en decant de viaje 10ml"
             >
               Decant ${(product.priceDecant || (isArabic ? 15 : 30)).toFixed(0)}
