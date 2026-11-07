@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
+import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, SunMoon, Heart } from 'lucide-react';
 
 export default function ProductCard({ 
   product, 
@@ -77,7 +77,7 @@ export default function ProductCard({
                     ? 'bg-[#0E0E0E]/90 text-[#C9A961] border-[#C9A961]/40 hover:border-[#C9A961] hover:bg-black'
                     : 'bg-[#F5F1E8] text-[#0E0E0E] border-[#C9A961]/50 hover:border-[#C9A961]'
                 }`}
-                title={`Uso recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día y Noche"}`}
+                title={`Uso recomendado: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Versátil"}`}
                 aria-label={`Momento: ${product.timeOfDay === "dia" ? "Día" : product.timeOfDay === "noche" ? "Noche" : "Día y Noche"}`}
               >
                 {product.timeOfDay === "dia" && (
@@ -87,7 +87,7 @@ export default function ProductCard({
                   <Moon className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961] -rotate-12" />
                 )}
                 {product.timeOfDay === "ambas" && (
-                  <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961]" />
+                  <SunMoon className="w-3.5 h-3.5 text-[#A58B4E]" />
                 )}
               </button>
 
@@ -99,7 +99,7 @@ export default function ProductCard({
                     : 'opacity-0 -translate-y-1 scale-95 group-hover/time:opacity-100 group-hover/time:translate-y-0 group-hover/time:scale-100'
                 }`}
               >
-                {product.timeOfDay === "dia" ? "☀️ USO DÍA" : product.timeOfDay === "noche" ? "🌙 USO NOCHE" : "✨ DÍA & NOCHE"}
+                {product.timeOfDay === "dia" ? "☀️ USO DÍA" : product.timeOfDay === "noche" ? "🌙 USO NOCHE" : "🌓 VERSÁTIL"}
               </div>
             </div>
           )}

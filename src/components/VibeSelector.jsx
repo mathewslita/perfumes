@@ -14,9 +14,7 @@ export default function VibeSelector({ activeVibe, onSelectVibe }) {
           <h3 className="font-arabic-title text-sm sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
             ¿QUÉ ESTILO BUSCAS HOY?
           </h3>
-          <span className="hidden sm:block text-[11px] text-gray-500 font-medium uppercase tracking-wider mt-1">
-            FILTRA POR ESTELA Y PERSONALIDAD
-          </span>
+
         </div>
 
         {/* Píldoras Horizontales Fluidas en Móvil y Centradas en Desktop */}

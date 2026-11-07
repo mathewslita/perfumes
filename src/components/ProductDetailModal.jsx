@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   X, ShoppingBag, Zap, ShieldCheck, Truck, Check, 
-  Flame, Sun, Moon, Sparkles, Heart 
+  Flame, Sun, Moon, SunMoon, Sparkles, Heart 
 } from 'lucide-react';
 import LightboxModal from './LightboxModal';
 
@@ -172,11 +172,11 @@ export default function ProductDetailModal({
                     {product.timeOfDay === 'ambas' && (
                       <div 
                         className="inline-flex items-center rounded-full h-6 px-2.5 bg-[#F5F1E8] text-[#0E0E0E] border border-[#C9A961]/50 shadow-2xs select-none flex-shrink-0"
-                        title="Momento recomendado: Día & Noche"
+                        title="Momento recomendado: Versátil (Día y Noche)"
                       >
-                        <Sparkles className="w-3.5 h-3.5 text-[#A58B4E] fill-[#C9A961] flex-shrink-0 mr-1.5" />
+                        <SunMoon className="w-3.5 h-3.5 text-[#A58B4E] flex-shrink-0 mr-1.5" />
                         <span className="text-[10px] font-extrabold tracking-wide uppercase">
-                          DÍA & NOCHE
+                          VERSÁTIL
                         </span>
                       </div>
                     )}

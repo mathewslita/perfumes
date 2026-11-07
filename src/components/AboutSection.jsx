@@ -5,21 +5,6 @@ export default function AboutSection() {
   return (
     <section id="acerca-de-nosotros" className="py-12 sm:py-16 bg-[#F5F1E8] border-t border-b border-[#C9A961]/25 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <h2 className="font-arabic-title text-xl sm:text-3xl font-black text-[#0E0E0E] tracking-tight">
-            EL UNIVERSO DE ARKANO PERFUMERÍA
-          </h2>
-
-          <div className="w-16 h-0.5 bg-gradient-to-r from-[#0E0E0E] via-[#C9A961] to-[#0E0E0E] mx-auto my-3 rounded-full" />
-
-          <p className="text-xs sm:text-[13px] text-gray-700 leading-relaxed font-normal">
-            En <strong>ARKANO</strong> creemos que una fragancia es la firma invisible de tu personalidad.
-            Curamos dos mundos complementarios de excelencia: <strong>el misterio oriental de los perfumes árabes de Dubái</strong> (con estela y fijación extrema de más de 12 horas) y <strong>la cumbre del lujo con perfumes de diseñador.</strong>
-          </p>
-        </div>
-
         {/* 3 Pillars of Trust Grid - Compacto, sutil y elegante */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4.5 mb-8 sm:mb-10">
 
@@ -98,7 +83,7 @@ export default function AboutSection() {
               ¿No sabes qué perfume árabe o de diseñador elegir?
             </h3>
             <p className="text-xs sm:text-sm text-gray-300 max-w-xl font-light">
-              Escríbenos directamente a WhatsApp. Nuestro equipo de sommeliers te recomendará la fragancia perfecta según tu ocasión, clima y gustos olfativos.
+              Escríbenos directamente a WhatsApp. Nuestro equipo de asesores te recomendará la fragancia perfecta según tu ocasión, clima y gustos olfativos.
             </p>
           </div>
 
@@ -109,7 +94,7 @@ export default function AboutSection() {
             className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs sm:text-sm py-3 px-6 sm:py-3.5 sm:px-8 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all flex items-center gap-2 flex-shrink-0"
           >
             <MessageCircle className="w-4 h-4 text-[#0E0E0E]" />
-            <span>Hablar con un Sommelier ARKANO</span>
+            <span>Hablar con un Asesor ARKANO</span>
           </a>
         </div>
 

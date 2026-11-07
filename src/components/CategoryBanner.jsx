@@ -1,5 +1,5 @@
 import React from 'react';
-import { Crown, Award, ArrowRight, Sparkles, ShieldCheck, Flame, Clock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { COLLECTIONS_DATA } from '../data/perfumes';
 
 export default function CategoryBanner({ 
@@ -22,10 +22,7 @@ export default function CategoryBanner({
         
         {/* Minimalist Editorial Title */}
         <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-12">
-          <span className="text-[11px] tracking-[0.35em] font-extrabold uppercase text-[#A58B4E] block mb-2">
-            UNIVERSOS OLFATIVOS
-          </span>
-                    <h2 className="font-arabic-title text-2xl sm:text-3xl lg:text-4xl font-light text-[#0E0E0E] tracking-[0.16em] uppercase">
+          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0E0E0E] tracking-[0.16em] uppercase">
             NUESTRAS CATEGORÍAS
           </h2>
           <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3.5 mb-2.5" />
@@ -54,16 +51,7 @@ export default function CategoryBanner({
                 {/* Ambient Warm Golden Aura */}
                 <div className="absolute w-48 h-48 bg-[#C9A961]/20 rounded-full blur-3xl pointer-events-none" />
                 
-                {/* Badges on Visual Stage */}
-                <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 bg-[#0E0E0E]/90 text-[#C9A961] border border-[#C9A961]/50 text-[10px] font-black px-2.5 py-1 rounded-full shadow-lg backdrop-blur-sm">
-                  <Crown className="w-3.5 h-3.5 fill-[#C9A961]" />
-                  <span>DUBÁI & ORIENTE</span>
-                </div>
 
-                <div className="absolute top-3 right-3 z-10 bg-[#C9A961] text-[#0E0E0E] text-[10px] font-black px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
-                  <Flame className="w-3 h-3 fill-current" />
-                  <span>+16h Fijación</span>
-                </div>
 
                 {/* Twin Hero Arabic Bottles */}
                 <div className="relative z-10 flex items-end justify-center -space-x-5 sm:-space-x-7 pt-4">
@@ -82,19 +70,9 @@ export default function CategoryBanner({
                 </div>
               </div>
 
-              {/* Title & Brand Badges */}
-              <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className="text-[10px] font-black tracking-[0.2em] text-[#C9A961] uppercase flex items-center gap-1">
-                  <Crown className="w-3 h-3 text-[#C9A961]" />
-                  COLECCIÓN REAL ORIENTAL
-                </span>
-                <span className="text-[10.5px] font-medium tracking-wider text-stone-400">
-                  Dubái, EAU
-                </span>
-              </div>
-
-              <h3 className="font-arabic-title text-2xl sm:text-3xl font-light text-white tracking-wide group-hover:text-[#C9A961] transition-colors">
-                Perfumes Árabes
+              {/* Title Editorial Playfair */}
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide uppercase group-hover:text-[#C9A961] transition-colors mt-2 mb-1">
+                PERFUMES ÁRABES
               </h3>
 
               {/* Brand Pills */}
@@ -117,21 +95,7 @@ export default function CategoryBanner({
                 </p>
               </div>
 
-              {/* Key Highlights Micro-Stats */}
-              <div className="grid grid-cols-3 gap-2 py-3 border-t border-b border-white/10 text-center">
-                <div className="bg-white/5 p-1.5 sm:p-2 rounded-xl border border-white/5">
-                  <div className="text-[9.5px] text-[#C9A961] uppercase font-bold tracking-wider">Fijación</div>
-                  <div className="text-xs font-black text-white mt-0.5">14h a 16h+</div>
-                </div>
-                <div className="bg-white/5 p-1.5 sm:p-2 rounded-xl border border-white/5">
-                  <div className="text-[9.5px] text-[#C9A961] uppercase font-bold tracking-wider">Aceites</div>
-                  <div className="text-xs font-black text-white mt-0.5">18% - 28%</div>
-                </div>
-                <div className="bg-white/5 p-1.5 sm:p-2 rounded-xl border border-white/5">
-                  <div className="text-[9.5px] text-[#C9A961] uppercase font-bold tracking-wider">Garantía</div>
-                  <div className="text-xs font-black text-white mt-0.5">Dubái 100%</div>
-                </div>
-              </div>
+
             </div>
 
             {/* CTA Button */}
@@ -165,16 +129,7 @@ export default function CategoryBanner({
                 {/* Ambient Platinum Aura */}
                 <div className="absolute w-48 h-48 bg-sky-400/10 rounded-full blur-3xl pointer-events-none" />
                 
-                {/* Badges on Visual Stage */}
-                <div className="absolute top-3 left-3 z-10 flex items-center gap-1.5 bg-[#0E0E0E]/90 text-white border border-white/30 text-[10px] font-black px-2.5 py-1 rounded-full shadow-lg backdrop-blur-sm">
-                  <Award className="w-3.5 h-3.5 text-[#C9A961]" />
-                  <span>PARÍS & MILÁN</span>
-                </div>
 
-                <div className="absolute top-3 right-3 z-10 bg-white text-[#0E0E0E] text-[10px] font-black px-2.5 py-1 rounded-full shadow-md flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-[#0E0E0E]" />
-                  <span>Alta Costura</span>
-                </div>
 
                 {/* Twin Hero Designer Bottles */}
                 <div className="relative z-10 flex items-end justify-center -space-x-5 sm:-space-x-7 pt-4">
@@ -193,19 +148,9 @@ export default function CategoryBanner({
                 </div>
               </div>
 
-              {/* Title & Brand Badges */}
-              <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className="text-[10px] font-black tracking-[0.2em] text-[#C9A961] uppercase flex items-center gap-1">
-                  <Award className="w-3 h-3 text-[#C9A961]" />
-                  ALTA COSTURA GLOBAL
-                </span>
-                <span className="text-[10.5px] font-medium tracking-wider text-stone-400">
-                  París & Milán
-                </span>
-              </div>
-
-              <h3 className="font-arabic-title text-2xl sm:text-3xl font-light text-white tracking-wide group-hover:text-[#C9A961] transition-colors">
-                Perfumes de Diseñador
+              {/* Title Editorial Playfair */}
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-white tracking-wide uppercase group-hover:text-[#C9A961] transition-colors mt-2 mb-1">
+                PERFUMES DE DISEÑADOR
               </h3>
 
               {/* Brand Pills */}
@@ -228,21 +173,7 @@ export default function CategoryBanner({
                 </p>
               </div>
 
-              {/* Key Highlights Micro-Stats */}
-              <div className="grid grid-cols-3 gap-2 py-3 border-t border-b border-white/10 text-center">
-                <div className="bg-white/5 p-1.5 sm:p-2 rounded-xl border border-white/5">
-                  <div className="text-[9.5px] text-[#C9A961] uppercase font-bold tracking-wider">Origen</div>
-                  <div className="text-xs font-black text-white mt-0.5">París & Milán</div>
-                </div>
-                <div className="bg-white/5 p-1.5 sm:p-2 rounded-xl border border-white/5">
-                  <div className="text-[9.5px] text-[#C9A961] uppercase font-bold tracking-wider">Estatus</div>
-                  <div className="text-xs font-black text-white mt-0.5">Alta Gama</div>
-                </div>
-                <div className="bg-white/5 p-1.5 sm:p-2 rounded-xl border border-white/5">
-                  <div className="text-[9.5px] text-[#C9A961] uppercase font-bold tracking-wider">Trazabilidad</div>
-                  <div className="text-xs font-black text-white mt-0.5">Batch Code</div>
-                </div>
-              </div>
+
             </div>
 
             {/* CTA Button */}

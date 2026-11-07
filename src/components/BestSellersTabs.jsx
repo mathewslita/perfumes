@@ -84,14 +84,10 @@ export default function BestSellersTabs({
         {/* Section Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-center gap-2 mb-1.5 sm:mb-2">
-            <h2 className="font-arabic-title text-xl sm:text-3xl font-extrabold text-[#0E0E0E] uppercase tracking-wide">
+            <h2 className="font-serif text-xl sm:text-3xl font-bold text-[#0E0E0E] uppercase tracking-wide">
               NUESTRO CATÁLOGO DE PERFUMES
             </h2>
-            <span className="text-xl sm:text-2xl animate-bounce">🔥</span>
           </div>
-          <p className="text-[11px] sm:text-sm text-gray-600 max-w-xl mx-auto uppercase tracking-wider font-medium px-2">
-            FRAGANCIAS ÁRABES Y DE DISEÑADOR CON ESTELA IMPONENTE, FIJACIÓN PROLONGADA Y MÁXIMA CALIDAD.
-          </p>
 
           {/* Dynamic Tabs: Cinta Deslizable Horizontal en Móvil, Centrada en Desktop */}
           <div className="flex items-center justify-start sm:justify-center overflow-x-auto no-scrollbar gap-2 sm:gap-4 mt-4 sm:mt-6 border-b border-gray-200 pb-1 px-1">
