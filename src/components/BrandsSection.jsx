@@ -62,8 +62,36 @@ export const ALL_BRANDS = [
     logoImage: '/assets/images/brands/french_avenue.webp?v=2',
     heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
   },
+  {
+    id: 'dumont-paris',
+    name: 'DUMONT PARIS',
+    category: 'arabes',
+    logoImage: '/assets/images/brands/dumont_paris.png',
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
+  },
+  {
+    id: 'rayhaan',
+    name: 'RAYHAAN',
+    category: 'arabes',
+    logoImage: '/assets/images/brands/rayhaan.png',
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
+  },
 
   // Casas Icónicas de Diseñador
+  {
+    id: 'halloween',
+    name: 'HALLOWEEN',
+    category: 'disenador',
+    logoImage: '/assets/images/brands/halloween_delpozo.png',
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px] mix-blend-multiply'
+  },
+  {
+    id: 'yves-dorgeval',
+    name: "YVES D'ORGEVAL",
+    category: 'disenador',
+    logoImage: '/assets/images/brands/yves_dorgeval.png',
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px] mix-blend-multiply'
+  },
   {
     id: 'dior',
     name: 'DIOR',

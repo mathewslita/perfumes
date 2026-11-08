@@ -260,11 +260,11 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                             }}
                             title="Ver detalles completos del perfume"
                           >
-                            <div className="w-14 h-14 rounded-xl bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] p-1 border border-stone-200 flex-shrink-0 flex items-center justify-center">
+                            <div className="w-14 h-14 rounded-xl bg-white p-1 border border-stone-200 flex-shrink-0 flex items-center justify-center">
                               <img 
                                 src={perfume.imageMain} 
                                 alt={perfume.name} 
-                                className="w-full h-full object-contain filter drop-shadow-sm"
+                                className="w-full h-full object-contain mix-blend-multiply"
                               />
                             </div>
                             

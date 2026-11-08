@@ -160,13 +160,13 @@ export default function FavoritesDrawer({
                           onOpenProduct(product.id);
                           onClose();
                         }}
-                        className="w-20 h-20 sm:w-22 sm:h-22 rounded-xl bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] p-1.5 border border-stone-200 flex-shrink-0 flex items-center justify-center cursor-pointer relative overflow-hidden"
+                        className="w-20 h-20 sm:w-22 sm:h-22 rounded-xl bg-white p-1.5 border border-stone-200 flex-shrink-0 flex items-center justify-center cursor-pointer relative overflow-hidden"
                         title="Ver detalles de la fragancia"
                       >
                         <img 
                           src={product.imageMain} 
                           alt={product.name}
-                          className="w-full h-full object-contain filter drop-shadow-sm group-hover:scale-108 transition-transform duration-300"
+                          className="w-full h-full object-contain mix-blend-multiply group-hover:scale-108 transition-transform duration-300"
                         />
                         {discount > 0 && (
                           <span className="absolute top-1 left-1 bg-rose-600 text-white text-[9px] font-black px-1.5 py-0.5 rounded-full">

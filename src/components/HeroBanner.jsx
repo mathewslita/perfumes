@@ -154,7 +154,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 onClick={() => onOpenProduct && onOpenProduct(currentProduct.id)}
                 title={`Haz clic para ver detalles y ficha de ${currentProduct.name}`}
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-square bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] pt-12 pb-24 sm:pt-10 sm:pb-22 px-6 flex items-center justify-center">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/5] sm:aspect-square bg-white pt-12 pb-24 sm:pt-10 sm:pb-22 px-6 flex items-center justify-center">
                   
                   {/* Slide Images con transición fluida tipo cross-fade y micro-escala */}
                   {NEW_ARRIVALS.map((perfume, idx) => (
@@ -169,7 +169,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                       <img 
                         src={perfume.image} 
                         alt={`${perfume.brand} ${perfume.name}`} 
-                        className="w-full h-full max-h-[265px] sm:max-h-full object-contain rounded-2xl filter drop-shadow-[0_16px_25px_rgba(0,0,0,0.18)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
+                        className="w-full h-full max-h-[265px] sm:max-h-full object-contain rounded-2xl mix-blend-multiply transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
                       />
                     </div>
                   ))}
