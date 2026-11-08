@@ -153,7 +153,7 @@ export default function ProductCard({
         <img 
           src={product.imageMain} 
           alt={`${product.brand} ${product.name} original`} 
-          className="w-full h-full max-h-[88%] max-w-[88%] object-contain object-center mix-blend-multiply group-hover:scale-108 transition-transform duration-500 ease-out"
+          className="w-full h-full max-h-[90%] max-w-[90%] object-contain object-center mix-blend-multiply group-hover:scale-108 transition-transform duration-500 ease-out"
           loading="lazy"
         />
 
