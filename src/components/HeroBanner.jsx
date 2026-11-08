@@ -8,7 +8,7 @@ const NEW_ARRIVALS = [
     name: 'Hawas Verde For Him',
     price: 85.00,
     notes: 'Lima, Romero, Manzana, Pachulí y Ámbar',
-    image: '/assets/images/rasasi_hawas_verde.jpg',
+    image: '/assets/images/hawas verde rasari.webp',
     categoryBadge: 'Árabe • Nuevo Lanzamiento'
   },
   {

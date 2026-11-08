@@ -3595,9 +3595,9 @@ export const PERFUMES_DATA = [
       "citricos",
       "oud_maderas"
     ],
-    "imageMain": "/assets/images/rasasi_hawas_verde.jpg",
+    "imageMain": "/assets/images/hawas verde rasari.webp",
     "gallery": [
-      "/assets/images/rasasi_hawas_verde.jpg",
+      "/assets/images/hawas verde rasari.webp",
       "/assets/images/rasasi_hawas_verde_infografia.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Rasasi/Hawas-for-Him-39449.html",
