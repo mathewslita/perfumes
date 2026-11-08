@@ -86,12 +86,12 @@ export default function ProductDetailModal({
               <div className="md:col-span-6 flex flex-col gap-3.5">
                 <div 
                   onClick={() => setLightboxOpen(true)}
-                  className="relative aspect-square max-h-[380px] sm:max-h-none bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] rounded-3xl p-5 sm:p-7 md:p-8 border border-[#C9A961]/25 cursor-pointer overflow-hidden flex items-center justify-center group shadow-inner transition-all hover:border-[#C9A961]/50"
+                  className="relative aspect-square max-h-[380px] sm:max-h-none bg-gradient-to-b from-white via-[#FCFAF7] to-[#F5F2EB] rounded-3xl p-5 sm:p-7 md:p-8 border border-[#C9A961]/25 cursor-pointer overflow-hidden flex items-center justify-center group shadow-inner transition-all hover:border-[#C9A961]/50"
                 >
                   <img 
                     src={images[activeImgIndex]} 
                     alt={product.name} 
-                    className="w-full h-full max-h-[90%] max-w-[90%] object-contain filter drop-shadow-[0_18px_24px_rgba(0,0,0,0.14)] group-hover:scale-108 transition-all duration-500 ease-out"
+                    className="w-full h-full max-h-[90%] max-w-[90%] object-contain object-center filter drop-shadow-[0_18px_24px_rgba(0,0,0,0.14)] group-hover:scale-108 transition-all duration-500 ease-out"
                   />
                   
                   {/* Badge de Oferta: Solo si el perfume tiene oferta activa */}

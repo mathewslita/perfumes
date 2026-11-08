@@ -148,12 +148,12 @@ export default function ProductCard({
       {/* Thumbnail de Producto - PERFUME PROTAGONISTA */}
       <div 
         onClick={() => onOpenProduct(product.id)}
-        className="relative w-full aspect-square bg-gradient-to-b from-[#FFFDF9] via-[#F8F4EC] to-[#EFE8DA] pt-10 pb-4 px-4 sm:pt-12 sm:pb-6 sm:px-6 cursor-pointer overflow-hidden flex items-center justify-center border-b border-gray-100"
+        className="relative w-full aspect-square bg-gradient-to-b from-white via-[#FCFAF7] to-[#F5F2EB] p-3 sm:p-4 pt-9 sm:pt-11 cursor-pointer overflow-hidden flex items-center justify-center border-b border-gray-100"
       >
         <img 
           src={product.imageMain} 
           alt={`${product.brand} ${product.name} original`} 
-          className="w-full h-full max-h-[86%] max-w-[86%] object-contain filter drop-shadow-[0_12px_18px_rgba(0,0,0,0.12)] group-hover:scale-108 transition-transform duration-500 ease-out"
+          className="w-full h-full max-h-[88%] max-w-[88%] object-contain object-center filter drop-shadow-[0_12px_18px_rgba(0,0,0,0.12)] group-hover:scale-108 transition-transform duration-500 ease-out"
           loading="lazy"
         />
 

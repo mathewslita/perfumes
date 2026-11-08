@@ -414,7 +414,7 @@ export default function Header({
                   ) : (
                     <div className="p-4 text-center text-xs text-gray-400">
                       <p className="font-semibold text-gray-300 mb-1">Sin resultados exactos</p>
-                      <p className="text-[11px]">Intenta buscar por <em>Khamrah, Sauvage, Vainilla</em> o <em>Oud</em>.</p>
+                      <p className="text-[11px]">Intenta buscar por <em>Khamrah, Hawas, Odyssey</em> o <em>Vainilla</em>.</p>
                     </div>
                   )}
 
@@ -598,7 +598,7 @@ export default function Header({
                           </span>
                         </div>
                         <div className="text-[11px] text-gray-400">
-                          Dior, Chanel, YSL, Tom Ford, Versace
+                          Halloween, Jesús del Pozo, Yves d'Orgeval
                         </div>
                       </div>
                     </div>

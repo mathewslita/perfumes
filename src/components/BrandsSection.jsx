@@ -26,33 +26,19 @@ export const ALL_BRANDS = [
     heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
   },
   {
-    id: 'al-haramain',
-    name: 'AL HARAMAIN',
-    category: 'arabes',
-    logoImage: '/assets/images/brands/al_haramain.png?v=2',
-    filterStyle: { filter: 'grayscale(100%) contrast(150%) brightness(0.2)' },
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
-  },
-  {
-    id: 'bharara',
-    name: 'BHARARA',
-    category: 'arabes',
-    logoImage: '/assets/images/brands/bharara.webp?v=2',
-    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[160px] mix-blend-multiply'
-  },
-  {
-    id: 'maison-alhambra',
-    name: 'MAISON ALHAMBRA',
-    category: 'arabes',
-    logoImage: '/assets/images/brands/maison_alhambra.webp?v=2',
-    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[170px] mix-blend-multiply'
-  },
-  {
     id: 'rasasi',
     name: 'RASASI',
     category: 'arabes',
     logoImage: '/assets/images/brands/rasasi.svg?v=2',
     filterStyle: { filter: 'brightness(0)' },
+    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
+  },
+  {
+    id: 'al-haramain',
+    name: 'AL HARAMAIN',
+    category: 'arabes',
+    logoImage: '/assets/images/brands/al_haramain.png?v=2',
+    filterStyle: { filter: 'grayscale(100%) contrast(150%) brightness(0.2)' },
     heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
   },
   {
@@ -62,63 +48,43 @@ export const ALL_BRANDS = [
     logoImage: '/assets/images/brands/french_avenue.webp?v=2',
     heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
   },
-
-  // Casas Icónicas de Diseñador
   {
-    id: 'dior',
-    name: 'DIOR',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/dior.webp?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[220px] mix-blend-multiply'
+    id: 'maison-alhambra',
+    name: 'MAISON ALHAMBRA',
+    category: 'arabes',
+    logoImage: '/assets/images/brands/maison_alhambra.webp?v=2',
+    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[170px] mix-blend-multiply'
   },
   {
-    id: 'jean-paul-gaultier',
-    name: 'JEAN PAUL GAULTIER',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/jean_paul_gaultier.jpg?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[190px] mix-blend-multiply'
+    id: 'bharara',
+    name: 'BHARARA',
+    category: 'arabes',
+    logoImage: '/assets/images/brands/bharara.webp?v=2',
+    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[160px] mix-blend-multiply'
   },
   {
-    id: 'chanel',
-    name: 'CHANEL',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/chanel.svg?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[180px]'
+    id: 'dumont-paris',
+    name: 'DUMONT PARIS',
+    category: 'arabes',
+    logoText: 'DUMONT PARIS'
   },
   {
-    id: 'yves-saint-laurent',
-    name: 'YVES SAINT LAURENT',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/ysl.png?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[270px]'
+    id: 'rayhaan',
+    name: 'RAYHAAN',
+    category: 'arabes',
+    logoText: 'RAYHAAN'
   },
   {
-    id: 'versace',
-    name: 'VERSACE',
+    id: 'halloween',
+    name: 'HALLOWEEN',
     category: 'disenador',
-    logoImage: '/assets/images/brands/versace.svg?v=5',
-    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[180px] scale-110 sm:scale-125'
+    logoText: 'HALLOWEEN'
   },
   {
-    id: 'tom-ford',
-    name: 'TOM FORD',
+    id: 'yves-dorgeval',
+    name: "YVES D'ORGEVAL",
     category: 'disenador',
-    logoImage: '/assets/images/brands/tom_ford.jpg?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[280px] mix-blend-multiply'
-  },
-  {
-    id: 'giorgio-armani',
-    name: 'GIORGIO ARMANI',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/giorgio_armani.webp?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[310px] mix-blend-multiply'
-  },
-  {
-    id: 'xerjoff',
-    name: 'XERJOFF',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/xerjoff.webp?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[270px]'
+    logoText: "YVES D'ORGEVAL PARIS"
   }
 ];
 
@@ -174,13 +140,19 @@ export default function BrandsSection({ onSelectBrand }) {
                 title={`Ver fragancias de ${brand.name}`}
                 aria-label={`Ver fragancias de ${brand.name}`}
               >
-                <img
-                  src={brand.logoImage}
-                  alt={brand.name}
-                  style={brand.filterStyle || {}}
-                  className={`transition-transform duration-300 ${brand.heightClass || 'h-12'}`}
-                  loading="lazy"
-                />
+                {brand.logoImage ? (
+                  <img
+                    src={brand.logoImage}
+                    alt={brand.name}
+                    style={brand.filterStyle || {}}
+                    className={`transition-transform duration-300 ${brand.heightClass || 'h-12'}`}
+                    loading="lazy"
+                  />
+                ) : (
+                  <span className="font-serif text-lg sm:text-xl font-black tracking-[0.22em] text-[#0E0E0E] uppercase border-b-2 border-[#C9A961]/40 pb-1 group-hover:border-[#C9A961] transition-colors whitespace-nowrap">
+                    {brand.logoText || brand.name}
+                  </span>
+                )}
               </button>
             ))}
           </div>

@@ -12,31 +12,40 @@ const NEW_ARRIVALS = [
     categoryBadge: 'Árabe • Nuevo Lanzamiento'
   },
   {
-    id: 'dior-sauvage-elixir',
-    brand: 'CHRISTIAN DIOR PARÍS',
-    name: 'Sauvage Elixir',
-    price: 185.00,
-    notes: 'Intenso Nocturno • Canela, Lavanda y Sándalo',
-    image: '/assets/images/dior_sauvage_elixir.jpg',
+    id: 'armaf-club-de-nuit-iconic',
+    brand: 'ARMAF DUBÁI',
+    name: 'Club de Nuit Iconic',
+    price: 75.00,
+    notes: 'Toronja Azul, Menta, Jengibre e Incienso',
+    image: '/assets/images/Club de nuit iconic.webp',
+    categoryBadge: 'Árabe • Best Seller Azul'
+  },
+  {
+    id: 'lattafa-khamrah-original',
+    brand: 'LATTAFA DUBÁI',
+    name: 'Khamrah Original',
+    price: 65.00,
+    notes: 'Gourmand Cálido • Canela, Dátiles y Praliné',
+    image: '/assets/images/Kamrah clasico.jpg',
+    categoryBadge: 'Árabe • Fenómeno Mundial'
+  },
+  {
+    id: 'halloween-man-x',
+    brand: 'HALLOWEEN PARÍS',
+    name: 'Halloween Man X',
+    price: 65.00,
+    notes: 'Café Espresso, Whisky Licoroso y Cardamomo',
+    image: '/assets/images/Halloween x man.jpg',
     categoryBadge: 'Diseñador • Alta Costura'
   },
   {
-    id: 'lattafa-khamrah',
-    brand: 'LATTAFA DUBÁI',
-    name: 'Khamrah',
-    price: 58.00,
-    notes: 'Gourmand Cálido • Canela, Praliné y Vainilla',
-    image: '/assets/images/lattafa_khamrah.jpg',
-    categoryBadge: 'Árabe • Edición Especial'
-  },
-  {
-    id: 'bleu-de-chanel-parfum',
-    brand: 'CHANEL PARÍS',
-    name: 'Bleu de Chanel Parfum',
-    price: 198.00,
-    notes: 'Elegancia Atemporal • Cedro, Sándalo y Cítricos',
-    image: '/assets/images/bleu_de_chanel.jpg',
-    categoryBadge: 'Diseñador • Edición Lujo'
+    id: 'french-avenue-liquid-brun',
+    brand: 'FRENCH AVENUE',
+    name: 'Liquid Brun',
+    price: 76.00,
+    notes: 'Vainilla Bourbon, Canela y Praliné de Avellana',
+    image: '/assets/images/Liquid brun.webp',
+    categoryBadge: 'Árabe • Nicho Supremo'
   }
 ];
 
