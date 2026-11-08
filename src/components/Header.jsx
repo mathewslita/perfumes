@@ -598,7 +598,7 @@ export default function Header({
                           </span>
                         </div>
                         <div className="text-[11px] text-gray-400">
-                          Halloween, Jesús del Pozo, Yves d'Orgeval
+                          Halloween, Jesús del Pozo, Dior, Chanel
                         </div>
                       </div>
                     </div>
