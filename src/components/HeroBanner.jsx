@@ -26,7 +26,7 @@ const NEW_ARRIVALS = [
     name: 'Khamrah Original',
     price: 65.00,
     notes: 'Gourmand Cálido • Canela, Dátiles y Praliné',
-    image: '/assets/images/Kamrah clasico.jpg',
+    image: '/assets/images/Khamrah clasico.webp',
     categoryBadge: 'Árabe • Fenómeno Mundial'
   },
   {

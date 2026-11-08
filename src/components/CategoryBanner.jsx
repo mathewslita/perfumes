@@ -56,7 +56,7 @@ export default function CategoryBanner({
                 {/* Twin Hero Arabic Bottles */}
                 <div className="relative z-10 flex items-end justify-center -space-x-5 sm:-space-x-7 pt-4">
                   <img 
-                    src="/assets/images/Kamrah clasico.jpg" 
+                    src="/assets/images/Khamrah clasico.webp" 
                     alt="Lattafa Khamrah Dubái Original" 
                     className="h-36 sm:h-52 w-auto object-contain filter drop-shadow-[0_18px_24px_rgba(0,0,0,0.6)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-108 transition-all duration-700 ease-out"
                     loading="lazy"

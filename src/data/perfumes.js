@@ -2414,9 +2414,9 @@ export const PERFUMES_DATA = [
       "vainilla",
       "oud_maderas"
     ],
-    "imageMain": "/assets/images/Kamrah clasico.jpg",
+    "imageMain": "/assets/images/Khamrah clasico.webp",
     "gallery": [
-      "/assets/images/Kamrah clasico.jpg"
+      "/assets/images/Khamrah clasico.webp"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Khamrah-75805.html",
     "fraganticaQuery": "Lattafa Khamrah Original",
