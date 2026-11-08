@@ -622,77 +622,79 @@ export const PERFUMES_DATA = [
     "historyText": "Consagrado como uno de los perfumes más vendidos del mundo en perfumería árabe en 2024 y 2025."
   },
   {
-    "id": "yves-dorgeval-sublime-red",
-    "name": "Sublime Red",
-    "brand": "YVES D'ORGEVAL",
-    "collection": "disenador",
-    "collectionBadge": "Diseñador • París Alta Costura",
-    "sku": "YDO-SR-09",
+    "id": "lattafa-badee-al-oud-sublime",
+    "name": "Bade'e Al Oud Sublime",
+    "brand": "LATTAFA",
+    "collection": "arabes",
+    "collectionBadge": "Árabe • Dubái Original",
+    "sku": "LTF-BAO-SUB01",
     "concentration": "Eau de Parfum",
     "volume100ml": "100 ml / 3.4 FL. OZ.",
     "volumeDecant": "10 ml (Atomizador de Lujo)",
     "price100ml": 65,
-    "originalPrice100ml": 95,
+    "originalPrice100ml": 90,
     "priceDecant": 18,
     "originalPriceDecant": 25,
-    "discountPercent": 31,
-    "onSale": false,
+    "discountPercent": 28,
+    "onSale": true,
     "timeOfDay": "ambas",
     "infographicImage": null,
-    "rating": 4.8,
-    "reviewCount": 310,
-    "gender": "Para Ella",
+    "rating": 4.9,
+    "reviewCount": 520,
+    "gender": "Unisex",
     "vibes": [
       "🍬 DULCES",
-      "👑 TOP VENTAS"
+      "👑 TOP VENTAS",
+      "☀️ DÍA"
     ],
-    "vibeBadge": "🌹 Seducción Roja Francesa",
-    "badgeColor": "bg-rose-700 text-white font-bold",
+    "vibeBadge": "🍎 Furor Manzana Jugosa & Ciruela",
+    "badgeColor": "bg-red-600 text-white font-bold",
     "acordes": [
-      "rosas",
-      "gourmand",
-      "vainilla"
+      "afrutados",
+      "dulce",
+      "vainilla",
+      "amaderado"
     ],
-    "imageMain": "/assets/images/Sublime red.jpg",
+    "imageMain": "/assets/images/badee-al-oud-sublimered.jpg",
     "gallery": [
-      "/assets/images/Sublime red.jpg"
+      "/assets/images/badee-al-oud-sublimered.jpg"
     ],
-    "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Yves+d+Orgeval+Sublime+Red",
-    "fraganticaQuery": "Yves d'Orgeval Sublime Red",
+    "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Bade-e-Al-Oud-Sublime-82555.html",
+    "fraganticaQuery": "Lattafa Bade'e Al Oud Sublime",
     "noteIcons": [
       {
-        "emoji": "🍒",
-        "name": "Frutas Rojas & Grosella"
+        "emoji": "🍎",
+        "name": "Manzana Roja & Lichi"
       },
       {
-        "emoji": "🌸",
-        "name": "Flor de Cerezo & Rosa"
+        "emoji": "🫐",
+        "name": "Ciruela & Rosa Búlgara"
       },
       {
-        "emoji": "🍨",
-        "name": "Vainilla & Ámbar Cálido"
+        "emoji": "🌿",
+        "name": "Musgo, Vainilla & Pachulí"
       }
     ],
     "technicalTable": {
-      "headNotes": "Grosella roja, Cereza silvestre y Bergamota francesa",
-      "heartNotes": "Flor de cerezo, Rosa damascena y Jazmín aterciopelado",
-      "baseNotes": "Vainilla Bourbon de París, Ámbar cálido y Almizcle sedoso",
-      "fragranceType": "Floral Frutal Ámbar París",
-      "concentrationPct": "20% Esencia de París",
-      "batchCodePrefix": "BATCH# YDO-SBR-2026",
-      "origin": "Francia"
+      "headNotes": "Manzana roja crujiente, Lichi exótico y Pétalos de rosa",
+      "heartNotes": "Ciruela dulce, Jazmín y Azúcar glaseado",
+      "baseNotes": "Vainilla de Madagascar, Musgo de roble y Pachulí oriental",
+      "fragranceType": "Frutal Dulce Amaderado de Dubái",
+      "concentrationPct": "20% Aceite Perfumado de Lujo",
+      "batchCodePrefix": "BATCH# LTF-SUB-2026",
+      "origin": "Emiratos Árabes Unidos (Lattafa Perfumes)"
     },
     "performance": {
-      "durationLabel": "10-12 Horas de Estela",
-      "durationPct": 89,
-      "projectionLabel": "Sensual y Femenina",
-      "projectionPct": 88,
-      "seasonLabel": "Citas / Tardes / Eventos Románticos",
-      "seasonPct": 94
+      "durationLabel": "12+ Horas en Piel",
+      "durationPct": 93,
+      "projectionLabel": "Muy Intensa / 2 Metros",
+      "projectionPct": 90,
+      "seasonLabel": "Versátil / Todo el Año",
+      "seasonPct": 95
     },
-    "inspiration": "La elegancia pasional parisina destilada en un frasco degradado rojo carmesí.",
-    "compositionText": "Frutos rojos carnosos envueltos en pétalos de rosa y flor de cerezo, reposando sobre una base adictiva de vainilla francesa y almizcles dorados.",
-    "historyText": "Creación de la histórica casa parisina Yves d'Orgeval para la mujer moderna que deja huella inolvidable."
+    "inspiration": "Inspirado en la aclamada Eden Juicy Apple de Kayali, con una duración y proyección orientales infinitamente superiores.",
+    "compositionText": "Una explosión chispeante y adictiva de manzanas rojas glaseadas con lichi, fusionadas con ciruelas maduras y una base profunda y cremosa de vainilla y musgo.",
+    "historyText": "Uno de los mayores éxitos virales globales de la línea Bade'e Al Oud de Lattafa, elogiado por críticos y coleccionistas por su estela irresistible."
   },
   {
     "id": "rasasi-hawas-fire",
@@ -3660,9 +3662,8 @@ export const ACORDES_LIST = [
 export const BRANDS_LIST = [
   // Diseñador
   { name: 'HALLOWEEN', category: 'disenador', count: '1 fragancia', badge: 'Halloween Man X' },
-  { name: "YVES D'ORGEVAL", category: 'disenador', count: '1 fragancia', badge: 'Sublime Red Paris' },
   // Árabes
-  { name: 'LATTAFA', category: 'arabes', count: '11 fragancias', badge: 'Top #1 Viral' },
+  { name: 'LATTAFA', category: 'arabes', count: '12 fragancias', badge: 'Top #1 Viral' },
   { name: 'ARMAF', category: 'arabes', count: '10 fragancias', badge: 'Best Seller' },
   { name: 'AFNAN', category: 'arabes', count: '6 fragancias', badge: '9 PM Saga' },
   { name: 'RASASI', category: 'arabes', count: '6 fragancias', badge: 'Hawas Dynasty' },

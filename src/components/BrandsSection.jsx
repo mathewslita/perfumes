@@ -86,13 +86,6 @@ export const ALL_BRANDS = [
     heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[180px] scale-115 sm:scale-125 mix-blend-multiply'
   },
   {
-    id: 'yves-dorgeval',
-    name: "YVES D'ORGEVAL",
-    category: 'disenador',
-    logoImage: '/assets/images/brands/yves_dorgeval.png',
-    heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[185px] scale-115 sm:scale-125 mix-blend-multiply'
-  },
-  {
     id: 'dior',
     name: 'DIOR',
     category: 'disenador',

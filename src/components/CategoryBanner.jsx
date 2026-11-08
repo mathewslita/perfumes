@@ -10,7 +10,7 @@ export default function CategoryBanner({
   const designerData = COLLECTIONS_DATA.disenador;
 
   const arabicBrands = ['Lattafa', 'Armaf', 'Afnan', 'Al Haramain', 'Rasasi', 'Bharara'];
-  const designerBrands = ['Halloween', 'Jesús del Pozo', "Yves d'Orgeval", 'Alta Costura'];
+  const designerBrands = ['Halloween', 'Jesús del Pozo', 'Dior', 'Chanel', 'YSL', 'Versace'];
 
   return (
     <section className="py-8 sm:py-16 md:py-20 bg-[#F9F7F2] border-b border-[#C9A961]/25 relative overflow-hidden">
@@ -131,18 +131,12 @@ export default function CategoryBanner({
                 
 
 
-                {/* Twin Hero Designer Bottles */}
-                <div className="relative z-10 flex items-end justify-center -space-x-5 sm:-space-x-7 pt-4">
+                {/* Hero Designer Bottle */}
+                <div className="relative z-10 flex items-end justify-center pt-4">
                   <img 
                     src="/assets/images/Halloween x man.jpg" 
-                    alt="Halloween Man X Madrid" 
-                    className="h-36 sm:h-52 w-auto object-contain filter drop-shadow-[0_18px_24px_rgba(0,0,0,0.6)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-108 transition-all duration-700 ease-out"
-                    loading="lazy"
-                  />
-                  <img 
-                    src="/assets/images/Sublime red.jpg" 
-                    alt="Sublime Red París Alta Costura" 
-                    className="h-32 sm:h-48 w-auto object-contain filter drop-shadow-[0_18px_24px_rgba(0,0,0,0.6)] transform rotate-4 group-hover:rotate-0 group-hover:scale-108 transition-all duration-700 ease-out"
+                    alt="Halloween Man X" 
+                    className="h-36 sm:h-52 w-auto object-contain filter drop-shadow-[0_18px_24px_rgba(0,0,0,0.6)] group-hover:scale-108 transition-all duration-700 ease-out"
                     loading="lazy"
                   />
                 </div>
