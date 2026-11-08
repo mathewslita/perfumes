@@ -42,14 +42,36 @@ export default function App() {
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
-          setCart(parsed);
+          const validCart = parsed
+            .map(item => {
+              if (item.id === 'yves-dorgeval-sublime-red') {
+                const newProd = PERFUMES_DATA.find(p => p.id === 'lattafa-badee-al-oud-sublime');
+                if (!newProd) return null;
+                return {
+                  ...item,
+                  id: 'lattafa-badee-al-oud-sublime',
+                  name: newProd.name,
+                  brand: newProd.brand,
+                  image: newProd.imageMain,
+                  price: item.type === 'decant' ? newProd.priceDecant : newProd.price100ml
+                };
+              }
+              return item;
+            })
+            .filter(Boolean)
+            .filter(item => PERFUMES_DATA.some(p => p.id === item.id));
+          setCart(validCart);
         }
       }
       const savedFavs = localStorage.getItem('arkano_favorites');
       if (savedFavs) {
         const parsedFavs = JSON.parse(savedFavs);
         if (Array.isArray(parsedFavs)) {
-          setFavorites(parsedFavs);
+          // Migrar IDs antiguos y filtrar únicamente perfumes existentes en el catálogo
+          const validFavs = parsedFavs
+            .map(id => id === 'yves-dorgeval-sublime-red' ? 'lattafa-badee-al-oud-sublime' : id)
+            .filter(id => PERFUMES_DATA.some(p => p.id === id));
+          setFavorites(validFavs);
         }
       }
     } catch (e) {
@@ -74,6 +96,15 @@ export default function App() {
       localStorage.setItem('arkano_favorites', JSON.stringify(favorites));
     } catch (e) {
       console.error('Error saving favorites:', e);
+    }
+  }, [favorites, isMounted]);
+
+  // Depuración automática de IDs obsoletos para asegurar sincronización 1:1
+  useEffect(() => {
+    if (!isMounted) return;
+    const valid = favorites.filter(id => PERFUMES_DATA.some(p => p.id === id));
+    if (valid.length !== favorites.length) {
+      setFavorites(valid);
     }
   }, [favorites, isMounted]);
 
@@ -326,7 +357,7 @@ export default function App() {
       <Header
         cartCount={cartItemCount}
         onOpenCart={() => setIsCartOpen(true)}
-        favoritesCount={favorites.length}
+        favoritesCount={favorites.filter(id => PERFUMES_DATA.some(p => p.id === id)).length}
         onOpenFavorites={() => setIsFavoritesOpen(true)}
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
