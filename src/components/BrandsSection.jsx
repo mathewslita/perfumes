@@ -23,7 +23,7 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/afnan.avif?v=2',
     filterStyle: { filter: 'brightness(0)' },
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
+    heightClass: 'h-11 sm:h-13 w-auto object-contain max-w-[200px]'
   },
   {
     id: 'al-haramain',
@@ -31,21 +31,21 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/al_haramain.png?v=2',
     filterStyle: { filter: 'grayscale(100%) contrast(150%) brightness(0.2)' },
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
+    heightClass: 'h-11 sm:h-13 w-auto object-contain max-w-[200px]'
   },
   {
     id: 'bharara',
     name: 'BHARARA',
     category: 'arabes',
     logoImage: '/assets/images/brands/bharara.webp?v=2',
-    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[160px] mix-blend-multiply'
+    heightClass: 'h-15 sm:h-18 w-auto object-contain max-w-[170px] scale-110 sm:scale-120 mix-blend-multiply'
   },
   {
     id: 'maison-alhambra',
     name: 'MAISON ALHAMBRA',
     category: 'arabes',
     logoImage: '/assets/images/brands/maison_alhambra.webp?v=2',
-    heightClass: 'h-14 sm:h-16 w-auto object-contain max-w-[170px] mix-blend-multiply'
+    heightClass: 'h-15 sm:h-18 w-auto object-contain max-w-[170px] scale-110 sm:scale-120 mix-blend-multiply'
   },
   {
     id: 'rasasi',
@@ -53,28 +53,28 @@ export const ALL_BRANDS = [
     category: 'arabes',
     logoImage: '/assets/images/brands/rasasi.svg?v=2',
     filterStyle: { filter: 'brightness(0)' },
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px]'
+    heightClass: 'h-11 sm:h-13 w-auto object-contain max-w-[200px]'
   },
   {
     id: 'french-avenue',
     name: 'FRENCH AVENUE',
     category: 'arabes',
     logoImage: '/assets/images/brands/french_avenue.webp?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
+    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[190px] mix-blend-multiply'
   },
   {
     id: 'dumont-paris',
     name: 'DUMONT PARIS',
     category: 'arabes',
     logoImage: '/assets/images/brands/dumont_paris.png',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
+    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[190px] scale-130 sm:scale-145 mix-blend-multiply'
   },
   {
     id: 'rayhaan',
     name: 'RAYHAAN',
     category: 'arabes',
     logoImage: '/assets/images/brands/rayhaan.png',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[200px] mix-blend-multiply'
+    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[200px] scale-105 sm:scale-115 mix-blend-multiply'
   },
 
   // Casas Icónicas de Diseñador
@@ -83,42 +83,42 @@ export const ALL_BRANDS = [
     name: 'HALLOWEEN',
     category: 'disenador',
     logoImage: '/assets/images/brands/halloween_delpozo.png',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px] mix-blend-multiply'
+    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[190px] scale-125 sm:scale-140 mix-blend-multiply'
   },
   {
     id: 'yves-dorgeval',
     name: "YVES D'ORGEVAL",
     category: 'disenador',
     logoImage: '/assets/images/brands/yves_dorgeval.png',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[210px] mix-blend-multiply'
+    heightClass: 'h-16 sm:h-20 w-auto object-contain max-w-[210px] scale-125 sm:scale-140 mix-blend-multiply'
   },
   {
     id: 'dior',
     name: 'DIOR',
     category: 'disenador',
     logoImage: '/assets/images/brands/dior.webp?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[220px] mix-blend-multiply'
+    heightClass: 'h-7 sm:h-8.5 w-auto object-contain max-w-[150px] mix-blend-multiply'
   },
   {
     id: 'jean-paul-gaultier',
     name: 'JEAN PAUL GAULTIER',
     category: 'disenador',
     logoImage: '/assets/images/brands/jean_paul_gaultier.jpg?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[190px] mix-blend-multiply'
+    heightClass: 'h-8 sm:h-10 w-auto object-contain max-w-[180px] mix-blend-multiply'
   },
   {
     id: 'chanel',
     name: 'CHANEL',
     category: 'disenador',
     logoImage: '/assets/images/brands/chanel.svg?v=2',
-    heightClass: 'h-12 sm:h-14 w-auto object-contain max-w-[180px]'
+    heightClass: 'h-11 sm:h-13 w-auto object-contain max-w-[160px]'
   },
   {
     id: 'yves-saint-laurent',
     name: 'YVES SAINT LAURENT',
     category: 'disenador',
     logoImage: '/assets/images/brands/ysl.png?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[270px]'
+    heightClass: 'h-8 sm:h-9.5 w-auto object-contain max-w-[220px]'
   },
   {
     id: 'versace',
@@ -132,21 +132,21 @@ export const ALL_BRANDS = [
     name: 'TOM FORD',
     category: 'disenador',
     logoImage: '/assets/images/brands/tom_ford.jpg?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[280px] mix-blend-multiply'
+    heightClass: 'h-6 sm:h-7.5 w-auto object-contain max-w-[220px] mix-blend-multiply'
   },
   {
     id: 'giorgio-armani',
     name: 'GIORGIO ARMANI',
     category: 'disenador',
     logoImage: '/assets/images/brands/giorgio_armani.webp?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[310px] mix-blend-multiply'
+    heightClass: 'h-6 sm:h-7.5 w-auto object-contain max-w-[240px] mix-blend-multiply'
   },
   {
     id: 'xerjoff',
     name: 'XERJOFF',
     category: 'disenador',
     logoImage: '/assets/images/brands/xerjoff.webp?v=2',
-    heightClass: 'h-10 sm:h-12 w-auto object-contain max-w-[270px]'
+    heightClass: 'h-7 sm:h-8.5 w-auto object-contain max-w-[200px]'
   }
 ];
 
