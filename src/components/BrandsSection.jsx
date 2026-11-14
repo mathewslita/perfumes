@@ -77,69 +77,13 @@ export const ALL_BRANDS = [
     heightClass: 'h-9 sm:h-11 w-auto object-contain max-w-[190px] mix-blend-multiply'
   },
 
-  // Casas Icónicas de Diseñador
+  // Casa Icónica de Diseñador en Catálogo
   {
     id: 'halloween',
     name: 'HALLOWEEN',
     category: 'disenador',
     logoImage: '/assets/images/brands/halloween_delpozo.png',
     heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[180px] scale-115 sm:scale-125 mix-blend-multiply'
-  },
-  {
-    id: 'dior',
-    name: 'DIOR',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/dior.webp?v=2',
-    heightClass: 'h-9 sm:h-11 w-auto object-contain max-w-[180px] mix-blend-multiply'
-  },
-  {
-    id: 'jean-paul-gaultier',
-    name: 'JEAN PAUL GAULTIER',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/jean_paul_gaultier.jpg?v=2',
-    heightClass: 'h-9.5 sm:h-11.5 w-auto object-contain max-w-[180px] mix-blend-multiply'
-  },
-  {
-    id: 'chanel',
-    name: 'CHANEL',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/chanel.svg?v=2',
-    heightClass: 'h-11 sm:h-13.5 w-auto object-contain max-w-[170px]'
-  },
-  {
-    id: 'yves-saint-laurent',
-    name: 'YVES SAINT LAURENT',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/ysl.png?v=2',
-    heightClass: 'h-9 sm:h-11 w-auto object-contain max-w-[220px]'
-  },
-  {
-    id: 'versace',
-    name: 'VERSACE',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/versace.svg?v=5',
-    heightClass: 'h-14 sm:h-17 w-auto object-contain max-w-[170px] scale-110 sm:scale-120'
-  },
-  {
-    id: 'tom-ford',
-    name: 'TOM FORD',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/tom_ford.jpg?v=2',
-    heightClass: 'h-7.5 sm:h-9 w-auto object-contain max-w-[220px] mix-blend-multiply'
-  },
-  {
-    id: 'giorgio-armani',
-    name: 'GIORGIO ARMANI',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/giorgio_armani.webp?v=2',
-    heightClass: 'h-7.5 sm:h-9 w-auto object-contain max-w-[240px] mix-blend-multiply'
-  },
-  {
-    id: 'xerjoff',
-    name: 'XERJOFF',
-    category: 'disenador',
-    logoImage: '/assets/images/brands/xerjoff.webp?v=2',
-    heightClass: 'h-8.5 sm:h-10.5 w-auto object-contain max-w-[200px]'
   }
 ];
 

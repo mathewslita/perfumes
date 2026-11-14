@@ -10,7 +10,7 @@ export default function CategoryBanner({
   const designerData = COLLECTIONS_DATA.disenador;
 
   const arabicBrands = ['Lattafa', 'Armaf', 'Afnan', 'Al Haramain', 'Bharara', 'Rasasi', 'French Avenue'];
-  const designerBrands = ['Halloween', 'Jesús del Pozo', 'Dior', 'Jean Paul Gaultier'];
+  const designerBrands = ['Halloween', 'Jesús del Pozo'];
 
   return (
     <section className="py-10 sm:py-16 md:py-20 bg-[#F9F7F2] border-b border-[#C9A961]/25 relative overflow-hidden">
@@ -168,7 +168,7 @@ export default function CategoryBanner({
               </h3>
 
               <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed mb-3">
-                La sofisticación atemporal de las casas de moda y perfumería más legendarias de Europa y Occidente. Fórmulas versátiles con estirpe de alta costura.
+                Edición seleccionada de alta costura occidental. Presentando la célebre creación nocturna de Jesús del Pozo: Halloween Man X, con sus seductoras notas de café roasted, cardamomo y cuero.
               </p>
 
               {/* Brand Pills */}
@@ -194,11 +194,11 @@ export default function CategoryBanner({
             {/* CTA Button */}
             <div className="mt-2 pt-3 border-t border-stone-100 flex items-center justify-between">
               <span className="text-xs font-black uppercase tracking-wider text-[#0E0E0E] group-hover:text-[#8F7432] transition-colors flex items-center gap-1.5">
-                <span>Explorar Colección Diseñador</span>
+                <span>Ver Halloween Man X</span>
                 <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:translate-x-1.5 transition-transform" />
               </span>
               <span className="text-[11px] font-bold text-stone-400 group-hover:text-[#0E0E0E] transition-colors">
-                Ver catálogo &rarr;
+                Ver detalle &rarr;
               </span>
             </div>
           </div>
