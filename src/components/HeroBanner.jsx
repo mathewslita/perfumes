@@ -68,7 +68,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
   const currentProduct = NEW_ARRIVALS[currentSlide];
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#0E0E0E] via-[#161616] to-[#0E0E0E] text-[#F5F1E8] py-8 sm:py-12 md:py-16 border-b border-[#C9A961]/30">
+    <div className="relative overflow-hidden bg-gradient-to-r from-[#0E0E0E] via-[#161616] to-[#0E0E0E] text-[#F5F1E8] min-h-[calc(100vh-64px)] sm:min-h-[calc(100vh-80px)] flex flex-col justify-center py-10 sm:py-14 border-b border-[#C9A961]/30">
       
       {/* Decorative Golden Ambient Aura */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#C9A961]/10 rounded-full blur-3xl pointer-events-none" />
@@ -118,7 +118,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 
                 <button
                   onClick={onOpenAiModal}
-                  className="bg-white/5 hover:bg-white/10 text-white border border-[#C9A961]/30 font-semibold text-xs sm:text-sm px-6 py-3.5 rounded-full flex items-center gap-2 backdrop-blur-sm transition-all hover:border-[#C9A961] cursor-pointer"
+                  className="bg-white/10 hover:bg-white/20 text-[#F5F1E8] hover:text-[#C9A961] border border-[#C9A961]/70 hover:border-[#C9A961] font-bold text-xs sm:text-sm px-6 py-3.5 rounded-full flex items-center gap-2 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 shadow-md cursor-pointer"
                 >
                   <Sparkles className="w-4 h-4 text-[#C9A961]" />
                   <span>ASESOR - IA de fragancias</span>
@@ -275,6 +275,19 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* Indicador de Desplazamiento Cinematográfico Estilo GTA VI */}
+      <div 
+        onClick={onExplore}
+        className="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 cursor-pointer opacity-75 hover:opacity-100 transition-opacity group"
+      >
+        <span className="text-[9.5px] font-black uppercase tracking-[0.25em] text-[#C9A961] group-hover:text-white transition-colors">
+          DESLIZA PARA EXPLORAR
+        </span>
+        <div className="w-5 h-8 rounded-full border-2 border-[#C9A961]/70 group-hover:border-[#C9A961] flex items-start justify-center p-1 shadow-md">
+          <span className="w-1.5 h-2 bg-[#C9A961] rounded-full animate-bounce" />
         </div>
       </div>
     </div>

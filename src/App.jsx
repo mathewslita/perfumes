@@ -47,17 +47,17 @@ export default function App() {
 
     const updateScroll = () => {
       const scrollY = window.scrollY || window.pageYOffset || 0;
-      if (scrollY <= 650) {
-        const p = Math.min(1, Math.max(0, scrollY / 420));
+      if (scrollY <= 800) {
+        const p = Math.min(1, Math.max(0, scrollY / 500));
         if (Math.abs(p - lastP) > 0.003) {
           lastP = p;
           if (heroContainerRef.current) {
-            heroContainerRef.current.style.transform = `scale(${1 - p * 0.06}) translateY(${p * -18}px)`;
+            heroContainerRef.current.style.transform = `scale(${1 - p * 0.05}) translateY(${p * -18}px)`;
             heroContainerRef.current.style.opacity = `${Math.max(0.18, 1 - p * 0.85)}`;
             heroContainerRef.current.style.pointerEvents = p > 0.65 ? 'none' : 'auto';
           }
           if (heroOverlayRef.current) {
-            heroOverlayRef.current.style.opacity = `${p * 0.7}`;
+            heroOverlayRef.current.style.opacity = `${p * 0.72}`;
           }
         }
       } else if (lastP !== 1) {
@@ -67,7 +67,7 @@ export default function App() {
           heroContainerRef.current.style.pointerEvents = 'none';
         }
         if (heroOverlayRef.current) {
-          heroOverlayRef.current.style.opacity = '0.7';
+          heroOverlayRef.current.style.opacity = '0.72';
         }
       }
       ticking = false;
@@ -462,7 +462,7 @@ export default function App() {
         </div>
 
         {/* Rising Curtain Sheet: Glides UP over the Hero with rounded top border and deep luxury shadow */}
-        <div className="relative z-10 -mt-6 sm:-mt-10 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(0,0,0,0.55)] border-t border-[#C9A961]/40 bg-[#F5F1E8]">
+        <div className="relative z-10 rounded-t-[36px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(0,0,0,0.55)] border-t border-[#C9A961]/40 bg-[#F5F1E8]">
           
           {/* Subtle tactile drag/curtain indicator */}
           <div className="pt-3 pb-1 flex justify-center">
