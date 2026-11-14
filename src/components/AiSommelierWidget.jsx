@@ -38,17 +38,17 @@ export default function AiSommelierWidget({
   
   const initialBotMessage = {
     sender: 'bot',
-    text: '¡Hola! Qué gusto saludarte 👑 Soy tu asesor personal de fragancias en **ARKANO PERFUMERÍA**.\n\nMi meta es ayudarte a encontrar ese aroma que de verdad vaya contigo y te haga recibir cumplidos, sin enredos ni tecnicismos aburridos.\n\nCuéntame: ¿buscas un perfume para ti o para hacer un regalo? ¿Y para qué ocasiones te gustaría usarlo (diario, trabajo, citas románticas o salir de fiesta)?',
+    text: '¡Hola! Qué gusto saludarte 👑 Es un verdadero placer darte la bienvenida a **ARKANO PERFUMERÍA**.\n\nSoy tu asesor personal de fragancias. Mi meta es ayudarte a encontrar ese aroma único que combine con tu personalidad, te haga sentir increíble y te llene de cumplidos, sin enredos ni tecnicismos aburridos.\n\nCuéntame: ¿buscas un perfume para ti o para hacer un regalo especial? ¿Y en qué momentos te gustaría lucirlo (trabajo diario, citas románticas, salir de noche o días de calor)?',
     recommendations: [
-      PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah'),
+      PERFUMES_DATA.find(p => p.id === 'lattafa-khamrah-original'),
       PERFUMES_DATA.find(p => p.id === 'armaf-club-de-nuit-intense-man')
     ].filter(Boolean),
     chips: [
-      '👔 Para el día a día / Trabajo',
+      '💼 Para el trabajo / Diario',
       '🌙 Para citas o salir de noche',
-      '👑 Árabes con fijación extrema',
+      '👑 Los más duraderos (+14h)',
       '🎁 Quiero hacer un regalo',
-      '🧪 ¿Cómo son los Decants de 10ml?'
+      '🧪 ¿Cómo funcionan los Decants de 10ml?'
     ]
   };
 
@@ -371,7 +371,7 @@ export default function AiSommelierWidget({
             {isTyping && (
               <div className="flex items-center gap-2 text-stone-500 text-xs py-2 px-3 bg-white rounded-2xl w-fit shadow-xs border border-stone-200 animate-pulse">
                 <Sparkles className="w-3.5 h-3.5 text-[#C9A961]" />
-                <span className="italic">Yasmin está preparando tu recomendación...</span>
+                <span className="italic">El Asesor de ARKANO está preparando tu recomendación...</span>
               </div>
             )}
 
