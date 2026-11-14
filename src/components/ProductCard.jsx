@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
 
 // Icono exacto de Sol con rayos, Luna creciente y 3 Estrellas (fiel al diseño de referencia)
@@ -31,12 +31,13 @@ export function VersatileSunMoon({ className = "w-5 h-5" }) {
   );
 }
 
-export default function ProductCard({ 
+function ProductCard({ 
   product, 
   onOpenProduct, 
   onAddToCart,
   isFavorite = false,
-  onToggleFavorite
+  onToggleFavorite,
+  priority = false
 }) {
   const [isAdded, setIsAdded] = useState(false);
   const [showTimeTooltip, setShowTimeTooltip] = useState(false);
@@ -154,7 +155,8 @@ export default function ProductCard({
           src={product.imageMain} 
           alt={`${product.brand} ${product.name} original`} 
           className="w-full h-full max-h-[90%] max-w-[90%] object-contain object-center mix-blend-multiply group-hover:scale-108 transition-transform duration-500 ease-out"
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
         />
 
         {/* Hover Quick View Button */}
@@ -251,3 +253,5 @@ export default function ProductCard({
     </article>
   );
 }
+
+export default memo(ProductCard);

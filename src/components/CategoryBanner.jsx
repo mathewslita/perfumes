@@ -117,7 +117,7 @@ export default function CategoryBanner({
               <div className="relative z-10 flex items-end justify-center pt-4">
                 <img 
                   src="/assets/images/halloween_x_man_transparent.webp" 
-                  alt="Halloween Man X" 
+                  alt="Halloween Man X Jesús del Pozo" 
                   className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
@@ -131,11 +131,11 @@ export default function CategoryBanner({
               </span>
 
               <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] tracking-tight uppercase group-hover:text-stone-700 transition-colors leading-tight">
-                HALLOWEEN MAN X
+                PERFUMES DE DISEÑADOR
               </h3>
 
               <p className="text-xs sm:text-[13px] text-stone-600 font-normal leading-relaxed line-clamp-2">
-                Jesús del Pozo Madrid. El magnetismo de la noche con café espresso tostado, cardamomo, whisky y cuero.
+                Halloween Man X por Jesús del Pozo Madrid. El magnetismo de la noche con café espresso tostado, cardamomo, whisky y cuero noble.
               </p>
 
               {/* Pill Button GTA Style */}
@@ -144,7 +144,7 @@ export default function CategoryBanner({
                   type="button"
                   className="bg-white hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 border-2 border-[#0E0E0E] shadow-md group-hover:shadow-lg group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
-                  <span>Ver Halloween Man X</span>
+                  <span>Explorar Colección Diseñador</span>
                   <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:text-[#C9A961] group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>

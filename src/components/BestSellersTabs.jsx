@@ -307,7 +307,7 @@ export default function BestSellersTabs({
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {displayProducts.map((perfume) => (
+              {displayProducts.map((perfume, idx) => (
                 <ProductCard
                   key={perfume.id}
                   product={perfume}
@@ -315,6 +315,7 @@ export default function BestSellersTabs({
                   onAddToCart={onAddToCart}
                   isFavorite={favorites.includes(perfume.id)}
                   onToggleFavorite={onToggleFavorite}
+                  priority={idx < 4}
                 />
               ))}
             </div>

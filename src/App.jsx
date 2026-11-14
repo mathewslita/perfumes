@@ -35,26 +35,53 @@ export default function App() {
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
   const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Scroll listener for cinematic GTA VI curtain reveal transition
+  // High-performance DOM refs for zero-rerender GPU scroll transition (60/120fps)
+  const heroContainerRef = useRef(null);
+  const heroOverlayRef = useRef(null);
+
+  // Zero-rerender scroll listener for cinematic GTA VI curtain reveal
   useEffect(() => {
     let ticking = false;
+    let lastP = -1;
+
+    const updateScroll = () => {
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      if (scrollY <= 650) {
+        const p = Math.min(1, Math.max(0, scrollY / 420));
+        if (Math.abs(p - lastP) > 0.003) {
+          lastP = p;
+          if (heroContainerRef.current) {
+            heroContainerRef.current.style.transform = `scale(${1 - p * 0.06}) translateY(${p * -18}px)`;
+            heroContainerRef.current.style.opacity = `${Math.max(0.18, 1 - p * 0.85)}`;
+            heroContainerRef.current.style.pointerEvents = p > 0.65 ? 'none' : 'auto';
+          }
+          if (heroOverlayRef.current) {
+            heroOverlayRef.current.style.opacity = `${p * 0.7}`;
+          }
+        }
+      } else if (lastP !== 1) {
+        lastP = 1;
+        if (heroContainerRef.current) {
+          heroContainerRef.current.style.opacity = '0.18';
+          heroContainerRef.current.style.pointerEvents = 'none';
+        }
+        if (heroOverlayRef.current) {
+          heroOverlayRef.current.style.opacity = '0.7';
+        }
+      }
+      ticking = false;
+    };
+
     const handleScroll = () => {
       if (!ticking) {
-        window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY || window.pageYOffset || 0;
-          // Progress from 0 to 1 over first 450px of scroll
-          const progress = Math.min(1, Math.max(0, scrollY / 450));
-          setScrollProgress(progress);
-          ticking = false;
-        });
+        window.requestAnimationFrame(updateScroll);
         ticking = true;
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    updateScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -407,15 +434,13 @@ export default function App() {
       {/* GTA VI Immersive Scroll Curtain Experience (Rockstar Games Inspired) */}
       <div className="relative">
         
-        {/* Sticky Hero Banner: Dims, scales down and gently blurs as the sheet rises */}
+        {/* Sticky Hero Banner: Dims and scales down smoothly via direct GPU compositor updates */}
         <div 
-          className="sticky top-16 sm:top-20 z-0 overflow-hidden will-change-transform select-none"
+          ref={heroContainerRef}
+          className="sticky top-16 sm:top-20 z-0 overflow-hidden select-none will-change-transform"
           style={{
-            opacity: Math.max(0.15, 1 - scrollProgress * 0.9),
-            transform: `scale(${Math.max(0.93, 1 - scrollProgress * 0.07)}) translateY(${scrollProgress * -25}px)`,
-            filter: `blur(${scrollProgress * 3}px)`,
-            pointerEvents: scrollProgress > 0.6 ? 'none' : 'auto',
-            transition: 'transform 0.12s ease-out, filter 0.12s ease-out, opacity 0.12s ease-out'
+            transform: 'scale(1) translateY(0px)',
+            opacity: 1
           }}
         >
           <HeroBanner
@@ -430,13 +455,14 @@ export default function App() {
 
           {/* Cinematic Darkening Shade that deepens on scroll */}
           <div 
-            className="absolute inset-0 bg-[#0E0E0E] pointer-events-none transition-opacity duration-200"
-            style={{ opacity: Math.min(0.70, scrollProgress * 0.85) }}
+            ref={heroOverlayRef}
+            className="absolute inset-0 bg-[#0E0E0E] pointer-events-none transition-opacity duration-75"
+            style={{ opacity: 0 }}
           />
         </div>
 
         {/* Rising Curtain Sheet: Glides UP over the Hero with rounded top border and deep luxury shadow */}
-        <div className="relative z-10 -mt-6 sm:-mt-10 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(0,0,0,0.55)] border-t border-[#C9A961]/40 bg-[#F5F1E8] overflow-hidden">
+        <div className="relative z-10 -mt-6 sm:-mt-10 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(0,0,0,0.55)] border-t border-[#C9A961]/40 bg-[#F5F1E8]">
           
           {/* Subtle tactile drag/curtain indicator */}
           <div className="pt-3 pb-1 flex justify-center">
