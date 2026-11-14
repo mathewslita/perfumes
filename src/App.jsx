@@ -393,12 +393,7 @@ export default function App() {
         onOpenAiModal={() => setIsAiAdvisorOpen(true)}
       />
 
-      {/* Brands Showcase Section */}
-      <BrandsSection
-        onSelectBrand={handleSelectBrand}
-      />
-
-      {/* 4. Category Showcase Banner: Árabes & Diseñador con Frases de Alta Calidad */}
+      {/* 4. Category Showcase Banner: Transición Cinemática Estilo GTA VI (Hero -> Nuestras Colecciones) */}
       <CategoryBanner
         activeCollection={activeCategory}
         onSelectCollection={(col) => {
@@ -406,6 +401,11 @@ export default function App() {
           const el = document.getElementById('los-mas-vendidos');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
+      />
+
+      {/* 5. Brands Showcase Section */}
+      <BrandsSection
+        onSelectBrand={handleSelectBrand}
       />
 
       {/* 5. Visual "Vibe" Search */}

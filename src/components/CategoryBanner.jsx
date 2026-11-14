@@ -1,205 +1,155 @@
 import React from 'react';
-import { ArrowRight, Crown, Award, Sparkles } from 'lucide-react';
-import { COLLECTIONS_DATA } from '../data/perfumes';
+import { ArrowRight, Crown, Award } from 'lucide-react';
 
 export default function CategoryBanner({ 
   activeCollection, // 'all' | 'arabes' | 'disenador'
   onSelectCollection 
 }) {
-  const arabicData = COLLECTIONS_DATA.arabes;
-  const designerData = COLLECTIONS_DATA.disenador;
-
-  const arabicBrands = ['Lattafa', 'Armaf', 'Afnan', 'Al Haramain', 'Bharara', 'Rasasi', 'French Avenue'];
-  const designerBrands = ['Halloween', 'Jesús del Pozo'];
+  const scrollToCatalog = () => {
+    const el = document.getElementById('los-mas-vendidos');
+    el?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section className="py-10 sm:py-16 md:py-20 bg-[#F9F7F2] border-b border-[#C9A961]/25 relative overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#C9A961]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-[#0E0E0E]/5 rounded-full blur-3xl pointer-events-none -translate-y-1/2" />
+    <section className="py-10 sm:py-16 md:py-20 bg-[#0E0E0E] text-[#F5F1E8] border-b border-[#C9A961]/25 relative overflow-hidden">
+      {/* Ambient Luxury Lighting */}
+      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#C9A961]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         
-        {/* Minimalist Editorial Title */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-[#8F7432] bg-[#C9A961]/15 px-3.5 py-1 rounded-full border border-[#C9A961]/35 inline-block mb-2.5">
-            UNIVERSOS OLFATIVOS
-          </span>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0E0E0E] tracking-[0.14em] uppercase">
-            NUESTRAS COLECCIONES
-          </h2>
-          <div className="w-12 h-px bg-[#C9A961] mx-auto mt-3 mb-2.5" />
-          <p className="text-xs sm:text-sm text-stone-600 max-w-lg mx-auto font-normal">
-            Explora la riqueza y estela de los elixires árabes o la elegancia atemporal de las casas de alta costura
-          </p>
+        {/* Section Header: Minimalist GTA VI Layout (Title Left + "Ver todo" Right) */}
+        <div className="flex items-end justify-between mb-6 sm:mb-10 pb-3 border-b border-white/10">
+          <div>
+            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-[#C9A961] block mb-1">
+              Catálogo Oficial
+            </span>
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white uppercase">
+              NUESTRAS COLECCIONES
+            </h2>
+          </div>
+
+          <button
+            onClick={scrollToCatalog}
+            className="text-xs sm:text-sm font-bold text-stone-400 hover:text-[#C9A961] flex items-center gap-1.5 transition-colors cursor-pointer group py-1"
+          >
+            <span>Ver todo el catálogo</span>
+            <ArrowRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform" />
+          </button>
         </div>
 
-        {/* 2 Luxury Editorial Category Cards (Árabes & Diseñador) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+        {/* 2 Immersive Luxury Cards (Estilo GTA VI: Grandes, Redondeadas y Cinemáticas) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           
           {/* =========================================================================
-              CATEGORÍA 1: PERFUMES ÁRABES (DUBÁI & ORIENTE)
+              CARD 1: COLECCIÓN ÁRABE (DUBÁI & ORIENTE)
               ========================================================================= */}
           <div
             onClick={() => onSelectCollection('arabes')}
-            className={`group rounded-3xl p-5 sm:p-7.5 bg-white border cursor-pointer transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
+            className={`group rounded-3xl p-6 sm:p-9 cursor-pointer transition-all duration-500 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-[#161619] to-[#101012] border ${
               activeCollection === 'arabes'
                 ? 'border-[#C9A961] shadow-2xl ring-2 ring-[#C9A961]/40 scale-[1.01]'
-                : 'border-stone-200/90 hover:border-[#C9A961] shadow-soft-card hover:shadow-xl hover:-translate-y-1'
+                : 'border-white/10 hover:border-[#C9A961]/70 shadow-2xl hover:-translate-y-1'
             }`}
           >
-            <div>
-              {/* Header Badge & Tag */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-[#C9A961] text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider border border-[#C9A961]/40 shadow-xs">
-                  <Crown className="w-3 h-3 text-[#C9A961]" />
-                  <span>DUBÁI & ORIENTE</span>
-                </span>
-                <span className="text-[10px] font-bold text-[#8F7432] tracking-wide">
-                  48 Fragancias Disponibles
-                </span>
-              </div>
+            {/* Ambient Spotlight Interior */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#C9A961]/20 rounded-full blur-3xl pointer-events-none group-hover:bg-[#C9A961]/30 transition-all duration-700" />
 
-              {/* Visual Bottle Showcase Stage (Pedestal Limpio & Sin Recortes) */}
-              <div className="relative h-48 sm:h-64 w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#FAF8F5] via-[#F4EFE6] to-[#ECE5D8] flex items-center justify-center p-4 mb-4 border border-stone-200/80 group-hover:border-[#C9A961]/40 transition-colors shadow-inner">
-                {/* Ambient Warm Golden Aura */}
-                <div className="absolute w-44 h-44 bg-[#C9A961]/25 rounded-full blur-2xl pointer-events-none" />
-
-                {/* Twin Hero Arabic Bottles con mix-blend-multiply perfecto */}
-                <div className="relative z-10 flex items-end justify-center -space-x-4 sm:-space-x-6 pt-3">
-                  <img 
-                    src="/assets/images/Khamrah clasico.webp" 
-                    alt="Lattafa Khamrah Dubái Original" 
-                    className="h-36 sm:h-48 w-auto object-contain mix-blend-multiply drop-shadow-[0_12px_16px_rgba(0,0,0,0.12)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-500 ease-out"
-                    loading="lazy"
-                  />
-                  <img 
-                    src="/assets/images/Amber oud gold edition.jpg" 
-                    alt="Al Haramain Amber Oud Gold Edition" 
-                    className="h-32 sm:h-44 w-auto object-contain mix-blend-multiply drop-shadow-[0_12px_16px_rgba(0,0,0,0.12)] transform rotate-4 group-hover:rotate-0 group-hover:scale-105 transition-all duration-500 ease-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Title Editorial Playfair */}
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0E0E0E] tracking-tight uppercase group-hover:text-[#8F7432] transition-colors mt-1 mb-1">
-                PERFUMES ÁRABES
-              </h3>
-
-              <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed mb-3">
-                Creaciones de las casas más aclamadas de Emiratos Árabes. Reconocidas mundialmente por su concentración en aceites nobles, estela magnética y fijación superior a 10 horas.
-              </p>
-
-              {/* Brand Pills */}
-              <div className="flex flex-wrap gap-1.5 my-2.5">
-                {arabicBrands.map((brand, i) => (
-                  <span 
-                    key={i} 
-                    className="text-[10px] sm:text-[11px] font-bold bg-[#F5F1E8] text-stone-800 px-2.5 py-0.5 rounded-full border border-stone-200/90 group-hover:border-[#C9A961]/40 transition-colors"
-                  >
-                    {brand}
-                  </span>
-                ))}
-              </div>
-
-              {/* Poetic Quote Editorial */}
-              <div className="p-3 sm:p-3.5 rounded-xl bg-[#FAF8F5] border-l-2 border-[#C9A961] my-3 shadow-2xs">
-                <p className="font-serif italic text-xs sm:text-[13px] text-stone-700 leading-relaxed">
-                  "{arabicData.phrase}"
-                </p>
+            {/* Stage Visual: Frascos Sin Fondo Blanco con Realismo Total */}
+            <div className="relative h-60 sm:h-72 w-full flex items-center justify-center mb-6">
+              <div className="relative z-10 flex items-end justify-center -space-x-5 sm:-space-x-8 pt-4">
+                <img 
+                  src="/assets/images/khamrah_clasico_transparent.webp" 
+                  alt="Lattafa Khamrah Dubái" 
+                  className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  loading="lazy"
+                />
+                <img 
+                  src="/assets/images/amber_oud_gold_transparent.webp" 
+                  alt="Al Haramain Amber Oud Gold Edition" 
+                  className="h-40 sm:h-52 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] transform rotate-4 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  loading="lazy"
+                />
               </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="mt-2 pt-3 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-wider text-[#8F7432] group-hover:text-[#0E0E0E] transition-colors flex items-center gap-1.5">
-                <span>Explorar Colección Árabe</span>
-                <ArrowRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1.5 transition-transform" />
+            {/* Content Details */}
+            <div className="relative z-10 space-y-2">
+              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-[#C9A961] block">
+                COLECCIÓN DUBÁI • 48 FRAGANCIAS
               </span>
-              <span className="text-[11px] font-bold text-stone-400 group-hover:text-[#0E0E0E] transition-colors">
-                Ver catálogo &rarr;
-              </span>
+
+              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase group-hover:text-[#C9A961] transition-colors leading-tight">
+                PERFUMES ÁRABES
+              </h3>
+
+              <p className="text-xs sm:text-[13px] text-stone-400 font-normal leading-relaxed line-clamp-2">
+                Lattafa, Armaf, Afnan, Rasasi, Al Haramain, Bharara, French Avenue, Dumont y Rayhaan.
+              </p>
+
+              {/* Pill Button GTA Style */}
+              <div className="pt-3">
+                <button
+                  type="button"
+                  className="bg-[#C9A961] hover:bg-[#D4B66E] text-[#0E0E0E] font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 shadow-lg group-hover:shadow-[#C9A961]/30 group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                >
+                  <span>Explorar Colección Árabe</span>
+                  <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
             </div>
           </div>
 
           {/* =========================================================================
-              CATEGORÍA 2: PERFUMES DE DISEÑADOR (ALTA COSTURA GLOBAL)
+              CARD 2: COLECCIÓN DISEÑADOR (HALLOWEEN MAN X)
               ========================================================================= */}
           <div
             onClick={() => onSelectCollection('disenador')}
-            className={`group rounded-3xl p-5 sm:p-7.5 bg-white border cursor-pointer transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${
+            className={`group rounded-3xl p-6 sm:p-9 cursor-pointer transition-all duration-500 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-[#161619] to-[#101012] border ${
               activeCollection === 'disenador'
-                ? 'border-[#0E0E0E] shadow-2xl ring-2 ring-[#0E0E0E]/30 scale-[1.01]'
-                : 'border-stone-200/90 hover:border-stone-800 shadow-soft-card hover:shadow-xl hover:-translate-y-1'
+                ? 'border-white shadow-2xl ring-2 ring-white/30 scale-[1.01]'
+                : 'border-white/10 hover:border-white/50 shadow-2xl hover:-translate-y-1'
             }`}
           >
-            <div>
-              {/* Header Badge & Tag */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <span className="inline-flex items-center gap-1.5 bg-[#0E0E0E] text-white text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider border border-white/20 shadow-xs">
-                  <Award className="w-3 h-3 text-[#C9A961]" />
-                  <span>ALTA COSTURA</span>
-                </span>
-                <span className="text-[10px] font-bold text-stone-500 tracking-wide">
-                  Casas Icónicas Occidentales
-                </span>
-              </div>
+            {/* Ambient Spotlight Interior */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-sky-400/10 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-400/20 transition-all duration-700" />
 
-              {/* Visual Bottle Showcase Stage (Pedestal Limpio & Sin Recortes) */}
-              <div className="relative h-48 sm:h-64 w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#F9FAFB] via-[#F3F4F6] to-[#E5E7EB] flex items-center justify-center p-4 mb-4 border border-stone-200/80 group-hover:border-stone-400 transition-colors shadow-inner">
-                {/* Ambient Platinum Aura */}
-                <div className="absolute w-44 h-44 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
-
-                {/* Hero Designer Bottle con mix-blend-multiply perfecto */}
-                <div className="relative z-10 flex items-end justify-center pt-3">
-                  <img 
-                    src="/assets/images/Halloween x man.jpg" 
-                    alt="Halloween Man X" 
-                    className="h-36 sm:h-48 w-auto object-contain mix-blend-multiply drop-shadow-[0_12px_16px_rgba(0,0,0,0.12)] group-hover:scale-105 transition-all duration-500 ease-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* Title Editorial Playfair */}
-              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-[#0E0E0E] tracking-tight uppercase group-hover:text-stone-700 transition-colors mt-1 mb-1">
-                PERFUMES DE DISEÑADOR
-              </h3>
-
-              <p className="text-xs text-stone-600 line-clamp-2 leading-relaxed mb-3">
-                Edición seleccionada de alta costura occidental. Presentando la célebre creación nocturna de Jesús del Pozo: Halloween Man X, con sus seductoras notas de café roasted, cardamomo y cuero.
-              </p>
-
-              {/* Brand Pills */}
-              <div className="flex flex-wrap gap-1.5 my-2.5">
-                {designerBrands.map((brand, i) => (
-                  <span 
-                    key={i} 
-                    className="text-[10px] sm:text-[11px] font-bold bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-full border border-stone-200 group-hover:border-stone-400 transition-colors"
-                  >
-                    {brand}
-                  </span>
-                ))}
-              </div>
-
-              {/* Poetic Quote Editorial */}
-              <div className="p-3 sm:p-3.5 rounded-xl bg-[#F8F9FA] border-l-2 border-[#0E0E0E] my-3 shadow-2xs">
-                <p className="font-serif italic text-xs sm:text-[13px] text-stone-700 leading-relaxed">
-                  "{designerData.phrase}"
-                </p>
+            {/* Stage Visual: Frasco Sin Fondo Blanco con Realismo Total */}
+            <div className="relative h-60 sm:h-72 w-full flex items-center justify-center mb-6">
+              <div className="relative z-10 flex items-end justify-center pt-4">
+                <img 
+                  src="/assets/images/halloween_x_man_transparent.webp" 
+                  alt="Halloween Man X" 
+                  className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-all duration-700 ease-out"
+                  loading="lazy"
+                />
               </div>
             </div>
 
-            {/* CTA Button */}
-            <div className="mt-2 pt-3 border-t border-stone-100 flex items-center justify-between">
-              <span className="text-xs font-black uppercase tracking-wider text-[#0E0E0E] group-hover:text-[#8F7432] transition-colors flex items-center gap-1.5">
-                <span>Ver Halloween Man X</span>
-                <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:translate-x-1.5 transition-transform" />
+            {/* Content Details */}
+            <div className="relative z-10 space-y-2">
+              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-stone-400 block">
+                ALTA COSTURA OCCIDENTAL • SELECCIÓN EXCLUSIVA
               </span>
-              <span className="text-[11px] font-bold text-stone-400 group-hover:text-[#0E0E0E] transition-colors">
-                Ver detalle &rarr;
-              </span>
+
+              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase group-hover:text-stone-200 transition-colors leading-tight">
+                HALLOWEEN MAN X
+              </h3>
+
+              <p className="text-xs sm:text-[13px] text-stone-400 font-normal leading-relaxed line-clamp-2">
+                Jesús del Pozo Madrid. El magnetismo de la noche con café espresso, cardamomo, whisky y cuero.
+              </p>
+
+              {/* Pill Button GTA Style */}
+              <div className="pt-3">
+                <button
+                  type="button"
+                  className="bg-white hover:bg-stone-200 text-[#0E0E0E] font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 shadow-lg group-hover:shadow-white/20 group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                >
+                  <span>Ver Halloween Man X</span>
+                  <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
             </div>
           </div>
 
