@@ -103,22 +103,31 @@ export default function ProductDetailModal({
                   )}
                 </div>
 
-                {/* Thumbnails Strip: Solo si hay más de 1 imagen real */}
+                {/* Thumbnails Strip: Frasco & Ficha Olfativa */}
                 {images.length > 1 && (
-                  <div className="flex items-center gap-3 overflow-x-auto pb-1">
-                    {images.map((img, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setActiveImgIndex(idx)}
-                        className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 bg-[#F8F4EC] p-1.5 flex-shrink-0 transition-all ${
-                          activeImgIndex === idx 
-                            ? 'border-[#0E0E0E] shadow-md scale-105 ring-2 ring-[#C9A961]' 
-                            : 'border-gray-200 opacity-70 hover:opacity-100'
-                        }`}
-                      >
-                        <img src={img} alt={`Vista ${idx + 1}`} className="w-full h-full object-contain mix-blend-multiply" />
-                      </button>
-                    ))}
+                  <div className="flex items-center gap-2.5 overflow-x-auto pb-1 pt-0.5">
+                    {images.map((img, idx) => {
+                      const isFicha = idx === 1;
+                      return (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setActiveImgIndex(idx)}
+                          className={`relative flex items-center gap-2 px-3 py-1.5 rounded-xl border-2 transition-all cursor-pointer ${
+                            activeImgIndex === idx 
+                              ? 'border-[#0E0E0E] bg-white shadow-md ring-2 ring-[#C9A961]/70' 
+                              : 'border-stone-200 bg-[#FAF8F5] opacity-75 hover:opacity-100 hover:border-stone-300'
+                          }`}
+                        >
+                          <div className="w-8 h-8 rounded-lg overflow-hidden bg-white p-0.5 flex-shrink-0 flex items-center justify-center border border-stone-200/60">
+                            <img src={img} alt={isFicha ? 'Ficha Olfativa' : 'Frasco'} className="w-full h-full object-contain mix-blend-multiply" />
+                          </div>
+                          <span className={`text-[11px] font-bold whitespace-nowrap ${activeImgIndex === idx ? 'text-[#0E0E0E]' : 'text-stone-600'}`}>
+                            {isFicha ? '📋 Ficha Olfativa' : '✨ Frasco'}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 )}
               </div>

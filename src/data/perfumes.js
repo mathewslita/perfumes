@@ -53,7 +53,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 29,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-mandarin-sky.jpg",
     "rating": 4.9,
     "reviewCount": 840,
     "gender": "Para Él",
@@ -71,7 +71,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Odysey Mandarin sky.jpg",
     "gallery": [
-      "/assets/images/Odysey Mandarin sky.jpg"
+      "/assets/images/Odysey Mandarin sky.jpg",
+      "/assets/images/fichas/ficha_armaf-odyssey-mandarin-sky.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Odyssey-Mandarin-Sky-81673.html",
     "fraganticaQuery": "Armaf Odyssey Mandarin Sky",
@@ -127,7 +128,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-homme-white.jpg",
     "rating": 4.8,
     "reviewCount": 520,
     "gender": "Para Él",
@@ -144,7 +145,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Odyssey homme white.jpg",
     "gallery": [
-      "/assets/images/Odyssey homme white.jpg"
+      "/assets/images/Odyssey homme white.jpg",
+      "/assets/images/fichas/ficha_armaf-odyssey-homme-white.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Odyssey-Homme-White-Edition-59929.html",
     "fraganticaQuery": "Armaf Odyssey Homme White Edition",
@@ -200,7 +202,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 26,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-marshmallow.jpg",
     "rating": 5,
     "reviewCount": 710,
     "gender": "Para Ella",
@@ -216,7 +218,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Odyssey marshemllow.jpg",
     "gallery": [
-      "/assets/images/Odyssey marshemllow.jpg"
+      "/assets/images/Odyssey marshemllow.jpg",
+      "/assets/images/fichas/ficha_armaf-odyssey-marshmallow.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Odyssey-Candee-Marshmallow-94320.html",
     "fraganticaQuery": "Armaf Odyssey Candee Marshmallow",
@@ -272,7 +275,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-mega.jpg",
     "rating": 4.9,
     "reviewCount": 680,
     "gender": "Para Él",
@@ -290,7 +293,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Odyssey mega.jpg",
     "gallery": [
-      "/assets/images/Odyssey mega.jpg"
+      "/assets/images/Odyssey mega.jpg",
+      "/assets/images/fichas/ficha_armaf-odyssey-mega.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Odyssey-Mega-84720.html",
     "fraganticaQuery": "Armaf Odyssey Mega Limited Edition",
@@ -417,7 +421,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-mandarin-sky-elixir.jpg",
     "rating": 5,
     "reviewCount": 620,
     "gender": "Para Él",
@@ -436,7 +440,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Odysey Mandarin sky elixir.jpg",
     "gallery": [
-      "/assets/images/Odysey Mandarin sky elixir.jpg"
+      "/assets/images/Odysey Mandarin sky elixir.jpg",
+      "/assets/images/fichas/ficha_armaf-odyssey-mandarin-sky-elixir.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Odyssey-Mandarin-Sky-Elixir-98401.html",
     "fraganticaQuery": "Armaf Odyssey Mandarin Sky Elixir",
@@ -492,7 +497,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-art-of-universe.jpg",
     "rating": 4.9,
     "reviewCount": 390,
     "gender": "Unisex",
@@ -509,7 +514,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Art of Universe.jpg",
     "gallery": [
-      "/assets/images/Art of Universe.jpg"
+      "/assets/images/Art of Universe.jpg",
+      "/assets/images/fichas/ficha_lattafa-art-of-universe.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Art-of-Universe-95123.html",
     "fraganticaQuery": "Lattafa Pride Art of Universe",
@@ -565,7 +571,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rasasi-hawas-ice.jpg",
     "rating": 5,
     "reviewCount": 1450,
     "gender": "Para Él",
@@ -582,7 +588,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Hawas ice.jpg",
     "gallery": [
-      "/assets/images/Hawas ice.jpg"
+      "/assets/images/Hawas ice.jpg",
+      "/assets/images/fichas/ficha_rasasi-hawas-ice.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Rasasi/Hawas-Ice-for-Him-89190.html",
     "fraganticaQuery": "Rasasi Hawas Ice for Him",
@@ -638,7 +645,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-badee-al-oud-sublime.jpg",
     "rating": 4.9,
     "reviewCount": 520,
     "gender": "Unisex",
@@ -657,7 +664,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/badee-al-oud-sublimered.jpg",
     "gallery": [
-      "/assets/images/badee-al-oud-sublimered.jpg"
+      "/assets/images/badee-al-oud-sublimered.jpg",
+      "/assets/images/fichas/ficha_lattafa-badee-al-oud-sublime.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Bade-e-Al-Oud-Sublime-82555.html",
     "fraganticaQuery": "Lattafa Bade'e Al Oud Sublime",
@@ -713,7 +721,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": false,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rasasi-hawas-fire.jpg",
     "rating": 4.9,
     "reviewCount": 480,
     "gender": "Para Él",
@@ -730,7 +738,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Hawas fire.jpg",
     "gallery": [
-      "/assets/images/Hawas fire.jpg"
+      "/assets/images/Hawas fire.jpg",
+      "/assets/images/fichas/ficha_rasasi-hawas-fire.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Rasasi/Hawas-Fire-for-Him-99520.html",
     "fraganticaQuery": "Rasasi Hawas Fire for Him",
@@ -786,7 +795,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 33,
     "onSale": false,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rasasi-hawas-highness.jpg",
     "rating": 5,
     "reviewCount": 540,
     "gender": "Para Él",
@@ -802,7 +811,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/hawas-highness.jpg",
     "gallery": [
-      "/assets/images/hawas-highness.jpg"
+      "/assets/images/hawas-highness.jpg",
+      "/assets/images/fichas/ficha_rasasi-hawas-highness.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Rasasi/Hawas-Highness-for-Him-99522.html",
     "fraganticaQuery": "Rasasi Hawas Highness for Him",
@@ -858,7 +868,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rasasi-hawas-ice-freeze.jpg",
     "rating": 4.9,
     "reviewCount": 410,
     "gender": "Para Él",
@@ -873,7 +883,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Hawas ice freze.webp",
     "gallery": [
-      "/assets/images/Hawas ice freze.webp"
+      "/assets/images/Hawas ice freze.webp",
+      "/assets/images/fichas/ficha_rasasi-hawas-ice-freeze.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Rasasi+Hawas+Ice+Freeze",
     "fraganticaQuery": "Rasasi Hawas Ice Freeze",
@@ -929,7 +940,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 32,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rasasi-hawas-diva.jpg",
     "rating": 5,
     "reviewCount": 610,
     "gender": "Para Ella",
@@ -947,7 +958,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Hawas diva.avif",
     "gallery": [
-      "/assets/images/Hawas diva.avif"
+      "/assets/images/Hawas diva.avif",
+      "/assets/images/fichas/ficha_rasasi-hawas-diva.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Rasasi+Hawas+for+Her+Diva",
     "fraganticaQuery": "Rasasi Hawas for Her Diva",
@@ -1003,7 +1015,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_al-haramain-amber-oud-gold-edition.jpg",
     "rating": 5,
     "reviewCount": 1680,
     "gender": "Unisex",
@@ -1020,7 +1032,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Amber oud gold edition.jpg",
     "gallery": [
-      "/assets/images/Amber oud gold edition.jpg"
+      "/assets/images/Amber oud gold edition.jpg",
+      "/assets/images/fichas/ficha_al-haramain-amber-oud-gold-edition.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Al-Haramain-Perfumes/Amber-Oud-Gold-Edition-50030.html",
     "fraganticaQuery": "Al Haramain Amber Oud Gold Edition",
@@ -1076,7 +1089,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 32,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_al-haramain-amber-oud-aqua-dubai.jpg",
     "rating": 4.9,
     "reviewCount": 520,
     "gender": "Unisex",
@@ -1093,7 +1106,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Amber oud Aqua dubai.webp",
     "gallery": [
-      "/assets/images/Amber oud Aqua dubai.webp"
+      "/assets/images/Amber oud Aqua dubai.webp",
+      "/assets/images/fichas/ficha_al-haramain-amber-oud-aqua-dubai.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Al-Haramain-Perfumes/Amber-Oud-Aqua-Dubai-94718.html",
     "fraganticaQuery": "Al Haramain Amber Oud Aqua Dubai",
@@ -1149,7 +1163,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_most-perfume-rome-melancholic.jpg",
     "rating": 4.8,
     "reviewCount": 340,
     "gender": "Para Él",
@@ -1165,7 +1179,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Rome melancholic.webp",
     "gallery": [
-      "/assets/images/Rome melancholic.webp"
+      "/assets/images/Rome melancholic.webp",
+      "/assets/images/fichas/ficha_most-perfume-rome-melancholic.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Rome+Melancholia+Pour+Homme",
     "fraganticaQuery": "Rome Melancholia Pour Homme",
@@ -1221,7 +1236,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_maison-alhambra-spectre-malachite.jpg",
     "rating": 4.9,
     "reviewCount": 420,
     "gender": "Unisex",
@@ -1237,7 +1252,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Spectre malchite.jpg",
     "gallery": [
-      "/assets/images/Spectre malchite.jpg"
+      "/assets/images/Spectre malchite.jpg",
+      "/assets/images/fichas/ficha_maison-alhambra-spectre-malachite.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Maison-Alhambra/Sceptre-Malachite-90412.html",
     "fraganticaQuery": "Maison Alhambra Sceptre Malachite",
@@ -1293,7 +1309,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-eclaire.jpg",
     "rating": 5,
     "reviewCount": 1390,
     "gender": "Para Ella",
@@ -1309,7 +1325,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Eclaire de lataffa.jpg",
     "gallery": [
-      "/assets/images/Eclaire de lataffa.jpg"
+      "/assets/images/Eclaire de lataffa.jpg",
+      "/assets/images/fichas/ficha_lattafa-eclaire.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Eclaire-93310.html",
     "fraganticaQuery": "Lattafa Eclaire",
@@ -1365,7 +1382,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-delights-yum-yum.jpg",
     "rating": 4.9,
     "reviewCount": 460,
     "gender": "Para Ella",
@@ -1381,7 +1398,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Yumyum.jpg",
     "gallery": [
-      "/assets/images/Yumyum.jpg"
+      "/assets/images/Yumyum.jpg",
+      "/assets/images/fichas/ficha_armaf-delights-yum-yum.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Armaf+Delights+Yum+Yum",
     "fraganticaQuery": "Armaf Delights Yum Yum",
@@ -1437,7 +1455,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_maison-alhambra-jean-lowe-immortel.jpg",
     "rating": 4.9,
     "reviewCount": 780,
     "gender": "Para Él",
@@ -1456,7 +1474,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Jean lowe inmortal.jpeg",
     "gallery": [
-      "/assets/images/Jean lowe inmortal.jpeg"
+      "/assets/images/Jean lowe inmortal.jpeg",
+      "/assets/images/fichas/ficha_maison-alhambra-jean-lowe-immortel.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Maison-Alhambra/Jean-Lowe-Immortal-83921.html",
     "fraganticaQuery": "Maison Alhambra Jean Lowe Immortal",
@@ -1512,7 +1531,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_maison-alhambra-jean-lowe-azure.jpg",
     "rating": 4.8,
     "reviewCount": 510,
     "gender": "Para Él",
@@ -1529,7 +1548,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Jean lowe azure.jpg",
     "gallery": [
-      "/assets/images/Jean lowe azure.jpg"
+      "/assets/images/Jean lowe azure.jpg",
+      "/assets/images/fichas/ficha_maison-alhambra-jean-lowe-azure.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Maison+Alhambra+Jean+Lowe+Azure",
     "fraganticaQuery": "Maison Alhambra Jean Lowe Azure",
@@ -1585,7 +1605,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-club-de-nuit-intense-man.jpg",
     "rating": 5,
     "reviewCount": 3890,
     "gender": "Para Él",
@@ -1602,7 +1622,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Club de nuit intense man.webp",
     "gallery": [
-      "/assets/images/Club de nuit intense man.webp"
+      "/assets/images/Club de nuit intense man.webp",
+      "/assets/images/fichas/ficha_armaf-club-de-nuit-intense-man.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Club-de-Nuit-Intense-Man-34696.html",
     "fraganticaQuery": "Armaf Club de Nuit Intense Man",
@@ -1658,7 +1679,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-club-de-nuit-iconic.jpg",
     "rating": 5,
     "reviewCount": 1120,
     "gender": "Para Él",
@@ -1675,7 +1696,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Club de nuit iconic.webp",
     "gallery": [
-      "/assets/images/Club de nuit iconic.webp"
+      "/assets/images/Club de nuit iconic.webp",
+      "/assets/images/fichas/ficha_armaf-club-de-nuit-iconic.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Club-de-Nuit-Blue-Iconic-78652.html",
     "fraganticaQuery": "Armaf Club de Nuit Blue Iconic",
@@ -1731,7 +1753,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_afnan-9-pm.jpg",
     "rating": 5,
     "reviewCount": 2950,
     "gender": "Para Él",
@@ -1749,7 +1771,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/9pm.webp",
     "gallery": [
-      "/assets/images/9pm.webp"
+      "/assets/images/9pm.webp",
+      "/assets/images/fichas/ficha_afnan-9-pm.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Afnan/9-PM-65414.html",
     "fraganticaQuery": "Afnan 9 PM",
@@ -1805,7 +1828,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_afnan-9-pm-rebel.jpg",
     "rating": 4.9,
     "reviewCount": 680,
     "gender": "Para Él",
@@ -1824,7 +1847,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/9pm rebel.webp",
     "gallery": [
-      "/assets/images/9pm rebel.webp"
+      "/assets/images/9pm rebel.webp",
+      "/assets/images/fichas/ficha_afnan-9-pm-rebel.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Afnan/9-PM-Rebel-93214.html",
     "fraganticaQuery": "Afnan 9 PM Rebel",
@@ -1880,7 +1904,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 34,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_afnan-9-pm-elixir.jpg",
     "rating": 5,
     "reviewCount": 510,
     "gender": "Para Él",
@@ -1899,7 +1923,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/9pm elixir.webp",
     "gallery": [
-      "/assets/images/9pm elixir.webp"
+      "/assets/images/9pm elixir.webp",
+      "/assets/images/fichas/ficha_afnan-9-pm-elixir.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Afnan+9+PM+Elixir",
     "fraganticaQuery": "Afnan 9 PM Elixir",
@@ -1955,7 +1980,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_afnan-9-am-dive.jpg",
     "rating": 4.9,
     "reviewCount": 920,
     "gender": "Unisex",
@@ -1972,7 +1997,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/9Am dive.jpg",
     "gallery": [
-      "/assets/images/9Am dive.jpg"
+      "/assets/images/9Am dive.jpg",
+      "/assets/images/fichas/ficha_afnan-9-am-dive.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Afnan/9-AM-Dive-77312.html",
     "fraganticaQuery": "Afnan 9 AM Dive",
@@ -2028,7 +2054,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": true,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_bharara-king.jpg",
     "rating": 5,
     "reviewCount": 2100,
     "gender": "Para Él",
@@ -2046,7 +2072,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Bharara king.jpg",
     "gallery": [
-      "/assets/images/Bharara king.jpg"
+      "/assets/images/Bharara king.jpg",
+      "/assets/images/fichas/ficha_bharara-king.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Bharara/King-70231.html",
     "fraganticaQuery": "Bharara King",
@@ -2102,7 +2129,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-yara-tous.jpg",
     "rating": 4.9,
     "reviewCount": 1150,
     "gender": "Para Ella",
@@ -2121,7 +2148,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Yara tous.avif",
     "gallery": [
-      "/assets/images/Yara tous.avif"
+      "/assets/images/Yara tous.avif",
+      "/assets/images/fichas/ficha_lattafa-yara-tous.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Yara-Tous-84221.html",
     "fraganticaQuery": "Lattafa Yara Tous",
@@ -2177,7 +2205,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-mayar.jpg",
     "rating": 4.9,
     "reviewCount": 890,
     "gender": "Para Ella",
@@ -2194,7 +2222,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Mayar rosado.jpg",
     "gallery": [
-      "/assets/images/Mayar rosado.jpg"
+      "/assets/images/Mayar rosado.jpg",
+      "/assets/images/fichas/ficha_lattafa-mayar.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Mayar-79521.html",
     "fraganticaQuery": "Lattafa Mayar",
@@ -2250,7 +2279,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-club-de-nuit-urban-man.jpg",
     "rating": 4.8,
     "reviewCount": 620,
     "gender": "Para Él",
@@ -2268,7 +2297,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Club de nuit Urban man.jpg",
     "gallery": [
-      "/assets/images/Club de nuit Urban man.jpg"
+      "/assets/images/Club de nuit Urban man.jpg",
+      "/assets/images/fichas/ficha_armaf-club-de-nuit-urban-man.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Club-De-Nuit-Urban-Man-47021.html",
     "fraganticaQuery": "Armaf Club de Nuit Urban Man",
@@ -2324,7 +2354,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 33,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-khamrah-qahwa.jpg",
     "rating": 5,
     "reviewCount": 2150,
     "gender": "Unisex",
@@ -2343,7 +2373,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Kamrah qawa.jpg",
     "gallery": [
-      "/assets/images/Kamrah qawa.jpg"
+      "/assets/images/Kamrah qawa.jpg",
+      "/assets/images/fichas/ficha_lattafa-khamrah-qahwa.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Khamrah-Qahwa-87854.html",
     "fraganticaQuery": "Lattafa Khamrah Qahwa",
@@ -2399,7 +2430,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-khamrah-original.jpg",
     "rating": 5,
     "reviewCount": 3420,
     "gender": "Unisex",
@@ -2418,7 +2449,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Khamrah clasico.webp",
     "gallery": [
-      "/assets/images/Khamrah clasico.webp"
+      "/assets/images/Khamrah clasico.webp",
+      "/assets/images/fichas/ficha_lattafa-khamrah-original.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Khamrah-75805.html",
     "fraganticaQuery": "Lattafa Khamrah Original",
@@ -2474,7 +2506,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": true,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_dumont-nitro-red.jpg",
     "rating": 5,
     "reviewCount": 1780,
     "gender": "Para Él",
@@ -2491,7 +2523,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Nitro red.jpg",
     "gallery": [
-      "/assets/images/Nitro red.jpg"
+      "/assets/images/Nitro red.jpg",
+      "/assets/images/fichas/ficha_dumont-nitro-red.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Dumont/Nitro-Red-69721.html",
     "fraganticaQuery": "Dumont Nitro Red Pour Homme",
@@ -2547,7 +2580,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 32,
     "onSale": false,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_dumont-nitro-red-intensely.jpg",
     "rating": 5,
     "reviewCount": 640,
     "gender": "Para Él",
@@ -2565,7 +2598,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Nitro red intensly.jpg",
     "gallery": [
-      "/assets/images/Nitro red intensly.jpg"
+      "/assets/images/Nitro red intensly.jpg",
+      "/assets/images/fichas/ficha_dumont-nitro-red-intensely.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Dumont+Nitro+Red+Intensely",
     "fraganticaQuery": "Dumont Nitro Red Intensely",
@@ -2621,7 +2655,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 33,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_french-avenue-liquid-brun.jpg",
     "rating": 5,
     "reviewCount": 1420,
     "gender": "Unisex",
@@ -2640,7 +2674,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Liquid brun.webp",
     "gallery": [
-      "/assets/images/Liquid brun.webp"
+      "/assets/images/Liquid brun.webp",
+      "/assets/images/fichas/ficha_french-avenue-liquid-brun.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/French-Avenue/Liquid-Brun-94812.html",
     "fraganticaQuery": "French Avenue Liquid Brun",
@@ -2696,7 +2731,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": false,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-asad-bourbon.jpg",
     "rating": 4.9,
     "reviewCount": 820,
     "gender": "Para Él",
@@ -2714,7 +2749,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Asad bourbon.webp",
     "gallery": [
-      "/assets/images/Asad bourbon.webp"
+      "/assets/images/Asad bourbon.webp",
+      "/assets/images/fichas/ficha_lattafa-asad-bourbon.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Asad-Zanzibar-91230.html",
     "fraganticaQuery": "Lattafa Asad Bourbon",
@@ -2770,7 +2806,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_halloween-man-x.jpg",
     "rating": 5,
     "reviewCount": 3120,
     "gender": "Para Él",
@@ -2787,7 +2823,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Halloween x man.jpg",
     "gallery": [
-      "/assets/images/Halloween x man.jpg"
+      "/assets/images/Halloween x man.jpg",
+      "/assets/images/fichas/ficha_halloween-man-x.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Halloween/Halloween-Man-X-53488.html",
     "fraganticaQuery": "Halloween Man X",
@@ -2843,7 +2880,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 32,
     "onSale": true,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-yara-pink.jpg",
     "rating": 5,
     "reviewCount": 4200,
     "gender": "Para Ella",
@@ -2860,7 +2897,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Yara rosado.jpg",
     "gallery": [
-      "/assets/images/Yara rosado.jpg"
+      "/assets/images/Yara rosado.jpg",
+      "/assets/images/fichas/ficha_lattafa-yara-pink.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Yara-64010.html",
     "fraganticaQuery": "Lattafa Yara Pink",
@@ -2916,7 +2954,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_afnan-turathi-blue.jpg",
     "rating": 5,
     "reviewCount": 2150,
     "gender": "Para Él",
@@ -2934,7 +2972,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Turathi.webp",
     "gallery": [
-      "/assets/images/Turathi.webp"
+      "/assets/images/Turathi.webp",
+      "/assets/images/fichas/ficha_afnan-turathi-blue.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Afnan/Turathi-Blue-70887.html",
     "fraganticaQuery": "Afnan Turathi Blue",
@@ -2990,7 +3029,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 33,
     "onSale": false,
     "timeOfDay": "ambas",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_french-avenue-vulcan-feu.jpg",
     "rating": 5,
     "reviewCount": 480,
     "gender": "Para Él",
@@ -3008,7 +3047,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Vulcan feu.jpg",
     "gallery": [
-      "/assets/images/Vulcan feu.jpg"
+      "/assets/images/Vulcan feu.jpg",
+      "/assets/images/fichas/ficha_french-avenue-vulcan-feu.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=French+Avenue+Vulcan+Feu",
     "fraganticaQuery": "French Avenue Vulcan Feu",
@@ -3064,7 +3104,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 28,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rayhaan-tropical-vibe.jpg",
     "rating": 4.8,
     "reviewCount": 390,
     "gender": "Unisex",
@@ -3081,7 +3121,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Rayhann tropical vibe.webp",
     "gallery": [
-      "/assets/images/Rayhann tropical vibe.webp"
+      "/assets/images/Rayhann tropical vibe.webp",
+      "/assets/images/fichas/ficha_rayhaan-tropical-vibe.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Rayhaan+Tropical+Vibe",
     "fraganticaQuery": "Rayhaan Tropical Vibe",
@@ -3137,7 +3178,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_afnan-9-pm-night-out.jpg",
     "rating": 5,
     "reviewCount": 610,
     "gender": "Para Él",
@@ -3156,7 +3197,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/9pm nigh out.jpg",
     "gallery": [
-      "/assets/images/9pm nigh out.jpg"
+      "/assets/images/9pm nigh out.jpg",
+      "/assets/images/fichas/ficha_afnan-9-pm-night-out.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Afnan+9+PM+Night+Out",
     "fraganticaQuery": "Afnan 9 PM Night Out",
@@ -3212,7 +3254,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 30,
     "onSale": false,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-pride-pisa.jpg",
     "rating": 5,
     "reviewCount": 380,
     "gender": "Unisex",
@@ -3229,7 +3271,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Pisa lataffa.jpg",
     "gallery": [
-      "/assets/images/Pisa lataffa.jpg"
+      "/assets/images/Pisa lataffa.jpg",
+      "/assets/images/fichas/ficha_lattafa-pride-pisa.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Lattafa+Pride+Pisa",
     "fraganticaQuery": "Lattafa Pride Pisa",
@@ -3285,7 +3328,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-asad-elixir.jpg",
     "rating": 5,
     "reviewCount": 1890,
     "gender": "Para Él",
@@ -3303,7 +3346,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Asad elixir.webp",
     "gallery": [
-      "/assets/images/Asad elixir.webp"
+      "/assets/images/Asad elixir.webp",
+      "/assets/images/fichas/ficha_lattafa-asad-elixir.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Asad-72810.html",
     "fraganticaQuery": "Lattafa Asad Elixir Edition",
@@ -3359,7 +3403,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 31,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_rayhaan-pacific-aura.jpg",
     "rating": 4.9,
     "reviewCount": 470,
     "gender": "Para Él",
@@ -3376,7 +3420,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Pacific aura RAYHAAN.jpg",
     "gallery": [
-      "/assets/images/Pacific aura RAYHAAN.jpg"
+      "/assets/images/Pacific aura RAYHAAN.jpg",
+      "/assets/images/fichas/ficha_rayhaan-pacific-aura.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Rayhaan/Pacific-Aura-93812.html",
     "fraganticaQuery": "Rayhaan Pacific Pour Homme Aura",
@@ -3432,7 +3477,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 32,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_lattafa-his-confession.jpg",
     "rating": 5,
     "reviewCount": 790,
     "gender": "Para Él",
@@ -3450,7 +3495,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/His confesión.webp",
     "gallery": [
-      "/assets/images/His confesión.webp"
+      "/assets/images/His confesión.webp",
+      "/assets/images/fichas/ficha_lattafa-his-confession.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/His-Confession-97421.html",
     "fraganticaQuery": "Lattafa His Confession",
@@ -3506,7 +3552,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 33,
     "onSale": true,
     "timeOfDay": "noche",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_french-avenue-liquid-brun-limited-edition.jpg",
     "rating": 5,
     "reviewCount": 680,
     "gender": "Unisex",
@@ -3525,7 +3571,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Liquid brun limited Edition.jpg",
     "gallery": [
-      "/assets/images/Liquid brun limited Edition.jpg"
+      "/assets/images/Liquid brun limited Edition.jpg",
+      "/assets/images/fichas/ficha_french-avenue-liquid-brun-limited-edition.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=French+Avenue+Liquid+Brun+Limited+Edition",
     "fraganticaQuery": "French Avenue Liquid Brun Limited Edition",
@@ -3581,7 +3628,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 29,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": "/assets/images/rasasi_hawas_verde_infografia.jpg",
+    "infographicImage": "/assets/images/fichas/ficha_rasasi-hawas-verde.jpg",
     "rating": 5,
     "reviewCount": 1420,
     "gender": "Para Él",
@@ -3600,7 +3647,7 @@ export const PERFUMES_DATA = [
     "imageMain": "/assets/images/hawas verde rasari.webp",
     "gallery": [
       "/assets/images/hawas verde rasari.webp",
-      "/assets/images/rasasi_hawas_verde_infografia.jpg"
+      "/assets/images/fichas/ficha_rasasi-hawas-verde.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Rasasi/Hawas-for-Him-39449.html",
     "fraganticaQuery": "Rasasi Hawas Verde for Him",
