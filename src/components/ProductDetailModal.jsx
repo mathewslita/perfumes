@@ -40,6 +40,14 @@ export default function ProductDetailModal({
     };
   }, []);
 
+  // Resetear selecciones e imagen activa al cambiar de producto
+  useEffect(() => {
+    setActiveImgIndex(0);
+    setSelectedFormat('100ml');
+    setQuantity(1);
+    setShowMomentText(false);
+  }, [product?.id]);
+
   const isOnSale = product.onSale !== false && (product.originalPrice100ml > product.price100ml);
   const currentPrice = selectedFormat === '100ml' ? product.price100ml : product.priceDecant;
   const originalPrice = selectedFormat === '100ml' ? product.originalPrice100ml : product.originalPriceDecant;

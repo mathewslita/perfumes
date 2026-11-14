@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
@@ -273,68 +273,70 @@ export default function App() {
     el?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Filtered Products Logic
-  const filteredProducts = PERFUMES_DATA.filter(p => {
-    // Brand filter
-    if (selectedBrand && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
-      return false;
-    }
-
-    // Acorde filter
-    if (selectedAcorde && !p.acordes?.includes(selectedAcorde)) {
-      return false;
-    }
-
-    // Category / Collection filter
-    if (activeCategory === 'arabes' && p.collection !== 'arabes') return false;
-    if (activeCategory === 'disenador' && p.collection !== 'disenador') return false;
-    if (activeCategory === 'Para Él' && p.gender !== 'Para Él' && p.gender !== 'Unisex') return false;
-    if (activeCategory === 'Para Ella' && p.gender !== 'Para Ella' && p.gender !== 'Unisex') return false;
-    if (activeCategory === 'Unisex' && p.gender !== 'Unisex') return false;
-    if (activeCategory === 'decants') return true; // Show all products for decants
-    if (activeCategory === 'ofertas' && (p.onSale === false || p.originalPrice100ml <= p.price100ml)) return false;
-
-    // Vibe filter
-    if (activeVibe !== 'all') {
-      const vibeMap = {
-        dulces: '🍬 DULCES',
-        beast: '🍬 DULCES',
-        amaderados: '🪵 AMADERADOS',
-        gourmand: '🪵 AMADERADOS',
-        citricos: '🍋 CÍTRICOS',
-        office: '🍋 CÍTRICOS',
-        day: '☀️ DÍA',
-        night: '🌙 NOCHE',
-        viral: '👑 TOP VENTAS'
-      };
-      const vibeObj = vibeMap[activeVibe];
-      if (vibeObj) {
-        const matches = p.vibes?.includes(vibeObj) || (activeVibe === 'day' && (p.timeOfDay === 'dia' || p.timeOfDay === 'ambas'));
-        if (!matches) return false;
+  // Filtered Products Logic (Optimizado y memoizado para máximo rendimiento)
+  const filteredProducts = useMemo(() => {
+    return PERFUMES_DATA.filter(p => {
+      // Brand filter
+      if (selectedBrand && p.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
+        return false;
       }
-    }
 
-    // Live search query
-    if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      const matchName = p.name.toLowerCase().includes(q);
-      const matchBrand = p.brand.toLowerCase().includes(q);
-      const matchType = p.technicalTable.fragranceType.toLowerCase().includes(q);
-      const matchInspo = p.inspiration.toLowerCase().includes(q);
-      const matchNotes = (
-        p.technicalTable.headNotes + ' ' + 
-        p.technicalTable.heartNotes + ' ' + 
-        p.technicalTable.baseNotes
-      ).toLowerCase().includes(q);
+      // Acorde filter
+      if (selectedAcorde && !p.acordes?.includes(selectedAcorde)) {
+        return false;
+      }
 
-      return matchName || matchBrand || matchType || matchInspo || matchNotes;
-    }
+      // Category / Collection filter
+      if (activeCategory === 'arabes' && p.collection !== 'arabes') return false;
+      if (activeCategory === 'disenador' && p.collection !== 'disenador') return false;
+      if (activeCategory === 'Para Él' && p.gender !== 'Para Él' && p.gender !== 'Unisex') return false;
+      if (activeCategory === 'Para Ella' && p.gender !== 'Para Ella' && p.gender !== 'Unisex') return false;
+      if (activeCategory === 'Unisex' && p.gender !== 'Unisex') return false;
+      if (activeCategory === 'decants') return true; // Show all products for decants
+      if (activeCategory === 'ofertas' && (p.onSale === false || p.originalPrice100ml <= p.price100ml)) return false;
 
-    return true;
-  });
+      // Vibe filter
+      if (activeVibe !== 'all') {
+        const vibeMap = {
+          dulces: '🍬 DULCES',
+          beast: '🍬 DULCES',
+          amaderados: '🪵 AMADERADOS',
+          gourmand: '🪵 AMADERADOS',
+          citricos: '🍋 CÍTRICOS',
+          office: '🍋 CÍTRICOS',
+          day: '☀️ DÍA',
+          night: '🌙 NOCHE',
+          viral: '👑 TOP VENTAS'
+        };
+        const vibeObj = vibeMap[activeVibe];
+        if (vibeObj) {
+          const matches = p.vibes?.includes(vibeObj) || (activeVibe === 'day' && (p.timeOfDay === 'dia' || p.timeOfDay === 'ambas'));
+          if (!matches) return false;
+        }
+      }
 
-  const openedProduct = PERFUMES_DATA.find(p => p.id === selectedProductId);
-  const cartItemCount = (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + (item.quantity || 1), 0);
+      // Live search query
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const matchName = p.name.toLowerCase().includes(q);
+        const matchBrand = p.brand.toLowerCase().includes(q);
+        const matchType = p.technicalTable.fragranceType.toLowerCase().includes(q);
+        const matchInspo = p.inspiration.toLowerCase().includes(q);
+        const matchNotes = (
+          p.technicalTable.headNotes + ' ' + 
+          p.technicalTable.heartNotes + ' ' + 
+          p.technicalTable.baseNotes
+        ).toLowerCase().includes(q);
+
+        return matchName || matchBrand || matchType || matchInspo || matchNotes;
+      }
+
+      return true;
+    });
+  }, [selectedBrand, selectedAcorde, activeCategory, activeVibe, searchQuery]);
+
+  const openedProduct = useMemo(() => PERFUMES_DATA.find(p => p.id === selectedProductId), [selectedProductId]);
+  const cartItemCount = useMemo(() => (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + (item.quantity || 1), 0), [cart]);
 
   const getAcordeLabel = (id) => {
     switch (id) {

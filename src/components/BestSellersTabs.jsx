@@ -1,6 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Sparkles, MessageCircle, RotateCcw, Crown, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from './ProductCard';
+
+// Algoritmo de Paginación Inteligente con Elipsis (Truncado fluido para móviles y desktop)
+function getPaginationItems(currentPage, totalPages, isMobile) {
+  if (totalPages <= 1) return [];
+
+  // En móviles: strictly máximo 5 elementos (p. ej. 1, 2, 3, '...', 12 o 1, '...', 7, '...', 12)
+  if (isMobile) {
+    if (totalPages <= 5) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+    if (currentPage <= 3) {
+      return [1, 2, 3, '...', totalPages];
+    }
+    if (currentPage >= totalPages - 2) {
+      return [1, '...', totalPages - 2, totalPages - 1, totalPages];
+    }
+    return [1, '...', currentPage, '...', totalPages];
+  }
+
+  // En PC / Tablet: hasta 7 elementos
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+  if (currentPage <= 4) {
+    return [1, 2, 3, 4, 5, '...', totalPages];
+  }
+  if (currentPage >= totalPages - 3) {
+    return [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+  }
+  return [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+}
 
 export default function BestSellersTabs({ 
   products, 
@@ -42,31 +73,33 @@ export default function BestSellersTabs({
     (activeVibe && activeVibe !== 'all')
   );
   
-  // Paginación Responsive: 8 en PC (>= 768px), 4 en Móviles (< 768px)
+  // Paginación Responsive: 8 en PC (>= 640px), 6 en Móviles (< 640px)
   const [isMobile, setIsMobile] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const mql = window.matchMedia('(max-width: 639px)');
+    const updateMobile = (e) => setIsMobile(e.matches);
+    setIsMobile(mql.matches);
+    mql.addEventListener('change', updateMobile);
+    return () => mql.removeEventListener('change', updateMobile);
   }, []);
 
-  const itemsPerPage = isMobile ? 4 : 8;
+  const itemsPerPage = isMobile ? 6 : 8;
 
-  // Restablecer a página 1 al cambiar de categoría o tamaño de pantalla
+  // Restablecer a página 1 al cambiar de categoría o filtros (estable ante scrolls y resize móvil)
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedCategory, isMobile]);
+  }, [selectedCategory, selectedBrand, selectedAcorde, searchQuery, activeVibe]);
 
   const totalItems = products.length;
   const totalPages = Math.max(1, Math.ceil(totalItems / itemsPerPage));
   const safePage = Math.min(Math.max(1, currentPage), totalPages);
   const startIndex = (safePage - 1) * itemsPerPage;
-  const displayProducts = products.slice(startIndex, startIndex + itemsPerPage);
+  const displayProducts = useMemo(
+    () => products.slice(startIndex, startIndex + itemsPerPage),
+    [products, startIndex, itemsPerPage]
+  );
 
   const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > totalPages || newPage === safePage) return;
@@ -286,64 +319,92 @@ export default function BestSellersTabs({
               ))}
             </div>
 
-            {/* Paginación Limpia y Minimalista (8 en PC / 4 en Móvil) */}
+            {/* Paginación Limpia, Intuitiva y Anti-Desbordamiento en Móviles */}
             {totalPages > 1 && (
-              <nav 
-                aria-label="Paginación del catálogo"
-                className="mt-10 pt-4 flex items-center justify-center gap-2"
-              >
-                {/* Botón Anterior */}
-                <button
-                  onClick={() => handlePageChange(safePage - 1)}
-                  disabled={safePage === 1}
-                  className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
-                    safePage === 1
-                      ? 'opacity-30 border-gray-200 text-gray-400 cursor-not-allowed'
-                      : 'bg-white text-[#0E0E0E] border-gray-200 hover:border-[#C9A961] hover:text-[#C9A961] hover:shadow-xs active:scale-95'
-                  }`}
-                  aria-label="Página anterior"
+              <div className="mt-10 pt-4 flex flex-col items-center gap-3">
+                <nav 
+                  aria-label="Paginación del catálogo"
+                  className="flex items-center justify-center gap-1.5 sm:gap-2 max-w-full"
                 >
-                  <ChevronLeft className="w-4 h-4" />
-                  <span className="hidden sm:inline">Anterior</span>
-                </button>
+                  {/* Botón Anterior */}
+                  <button
+                    onClick={() => handlePageChange(safePage - 1)}
+                    disabled={safePage === 1}
+                    className={`h-9 sm:h-10 px-2.5 sm:px-4 rounded-xl text-xs font-bold transition-all border flex items-center justify-center gap-1 cursor-pointer select-none ${
+                      safePage === 1
+                        ? 'opacity-30 border-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-white text-[#0E0E0E] border-gray-200 hover:border-[#C9A961] hover:text-[#C9A961] hover:shadow-xs active:scale-95'
+                    }`}
+                    aria-label="Página anterior"
+                  >
+                    <ChevronLeft className="w-4 h-4" />
+                    <span className="hidden sm:inline">Anterior</span>
+                  </button>
 
-                {/* Botones de Páginas Numéricas */}
-                <div className="flex items-center gap-1.5">
-                  {Array.from({ length: totalPages }, (_, idx) => idx + 1).map((pageNum) => {
-                    const isActive = pageNum === safePage;
-                    return (
-                      <button
-                        key={pageNum}
-                        onClick={() => handlePageChange(pageNum)}
-                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer ${
-                          isActive
-                            ? 'bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961] font-black shadow-sm'
-                            : 'bg-white text-gray-700 border border-gray-200 hover:border-[#C9A961]/60 hover:text-black'
-                        }`}
-                        aria-label={`Ir a página ${pageNum}`}
-                        aria-current={isActive ? 'page' : undefined}
-                      >
-                        {pageNum}
-                      </button>
-                    );
-                  })}
-                </div>
+                  {/* Botones de Páginas Numéricas y Elipsis Inteligente */}
+                  <div className="flex items-center gap-1 sm:gap-1.5">
+                    {getPaginationItems(safePage, totalPages, isMobile).map((item, idx) => {
+                      if (typeof item === 'string') {
+                        const isLeft = idx === 1;
+                        const targetPage = isLeft ? Math.max(1, safePage - 3) : Math.min(totalPages, safePage + 3);
+                        return (
+                          <button
+                            key={`ellipsis-${idx}`}
+                            onClick={() => handlePageChange(targetPage)}
+                            className="w-8 h-9 sm:w-10 sm:h-10 rounded-xl text-xs font-bold text-stone-400 hover:text-[#C9A961] hover:bg-[#C9A961]/10 transition-colors flex items-center justify-center cursor-pointer select-none"
+                            title={isLeft ? 'Saltar atrás 3 páginas' : 'Saltar adelante 3 páginas'}
+                            aria-label={isLeft ? 'Saltar atrás 3 páginas' : 'Saltar adelante 3 páginas'}
+                          >
+                            •••
+                          </button>
+                        );
+                      }
 
-                {/* Botón Siguiente */}
-                <button
-                  onClick={() => handlePageChange(safePage + 1)}
-                  disabled={safePage === totalPages}
-                  className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all border flex items-center gap-1.5 cursor-pointer ${
-                    safePage === totalPages
-                      ? 'opacity-30 border-gray-200 text-gray-400 cursor-not-allowed'
-                      : 'bg-white text-[#0E0E0E] border-gray-200 hover:border-[#C9A961] hover:text-[#C9A961] hover:shadow-xs active:scale-95'
-                  }`}
-                  aria-label="Página siguiente"
-                >
-                  <span className="hidden sm:inline">Siguiente</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </nav>
+                      const pageNum = item;
+                      const isActive = pageNum === safePage;
+                      return (
+                        <button
+                          key={pageNum}
+                          onClick={() => handlePageChange(pageNum)}
+                          className={`w-8 h-9 sm:w-10 sm:h-10 rounded-xl text-xs font-bold transition-all flex items-center justify-center cursor-pointer select-none active:scale-95 ${
+                            isActive
+                              ? 'bg-[#0E0E0E] text-[#C9A961] border border-[#C9A961] font-black shadow-sm ring-1 ring-[#C9A961]/40'
+                              : 'bg-white text-gray-700 border border-gray-200 hover:border-[#C9A961]/60 hover:text-black'
+                          }`}
+                          aria-label={`Ir a página ${pageNum}`}
+                          aria-current={isActive ? 'page' : undefined}
+                        >
+                          {pageNum}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* Botón Siguiente */}
+                  <button
+                    onClick={() => handlePageChange(safePage + 1)}
+                    disabled={safePage === totalPages}
+                    className={`h-9 sm:h-10 px-2.5 sm:px-4 rounded-xl text-xs font-bold transition-all border flex items-center justify-center gap-1 cursor-pointer select-none ${
+                      safePage === totalPages
+                        ? 'opacity-30 border-gray-200 text-gray-400 cursor-not-allowed'
+                        : 'bg-white text-[#0E0E0E] border-gray-200 hover:border-[#C9A961] hover:text-[#C9A961] hover:shadow-xs active:scale-95'
+                    }`}
+                    aria-label="Página siguiente"
+                  >
+                    <span className="hidden sm:inline">Siguiente</span>
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </nav>
+
+                {/* Indicador Informativo Elegante */}
+                <p className="text-[11px] sm:text-xs text-stone-500 font-medium tracking-wide">
+                  Página <span className="text-[#0E0E0E] font-bold">{safePage}</span> de <span className="text-[#0E0E0E] font-bold">{totalPages}</span>
+                  <span className="hidden sm:inline text-stone-300 mx-2">|</span>
+                  <span className="hidden sm:inline">
+                    Mostrando {startIndex + 1}–{Math.min(startIndex + itemsPerPage, totalItems)} de {totalItems} fragancias
+                  </span>
+                </p>
+              </div>
             )}
           </>
         )}

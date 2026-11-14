@@ -350,7 +350,7 @@ export const PERFUMES_DATA = [
     "discountPercent": 26,
     "onSale": false,
     "timeOfDay": "dia",
-    "infographicImage": null,
+    "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-limoni.jpg",
     "rating": 4.8,
     "reviewCount": 430,
     "gender": "Unisex",
@@ -365,7 +365,8 @@ export const PERFUMES_DATA = [
     ],
     "imageMain": "/assets/images/Odyssey Limoni.jpg",
     "gallery": [
-      "/assets/images/Odyssey Limoni.jpg"
+      "/assets/images/Odyssey Limoni.jpg",
+      "/assets/images/fichas/ficha_armaf-odyssey-limoni.jpg"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Armaf/Odyssey-Limoni-94321.html",
     "fraganticaQuery": "Armaf Odyssey Limoni",
