@@ -11,34 +11,30 @@ export default function CategoryBanner({
   };
 
   return (
-    <section className="py-10 sm:py-16 md:py-20 bg-[#0E0E0E] text-[#F5F1E8] border-b border-[#C9A961]/25 relative overflow-hidden">
-      {/* Ambient Luxury Lighting */}
-      <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-[#C9A961]/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[140px] pointer-events-none" />
-
+    <section id="nuestras-colecciones" className="py-10 sm:py-16 md:py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Section Header: Minimalist GTA VI Layout (Title Left + "Ver todo" Right) */}
-        <div className="flex items-end justify-between mb-6 sm:mb-10 pb-3 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 sm:mb-12 pb-4 border-b border-stone-200/80">
           <div>
-            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-[#C9A961] block mb-1">
+            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-[#8F7432] block mb-1">
               Catálogo Oficial
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white uppercase">
+            <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#0E0E0E] uppercase">
               NUESTRAS COLECCIONES
             </h2>
           </div>
 
           <button
             onClick={scrollToCatalog}
-            className="text-xs sm:text-sm font-bold text-stone-400 hover:text-[#C9A961] flex items-center gap-1.5 transition-colors cursor-pointer group py-1"
+            className="text-xs sm:text-sm font-bold text-stone-600 hover:text-[#8F7432] flex items-center gap-1.5 transition-colors cursor-pointer group py-1 self-start sm:self-auto"
           >
-            <span>Ver todo el catálogo</span>
+            <span>Ver todo el catálogo (49 Fragancias)</span>
             <ArrowRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 
-        {/* 2 Immersive Luxury Cards (Estilo GTA VI: Grandes, Redondeadas y Cinemáticas) */}
+        {/* 2 Luxury Editorial Cards (Clean, Harmonious & Seamless Bottles) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 items-stretch">
           
           {/* =========================================================================
@@ -46,55 +42,56 @@ export default function CategoryBanner({
               ========================================================================= */}
           <div
             onClick={() => onSelectCollection('arabes')}
-            className={`group rounded-3xl p-6 sm:p-9 cursor-pointer transition-all duration-500 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-[#161619] to-[#101012] border ${
+            className={`group rounded-3xl p-6 sm:p-9 cursor-pointer transition-all duration-500 flex flex-col justify-between relative overflow-hidden bg-white border ${
               activeCollection === 'arabes'
                 ? 'border-[#C9A961] shadow-2xl ring-2 ring-[#C9A961]/40 scale-[1.01]'
-                : 'border-white/10 hover:border-[#C9A961]/70 shadow-2xl hover:-translate-y-1'
+                : 'border-stone-200/90 hover:border-[#C9A961] shadow-soft-card hover:shadow-xl hover:-translate-y-1'
             }`}
           >
-            {/* Ambient Spotlight Interior */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-[#C9A961]/20 rounded-full blur-3xl pointer-events-none group-hover:bg-[#C9A961]/30 transition-all duration-700" />
+            {/* Visual Bottle Showcase Stage (Pedestal Alabastro Cálido) */}
+            <div className="relative h-60 sm:h-72 w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#FAF8F5] via-[#F4EFE6] to-[#ECE5D8] flex items-center justify-center p-4 mb-6 border border-stone-200/70 group-hover:border-[#C9A961]/40 transition-colors shadow-inner">
+              {/* Ambient Warm Glow */}
+              <div className="absolute w-48 h-48 bg-[#C9A961]/20 rounded-full blur-2xl pointer-events-none" />
 
-            {/* Stage Visual: Frascos Sin Fondo Blanco con Realismo Total */}
-            <div className="relative h-60 sm:h-72 w-full flex items-center justify-center mb-6">
-              <div className="relative z-10 flex items-end justify-center -space-x-5 sm:-space-x-8 pt-4">
+              {/* Twin Arabic Bottles con transparencia total */}
+              <div className="relative z-10 flex items-end justify-center -space-x-4 sm:-space-x-7 pt-4">
                 <img 
                   src="/assets/images/khamrah_clasico_transparent.webp" 
                   alt="Lattafa Khamrah Dubái" 
-                  className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
                 <img 
                   src="/assets/images/amber_oud_gold_transparent.webp" 
                   alt="Al Haramain Amber Oud Gold Edition" 
-                  className="h-40 sm:h-52 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] transform rotate-4 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="h-40 sm:h-52 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] transform rotate-4 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
               </div>
             </div>
 
             {/* Content Details */}
-            <div className="relative z-10 space-y-2">
-              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-[#C9A961] block">
+            <div className="space-y-2">
+              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-[#8F7432] block">
                 COLECCIÓN DUBÁI • 48 FRAGANCIAS
               </span>
 
-              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase group-hover:text-[#C9A961] transition-colors leading-tight">
+              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] tracking-tight uppercase group-hover:text-[#8F7432] transition-colors leading-tight">
                 PERFUMES ÁRABES
               </h3>
 
-              <p className="text-xs sm:text-[13px] text-stone-400 font-normal leading-relaxed line-clamp-2">
-                Lattafa, Armaf, Afnan, Rasasi, Al Haramain, Bharara, French Avenue, Dumont y Rayhaan.
+              <p className="text-xs sm:text-[13px] text-stone-600 font-normal leading-relaxed line-clamp-2">
+                Lattafa, Armaf, Afnan, Rasasi, Al Haramain, Bharara, French Avenue, Dumont y Rayhaan. Fórmulas de altísima fijación y estela envolvente.
               </p>
 
               {/* Pill Button GTA Style */}
-              <div className="pt-3">
+              <div className="pt-4">
                 <button
                   type="button"
-                  className="bg-[#C9A961] hover:bg-[#D4B66E] text-[#0E0E0E] font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 shadow-lg group-hover:shadow-[#C9A961]/30 group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-[#0E0E0E] hover:bg-[#1A1A1A] text-[#C9A961] hover:text-white font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 border border-[#C9A961]/40 shadow-md group-hover:shadow-lg group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span>Explorar Colección Árabe</span>
-                  <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>
@@ -105,49 +102,50 @@ export default function CategoryBanner({
               ========================================================================= */}
           <div
             onClick={() => onSelectCollection('disenador')}
-            className={`group rounded-3xl p-6 sm:p-9 cursor-pointer transition-all duration-500 flex flex-col justify-between relative overflow-hidden bg-gradient-to-b from-[#161619] to-[#101012] border ${
+            className={`group rounded-3xl p-6 sm:p-9 cursor-pointer transition-all duration-500 flex flex-col justify-between relative overflow-hidden bg-white border ${
               activeCollection === 'disenador'
-                ? 'border-white shadow-2xl ring-2 ring-white/30 scale-[1.01]'
-                : 'border-white/10 hover:border-white/50 shadow-2xl hover:-translate-y-1'
+                ? 'border-[#0E0E0E] shadow-2xl ring-2 ring-[#0E0E0E]/30 scale-[1.01]'
+                : 'border-stone-200/90 hover:border-stone-700 shadow-soft-card hover:shadow-xl hover:-translate-y-1'
             }`}
           >
-            {/* Ambient Spotlight Interior */}
-            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-sky-400/10 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-400/20 transition-all duration-700" />
+            {/* Visual Bottle Showcase Stage (Pedestal Platino Limpio) */}
+            <div className="relative h-60 sm:h-72 w-full rounded-2xl overflow-hidden bg-gradient-to-b from-[#F9FAFB] via-[#F3F4F6] to-[#E5E7EB] flex items-center justify-center p-4 mb-6 border border-stone-200/70 group-hover:border-stone-400 transition-colors shadow-inner">
+              {/* Ambient Cool Glow */}
+              <div className="absolute w-48 h-48 bg-sky-400/10 rounded-full blur-2xl pointer-events-none" />
 
-            {/* Stage Visual: Frasco Sin Fondo Blanco con Realismo Total */}
-            <div className="relative h-60 sm:h-72 w-full flex items-center justify-center mb-6">
+              {/* Halloween Man X Bottle con transparencia total */}
               <div className="relative z-10 flex items-end justify-center pt-4">
                 <img 
                   src="/assets/images/halloween_x_man_transparent.webp" 
                   alt="Halloween Man X" 
-                  className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-all duration-700 ease-out"
+                  className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
               </div>
             </div>
 
             {/* Content Details */}
-            <div className="relative z-10 space-y-2">
-              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-stone-400 block">
+            <div className="space-y-2">
+              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-stone-500 block">
                 ALTA COSTURA OCCIDENTAL • SELECCIÓN EXCLUSIVA
               </span>
 
-              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase group-hover:text-stone-200 transition-colors leading-tight">
+              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] tracking-tight uppercase group-hover:text-stone-700 transition-colors leading-tight">
                 HALLOWEEN MAN X
               </h3>
 
-              <p className="text-xs sm:text-[13px] text-stone-400 font-normal leading-relaxed line-clamp-2">
-                Jesús del Pozo Madrid. El magnetismo de la noche con café espresso, cardamomo, whisky y cuero.
+              <p className="text-xs sm:text-[13px] text-stone-600 font-normal leading-relaxed line-clamp-2">
+                Jesús del Pozo Madrid. El magnetismo de la noche con café espresso tostado, cardamomo, whisky y cuero.
               </p>
 
               {/* Pill Button GTA Style */}
-              <div className="pt-3">
+              <div className="pt-4">
                 <button
                   type="button"
-                  className="bg-white hover:bg-stone-200 text-[#0E0E0E] font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 shadow-lg group-hover:shadow-white/20 group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-white hover:bg-[#0E0E0E] text-[#0E0E0E] hover:text-[#C9A961] font-black text-xs sm:text-sm px-6 sm:px-7 py-3 rounded-full flex items-center gap-2 border-2 border-[#0E0E0E] shadow-md group-hover:shadow-lg group-hover:scale-105 active:scale-95 transition-all cursor-pointer"
                 >
                   <span>Ver Halloween Man X</span>
-                  <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 text-[#0E0E0E] group-hover:text-[#C9A961] group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </div>

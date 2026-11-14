@@ -35,6 +35,28 @@ export default function App() {
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
   const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  // Scroll listener for cinematic GTA VI curtain reveal transition
+  useEffect(() => {
+    let ticking = false;
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY = window.scrollY || window.pageYOffset || 0;
+          // Progress from 0 to 1 over first 450px of scroll
+          const progress = Math.min(1, Math.max(0, scrollY / 450));
+          setScrollProgress(progress);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   // Load cart & favorites on client mount to prevent SSR hydration mismatch
   useEffect(() => {
@@ -382,73 +404,103 @@ export default function App() {
         onOpenProduct={(id) => setSelectedProductId(id)}
       />
 
-      {/* 3. Hero Banner (ARKANO PERFUMERÍA) */}
-      <HeroBanner
-        onOpenProduct={(id) => setSelectedProductId(id)}
-        onAddToCart={handleAddToCart}
-        onExplore={() => {
-          const el = document.getElementById('los-mas-vendidos');
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }}
-        onOpenAiModal={() => setIsAiAdvisorOpen(true)}
-      />
+      {/* GTA VI Immersive Scroll Curtain Experience (Rockstar Games Inspired) */}
+      <div className="relative">
+        
+        {/* Sticky Hero Banner: Dims, scales down and gently blurs as the sheet rises */}
+        <div 
+          className="sticky top-16 sm:top-20 z-0 overflow-hidden will-change-transform select-none"
+          style={{
+            opacity: Math.max(0.15, 1 - scrollProgress * 0.9),
+            transform: `scale(${Math.max(0.93, 1 - scrollProgress * 0.07)}) translateY(${scrollProgress * -25}px)`,
+            filter: `blur(${scrollProgress * 3}px)`,
+            pointerEvents: scrollProgress > 0.6 ? 'none' : 'auto',
+            transition: 'transform 0.12s ease-out, filter 0.12s ease-out, opacity 0.12s ease-out'
+          }}
+        >
+          <HeroBanner
+            onOpenProduct={(id) => setSelectedProductId(id)}
+            onAddToCart={handleAddToCart}
+            onExplore={() => {
+              const el = document.getElementById('nuestras-colecciones') || document.getElementById('los-mas-vendidos');
+              el?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            onOpenAiModal={() => setIsAiAdvisorOpen(true)}
+          />
 
-      {/* 4. Category Showcase Banner: Transición Cinemática Estilo GTA VI (Hero -> Nuestras Colecciones) */}
-      <CategoryBanner
-        activeCollection={activeCategory}
-        onSelectCollection={(col) => {
-          setActiveCategory(col);
-          const el = document.getElementById('los-mas-vendidos');
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }}
-      />
+          {/* Cinematic Darkening Shade that deepens on scroll */}
+          <div 
+            className="absolute inset-0 bg-[#0E0E0E] pointer-events-none transition-opacity duration-200"
+            style={{ opacity: Math.min(0.70, scrollProgress * 0.85) }}
+          />
+        </div>
 
-      {/* 5. Brands Showcase Section */}
-      <BrandsSection
-        onSelectBrand={handleSelectBrand}
-      />
+        {/* Rising Curtain Sheet: Glides UP over the Hero with rounded top border and deep luxury shadow */}
+        <div className="relative z-10 -mt-6 sm:-mt-10 rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-25px_60px_rgba(0,0,0,0.55)] border-t border-[#C9A961]/40 bg-[#F5F1E8] overflow-hidden">
+          
+          {/* Subtle tactile drag/curtain indicator */}
+          <div className="pt-3 pb-1 flex justify-center">
+            <div className="w-12 h-1.5 rounded-full bg-[#C9A961]/40" />
+          </div>
 
-      {/* 5. Visual "Vibe" Search */}
-      <VibeSelector
-        activeVibe={activeVibe}
-        onSelectVibe={(vibeId) => setActiveVibe(vibeId)}
-      />
+          {/* 4. Category Showcase Banner (Nuestras Colecciones) */}
+          <CategoryBanner
+            activeCollection={activeCategory}
+            onSelectCollection={(col) => {
+              setActiveCategory(col);
+              const el = document.getElementById('los-mas-vendidos');
+              el?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
 
-      {/* 6. Best Sellers Section with Dynamic Tabs */}
-      <main className="flex-grow">
-        <BestSellersTabs
-          products={filteredProducts}
-          onOpenProduct={(id) => setSelectedProductId(id)}
-          onAddToCart={handleAddToCart}
-          selectedCategory={activeCategory}
-          onTabChange={(tabId) => setActiveCategory(tabId)}
-          onResetFilters={handleResetFilters}
-          favorites={favorites}
-          onToggleFavorite={handleToggleFavorite}
-          selectedBrand={selectedBrand}
-          onClearBrand={() => setSelectedBrand(null)}
-          selectedAcorde={selectedAcorde}
-          onClearAcorde={() => setSelectedAcorde(null)}
-          searchQuery={searchQuery}
-          onClearSearch={() => setSearchQuery('')}
-          activeVibe={activeVibe}
-          onClearVibe={() => setActiveVibe('all')}
-          getAcordeLabel={getAcordeLabel}
-          vibeCategories={VIBE_CATEGORIES}
-        />
+          {/* 5. Brands Showcase Section */}
+          <BrandsSection
+            onSelectBrand={handleSelectBrand}
+          />
 
-        {/* 7. Cross-Selling Carousel ("También Compraron") */}
-        <CrossSelling
-          products={PERFUMES_DATA}
-          onOpenProduct={(id) => setSelectedProductId(id)}
-          onAddToCart={handleAddToCart}
-          favorites={favorites}
-          onToggleFavorite={handleToggleFavorite}
-        />
+          {/* 6. Visual "Vibe" Search */}
+          <VibeSelector
+            activeVibe={activeVibe}
+            onSelectVibe={(vibeId) => setActiveVibe(vibeId)}
+          />
 
-        {/* 9. About Us & Authenticity Guarantee Section */}
-        <AboutSection />
-      </main>
+          {/* 7. Best Sellers Section with Dynamic Tabs */}
+          <main className="flex-grow">
+            <BestSellersTabs
+              products={filteredProducts}
+              onOpenProduct={(id) => setSelectedProductId(id)}
+              onAddToCart={handleAddToCart}
+              selectedCategory={activeCategory}
+              onTabChange={(tabId) => setActiveCategory(tabId)}
+              onResetFilters={handleResetFilters}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
+              selectedBrand={selectedBrand}
+              onClearBrand={() => setSelectedBrand(null)}
+              selectedAcorde={selectedAcorde}
+              onClearAcorde={() => setSelectedAcorde(null)}
+              searchQuery={searchQuery}
+              onClearSearch={() => setSearchQuery('')}
+              activeVibe={activeVibe}
+              onClearVibe={() => setActiveVibe('all')}
+              getAcordeLabel={getAcordeLabel}
+              vibeCategories={VIBE_CATEGORIES}
+            />
+
+            {/* Cross-Selling Carousel ("También Compraron") */}
+            <CrossSelling
+              products={PERFUMES_DATA}
+              onOpenProduct={(id) => setSelectedProductId(id)}
+              onAddToCart={handleAddToCart}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
+            />
+
+            {/* About Us & Authenticity Guarantee Section */}
+            <AboutSection />
+          </main>
+        </div>
+      </div>
 
       {/* 11. Footer */}
       <Footer 
