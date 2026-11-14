@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sparkles, ArrowRight, Eye, Check, ChevronLeft, ChevronRight, ShieldCheck, Flame, Award, Clock } from 'lucide-react';
+import { Sparkles, ArrowRight, Eye, Check, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const NEW_ARRIVALS = [
   {
@@ -10,7 +10,7 @@ const NEW_ARRIVALS = [
     decantPrice: 22.00,
     notes: 'Lima fresca, Romero noble, Manzana verde, Pachulí y Ámbar',
     image: '/assets/images/hawas verde rasari.webp',
-    categoryBadge: 'Árabe • Nuevo Lanzamiento Dubái',
+    categoryBadge: 'Árabe • Nuevo Lanzamiento',
     vibeText: 'Frescura verde ambarada de fijación extrema'
   },
   {
@@ -43,8 +43,8 @@ const NEW_ARRIVALS = [
     decantPrice: 18.00,
     notes: 'Café Espresso tostado, Whisky licoroso, Cardamomo y Cuero',
     image: '/assets/images/Halloween x man.jpg',
-    categoryBadge: 'Diseñador • Alta Costura Madrid',
-    vibeText: 'Magnetismo nocturno sofisticado de Jesús del Pozo'
+    categoryBadge: 'Diseñador • Alta Costura',
+    vibeText: 'Magnetismo nocturno de Jesús del Pozo'
   },
   {
     id: 'french-avenue-liquid-brun',
@@ -78,7 +78,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
   const currentProduct = NEW_ARRIVALS[currentSlide];
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-[#0B0B0C] via-[#121214] to-[#0A0A0B] text-[#F5F1E8] min-h-[calc(100vh-64px)] sm:min-h-[calc(100vh-80px)] flex flex-col justify-center py-10 sm:py-16 border-b border-[#C9A961]/30">
+    <div className="relative overflow-hidden bg-gradient-to-b from-[#0B0B0C] via-[#121214] to-[#0A0A0B] text-[#F5F1E8] min-h-[calc(100svh-64px)] lg:min-h-[calc(100vh-80px)] flex flex-col justify-center py-2.5 sm:py-6 lg:py-16 border-b border-[#C9A961]/30">
       
       {/* Decorative Golden Ambient Auras & Luxury Lighting */}
       <div className="absolute top-1/4 -left-24 w-[550px] h-[550px] bg-[#C9A961]/12 rounded-full blur-[140px] pointer-events-none" />
@@ -96,60 +96,60 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
         }
       `}</style>
 
-      <div className="max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-12 relative z-10 my-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+      <div className="max-w-[1440px] w-full mx-auto px-3.5 sm:px-6 lg:px-12 relative z-10 my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-6 lg:gap-14 items-center">
           
           {/* =========================================================================
               LEFT COLUMN: Pre-title, Majestic Title, Narrative, CTAs & Stats Grid
               ========================================================================= */}
-          <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center space-y-5 sm:space-y-6 text-center lg:text-left py-2">
+          <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center space-y-2 sm:space-y-4 lg:space-y-6 text-center lg:text-left py-1">
 
             {/* Pre-title Exclusive Badge */}
-            <div className="inline-flex items-center gap-2 bg-[#C9A961]/15 text-[#C9A961] border border-[#C9A961]/40 px-3.5 py-1.5 rounded-full text-[10.5px] sm:text-xs font-black tracking-[0.2em] uppercase backdrop-blur-md self-center lg:self-start shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 fill-[#C9A961]" />
-              <span>BOUTIQUE DE ALTA PERFUMERÍA • SELECCIÓN 2026</span>
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-[#C9A961]/15 text-[#C9A961] border border-[#C9A961]/40 px-2.5 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-xs font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase backdrop-blur-md self-center lg:self-start shadow-sm">
+              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#C9A961]" />
+              <span>BOUTIQUE DE ALTA PERFUMERÍA • 2026</span>
             </div>
 
             {/* Headline and Narrative */}
-            <div className="space-y-3">
-              <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl xl:text-[62px] font-bold leading-[1.08] tracking-tight text-white uppercase">
+            <div className="space-y-1 sm:space-y-3">
+              <h1 className="font-serif text-xl sm:text-4xl lg:text-5xl xl:text-[62px] font-bold leading-tight lg:leading-[1.08] tracking-tight text-white uppercase">
                 PERFUMES 100% ORIGINALES
-                <span className="block text-[#C9A961] italic font-serif font-normal normal-case text-xl sm:text-3xl lg:text-[32px] xl:text-[36px] mt-2 tracking-normal">
+                <span className="block text-[#C9A961] italic font-serif font-normal normal-case text-xs sm:text-xl lg:text-[32px] xl:text-[36px] mt-0.5 sm:mt-2 tracking-normal">
                   Árabes de leyenda y diseñador de alta categoría.
                 </span>
               </h1>
 
               {/* Sutil divisor dorado editorial */}
-              <div className="w-20 h-0.5 bg-gradient-to-r from-transparent via-[#C9A961] to-transparent lg:from-[#C9A961] lg:to-transparent mx-auto lg:mx-0 my-3" />
+              <div className="w-12 sm:w-20 h-0.5 bg-gradient-to-r from-transparent via-[#C9A961] to-transparent lg:from-[#C9A961] lg:to-transparent mx-auto lg:mx-0 my-1 sm:my-3" />
 
-              <p className="text-stone-300 text-xs sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
-                En <strong className="text-white font-semibold">ARKANO PERFUMERÍA</strong> seleccionamos elixires de altísima concentración procedentes de las casas más prestigiosas de Dubái y piezas selectas de diseñador. Fórmulas de fijación titánica, estela envolvente y batch codes 100% verificables.
+              <p className="text-stone-300 text-[10.5px] sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed line-clamp-2 sm:line-clamp-none">
+                En <strong className="text-white font-semibold">ARKANO PERFUMERÍA</strong> seleccionamos elixires de altísima concentración procedentes de las casas más prestigiosas de Dubái y piezas selectas de diseñador con batch codes 100% verificables.
               </p>
             </div>
 
-            {/* CTAs & Action Buttons */}
-            <div className="pt-1">
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3.5">
+            {/* CTAs & Action Buttons: En móvil están lado a lado en 1 fila */}
+            <div className="pt-0.5 sm:pt-1">
+              <div className="flex flex-row items-center justify-center lg:justify-start gap-2 sm:gap-3.5">
                 <button
                   onClick={onExplore}
-                  className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs sm:text-sm px-7 py-3.5 rounded-full flex items-center gap-2 shadow-xl hover:shadow-[#C9A961]/30 hover:scale-105 active:scale-95 transition-all cursor-pointer"
+                  className="bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-[11px] sm:text-sm px-4 sm:px-7 py-2.5 sm:py-3.5 rounded-full flex items-center justify-center gap-1.5 shadow-xl hover:shadow-[#C9A961]/30 hover:scale-105 active:scale-95 transition-all cursor-pointer flex-1 sm:flex-initial"
                 >
-                  <span>Explorar Catálogo Exclusivo</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Explorar Catálogo</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
                 
                 <button
                   onClick={onOpenAiModal}
-                  className="bg-white/10 hover:bg-white/20 text-[#F5F1E8] hover:text-[#C9A961] border border-[#C9A961]/70 hover:border-[#C9A961] font-bold text-xs sm:text-sm px-6 py-3.5 rounded-full flex items-center gap-2 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 shadow-md cursor-pointer"
+                  className="bg-white/10 hover:bg-white/20 text-[#F5F1E8] hover:text-[#C9A961] border border-[#C9A961]/70 hover:border-[#C9A961] font-bold text-[11px] sm:text-sm px-3.5 sm:px-6 py-2.5 sm:py-3.5 rounded-full flex items-center justify-center gap-1.5 backdrop-blur-sm transition-all hover:scale-105 active:scale-95 shadow-md cursor-pointer flex-1 sm:flex-initial whitespace-nowrap"
                 >
-                  <Sparkles className="w-4 h-4 text-[#C9A961]" />
-                  <span>ASESOR - IA de fragancias</span>
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A961]" />
+                  <span>Asesor IA</span>
                 </button>
               </div>
             </div>
 
-            {/* Prestigious 3-Metric Counter Strip (Llena el espacio con datos de lujo) */}
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 pt-4 sm:pt-6 border-t border-white/10 max-w-xl">
+            {/* Prestigious 3-Metric Counter Strip (Visible en tablet y desktop) */}
+            <div className="hidden sm:grid grid-cols-3 gap-2.5 sm:gap-4 pt-4 sm:pt-6 border-t border-white/10 max-w-xl">
               <div className="bg-white/[0.04] hover:bg-white/[0.07] border border-[#C9A961]/25 hover:border-[#C9A961]/60 rounded-2xl p-3 sm:p-4 text-center lg:text-left transition-colors backdrop-blur-sm shadow-sm">
                 <span className="font-serif text-2xl sm:text-3xl font-extrabold text-[#C9A961] block leading-none">49</span>
                 <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-200 font-bold block mt-1.5">Fragancias Élite</span>
@@ -169,21 +169,32 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               </div>
             </div>
 
+            {/* Versión móvil compacta de los sellos de garantía (1 sola línea limpia) */}
+            <div className="flex sm:hidden items-center justify-center gap-2.5 text-[9.5px] text-stone-300 font-medium pt-0.5">
+              <span className="flex items-center gap-1 text-emerald-400 font-bold">
+                <Check className="w-3 h-3 stroke-[3]" /> 100% Original
+              </span>
+              <span className="text-white/20">•</span>
+              <span className="text-stone-200">+14h Fijación</span>
+              <span className="text-white/20">•</span>
+              <span className="text-[#C9A961]">Decants 10ml</span>
+            </div>
+
           </div>
 
           {/* =========================================================================
-              RIGHT COLUMN: Vitrina Majestuosa de Lanzamientos & Selector Interactivo
+              RIGHT COLUMN: Vitrina Majestuosa Adaptativa (Sin recortes en móvil)
               ========================================================================= */}
           <div className="lg:col-span-5 xl:col-span-6 flex flex-col items-center lg:items-end justify-center">
             
-            {/* Vitrina Card Container (Grande, Protagónica y Llena de Luz) */}
-            <div className="relative w-full max-w-lg xl:max-w-[530px]">
+            {/* Vitrina Card Container */}
+            <div className="relative w-full max-w-[340px] sm:max-w-md lg:max-w-lg xl:max-w-[530px]">
               
               {/* Resplandor áurico trasero de la vitrina */}
-              <div className="absolute inset-0 bg-[#C9A961]/20 rounded-3xl blur-2xl transform scale-105 pointer-events-none" />
+              <div className="absolute inset-0 bg-[#C9A961]/15 rounded-3xl blur-2xl transform scale-105 pointer-events-none" />
 
               <div 
-                className="relative bg-gradient-to-b from-white/[0.09] via-white/[0.05] to-[#0E0E0E]/90 backdrop-blur-xl border border-[#C9A961]/45 hover:border-[#C9A961] rounded-3xl p-4 sm:p-5 shadow-2xl cursor-pointer group/hero transition-all duration-500 hover:shadow-[#C9A961]/20"
+                className="relative bg-gradient-to-b from-white/[0.09] via-white/[0.05] to-[#0E0E0E]/90 backdrop-blur-xl border border-[#C9A961]/45 hover:border-[#C9A961] rounded-2xl sm:rounded-3xl p-2.5 sm:p-5 shadow-2xl cursor-pointer group/hero transition-all duration-500 hover:shadow-[#C9A961]/20"
                 onMouseEnter={() => setIsPaused(true)}
                 onMouseLeave={() => setIsPaused(false)}
                 onClick={() => onOpenProduct && onOpenProduct(currentProduct.id)}
@@ -191,16 +202,16 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               >
                 
                 {/* Stage Interior de la Botella con Pedestal Blanco & Sombra Realista */}
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[4/3.5] bg-gradient-to-b from-[#FAF8F5] via-[#F4EFE6] to-[#ECE5D8] pt-12 pb-24 sm:pt-10 sm:pb-24 px-6 flex items-center justify-center border border-white/20 shadow-inner">
+                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[4/3.5] bg-gradient-to-b from-[#FAF8F5] via-[#F4EFE6] to-[#ECE5D8] pt-8 pb-14 sm:pt-10 sm:pb-24 px-4 sm:px-6 flex items-center justify-center border border-white/20 shadow-inner">
                   
                   {/* Luz ambiental dorada detrás del frasco */}
-                  <div className="absolute w-56 h-56 bg-[#C9A961]/25 rounded-full blur-3xl pointer-events-none" />
+                  <div className="absolute w-40 sm:w-56 h-40 sm:h-56 bg-[#C9A961]/25 rounded-full blur-2xl sm:blur-3xl pointer-events-none" />
 
                   {/* Slide Images con cross-fade suave */}
                   {NEW_ARRIVALS.map((perfume, idx) => (
                     <div
                       key={perfume.id}
-                      className={`absolute inset-0 flex items-center justify-center pt-8 pb-22 sm:pt-6 sm:pb-20 px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                      className={`absolute inset-0 flex items-center justify-center pt-6 pb-12 sm:pt-6 sm:pb-20 px-4 sm:px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
                         currentSlide === idx 
                           ? 'opacity-100 scale-100 z-10' 
                           : 'opacity-0 scale-95 pointer-events-none z-0'
@@ -209,19 +220,19 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                       <img 
                         src={perfume.image} 
                         alt={`${perfume.brand} ${perfume.name}`} 
-                        className="w-full h-full max-h-[290px] sm:max-h-[320px] object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.22)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
+                        className="w-full h-full max-h-[145px] sm:max-h-[260px] lg:max-h-[320px] object-contain drop-shadow-[0_12px_18px_rgba(0,0,0,0.22)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
                       />
                     </div>
                   ))}
                   
-                  {/* Badge Superior Izquierdo: NUEVOS LANZAMIENTOS */}
-                  <div className="absolute top-3.5 left-3.5 bg-[#0E0E0E]/90 backdrop-blur-md border border-[#C9A961] text-[#C9A961] text-[10.5px] font-black tracking-wider uppercase px-3 py-1 rounded-full shadow-md flex items-center gap-1.5 z-20">
-                    <Sparkles className="w-3.5 h-3.5 fill-[#C9A961]" />
+                  {/* Badge Superior Izquierdo */}
+                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 bg-[#0E0E0E]/90 backdrop-blur-md border border-[#C9A961] text-[#C9A961] text-[9px] sm:text-[10.5px] font-black tracking-wider uppercase px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-md flex items-center gap-1 z-20">
+                    <Sparkles className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-[#C9A961]" />
                     <span>VITRINA DESTACADA</span>
                   </div>
 
                   {/* Indicadores de Slide con barra de progreso fluida */}
-                  <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-3 py-1.5 rounded-full border border-[#C9A961]/35 shadow-sm">
+                  <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 flex items-center gap-1 sm:gap-1.5 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-[#C9A961]/35 shadow-sm">
                     {NEW_ARRIVALS.map((_, idx) => (
                       <button
                         key={idx}
@@ -230,10 +241,10 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                           e.stopPropagation();
                           setCurrentSlide(idx);
                         }}
-                        className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer overflow-hidden relative ${
+                        className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 cursor-pointer overflow-hidden relative ${
                           currentSlide === idx 
-                            ? 'w-7 bg-white/20' 
-                            : 'w-2 bg-white/40 hover:bg-white/80'
+                            ? 'w-5 sm:w-7 bg-white/20' 
+                            : 'w-1.5 sm:w-2 bg-white/40 hover:bg-white/80'
                         }`}
                         title={`Ver perfume ${idx + 1}`}
                         aria-label={`Ver perfume ${idx + 1}`}
@@ -251,11 +262,11 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     ))}
                   </div>
 
-                  {/* Flechas de Navegación Manual */}
+                  {/* Flechas de Navegación Manual (visibles en hover o tablet/pc) */}
                   <button 
                     type="button"
                     onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-[#0E0E0E]/80 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 flex items-center justify-center transition-all opacity-0 group-hover/hero:opacity-100 shadow-md cursor-pointer active:scale-90"
+                    className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-[#0E0E0E]/80 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 items-center justify-center transition-all opacity-0 group-hover/hero:opacity-100 shadow-md cursor-pointer active:scale-90"
                     aria-label="Anterior perfume"
                     title="Anterior perfume"
                   >
@@ -265,34 +276,34 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                   <button 
                     type="button"
                     onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-[#0E0E0E]/80 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 flex items-center justify-center transition-all opacity-0 group-hover/hero:opacity-100 shadow-md cursor-pointer active:scale-90"
+                    className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-[#0E0E0E]/80 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 items-center justify-center transition-all opacity-0 group-hover/hero:opacity-100 shadow-md cursor-pointer active:scale-90"
                     aria-label="Siguiente perfume"
                     title="Siguiente perfume"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
 
-                  {/* Hover Quick View Overlay */}
-                  <div className="absolute inset-0 bg-[#0E0E0E]/40 backdrop-blur-[2px] opacity-0 group-hover/hero:opacity-100 transition-opacity flex items-center justify-center z-20">
+                  {/* Hover Quick View Overlay (PC) */}
+                  <div className="absolute inset-0 bg-[#0E0E0E]/40 backdrop-blur-[2px] opacity-0 group-hover/hero:opacity-100 transition-opacity hidden sm:flex items-center justify-center z-20">
                     <span className="bg-[#0E0E0E] text-[#C9A961] font-black text-xs py-2.5 px-5 rounded-full shadow-2xl flex items-center gap-2 transform translate-y-2 group-hover/hero:translate-y-0 transition-transform border border-[#C9A961]">
                       <Eye className="w-4 h-4 text-[#C9A961]" />
-                      <span>Ver Perfume & Ficha Completa</span>
+                      <span>Ver Perfume & Ficha</span>
                     </span>
                   </div>
 
-                  {/* Product Info Bar: Transición suave de textos y precio */}
-                  <div className="absolute bottom-3 left-3 right-3 bg-[#0E0E0E]/95 backdrop-blur-md border border-[#C9A961]/40 p-3 sm:p-4 rounded-2xl flex items-center justify-between gap-3 shadow-2xl z-20">
+                  {/* Product Info Bar: Totalmente Visible en Móvil y PC */}
+                  <div className="absolute bottom-2 left-2 right-2 sm:bottom-3 sm:left-3 sm:right-3 bg-[#0E0E0E]/95 backdrop-blur-md border border-[#C9A961]/40 p-2 sm:p-4 rounded-xl sm:rounded-2xl flex items-center justify-between gap-2 shadow-2xl z-20">
                     <div 
                       key={currentProduct.id} 
-                      className="min-w-0 pr-2 transition-all duration-500 ease-out"
+                      className="min-w-0 pr-1 transition-all duration-500 ease-out"
                     >
-                      <span className="text-[9.5px] sm:text-[10px] text-[#C9A961] font-extrabold uppercase tracking-widest block truncate">
-                        {currentProduct.brand} • {currentProduct.categoryBadge}
+                      <span className="text-[8.5px] sm:text-[10px] text-[#C9A961] font-extrabold uppercase tracking-widest block truncate">
+                        {currentProduct.brand}
                       </span>
-                      <h4 className="font-bold text-xs sm:text-base text-white group-hover/hero:text-[#C9A961] transition-colors truncate">
+                      <h4 className="font-bold text-[11px] sm:text-base text-white group-hover/hero:text-[#C9A961] transition-colors truncate">
                         {currentProduct.name}
                       </h4>
-                      <p className="text-[10px] sm:text-[11.5px] text-stone-300 truncate mt-0.5">
+                      <p className="text-[9.5px] sm:text-[11.5px] text-stone-300 truncate hidden sm:block mt-0.5">
                         {currentProduct.notes}
                       </p>
                     </div>
@@ -301,11 +312,11 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                       key={`price-${currentProduct.id}`}
                       className="text-right flex-shrink-0 transition-all duration-500 ease-out pl-2 border-l border-white/10"
                     >
-                      <span className="text-base sm:text-lg font-black text-[#C9A961] block leading-none">
+                      <span className="text-xs sm:text-lg font-black text-[#C9A961] block leading-none">
                         ${currentProduct.price.toFixed(2)}
                       </span>
-                      <span className="text-[10px] text-stone-300 font-semibold block mt-1">
-                        Decant: <strong>${currentProduct.decantPrice.toFixed(0)}</strong>
+                      <span className="text-[8.5px] sm:text-[10px] text-stone-300 font-semibold block mt-0.5">
+                        Decant: ${currentProduct.decantPrice.toFixed(0)}
                       </span>
                     </div>
                   </div>
@@ -314,8 +325,8 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
 
               </div>
 
-              {/* Interactive 5-Perfume Thumbnail Selector Strip (Llena el espacio inferior con elegancia) */}
-              <div className="mt-3.5 sm:mt-4 flex items-center justify-between gap-2 px-1">
+              {/* Selector de 5 Miniaturas (Visible en tablet y desktop para enriquecer el espacio) */}
+              <div className="hidden sm:flex items-center justify-between gap-2 px-1 mt-3.5 sm:mt-4">
                 {NEW_ARRIVALS.map((p, idx) => (
                   <button
                     key={p.id}
@@ -343,16 +354,16 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
         </div>
       </div>
 
-      {/* Indicador de Desplazamiento Cinematográfico Estilo GTA VI */}
+      {/* Indicador de Desplazamiento Cinematográfico (Visible en pantallas grandes) */}
       <div 
         onClick={onExplore}
-        className="hidden sm:flex absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 cursor-pointer opacity-75 hover:opacity-100 transition-opacity group"
+        className="hidden lg:flex absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex-col items-center gap-1.5 cursor-pointer opacity-75 hover:opacity-100 transition-opacity group"
       >
-        <span className="text-[9.5px] font-black uppercase tracking-[0.25em] text-[#C9A961] group-hover:text-white transition-colors">
+        <span className="text-[9px] font-black uppercase tracking-[0.25em] text-[#C9A961] group-hover:text-white transition-colors">
           DESLIZA PARA EXPLORAR
         </span>
-        <div className="w-5 h-8 rounded-full border-2 border-[#C9A961]/70 group-hover:border-[#C9A961] flex items-start justify-center p-1 shadow-md">
-          <span className="w-1.5 h-2 bg-[#C9A961] rounded-full animate-bounce" />
+        <div className="w-5 h-7 rounded-full border-2 border-[#C9A961]/70 group-hover:border-[#C9A961] flex items-start justify-center p-1 shadow-md">
+          <span className="w-1.5 h-1.5 bg-[#C9A961] rounded-full animate-bounce" />
         </div>
       </div>
     </div>
