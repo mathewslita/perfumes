@@ -78,11 +78,20 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
   const currentProduct = NEW_ARRIVALS[currentSlide];
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-b from-[#0B0B0C] via-[#121214] to-[#0A0A0B] text-[#F5F1E8] min-h-[calc(100svh-64px)] lg:min-h-[calc(100vh-80px)] flex flex-col justify-center py-2.5 sm:py-6 lg:py-16 border-b border-[#C9A961]/30">
+    <div className="relative overflow-hidden bg-[#0A0A0B] text-[#F5F1E8] min-h-[calc(100svh-64px)] lg:min-h-[calc(100vh-80px)] flex flex-col justify-center py-2.5 sm:py-6 lg:py-16 border-b border-[#C9A961]/30">
       
+      {/* Fondo de alta gama botánico con textura oscura y líneas doradas */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-85"
+        style={{ backgroundImage: `url('/assets/images/hero_bg_dark_botanical.jpg')` }}
+      />
+
+      {/* Degradado sutil para asegurar contraste nítido y transición perfecta */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0E0E0E]/70 via-transparent to-[#0A0A0B] pointer-events-none" />
+
       {/* Decorative Golden Ambient Auras & Luxury Lighting */}
-      <div className="absolute top-1/4 -left-24 w-[550px] h-[550px] bg-[#C9A961]/12 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 -right-24 w-[600px] h-[600px] bg-[#C9A961]/15 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/4 -left-24 w-[450px] h-[450px] bg-[#C9A961]/12 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 -right-24 w-[500px] h-[500px] bg-[#C9A961]/15 rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute -bottom-20 left-1/3 w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[130px] pointer-events-none" />
       
       {/* Sutil halo central para iluminar la vitrina */}
@@ -262,25 +271,25 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     ))}
                   </div>
 
-                  {/* Flechas de Navegación Manual (visibles en hover o tablet/pc) */}
+                  {/* Flechas de Navegación Manual */}
                   <button 
                     type="button"
                     onClick={(e) => { e.stopPropagation(); prevSlide(); }}
-                    className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-[#0E0E0E]/80 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 items-center justify-center transition-all opacity-0 group-hover/hero:opacity-100 shadow-md cursor-pointer active:scale-90"
+                    className="flex absolute left-2.5 sm:left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#0E0E0E]/85 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 items-center justify-center transition-all opacity-75 hover:opacity-100 hover:scale-110 shadow-lg cursor-pointer active:scale-95"
                     aria-label="Anterior perfume"
                     title="Anterior perfume"
                   >
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
 
                   <button 
                     type="button"
                     onClick={(e) => { e.stopPropagation(); nextSlide(); }}
-                    className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-[#0E0E0E]/80 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 items-center justify-center transition-all opacity-0 group-hover/hero:opacity-100 shadow-md cursor-pointer active:scale-90"
+                    className="flex absolute right-2.5 sm:right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#0E0E0E]/85 text-[#C9A961] hover:text-white hover:bg-[#0E0E0E] border border-[#C9A961]/40 items-center justify-center transition-all opacity-75 hover:opacity-100 hover:scale-110 shadow-lg cursor-pointer active:scale-95"
                     aria-label="Siguiente perfume"
                     title="Siguiente perfume"
                   >
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
                   </button>
 
                   {/* Hover Quick View Overlay (PC) */}
@@ -323,28 +332,6 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
 
                 </div>
 
-              </div>
-
-              {/* Selector de 5 Miniaturas (Visible en tablet y desktop para enriquecer el espacio) */}
-              <div className="hidden sm:flex items-center justify-between gap-2 px-1 mt-3.5 sm:mt-4">
-                {NEW_ARRIVALS.map((p, idx) => (
-                  <button
-                    key={p.id}
-                    onClick={() => setCurrentSlide(idx)}
-                    className={`relative flex-1 h-14 sm:h-16 rounded-xl border p-1 bg-white/[0.06] backdrop-blur-md transition-all cursor-pointer flex items-center justify-center overflow-hidden ${
-                      currentSlide === idx
-                        ? 'border-[#C9A961] ring-2 ring-[#C9A961]/40 bg-white/[0.14] scale-105 shadow-lg'
-                        : 'border-white/10 opacity-60 hover:opacity-100 hover:border-[#C9A961]/50'
-                    }`}
-                    title={p.name}
-                  >
-                    <img 
-                      src={p.image} 
-                      alt={p.name} 
-                      className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm" 
-                    />
-                  </button>
-                ))}
               </div>
 
             </div>
