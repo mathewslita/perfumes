@@ -34,6 +34,7 @@ export default function App() {
   const [selectedBrand, setSelectedBrand] = useState(null);
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
+  const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
 
   // Load cart & favorites on client mount to prevent SSR hydration mismatch
   useEffect(() => {
@@ -361,6 +362,7 @@ export default function App() {
         onOpenCart={() => setIsCartOpen(true)}
         favoritesCount={favorites.filter(id => PERFUMES_DATA.some(p => p.id === id)).length}
         onOpenFavorites={() => setIsFavoritesOpen(true)}
+        onOpenAiModal={() => setIsAiAdvisorOpen(true)}
         onSelectCategory={(cat) => {
           setActiveCategory(cat);
           setSelectedBrand(null);
@@ -380,8 +382,6 @@ export default function App() {
         onOpenProduct={(id) => setSelectedProductId(id)}
       />
 
-
-
       {/* 3. Hero Banner (ARKANO PERFUMERÍA) */}
       <HeroBanner
         onOpenProduct={(id) => setSelectedProductId(id)}
@@ -390,10 +390,7 @@ export default function App() {
           const el = document.getElementById('los-mas-vendidos');
           el?.scrollIntoView({ behavior: 'smooth' });
         }}
-        onOpenAiModal={() => {
-          const widgetBtn = document.querySelector('[aria-label="Abrir Sommelier de Perfumes IA"]');
-          if (widgetBtn) widgetBtn.click();
-        }}
+        onOpenAiModal={() => setIsAiAdvisorOpen(true)}
       />
 
       {/* Brands Showcase Section */}
@@ -511,10 +508,11 @@ export default function App() {
 
       {/* 14. AI Sommelier Floating Concierge Widget */}
       <AiSommelierWidget
-        catalog={PERFUMES_DATA}
-        onSelectProduct={(id) => {
-          setSelectedProductId(id);
-        }}
+        isOpen={isAiAdvisorOpen}
+        onToggle={() => setIsAiAdvisorOpen(prev => !prev)}
+        onClose={() => setIsAiAdvisorOpen(false)}
+        onOpenProduct={(id) => setSelectedProductId(id)}
+        onAddToCart={handleAddToCart}
       />
 
       {/* Toast Alert Notification de Alta Visibilidad */}

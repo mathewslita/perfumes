@@ -3,8 +3,35 @@ import { Sparkles, X, Send, Bot, MessageCircle, ChevronRight, ShoppingBag, Rotat
 import { PERFUMES_DATA } from '../data/perfumes';
 import { analyzeAndRespond } from '../utils/aiSommelierBrain';
 
-export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function AiSommelierWidget({ 
+  onOpenProduct, 
+  onAddToCart,
+  isOpen: controlledIsOpen,
+  onToggle: controlledOnToggle,
+  onClose: controlledOnClose
+}) {
+  const [internalIsOpen, setInternalIsOpen] = useState(false);
+  const isControlled = controlledIsOpen !== undefined;
+  const isOpen = isControlled ? controlledIsOpen : internalIsOpen;
+
+  const handleToggle = () => {
+    if (isControlled && controlledOnToggle) {
+      controlledOnToggle();
+    } else if (isControlled && controlledOnClose && isOpen) {
+      controlledOnClose();
+    } else {
+      setInternalIsOpen(prev => !prev);
+    }
+  };
+
+  const handleClose = () => {
+    if (isControlled && controlledOnClose) {
+      controlledOnClose();
+    } else {
+      setInternalIsOpen(false);
+    }
+  };
+
   const [showGreeting, setShowGreeting] = useState(true);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -136,8 +163,9 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
         )}
 
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="relative w-14 h-14 rounded-full bg-white text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#C9A961] group"
+          id="btn-sommelier-widget"
+          onClick={handleToggle}
+          className="relative w-14 h-14 rounded-full bg-white text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all border-2 border-[#C9A961] group cursor-pointer"
           aria-label="Abrir Asistente de Perfumes ARKANO"
           title="Asistente ARKANO Perfumes - ¡Estoy aquí para ayudarte!"
         >
@@ -195,8 +223,8 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                 <RotateCcw className="w-4 h-4" />
               </button>
               <button
-                onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors"
+                onClick={handleClose}
+                className="text-gray-400 hover:text-white p-1.5 rounded-full hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label="Cerrar chat"
               >
                 <X className="w-5 h-5" />
@@ -255,8 +283,8 @@ export default function AiSommelierWidget({ onOpenProduct, onAddToCart }) {
                           <div 
                             className="flex items-center gap-3 cursor-pointer"
                             onClick={() => {
-                              onOpenProduct(perfume.id);
-                              setIsOpen(false);
+                              onOpenProduct && onOpenProduct(perfume.id);
+                              handleClose();
                             }}
                             title="Ver detalles completos del perfume"
                           >
