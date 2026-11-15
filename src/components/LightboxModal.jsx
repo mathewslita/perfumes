@@ -49,15 +49,15 @@ export default function LightboxModal({
         </button>
       )}
 
-      {/* Imagen Limpia en Alta Resolución Sin Cuadros Redundantes */}
+      {/* Imagen Limpia en Alta Resolución y Tamaño Consistente */}
       <div 
-        className="relative max-w-full max-h-[90vh] flex items-center justify-center"
+        className="relative max-w-full max-h-[90vh] flex items-center justify-center p-2"
         onClick={(e) => e.stopPropagation()}
       >
         <img 
           src={images[currentIndex]} 
           alt="Fotografía oficial en alta resolución" 
-          className="max-h-[85vh] sm:max-h-[88vh] max-w-[92vw] sm:max-w-[85vw] object-contain rounded-2xl filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)] select-none transition-all duration-300"
+          className="max-h-[82vh] sm:max-h-[86vh] max-w-[92vw] sm:max-w-[85vw] w-auto h-auto object-contain rounded-2xl filter drop-shadow-[0_25px_50px_rgba(0,0,0,0.8)] select-none transition-all duration-300"
         />
       </div>
 
