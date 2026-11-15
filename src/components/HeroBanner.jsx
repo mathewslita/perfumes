@@ -9,7 +9,7 @@ const NEW_ARRIVALS = [
     price: 85.00,
     decantPrice: 22.00,
     notes: 'Lima fresca, Romero noble, Manzana verde, Pachulí y Ámbar',
-    image: '/assets/images/hawas_verde_transparent.webp',
+    image: '/assets/images/hawas verde rasari.webp',
     categoryBadge: 'Árabe • Nuevo Lanzamiento',
     vibeText: 'Frescura verde ambarada de fijación extrema'
   },
@@ -20,7 +20,7 @@ const NEW_ARRIVALS = [
     price: 75.00,
     decantPrice: 20.00,
     notes: 'Toronja Azul, Menta helada, Jengibre picante e Incienso',
-    image: '/assets/images/club_de_nuit_iconic_transparent.webp',
+    image: '/assets/images/Club de nuit iconic.webp',
     categoryBadge: 'Árabe • Best Seller Azul',
     vibeText: 'Elixir azul todoterreno para oficina y noche'
   },
@@ -31,7 +31,7 @@ const NEW_ARRIVALS = [
     price: 65.00,
     decantPrice: 18.00,
     notes: 'Canela fina, Dátiles dulces, Praliné belga y Licor ámbar',
-    image: '/assets/images/khamrah_clasico_transparent.webp',
+    image: '/assets/images/Khamrah clasico.webp',
     categoryBadge: 'Árabe • Fenómeno Mundial',
     vibeText: 'La fragancia gourmand más elogiada de Oriente'
   },
@@ -42,7 +42,7 @@ const NEW_ARRIVALS = [
     price: 65.00,
     decantPrice: 18.00,
     notes: 'Café Espresso tostado, Whisky licoroso, Cardamomo y Cuero',
-    image: '/assets/images/halloween_x_man_transparent.webp',
+    image: '/assets/images/Halloween x man.jpg',
     categoryBadge: 'Diseñador • Alta Costura',
     vibeText: 'Magnetismo nocturno de Jesús del Pozo'
   },
@@ -53,7 +53,7 @@ const NEW_ARRIVALS = [
     price: 76.00,
     decantPrice: 20.00,
     notes: 'Vainilla Bourbon, Canela de Ceilán y Praliné de Avellana',
-    image: '/assets/images/liquid_brun_transparent.webp',
+    image: '/assets/images/Liquid brun.webp',
     categoryBadge: 'Árabe • Nicho Supremo',
     vibeText: 'Opulencia cálida inspirada en Althair de Marly'
   }
@@ -210,16 +210,13 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 title={`Haz clic para ver detalles y ficha de ${currentProduct.name}`}
               >
                 
-                {/* Stage Interior de la Vitrina: Fusión perfecta y limpia con el fondo oscuro y halo dorado */}
-                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[4/3.5] bg-gradient-to-b from-white/[0.07] via-[#121215]/85 to-[#08080A]/95 pt-8 pb-14 sm:pt-10 sm:pb-24 px-4 sm:px-6 flex items-center justify-center border border-[#C9A961]/30 shadow-2xl backdrop-blur-md">
+                {/* Stage Interior de la Vitrina: Fondo blanco puro para integración perfecta y cero cortes */}
+                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden aspect-[4/3] sm:aspect-[4/3.5] bg-white pt-8 pb-14 sm:pt-10 sm:pb-24 px-4 sm:px-6 flex items-center justify-center border border-[#C9A961]/25 shadow-inner">
                   
-                  {/* Luz ambiental dorada detrás del frasco */}
-                  <div className="absolute w-44 sm:w-64 h-44 sm:h-64 bg-[#C9A961]/20 rounded-full blur-2xl sm:blur-3xl pointer-events-none" />
+                  {/* Sutil resplandor áurico en el fondo blanco */}
+                  <div className="absolute w-44 sm:w-64 h-44 sm:h-64 bg-[#C9A961]/10 rounded-full blur-2xl sm:blur-3xl pointer-events-none" />
 
-                  {/* Sombra de pedestal suave para asentar el frasco */}
-                  <div className="absolute bottom-11 sm:bottom-16 left-1/2 -translate-x-1/2 w-44 sm:w-60 h-4 bg-black/60 blur-md rounded-full pointer-events-none" />
-
-                  {/* Slide Images con cross-fade suave y botellas transparentes */}
+                  {/* Slide Images con cross-fade suave e integración 100% limpia sin líneas */}
                   {NEW_ARRIVALS.map((perfume, idx) => (
                     <div
                       key={perfume.id}
@@ -232,7 +229,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                       <img 
                         src={perfume.image} 
                         alt={`${perfume.brand} ${perfume.name}`} 
-                        className="w-full h-full max-h-[145px] sm:max-h-[260px] lg:max-h-[320px] object-contain drop-shadow-[0_20px_28px_rgba(0,0,0,0.7)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
+                        className="w-full h-full max-h-[145px] sm:max-h-[260px] lg:max-h-[320px] object-contain mix-blend-multiply drop-shadow-[0_10px_16px_rgba(0,0,0,0.12)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
                       />
                     </div>
                   ))}
