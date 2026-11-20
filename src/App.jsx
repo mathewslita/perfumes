@@ -260,14 +260,14 @@ export default function App() {
   const handleBuyNowWhatsApp = (product, format = '100ml', quantity = 1) => {
     const isArabic = product.collection === 'arabes';
     let price = product.price100ml;
-    let presentationName = `Botella Completa ${product.volume100ml || '100ml'}`;
+    let presentationName = `Frasco ${product.volume100ml ? product.volume100ml.split('/')[0].trim() : '100ml'}`;
 
     if (format === '30ml') {
       price = product.priceDecant30ml || (isArabic ? 28 : 32);
-      presentationName = 'Decant de Lujo 30ml (Atomizador)';
+      presentationName = 'Decant 30ml';
     } else if (format === '10ml' || format === 'decant') {
       price = product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18);
-      presentationName = 'Decant Muestra 10ml (Atomizador)';
+      presentationName = 'Decant 10ml';
     }
 
     const totalAmount = price * quantity;

@@ -247,14 +247,11 @@ export default function ProductDetailModal({
                         </span>
                       )}
                     </div>
-                    <div className="flex items-center justify-between text-[11px] text-gray-700 mt-2 pt-2 border-t border-gray-300/60">
+                    <div className="text-[11px] text-gray-700 mt-2 pt-2 border-t border-gray-300/60 flex items-center">
                       <span>
                         {isBottle 
                           ? '✓ Frasco 100% sellado de fábrica con Batch Code' 
                           : '✓ Decant extraído de lote oficial con Batch Code verificado'}
-                      </span>
-                      <span className="text-[#A58B4E] font-bold flex items-center gap-1">
-                        <Flame className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961]" /> Alta demanda
                       </span>
                     </div>
                   </div>
@@ -265,84 +262,69 @@ export default function ProductDetailModal({
                       Seleccionar Presentación:
                     </label>
                     <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                      {/* Botella Completa 100ml */}
+                      {/* Frasco 100 ml */}
                       <button
                         type="button"
                         onClick={() => setSelectedFormat('100ml')}
-                        className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
                           selectedFormat === '100ml'
                             ? 'border-[#0E0E0E] bg-[#FAF8F5] shadow-sm ring-1 ring-[#0E0E0E]'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50/60'
                         }`}
                       >
-                        <div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '100ml' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
-                              Frasco 100 ml
-                            </span>
-                            <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
-                              selectedFormat === '100ml' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
-                            }`} />
-                          </div>
-                          <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5 truncate">
-                            Botella Completa
-                          </p>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '100ml' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
+                            Frasco 100 ml
+                          </span>
+                          <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
+                            selectedFormat === '100ml' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
+                          }`} />
                         </div>
                         <div className="text-sm sm:text-base font-black text-[#0E0E0E] mt-2">
                           ${price100ml.toFixed(2)}
                         </div>
                       </button>
 
-                      {/* Decant Muestra 10ml */}
+                      {/* Decant 10 ml */}
                       <button
                         type="button"
                         onClick={() => setSelectedFormat('10ml')}
-                        className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
                           selectedFormat === '10ml' || selectedFormat === 'decant'
                             ? 'border-[#0E0E0E] bg-[#FAF8F5] shadow-sm ring-1 ring-[#0E0E0E]'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50/60'
                         }`}
                       >
-                        <div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '10ml' || selectedFormat === 'decant' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
-                              Decant 10 ml
-                            </span>
-                            <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
-                              selectedFormat === '10ml' || selectedFormat === 'decant' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
-                            }`} />
-                          </div>
-                          <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5 truncate">
-                            Atomizador
-                          </p>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '10ml' || selectedFormat === 'decant' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
+                            Decant 10 ml
+                          </span>
+                          <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
+                            selectedFormat === '10ml' || selectedFormat === 'decant' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
+                          }`} />
                         </div>
                         <div className="text-sm sm:text-base font-black text-[#0E0E0E] mt-2">
                           ${price10ml.toFixed(2)}
                         </div>
                       </button>
 
-                      {/* Decant Lujo 30ml */}
+                      {/* Decant 30 ml */}
                       <button
                         type="button"
                         onClick={() => setSelectedFormat('30ml')}
-                        className={`p-2.5 sm:p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
+                        className={`p-3 rounded-2xl border text-left transition-all relative flex flex-col justify-between cursor-pointer ${
                           selectedFormat === '30ml'
                             ? 'border-[#0E0E0E] bg-[#FAF8F5] shadow-sm ring-1 ring-[#0E0E0E]'
                             : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50/60'
                         }`}
                       >
-                        <div>
-                          <div className="flex items-center justify-between">
-                            <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '30ml' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
-                              Decant 30 ml
-                            </span>
-                            <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
-                              selectedFormat === '30ml' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
-                            }`} />
-                          </div>
-                          <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5 truncate">
-                            Atomizador de Lujo
-                          </p>
+                        <div className="flex items-center justify-between">
+                          <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '30ml' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
+                            Decant 30 ml
+                          </span>
+                          <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
+                            selectedFormat === '30ml' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
+                          }`} />
                         </div>
                         <div className="text-sm sm:text-base font-black text-[#0E0E0E] mt-2">
                           ${price30ml.toFixed(2)}

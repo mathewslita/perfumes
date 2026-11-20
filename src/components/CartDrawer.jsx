@@ -81,10 +81,10 @@ export default function CartDrawer({
 
     cart.forEach((item, index) => {
       const formatLabel = item.format === '100ml' 
-        ? 'Botella Completa' 
+        ? 'Frasco 100ml' 
         : item.format === '30ml' 
-          ? 'Decant Lujo 30ml' 
-          : 'Decant Muestra 10ml';
+          ? 'Decant 30ml' 
+          : 'Decant 10ml';
       message += `${index + 1}. *${item.brand} - ${item.name}*\n`;
       message += `   • Presentación: ${formatLabel}\n`;
       message += `   • Cantidad: ${item.quantity}\n`;
@@ -280,10 +280,10 @@ export default function CartDrawer({
                         </h4>
                         <span className="text-[11px] text-gray-500 font-medium block mt-0.5">
                           {item.format === '100ml' 
-                            ? 'Botella Completa' 
+                            ? 'Frasco 100ml' 
                             : item.format === '30ml' 
-                              ? 'Decant Lujo 30ml' 
-                              : 'Decant Muestra 10ml'}
+                              ? 'Decant 30ml' 
+                              : 'Decant 10ml'}
                         </span>
                       </div>
                       
