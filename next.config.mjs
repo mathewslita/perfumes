@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  experimental: {
+    agentUpgrade: 'security',
+  },
   allowedDevOrigins: [
     '*.trycloudflare.com',
     'readily-flexible-reviews-recently.trycloudflare.com',
