@@ -53,24 +53,27 @@ export default function ProductDetailModal({
   const originalPrice100ml = product.originalPrice100ml || Math.round(price100ml * 1.3);
 
   const price10ml = product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18);
-  const originalPrice10ml = product.originalPriceDecant || (isArabic ? 20 : 24);
-
   const price30ml = product.priceDecant30ml || (isArabic ? 28 : 32);
-  const originalPrice30ml = product.originalPriceDecant30ml || (isArabic ? 35 : 40);
+
+  const isBottle = selectedFormat === '100ml';
 
   let currentPrice = price100ml;
   let originalPrice = originalPrice100ml;
 
   if (selectedFormat === '10ml' || selectedFormat === 'decant') {
     currentPrice = price10ml;
-    originalPrice = originalPrice10ml;
+    originalPrice = price10ml; // Los decants NO tienen descuento
   } else if (selectedFormat === '30ml') {
     currentPrice = price30ml;
-    originalPrice = originalPrice30ml;
+    originalPrice = price30ml; // Los decants NO tienen descuento
   }
 
-  const isOnSale = product.onSale !== false && (originalPrice > currentPrice);
-  const savings = Math.max(0, originalPrice - currentPrice);
+  // Los descuentos aplican EXCLUSIVAMENTE para frascos completos (100ml)
+  const isOnSale = isBottle && product.onSale !== false && (originalPrice > currentPrice);
+  const savings = isBottle ? Math.max(0, originalPrice - currentPrice) : 0;
+  const discountPercent = (isOnSale && originalPrice > 0)
+    ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100)
+    : 0;
 
   const images = product.gallery && product.gallery.length > 0 ? product.gallery : [product.imageMain];
 
@@ -120,11 +123,11 @@ export default function ProductDetailModal({
                     className="w-full h-full max-h-[90%] max-w-[90%] object-contain object-center mix-blend-multiply group-hover:scale-108 transition-all duration-500 ease-out"
                   />
                   
-                  {/* Badge de Oferta: Solo si el perfume tiene oferta activa */}
-                  {isOnSale && (
+                  {/* Badge de Oferta: Solo si es Frasco Completo y tiene oferta activa */}
+                  {isOnSale && discountPercent > 0 && (
                     <div className="absolute top-3.5 left-3.5 bg-rose-600 text-white font-black text-xs px-3 py-1 rounded-full shadow-md flex items-center gap-1">
                       <Flame className="w-3.5 h-3.5 fill-current" />
-                      <span>-{product.discountPercent}% OFF</span>
+                      <span>-{discountPercent}% OFF</span>
                     </div>
                   )}
                 </div>
@@ -171,7 +174,7 @@ export default function ProductDetailModal({
                         ? 'bg-[#C9A961]/15 text-[#8F7432] border-[#C9A961]/60' 
                         : 'bg-stone-100 text-stone-800 border-stone-300'
                     }`}>
-                      {isArabic ? '👑 COLECCION ARABE' : '✨ ALTA COSTURA DISEÑADOR'}
+                      {isArabic ? '👑 COLECCIÓN ÁRABE' : '✨ ALTA COSTURA DISEÑADOR'}
                     </span>
                   </div>
 
@@ -231,7 +234,7 @@ export default function ProductDetailModal({
                       </span>
                       {isOnSale ? (
                         <>
-                          <span className="text-sm font-bold text-gray-400 line-through decoration-rose-500 decoration-1.5">
+                          <span className="text-sm font-bold text-stone-400 line-through decoration-[#C9A961]/80 decoration-1.5">
                             ${originalPrice.toFixed(2)}
                           </span>
                           <span className="ml-auto bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-black px-3 py-1 rounded-full shadow-xs">
@@ -245,7 +248,11 @@ export default function ProductDetailModal({
                       )}
                     </div>
                     <div className="flex items-center justify-between text-[11px] text-gray-700 mt-2 pt-2 border-t border-gray-300/60">
-                      <span>✓ Lote oficial sellado con Batch Code</span>
+                      <span>
+                        {isBottle 
+                          ? '✓ Frasco 100% sellado de fábrica con Batch Code' 
+                          : '✓ Decant extraído de lote oficial con Batch Code verificado'}
+                      </span>
                       <span className="text-[#A58B4E] font-bold flex items-center gap-1">
                         <Flame className="w-3.5 h-3.5 text-[#C9A961] fill-[#C9A961]" /> Alta demanda
                       </span>
@@ -271,7 +278,7 @@ export default function ProductDetailModal({
                         <div>
                           <div className="flex items-center justify-between">
                             <span className={`text-[11px] sm:text-xs font-bold leading-tight ${selectedFormat === '100ml' ? 'text-[#0E0E0E]' : 'text-gray-700'}`}>
-                              Frasco 100ml
+                              Frasco 100 ml
                             </span>
                             <span className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all ${
                               selectedFormat === '100ml' ? 'bg-[#C9A961] ring-2 ring-[#C9A961]/30' : 'bg-gray-200'
@@ -334,7 +341,7 @@ export default function ProductDetailModal({
                             }`} />
                           </div>
                           <p className="text-[10px] sm:text-[11px] text-gray-500 mt-0.5 truncate">
-                            Atomizador Lujo
+                            Atomizador de Lujo
                           </p>
                         </div>
                         <div className="text-sm sm:text-base font-black text-[#0E0E0E] mt-2">

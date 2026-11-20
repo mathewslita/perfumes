@@ -201,11 +201,11 @@ export default function App() {
 
     if (format === '30ml') {
       price = product.priceDecant30ml || (isArabic ? 28 : 32);
-      originalPrice = product.originalPriceDecant30ml || (isArabic ? 35 : 40);
+      originalPrice = price; // Sin descuento en decants
       formatLabel = ' (Decant 30ml)';
     } else if (format === '10ml' || format === 'decant') {
       price = product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18);
-      originalPrice = product.originalPriceDecant || (isArabic ? 20 : 24);
+      originalPrice = price; // Sin descuento en decants
       formatLabel = ' (Decant 10ml)';
     }
 
