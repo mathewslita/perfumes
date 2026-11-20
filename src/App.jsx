@@ -194,9 +194,20 @@ export default function App() {
 
   // Add to Cart (con soporte para no interrumpir la navegación en favoritos)
   const handleAddToCart = (product, format = '100ml', quantity = 1, openCart = true) => {
-    const isFull = format === '100ml';
-    const price = isFull ? product.price100ml : product.priceDecant;
-    const originalPrice = isFull ? product.originalPrice100ml : product.originalPriceDecant;
+    const isArabic = product.collection === 'arabes';
+    let price = product.price100ml;
+    let originalPrice = product.originalPrice100ml;
+    let formatLabel = '';
+
+    if (format === '30ml') {
+      price = product.priceDecant30ml || (isArabic ? 28 : 32);
+      originalPrice = product.originalPriceDecant30ml || (isArabic ? 35 : 40);
+      formatLabel = ' (Decant 30ml)';
+    } else if (format === '10ml' || format === 'decant') {
+      price = product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18);
+      originalPrice = product.originalPriceDecant || (isArabic ? 20 : 24);
+      formatLabel = ' (Decant 10ml)';
+    }
 
     setCart(prev => {
       const existingIndex = prev.findIndex(item => item.id === product.id && item.format === format);
@@ -220,7 +231,6 @@ export default function App() {
       }
     });
 
-    const formatLabel = format === '100ml' ? '' : ' (Decant)';
     showToast(`¡"${product.name}${formatLabel}" añadido al carrito!`);
     if (openCart) {
       setIsFavoritesOpen(false);
@@ -248,15 +258,25 @@ export default function App() {
 
   // Buy Now via WhatsApp directly from PDP
   const handleBuyNowWhatsApp = (product, format = '100ml', quantity = 1) => {
-    const isFull = format === '100ml';
-    const price = isFull ? product.price100ml : product.priceDecant;
+    const isArabic = product.collection === 'arabes';
+    let price = product.price100ml;
+    let presentationName = `Botella Completa ${product.volume100ml || '100ml'}`;
+
+    if (format === '30ml') {
+      price = product.priceDecant30ml || (isArabic ? 28 : 32);
+      presentationName = 'Decant de Lujo 30ml (Atomizador)';
+    } else if (format === '10ml' || format === 'decant') {
+      price = product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18);
+      presentationName = 'Decant Muestra 10ml (Atomizador)';
+    }
+
     const totalAmount = price * quantity;
     const phoneNumber = '593992851808';
 
     let msg = `*¡Hola ARKANO Perfumería! 👑 Deseo comprar ahora este perfume con entrega express:*\n\n`;
     msg += `✨ *Colección:* ${product.collection === 'arabes' ? 'Alta Perfumería Árabe de Dubái' : 'Diseñador Alta Costura'}\n`;
     msg += `💎 *Producto:* ${product.brand} - ${product.name}\n`;
-    msg += `📦 *Presentación:* ${isFull ? 'Botella Completa ' + product.volume100ml : 'Decant Muestra 10ml'}\n`;
+    msg += `📦 *Presentación:* ${presentationName}\n`;
     msg += `🔢 *Cantidad:* ${quantity}\n`;
     msg += `💰 *Total a Pagar:* $${totalAmount.toFixed(2)} USD\n`;
     msg += `🔒 *Garantía:* Con Sello de Fábrica y Batch Code verificado\n\n`;

@@ -42,9 +42,11 @@ export default function FavoritesDrawer({
 
     favoriteProducts.forEach((p, idx) => {
       const isArabic = p.collection === 'arabes';
+      const decant10 = (p.priceDecant10ml || p.priceDecant || (isArabic ? 15 : 18)).toFixed(0);
+      const decant30 = (p.priceDecant30ml || (isArabic ? 28 : 32)).toFixed(0);
       msg += `${idx + 1}. *${p.brand} - ${p.name}*\n`;
       msg += `   • Colección: ${isArabic ? 'Árabe de Dubái' : 'Diseñador Alta Costura'}\n`;
-      msg += `   • Frasco Completo: $${p.price100ml.toFixed(2)} | Decant 10ml: $${p.priceDecant.toFixed(2)}\n\n`;
+      msg += `   • Frasco Completo: $${p.price100ml.toFixed(2)} | Decants: 10ml ($${decant10}) / 30ml ($${decant30})\n\n`;
     });
 
     msg += `──────────────────\n`;

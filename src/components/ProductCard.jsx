@@ -219,9 +219,9 @@ function ProductCard({
             <span 
               onClick={() => onOpenProduct(product.id)} 
               className="text-[9.5px] sm:text-[10px] font-bold text-[#8F7432] hover:text-[#0E0E0E] transition-all cursor-pointer bg-[#F5F1E8] px-2 py-0.5 rounded-full border border-[#C9A961]/35 shadow-2xs hover:border-[#C9A961]"
-              title="Ver presentación en decant de viaje 10ml"
+              title="Ver presentación en decants de 10ml y 30ml"
             >
-              Decant ${(product.priceDecant || (isArabic ? 15 : 30)).toFixed(0)}
+              Decants ${(product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18)).toFixed(0)}
             </span>
           </div>
 

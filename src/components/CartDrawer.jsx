@@ -80,8 +80,13 @@ export default function CartDrawer({
     let message = `*¡Hola ARKANO Perfumería! 👑 Deseo confirmar mi pedido de Perfumes Originales (Árabes / Diseñador):*\n\n`;
 
     cart.forEach((item, index) => {
+      const formatLabel = item.format === '100ml' 
+        ? 'Botella Completa' 
+        : item.format === '30ml' 
+          ? 'Decant Lujo 30ml' 
+          : 'Decant Muestra 10ml';
       message += `${index + 1}. *${item.brand} - ${item.name}*\n`;
-      message += `   • Presentación: ${item.format === '100ml' ? 'Botella Completa' : 'Decant Muestra 10ml'}\n`;
+      message += `   • Presentación: ${formatLabel}\n`;
       message += `   • Cantidad: ${item.quantity}\n`;
       message += `   • Precio Unitario: $${item.price.toFixed(2)}\n`;
       message += `   • Subtotal Ítem: $${(item.price * item.quantity).toFixed(2)}\n\n`;
@@ -274,7 +279,11 @@ export default function CartDrawer({
                           {item.name}
                         </h4>
                         <span className="text-[11px] text-gray-500 font-medium block mt-0.5">
-                          {item.format === '100ml' ? 'Botella Completa' : 'Decant Muestra 10ml'}
+                          {item.format === '100ml' 
+                            ? 'Botella Completa' 
+                            : item.format === '30ml' 
+                              ? 'Decant Lujo 30ml' 
+                              : 'Decant Muestra 10ml'}
                         </span>
                       </div>
                       

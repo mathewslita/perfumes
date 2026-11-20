@@ -18,7 +18,7 @@ const NEW_ARRIVALS = [
     brand: 'ARMAF DUBÁI',
     name: 'Club de Nuit Iconic',
     price: 75.00,
-    decantPrice: 20.00,
+    decantPrice: 15.00,
     notes: 'Toronja Azul, Menta helada, Jengibre picante e Incienso',
     image: '/assets/images/Club de nuit iconic.webp',
     categoryBadge: 'Árabe • Best Seller Azul',
@@ -29,7 +29,7 @@ const NEW_ARRIVALS = [
     brand: 'LATTAFA DUBÁI',
     name: 'Khamrah Original',
     price: 65.00,
-    decantPrice: 18.00,
+    decantPrice: 15.00,
     notes: 'Canela fina, Dátiles dulces, Praliné belga y Licor ámbar',
     image: '/assets/images/Khamrah clasico.webp',
     categoryBadge: 'Árabe • Fenómeno Mundial',
@@ -51,7 +51,7 @@ const NEW_ARRIVALS = [
     brand: 'FRENCH AVENUE',
     name: 'Liquid Brun',
     price: 76.00,
-    decantPrice: 20.00,
+    decantPrice: 15.00,
     notes: 'Vainilla Bourbon, Canela de Ceilán y Praliné de Avellana',
     image: '/assets/images/Liquid brun.webp',
     categoryBadge: 'Árabe • Nicho Supremo',
@@ -165,7 +165,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               <div className="bg-white/[0.04] hover:bg-white/[0.07] border border-[#C9A961]/25 hover:border-[#C9A961]/60 rounded-2xl p-3 sm:p-4 text-center lg:text-left transition-colors backdrop-blur-sm shadow-sm">
                 <span className="font-serif text-xl sm:text-2xl font-extrabold text-[#C9A961] block leading-none whitespace-nowrap">10ml - 30ml</span>
                 <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-200 font-bold block mt-1.5">Decants Oficiales</span>
-                <span className="text-[9.5px] text-stone-400 hidden sm:block mt-0.5">Desde $16 para probar</span>
+                <span className="text-[9.5px] text-stone-400 hidden sm:block mt-0.5">Desde $15 para probar</span>
               </div>
             </div>
 
