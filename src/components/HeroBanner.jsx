@@ -117,7 +117,7 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
             <div className="space-y-1 sm:space-y-3">
               <h1 className="font-serif text-xl sm:text-4xl lg:text-5xl xl:text-[62px] font-bold leading-tight lg:leading-[1.08] tracking-tight text-white uppercase">
                 PERFUMES <span className="inline-block [font-variant-numeric:lining-nums] text-[1.06em] font-serif align-baseline">100%</span> ORIGINALES
-                <span className="block text-[#C9A961] not-italic font-sans font-semibold normal-case text-xs sm:text-xl lg:text-[28px] xl:text-[32px] mt-1 sm:mt-2.5 tracking-normal">
+                <span className="block text-[#C9A961] not-italic font-cormorant font-semibold normal-case text-base sm:text-2xl lg:text-[30px] xl:text-[34px] mt-1.5 sm:mt-3 tracking-wide leading-snug">
                   Árabes de leyenda y diseñador de alta categoría.
                 </span>
               </h1>

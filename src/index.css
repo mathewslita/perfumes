@@ -49,6 +49,8 @@
 @theme {
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-cinzel: 'Cinzel', serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-arabic-title,
@@ -59,6 +61,14 @@
 .font-body,
 .font-sans {
   font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif !important;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', Georgia, serif !important;
 }
 
 /* Sombras y Efectos de Lujo */
