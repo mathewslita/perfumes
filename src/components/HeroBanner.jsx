@@ -109,27 +109,18 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 sm:gap-6 lg:gap-14 items-center">
           
           {/* =========================================================================
-              LEFT COLUMN: Pre-title, Majestic Title, Narrative, CTAs & Stats Grid
+              LEFT COLUMN: Majestic Title, Narrative, CTAs & Stats Grid
               ========================================================================= */}
-          <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center space-y-2 sm:space-y-4 lg:space-y-6 text-center lg:text-left py-1">
-
-            {/* Pre-title Exclusive Badge */}
-            <div className="inline-flex items-center gap-1.5 sm:gap-2 bg-[#C9A961]/15 text-[#C9A961] border border-[#C9A961]/40 px-2.5 py-0.5 sm:px-3.5 sm:py-1.5 rounded-full text-[9px] sm:text-xs font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase backdrop-blur-md self-center lg:self-start shadow-sm">
-              <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-[#C9A961]" />
-              <span>BOUTIQUE DE ALTA PERFUMERÍA • 2026</span>
-            </div>
+          <div className="lg:col-span-7 xl:col-span-6 flex flex-col justify-center space-y-3 sm:space-y-4 lg:space-y-6 text-center lg:text-left py-1">
 
             {/* Headline and Narrative */}
             <div className="space-y-1 sm:space-y-3">
               <h1 className="font-serif text-xl sm:text-4xl lg:text-5xl xl:text-[62px] font-bold leading-tight lg:leading-[1.08] tracking-tight text-white uppercase">
-                PERFUMES 100% ORIGINALES
-                <span className="block text-[#C9A961] italic font-serif font-normal normal-case text-xs sm:text-xl lg:text-[32px] xl:text-[36px] mt-0.5 sm:mt-2 tracking-normal">
+                PERFUMES <span className="inline-block [font-variant-numeric:lining-nums] text-[1.06em] font-serif align-baseline">100%</span> ORIGINALES
+                <span className="block text-[#C9A961] not-italic font-sans font-semibold normal-case text-xs sm:text-xl lg:text-[28px] xl:text-[32px] mt-1 sm:mt-2.5 tracking-normal">
                   Árabes de leyenda y diseñador de alta categoría.
                 </span>
               </h1>
-
-              {/* Sutil divisor dorado editorial */}
-              <div className="w-12 sm:w-20 h-0.5 bg-gradient-to-r from-transparent via-[#C9A961] to-transparent lg:from-[#C9A961] lg:to-transparent mx-auto lg:mx-0 my-1 sm:my-3" />
 
               <p className="text-stone-300 text-[10.5px] sm:text-sm lg:text-[15px] max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed line-clamp-2 sm:line-clamp-none">
                 En <strong className="text-white font-semibold">ARKANO PERFUMERÍA</strong> seleccionamos elixires de altísima concentración procedentes de las casas más prestigiosas de Dubái y piezas selectas de diseñador con batch codes 100% verificables.
@@ -166,14 +157,14 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
               </div>
 
               <div className="bg-white/[0.04] hover:bg-white/[0.07] border border-[#C9A961]/25 hover:border-[#C9A961]/60 rounded-2xl p-3 sm:p-4 text-center lg:text-left transition-colors backdrop-blur-sm shadow-sm">
-                <span className="font-serif text-2xl sm:text-3xl font-extrabold text-white block leading-none">+14h</span>
+                <span className="font-serif text-2xl sm:text-3xl font-extrabold text-white block leading-none">+8h</span>
                 <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-200 font-bold block mt-1.5">Fijación en Piel</span>
-                <span className="text-[9.5px] text-stone-400 hidden sm:block mt-0.5">Concentración pura</span>
+                <span className="text-[9.5px] text-stone-400 hidden sm:block mt-0.5">Duración comprobada</span>
               </div>
 
               <div className="bg-white/[0.04] hover:bg-white/[0.07] border border-[#C9A961]/25 hover:border-[#C9A961]/60 rounded-2xl p-3 sm:p-4 text-center lg:text-left transition-colors backdrop-blur-sm shadow-sm">
-                <span className="font-serif text-2xl sm:text-3xl font-extrabold text-[#C9A961] block leading-none">10ml</span>
-                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-200 font-bold block mt-1.5">Decants de Lujo</span>
+                <span className="font-serif text-xl sm:text-2xl font-extrabold text-[#C9A961] block leading-none whitespace-nowrap">10ml - 30ml</span>
+                <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-stone-200 font-bold block mt-1.5">Decants Oficiales</span>
                 <span className="text-[9.5px] text-stone-400 hidden sm:block mt-0.5">Desde $16 para probar</span>
               </div>
             </div>
@@ -184,9 +175,9 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                 <Check className="w-3 h-3 stroke-[3]" /> 100% Original
               </span>
               <span className="text-white/20">•</span>
-              <span className="text-stone-200">+14h Fijación</span>
+              <span className="text-stone-200">+8h Fijación</span>
               <span className="text-white/20">•</span>
-              <span className="text-[#C9A961]">Decants 10ml</span>
+              <span className="text-[#C9A961]">Decants 10ml - 30ml</span>
             </div>
 
           </div>
@@ -234,10 +225,9 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     </div>
                   ))}
                   
-                  {/* Badge Superior Izquierdo */}
-                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 bg-[#0E0E0E]/90 backdrop-blur-md border border-[#C9A961] text-[#C9A961] text-[9px] sm:text-[10.5px] font-black tracking-wider uppercase px-2 py-0.5 sm:px-3 sm:py-1 rounded-full shadow-md flex items-center gap-1 z-20">
-                    <Sparkles className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-[#C9A961]" />
-                    <span>VITRINA DESTACADA</span>
+                  {/* Badge Superior Izquierdo: Sin estrella y con texto NUEVOS - DESTACADOS */}
+                  <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 bg-[#0E0E0E]/90 backdrop-blur-md border border-[#C9A961] text-[#C9A961] text-[9px] sm:text-[10.5px] font-black tracking-wider uppercase px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded-full shadow-md flex items-center z-20">
+                    <span>NUEVOS - DESTACADOS</span>
                   </div>
 
                   {/* Indicadores de Slide con barra de progreso fluida */}

@@ -400,14 +400,14 @@ export default function CartDrawer({
                 Precios con impuestos incluidos • Batch code verificado y sellado
               </p>
 
-              {/* Direct WhatsApp Checkout Button */}
+              {/* Direct WhatsApp Checkout Button - Official WhatsApp Green */}
               <button
                 onClick={handleCheckoutWhatsApp}
-                className="w-full bg-[#0E0E0E] hover:bg-[#1A1A1A] active:scale-98 text-white font-extrabold text-sm py-3.5 px-6 rounded-full flex items-center justify-center gap-2 shadow-xl border border-[#C9A961]/40 transition-all group"
+                className="w-full bg-[#25D366] hover:bg-[#20ba5a] active:scale-98 text-white font-extrabold text-sm py-3.5 px-6 rounded-full flex items-center justify-center gap-2 shadow-xl hover:shadow-emerald-500/30 transition-all group cursor-pointer"
               >
-                <MessageCircle className="w-5 h-5 text-[#C9A961]" />
+                <MessageCircle className="w-5 h-5 text-white fill-current" />
                 <span>CONFIRMAR PEDIDO POR WHATSAPP</span>
-                <ArrowRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
               </button>
 
               <div className="flex items-center justify-center gap-1.5 text-[10px] text-gray-600 font-medium">

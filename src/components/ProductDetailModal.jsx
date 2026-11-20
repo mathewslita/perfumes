@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { 
   X, ShoppingBag, Zap, ShieldCheck, Truck, Check, 
-  Flame, Sun, Moon, Sparkles, Heart 
+  Flame, Sun, Moon, Sparkles, Heart, MessageCircle 
 } from 'lucide-react';
 import LightboxModal from './LightboxModal';
 import { VersatileSunMoon } from './ProductCard';
@@ -344,12 +344,12 @@ export default function ProductDetailModal({
                       </button>
                     </div>
 
-                    {/* Direct Buy Now via WhatsApp */}
+                    {/* Direct Buy Now via WhatsApp - Official WhatsApp Green */}
                     <button
                       onClick={handleBuyNow}
-                      className="w-full bg-[#C9A961] hover:bg-[#B89228] active:scale-98 text-[#0E0E0E] font-black text-sm py-3.5 px-6 rounded-full flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all"
+                      className="w-full bg-[#25D366] hover:bg-[#20ba5a] active:scale-98 text-white font-black text-sm py-3.5 px-6 rounded-full flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all cursor-pointer"
                     >
-                      <Zap className="w-4 h-4 fill-current" />
+                      <MessageCircle className="w-5 h-5 fill-current" />
                       <span>Comprar Ahora por WhatsApp</span>
                     </button>
                   </div>
