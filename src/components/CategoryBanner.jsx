@@ -17,7 +17,7 @@ export default function CategoryBanner({
         {/* Section Header: Minimalist GTA VI Layout (Title Left + "Ver todo" Right) */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 sm:mb-12 pb-4 border-b border-stone-200/80">
           <div>
-            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-[#8F7432] block mb-1">
+            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.25em] text-[#755B1E] block mb-1">
               Catálogo Oficial
             </span>
             <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#0E0E0E] uppercase">
@@ -27,7 +27,7 @@ export default function CategoryBanner({
 
           <button
             onClick={scrollToCatalog}
-            className="text-xs sm:text-sm font-bold text-stone-600 hover:text-[#8F7432] flex items-center gap-1.5 transition-colors cursor-pointer group py-1 self-start sm:self-auto"
+            className="text-xs sm:text-sm font-bold text-stone-700 hover:text-[#755B1E] flex items-center gap-1.5 transition-colors cursor-pointer group py-1.5 min-h-[32px] self-start sm:self-auto"
           >
             <span>Ver todo el catálogo (49 Fragancias)</span>
             <ArrowRight className="w-4 h-4 text-[#C9A961] group-hover:translate-x-1 transition-transform" />
@@ -57,15 +57,19 @@ export default function CategoryBanner({
               <div className="relative z-10 flex items-end justify-center -space-x-4 sm:-space-x-7 pt-4">
                 <img 
                   src="/assets/images/khamrah_clasico_transparent.webp" 
+                  srcSet="/assets/images/thumbs/khamrah_clasico_transparent-320.webp 320w, /assets/images/khamrah_clasico_transparent.webp 480w"
+                  sizes="(max-width: 639px) 176px, 224px"
                   alt="Lattafa Khamrah Dubái" 
-                  width="340"
-                  height="340"
+                  width="320"
+                  height="320"
                   decoding="async"
                   className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
                 <img 
                   src="/assets/images/amber_oud_gold_transparent.webp" 
+                  srcSet="/assets/images/thumbs/amber_oud_gold_transparent-320.webp 320w, /assets/images/amber_oud_gold_transparent.webp 480w"
+                  sizes="(max-width: 639px) 160px, 208px"
                   alt="Al Haramain Amber Oud Gold Edition" 
                   width="320"
                   height="320"
@@ -78,11 +82,11 @@ export default function CategoryBanner({
 
             {/* Content Details */}
             <div className="space-y-2">
-              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-[#8F7432] block">
+              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-[#755B1E] block">
                 COLECCIÓN DUBÁI • 48 FRAGANCIAS
               </span>
 
-              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] tracking-tight uppercase group-hover:text-[#8F7432] transition-colors leading-tight">
+              <h3 className="font-serif text-2xl sm:text-3xl font-extrabold text-[#0E0E0E] tracking-tight uppercase group-hover:text-[#755B1E] transition-colors leading-tight">
                 PERFUMES ÁRABES
               </h3>
 
@@ -123,9 +127,11 @@ export default function CategoryBanner({
               <div className="relative z-10 flex items-end justify-center pt-4">
                 <img 
                   src="/assets/images/halloween_x_man_transparent.webp" 
+                  srcSet="/assets/images/thumbs/halloween_x_man_transparent-320.webp 320w, /assets/images/halloween_x_man_transparent.webp 480w"
+                  sizes="(max-width: 639px) 176px, 224px"
                   alt="Halloween Man X Jesús del Pozo" 
-                  width="340"
-                  height="340"
+                  width="320"
+                  height="320"
                   decoding="async"
                   className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
@@ -135,7 +141,7 @@ export default function CategoryBanner({
 
             {/* Content Details */}
             <div className="space-y-2">
-              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-stone-500 block">
+              <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.25em] text-stone-600 block">
                 ALTA COSTURA OCCIDENTAL • SELECCIÓN EXCLUSIVA
               </span>
 

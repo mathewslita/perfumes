@@ -14,14 +14,14 @@ export const ALL_BRANDS = [
     id: 'armaf',
     name: 'ARMAF',
     category: 'arabes',
-    logoImage: '/assets/images/brands/armaf.avif?v=3',
+    logoImage: '/assets/images/brands/armaf.webp?v=4',
     heightClass: 'h-14 sm:h-17 w-auto object-contain max-w-[170px] scale-110 sm:scale-120'
   },
   {
     id: 'afnan',
     name: 'AFNAN',
     category: 'arabes',
-    logoImage: '/assets/images/brands/afnan.avif?v=2',
+    logoImage: '/assets/images/brands/afnan.webp?v=4',
     filterStyle: { filter: 'brightness(0)' },
     heightClass: 'h-11 sm:h-13.5 w-auto object-contain max-w-[210px]'
   },
@@ -110,7 +110,7 @@ export default function BrandsSection({ onSelectBrand }) {
       className="py-12 sm:py-16 bg-white border-t border-b border-[#C9A961]/20 scroll-mt-20 overflow-hidden relative"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 mb-8 sm:mb-10 text-center">
-        <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-extrabold uppercase text-[#A58B4E] block mb-2">
+        <span className="text-[10px] sm:text-[11px] tracking-[0.3em] font-extrabold uppercase text-[#755B1E] block mb-2">
           CASAS OFICIALES
         </span>
         <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0E0E0E] tracking-[0.16em] uppercase">

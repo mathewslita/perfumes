@@ -1,5 +1,6 @@
 import React, { useState, memo } from 'react';
-import { ShoppingBag, Eye, Star, Flame, Check, ExternalLink, Sparkles, Sun, Moon, Heart } from 'lucide-react';
+import { ShoppingBag, Eye, Flame, Check, Sun, Moon, Heart } from 'lucide-react';
+import { getResponsiveSrcSet } from '../utils/responsiveImage';
 
 // Icono exacto de Sol con rayos, Luna creciente y 3 Estrellas (fiel al diseño de referencia)
 export function VersatileSunMoon({ className = "w-5 h-5" }) {
@@ -79,7 +80,7 @@ function ProductCard({
             className={`w-8 h-8 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
               isFavorite
                 ? 'bg-rose-50 border border-rose-300 text-rose-500 shadow-md scale-105'
-                : 'bg-white/95 text-stone-400 hover:text-rose-500 border border-stone-200 hover:border-rose-300'
+                : 'bg-white/95 text-stone-600 hover:text-rose-500 border border-stone-200 hover:border-rose-300'
             }`}
             title={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
             aria-label={isFavorite ? "Quitar de favoritos" : "Guardar en favoritos"}
@@ -154,6 +155,8 @@ function ProductCard({
       >
         <img 
           src={product.imageMain} 
+          srcSet={getResponsiveSrcSet(product.imageMain)}
+          sizes="(max-width: 639px) 250px, 260px"
           alt={`${product.brand} ${product.name} original`} 
           width="360"
           height="360"
@@ -175,10 +178,10 @@ function ProductCard({
         <div>
           {/* Marca y Género */}
           <div className="flex items-center justify-between text-[10px] sm:text-[11px] mb-1">
-            <span className="font-extrabold tracking-widest text-[#8F7432] uppercase truncate mr-1">
+            <span className="font-extrabold tracking-widest text-[#755B1E] uppercase truncate mr-1">
               {product.brand}
             </span>
-            <span className="text-stone-500 font-semibold text-[9px] sm:text-[10px] uppercase tracking-wider flex-shrink-0">
+            <span className="text-stone-600 font-semibold text-[9px] sm:text-[10px] uppercase tracking-wider flex-shrink-0">
               {product.gender.toUpperCase()}
             </span>
           </div>
@@ -186,7 +189,7 @@ function ProductCard({
           {/* Nombre del Perfume */}
           <h3 
             onClick={() => onOpenProduct(product.id)}
-            className="font-serif font-bold text-[13px] sm:text-[15px] text-[#0E0E0E] group-hover:text-[#8F7432] transition-colors cursor-pointer line-clamp-1 tracking-tight leading-snug"
+            className="font-serif font-bold text-[13px] sm:text-[15px] text-[#0E0E0E] group-hover:text-[#755B1E] transition-colors cursor-pointer line-clamp-1 tracking-tight leading-snug"
             title={product.name}
           >
             {product.name}
@@ -212,7 +215,7 @@ function ProductCard({
                 ${product.price100ml.toFixed(2)}
               </span>
               {isOnSale && (
-                <span className="text-[10px] sm:text-xs font-bold text-stone-400 line-through decoration-rose-500 decoration-1">
+                <span className="text-[10px] sm:text-xs font-bold text-stone-600 line-through decoration-[#755B1E]/80 decoration-1">
                   ${product.originalPrice100ml.toFixed(2)}
                 </span>
               )}
@@ -222,7 +225,7 @@ function ProductCard({
             <button
               type="button"
               onClick={() => onOpenProduct(product.id)} 
-              className="text-[9.5px] sm:text-[10px] font-bold text-[#8F7432] hover:text-[#0E0E0E] transition-all cursor-pointer bg-[#F5F1E8] px-2.5 py-1 min-h-[26px] inline-flex items-center rounded-full border border-[#C9A961]/35 shadow-2xs hover:border-[#C9A961]"
+              className="text-[9.5px] sm:text-[10px] font-bold text-[#6E551A] hover:text-[#0E0E0E] transition-all cursor-pointer bg-[#F5F1E8] px-2.5 py-1 min-h-[26px] inline-flex items-center rounded-full border border-[#C9A961]/45 shadow-2xs hover:border-[#C9A961]"
               title="Ver presentación en decants de 10ml y 30ml"
             >
               Decants ${(product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18)).toFixed(0)}

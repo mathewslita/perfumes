@@ -135,7 +135,7 @@ export default function BestSellersTabs({
                   className={`pt-1.5 pb-2.5 sm:pb-3 min-h-[36px] px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer flex-shrink-0 ${
                     isActive
                       ? 'text-[#0E0E0E] font-black'
-                      : 'text-stone-400 hover:text-stone-900'
+                      : 'text-stone-600 hover:text-[#0E0E0E]'
                   }`}
                 >
                   <span>{tab.label}</span>
@@ -352,7 +352,7 @@ export default function BestSellersTabs({
                           <button
                             key={`ellipsis-${idx}`}
                             onClick={() => handlePageChange(targetPage)}
-                            className="w-8 h-9 sm:w-10 sm:h-10 rounded-xl text-xs font-bold text-stone-400 hover:text-[#C9A961] hover:bg-[#C9A961]/10 transition-colors flex items-center justify-center cursor-pointer select-none"
+                            className="w-8 h-9 sm:w-10 sm:h-10 rounded-xl text-xs font-bold text-stone-600 hover:text-[#755B1E] hover:bg-[#C9A961]/10 transition-colors flex items-center justify-center cursor-pointer select-none"
                             title={isLeft ? 'Saltar atrás 3 páginas' : 'Saltar adelante 3 páginas'}
                             aria-label={isLeft ? 'Saltar atrás 3 páginas' : 'Saltar adelante 3 páginas'}
                           >
@@ -398,9 +398,9 @@ export default function BestSellersTabs({
                 </nav>
 
                 {/* Indicador Informativo Elegante */}
-                <p className="text-[11px] sm:text-xs text-stone-500 font-medium tracking-wide">
+                <p className="text-[11px] sm:text-xs text-stone-600 font-medium tracking-wide">
                   Página <span className="text-[#0E0E0E] font-bold">{safePage}</span> de <span className="text-[#0E0E0E] font-bold">{totalPages}</span>
-                  <span className="hidden sm:inline text-stone-300 mx-2">|</span>
+                  <span className="hidden sm:inline text-stone-500 mx-2">|</span>
                   <span className="hidden sm:inline">
                     Mostrando {startIndex + 1}–{Math.min(startIndex + itemsPerPage, totalItems)} de {totalItems} fragancias
                   </span>

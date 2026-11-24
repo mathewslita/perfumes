@@ -993,9 +993,9 @@ export const PERFUMES_DATA = [
       "rosas",
       "vainilla"
     ],
-    "imageMain": "/assets/images/Hawas diva.avif",
+    "imageMain": "/assets/images/Hawas diva.webp",
     "gallery": [
-      "/assets/images/Hawas diva.avif",
+      "/assets/images/Hawas diva.webp",
       "/assets/images/fichas/ficha_rasasi-hawas-diva.webp"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/buscar/?query=Rasasi+Hawas+for+Her+Diva",
@@ -2231,9 +2231,9 @@ export const PERFUMES_DATA = [
       "citricos",
       "vainilla"
     ],
-    "imageMain": "/assets/images/Yara tous.avif",
+    "imageMain": "/assets/images/Yara tous.webp",
     "gallery": [
-      "/assets/images/Yara tous.avif",
+      "/assets/images/Yara tous.webp",
       "/assets/images/fichas/ficha_lattafa-yara-tous.webp"
     ],
     "fraganticaUrl": "https://www.fragrantica.es/perfume/Lattafa-Perfumes/Yara-Tous-84221.html",

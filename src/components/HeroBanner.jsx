@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, ArrowRight, Eye, Check, ChevronLeft, ChevronRight } from 'lucide-react';
+import { getResponsiveSrcSet } from '../utils/responsiveImage';
 
 const NEW_ARRIVALS = [
   {
@@ -62,18 +63,28 @@ const NEW_ARRIVALS = [
 export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, onAddToCart }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [loadedSlides, setLoadedSlides] = useState([0]);
 
-  // Auto-transición limpia y fluida cada 2.8 segundos
+  const goToSlide = (nextIdx) => {
+    setLoadedSlides((prev) => (prev.includes(nextIdx) ? prev : [...prev, nextIdx]));
+    setCurrentSlide(nextIdx);
+  };
+
+  // Auto-transición limpia y fluida cada 3.2 segundos cargando imágenes bajo demanda
   useEffect(() => {
     if (isPaused) return;
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % NEW_ARRIVALS.length);
-    }, 2800);
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % NEW_ARRIVALS.length;
+        setLoadedSlides((loaded) => (loaded.includes(next) ? loaded : [...loaded, next]));
+        return next;
+      });
+    }, 3200);
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % NEW_ARRIVALS.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + NEW_ARRIVALS.length) % NEW_ARRIVALS.length);
+  const nextSlide = () => goToSlide((currentSlide + 1) % NEW_ARRIVALS.length);
+  const prevSlide = () => goToSlide((currentSlide - 1 + NEW_ARRIVALS.length) % NEW_ARRIVALS.length);
 
   const currentProduct = NEW_ARRIVALS[currentSlide];
 
@@ -103,11 +114,11 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
       {/* Sutil halo central para iluminar la vitrina */}
       <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-[#C9A961]/10 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Embedded Keyframe for Fluid Progress Fill */}
+      {/* Embedded Keyframe for GPU-Composited Progress Fill */}
       <style>{`
         @keyframes heroProgressFill {
-          from { width: 0%; }
-          to { width: 100%; }
+          from { transform: scaleX(0); }
+          to { transform: scaleX(1); }
         }
       `}</style>
 
@@ -213,35 +224,42 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                   {/* Sutil resplandor áurico en el fondo blanco */}
                   <div className="absolute w-44 sm:w-64 h-44 sm:h-64 bg-[#C9A961]/10 rounded-full blur-2xl sm:blur-3xl pointer-events-none" />
 
-                  {/* Slide Images con cross-fade suave e integración 100% limpia sin líneas */}
-                  {NEW_ARRIVALS.map((perfume, idx) => (
-                    <div
-                      key={perfume.id}
-                      className={`absolute inset-0 flex items-center justify-center pt-6 pb-12 sm:pt-6 sm:pb-20 px-4 sm:px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                        currentSlide === idx 
-                          ? 'opacity-100 scale-100 z-10' 
-                          : 'opacity-0 scale-95 pointer-events-none z-0'
-                      }`}
-                    >
-                      <img 
-                        src={perfume.image} 
-                        alt={`${perfume.brand} ${perfume.name}`} 
-                        width="600"
-                        height="600"
-                        fetchPriority={idx === 0 ? 'high' : 'low'}
-                        loading={idx === 0 ? 'eager' : 'lazy'}
-                        decoding={idx === 0 ? 'sync' : 'async'}
-                        className="w-full h-full max-h-[145px] sm:max-h-[260px] lg:max-h-[320px] object-contain mix-blend-multiply drop-shadow-[0_10px_16px_rgba(0,0,0,0.12)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
-                      />
-                    </div>
-                  ))}
+                  {/* Slide Images con cross-fade suave, srcSet responsivo y carga diferida */}
+                  {NEW_ARRIVALS.map((perfume, idx) => {
+                    const shouldRenderImg = idx === 0 || loadedSlides.includes(idx);
+                    return (
+                      <div
+                        key={perfume.id}
+                        className={`absolute inset-0 flex items-center justify-center pt-6 pb-12 sm:pt-6 sm:pb-20 px-4 sm:px-6 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                          currentSlide === idx 
+                            ? 'opacity-100 scale-100 z-10' 
+                            : 'opacity-0 scale-95 pointer-events-none z-0'
+                        }`}
+                      >
+                        {shouldRenderImg && (
+                          <img 
+                            src={perfume.image} 
+                            srcSet={getResponsiveSrcSet(perfume.image)}
+                            sizes="(max-width: 639px) 150px, 320px"
+                            alt={`${perfume.brand} ${perfume.name}`} 
+                            width="320"
+                            height="320"
+                            fetchPriority={idx === 0 ? 'high' : 'low'}
+                            loading={idx === 0 ? 'eager' : 'lazy'}
+                            decoding={idx === 0 ? 'sync' : 'async'}
+                            className="w-full h-full max-h-[145px] sm:max-h-[260px] lg:max-h-[320px] object-contain mix-blend-multiply drop-shadow-[0_10px_16px_rgba(0,0,0,0.12)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
+                          />
+                        )}
+                      </div>
+                    );
+                  })}
                   
                   {/* Badge Superior Izquierdo: Sin estrella y con texto NUEVOS - DESTACADOS */}
                   <div className="absolute top-2.5 left-2.5 sm:top-3.5 sm:left-3.5 bg-[#0E0E0E]/90 backdrop-blur-md border border-[#C9A961] text-[#C9A961] text-[9px] sm:text-[10.5px] font-black tracking-wider uppercase px-2.5 py-0.5 sm:px-3.5 sm:py-1 rounded-full shadow-md flex items-center z-20">
                     <span>NUEVOS - DESTACADOS</span>
                   </div>
 
-                  {/* Indicadores de Slide con barra de progreso fluida y área táctil accesible (>=24px) */}
+                  {/* Indicadores de Slide con barra de progreso GPU y área táctil accesible (>=24px) */}
                   <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-0 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-1.5 py-0 sm:px-2 sm:py-0 rounded-full border border-[#C9A961]/35 shadow-sm">
                     {NEW_ARRIVALS.map((_, idx) => (
                       <button
@@ -249,14 +267,14 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setCurrentSlide(idx);
+                          goToSlide(idx);
                         }}
                         className="min-w-[24px] min-h-[24px] sm:min-w-[26px] sm:min-h-[26px] flex items-center justify-center cursor-pointer group/dot"
                         title={`Ver perfume ${idx + 1}`}
                         aria-label={`Ver perfume ${idx + 1}`}
                       >
                         <span
-                          className={`block h-1 sm:h-1.5 rounded-full transition-all duration-300 overflow-hidden relative ${
+                          className={`block h-1 sm:h-1.5 rounded-full transition-colors duration-300 overflow-hidden relative ${
                             currentSlide === idx 
                               ? 'w-5 sm:w-7 bg-white/20' 
                               : 'w-1.5 sm:w-2 bg-white/40 group-hover/dot:bg-white/80'
@@ -265,9 +283,9 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                           {currentSlide === idx && (
                             <span 
                               key={`${idx}-${currentSlide}`}
-                              className="absolute inset-0 bg-[#C9A961] rounded-full"
+                              className="absolute inset-0 bg-[#C9A961] rounded-full origin-left will-change-transform"
                               style={{
-                                animation: isPaused ? 'none' : 'heroProgressFill 2.8s linear forwards'
+                                animation: isPaused ? 'none' : 'heroProgressFill 3.2s linear forwards'
                               }}
                             />
                           )}

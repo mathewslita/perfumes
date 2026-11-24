@@ -8,7 +8,7 @@ export default function VibeSelector({ activeVibe, onSelectVibe }) {
         
         {/* Centered Title & Subtitle */}
         <div className="text-center mb-3 sm:mb-5">
-          <span className="text-[10px] sm:text-[11px] font-extrabold tracking-[0.25em] text-[#A58B4E] uppercase block mb-1">
+          <span className="text-[10px] sm:text-[11px] font-extrabold tracking-[0.25em] text-[#755B1E] uppercase block mb-1">
             DESCUBRIMIENTO POR OCASIÓN
           </span>
           <h2 className="font-serif text-base sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
