@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import { ShoppingBag, Eye, Flame, Check, Sun, Moon, Heart } from 'lucide-react';
+import { ShoppingBag, Eye, Flame, Check, Sun, Moon, Heart, Truck } from 'lucide-react';
 import { getResponsiveSrcSet } from '../utils/responsiveImage';
 
 // Icono exacto de Sol con rayos, Luna creciente y 3 Estrellas (unificado en un solo path para optimizar el DOM)
@@ -193,7 +193,7 @@ function ProductCard({
 
         {/* Precios y Botón de Carrito */}
         <div className="mt-2.5 sm:mt-4 pt-2 sm:pt-3 border-t border-stone-100">
-          <div className="flex items-baseline justify-between gap-1 mb-2">
+          <div className="flex items-baseline justify-between gap-1 mb-1.5">
             <div className="flex items-baseline gap-1.5">
               <span className="text-base sm:text-xl font-black text-[#0E0E0E]">
                 ${product.price100ml.toFixed(2)}
@@ -214,6 +214,12 @@ function ProductCard({
             >
               Decants ${(product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18)).toFixed(0)}
             </button>
+          </div>
+
+          {/* Indicador de Despacho Rápido */}
+          <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-emerald-800 mb-2">
+            <Truck className="w-3.5 h-3.5 text-emerald-700 flex-shrink-0" />
+            <span>Despacho en máximo 6 horas</span>
           </div>
 
           {/* Botón Añadir al Carrito ARKANO */}

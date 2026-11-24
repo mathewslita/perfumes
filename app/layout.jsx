@@ -35,6 +35,16 @@ export const metadata = {
   title: 'ARKANO PERFUMERÍA | Perfumes Árabes y Diseñador de Alta Gama 100% Originales',
   description: 'Boutique exclusiva de Alta Perfumería ARKANO. Colección de Perfumes Árabes de Dubái y Perfumes de Diseñador de Alta Costura. Garantía de autenticidad, batch codes verificables y fichas olfativas completas.',
   keywords: 'arkano perfumeria, perfumes arabes originales, perfumes disenador, lattafa khamrah, dior sauvage elixir, club de nuit intense, ysl libre, fragrantica especificaciones, decants originales',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: '/favicon-32x32.png',
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'ARKANO PERFUMERÍA | El Arte de la Alta Perfumería',
     description: 'Descubre las fragancias árabes y de diseñador más exclusivas del mundo. Concentración pura, estela legendaria y garantía total.',

@@ -130,21 +130,23 @@ export const PERFUMES_DATA = [
     "originalPriceDecant": 20,
     "discountPercent": 28,
     "onSale": false,
-    "timeOfDay": "dia",
+    "timeOfDay": "noche",
     "infographicImage": "/assets/images/fichas/ficha_armaf-odyssey-homme-white.webp",
     "rating": 4.8,
     "reviewCount": 520,
     "gender": "Para Él",
     "vibes": [
-      "🍋 CÍTRICOS",
-      "☀️ DÍA",
+      "🍬 DULCES",
+      "🪵 AMADERADOS",
+      "🌙 NOCHE",
       "👑 TOP VENTAS"
     ],
-    "vibeBadge": "⚡ Frescura Acuática Cristalina",
+    "vibeBadge": "🌙 Elegancia Nocturna Especiada",
     "badgeColor": "bg-stone-800 text-stone-100 font-bold",
     "acordes": [
-      "citricos",
-      "oud_maderas"
+      "gourmand",
+      "oud_maderas",
+      "especiados"
     ],
     "imageMain": "/assets/images/Odyssey homme white.webp",
     "gallery": [
@@ -155,23 +157,23 @@ export const PERFUMES_DATA = [
     "fraganticaQuery": "Armaf Odyssey Homme White Edition",
     "noteIcons": [
       {
-        "emoji": "🍋",
-        "name": "Yuzu & Pomelo"
+        "emoji": "🍦",
+        "name": "Vainilla & Ámbar"
       },
       {
-        "emoji": "🌊",
-        "name": "Brisa Marina & Violeta"
+        "emoji": "🌿",
+        "name": "Cardamomo & Salvia"
       },
       {
         "emoji": "🪵",
-        "name": "Madera de Guayaco"
+        "name": "Cedro & Pimienta Rosa"
       }
     ],
     "technicalTable": {
-      "headNotes": "Yuzu japonés, Pimienta rosa y Pomelo blanco",
-      "heartNotes": "Hojas de violeta, Notas marinas alpinas y Neroli",
-      "baseNotes": "Madera de guayaco, Ámbar blanco y Almizcle puro",
-      "fragranceType": "Acuático Amaderado Cítrico",
+      "headNotes": "Pimienta rosa, Pomelo y Yuzu especiado",
+      "heartNotes": "Cardamomo cálido, Salvia aromática y Hojas de violeta",
+      "baseNotes": "Vainilla cremosa, Madera de ámbar y Cedro noble",
+      "fragranceType": "Oriental Amaderado Especiado",
       "concentrationPct": "19% Extracto de Perfume",
       "batchCodePrefix": "BATCH# AR-OHW-2026",
       "origin": "Emiratos Árabes Unidos"
