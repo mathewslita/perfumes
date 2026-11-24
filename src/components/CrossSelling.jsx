@@ -10,7 +10,7 @@ export default function CrossSelling({
   onToggleFavorite 
 }) {
   const scrollRef = useRef(null);
-  const featuredRecommendations = useMemo(() => products.slice(0, 10), [products]);
+  const featuredRecommendations = useMemo(() => products.slice(0, 8), [products]);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -31,7 +31,7 @@ export default function CrossSelling({
   };
 
   return (
-    <section id="recomendaciones-para-ti" className="py-12 sm:py-16 bg-[#F5F1E8] border-t border-b border-[#C9A961]/25">
+    <section id="recomendaciones-para-ti" className="cv-auto py-12 sm:py-16 bg-[#F5F1E8] border-t border-b border-[#C9A961]/25">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         
         {/* Responsive Luxury Header */}

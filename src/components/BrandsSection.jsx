@@ -14,14 +14,14 @@ export const ALL_BRANDS = [
     id: 'armaf',
     name: 'ARMAF',
     category: 'arabes',
-    logoImage: '/assets/images/brands/armaf.webp?v=4',
+    logoImage: '/assets/images/brands/armaf.webp?v=5',
     heightClass: 'h-14 sm:h-17 w-auto object-contain max-w-[170px] scale-110 sm:scale-120'
   },
   {
     id: 'afnan',
     name: 'AFNAN',
     category: 'arabes',
-    logoImage: '/assets/images/brands/afnan.webp?v=4',
+    logoImage: '/assets/images/brands/afnan.webp?v=5',
     filterStyle: { filter: 'brightness(0)' },
     heightClass: 'h-11 sm:h-13.5 w-auto object-contain max-w-[210px]'
   },
@@ -29,7 +29,7 @@ export const ALL_BRANDS = [
     id: 'al-haramain',
     name: 'AL HARAMAIN',
     category: 'arabes',
-    logoImage: '/assets/images/brands/al_haramain.webp?v=2',
+    logoImage: '/assets/images/brands/al_haramain.webp?v=5',
     filterStyle: { filter: 'grayscale(100%) contrast(150%) brightness(0.2)' },
     heightClass: 'h-11 sm:h-13.5 w-auto object-contain max-w-[210px]'
   },
@@ -37,14 +37,14 @@ export const ALL_BRANDS = [
     id: 'bharara',
     name: 'BHARARA',
     category: 'arabes',
-    logoImage: '/assets/images/brands/bharara.webp?v=2',
+    logoImage: '/assets/images/brands/bharara.webp?v=5',
     heightClass: 'h-13 sm:h-16 w-auto object-contain max-w-[170px] scale-110 sm:scale-120 mix-blend-multiply'
   },
   {
     id: 'maison-alhambra',
     name: 'MAISON ALHAMBRA',
     category: 'arabes',
-    logoImage: '/assets/images/brands/maison_alhambra.webp?v=2',
+    logoImage: '/assets/images/brands/maison_alhambra.webp?v=5',
     heightClass: 'h-13 sm:h-16 w-auto object-contain max-w-[170px] scale-115 sm:scale-125 mix-blend-multiply'
   },
   {
@@ -59,21 +59,21 @@ export const ALL_BRANDS = [
     id: 'french-avenue',
     name: 'FRENCH AVENUE',
     category: 'arabes',
-    logoImage: '/assets/images/brands/french_avenue.webp?v=2',
+    logoImage: '/assets/images/brands/french_avenue.webp?v=5',
     heightClass: 'h-11 sm:h-13.5 w-auto object-contain max-w-[200px] mix-blend-multiply'
   },
   {
     id: 'dumont-paris',
     name: 'DUMONT PARIS',
     category: 'arabes',
-    logoImage: '/assets/images/brands/dumont_paris.webp',
+    logoImage: '/assets/images/brands/dumont_paris.webp?v=5',
     heightClass: 'h-13 sm:h-16 w-auto object-contain max-w-[170px] scale-115 sm:scale-125 mix-blend-multiply'
   },
   {
     id: 'rayhaan',
     name: 'RAYHAAN',
     category: 'arabes',
-    logoImage: '/assets/images/brands/rayhaan.webp',
+    logoImage: '/assets/images/brands/rayhaan.webp?v=5',
     heightClass: 'h-9 sm:h-11 w-auto object-contain max-w-[190px] mix-blend-multiply'
   },
 
@@ -82,7 +82,7 @@ export const ALL_BRANDS = [
     id: 'halloween',
     name: 'HALLOWEEN',
     category: 'disenador',
-    logoImage: '/assets/images/brands/halloween_delpozo.webp',
+    logoImage: '/assets/images/brands/halloween_delpozo.webp?v=5',
     heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[180px] scale-115 sm:scale-125 mix-blend-multiply'
   }
 ];
@@ -90,8 +90,8 @@ export const ALL_BRANDS = [
 export const ARABIC_BRANDS = ALL_BRANDS.filter(b => b.category === 'arabes');
 export const DESIGNER_BRANDS = ALL_BRANDS.filter(b => b.category === 'disenador');
 
-// Quadruplicate to guarantee smooth infinite seamless loop on any screen width
-const MARQUEE_ITEMS = [...ALL_BRANDS, ...ALL_BRANDS, ...ALL_BRANDS, ...ALL_BRANDS];
+// Duplicate 2x to match translate3d(-50%, 0, 0) seamless loop with minimal DOM nodes
+const MARQUEE_ITEMS = [...ALL_BRANDS, ...ALL_BRANDS];
 
 export default function BrandsSection({ onSelectBrand }) {
   const handleBrandClick = (brandName) => {

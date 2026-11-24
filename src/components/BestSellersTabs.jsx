@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, startTransition } from 'react';
 import { Sparkles, MessageCircle, RotateCcw, Crown, Award, ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 
@@ -79,8 +79,12 @@ export default function BestSellersTabs({
 
   useEffect(() => {
     const mql = window.matchMedia('(max-width: 639px)');
-    const updateMobile = (e) => setIsMobile(e.matches);
-    setIsMobile(mql.matches);
+    const updateMobile = (e) => {
+      startTransition(() => setIsMobile(e.matches));
+    };
+    if (mql.matches) {
+      startTransition(() => setIsMobile(true));
+    }
     mql.addEventListener('change', updateMobile);
     return () => mql.removeEventListener('change', updateMobile);
   }, []);

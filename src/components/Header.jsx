@@ -80,14 +80,9 @@ export default function Header({
   const [megaMenuOpen, setMegaMenuOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [mobileOccasionsOpen, setMobileOccasionsOpen] = useState(false);
   const [mobileBrandsOpen, setMobileBrandsOpen] = useState(false);
   const menuTimeoutRef = useRef(null);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -473,7 +468,7 @@ export default function Header({
       </div>
 
       {/* Responsive Mobile Drawer Menu via Portal ("Las 3 rayitas" con todas las categorías de PC) */}
-      {mobileMenuOpen && mounted && typeof document !== 'undefined' && createPortal(
+      {mobileMenuOpen && typeof document !== 'undefined' && createPortal(
         <div className="fixed inset-0 z-[9999] flex justify-start overflow-hidden">
           {/* Backdrop con desenfoque de pantalla completa */}
           <div 

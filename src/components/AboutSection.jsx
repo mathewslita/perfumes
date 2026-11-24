@@ -3,7 +3,7 @@ import { ShieldCheck, MessageCircle, HeartHandshake, CheckCircle, Crown } from '
 
 export default function AboutSection() {
   return (
-    <section id="acerca-de-nosotros" className="py-12 sm:py-16 bg-[#F5F1E8] border-t border-b border-[#C9A961]/25 scroll-mt-20">
+    <section id="acerca-de-nosotros" className="cv-auto py-12 sm:py-16 bg-[#F5F1E8] border-t border-b border-[#C9A961]/25 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <h2 className="sr-only">Garantía de Autenticidad y Asesoría ARKANO</h2>
         {/* 3 Pillars of Trust Grid - Compacto, sutil y elegante */}

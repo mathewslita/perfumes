@@ -4,7 +4,7 @@ import Logo from './Logo';
 
 export default function Footer({ onSelectCategory }) {
   return (
-    <footer className="bg-[#0E0E0E] text-[#F5F1E8] pt-14 pb-8 border-t border-[#C9A961]/30">
+    <footer className="cv-auto bg-[#0E0E0E] text-[#F5F1E8] pt-14 pb-8 border-t border-[#C9A961]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <h2 className="sr-only">Información institucional y contacto de ARKANO Perfumería</h2>
 

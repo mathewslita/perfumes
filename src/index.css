@@ -88,11 +88,10 @@
   box-shadow: 0 10px 30px -5px rgba(14, 14, 14, 0.4);
 }
 
-/* Transiciones fluidas */
-* {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
+/* Optimización de renderizado para secciones fuera de la ventana inicial */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 560px;
 }
 
 @keyframes pulseGently {
@@ -128,7 +127,7 @@
 .animate-marquee-left {
   display: flex;
   width: max-content;
-  animation: marqueeScrollLeft 40s linear infinite;
+  animation: marqueeScrollLeft 24s linear infinite;
   will-change: transform;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;

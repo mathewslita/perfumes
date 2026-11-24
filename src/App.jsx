@@ -23,7 +23,7 @@ const FavoritesDrawer = dynamic(() => import('./components/FavoritesDrawer'), { 
 export default function App() {
   // Cart state persisted in localStorage
   const [cart, setCart] = useState([]);
-  const [isMounted, setIsMounted] = useState(false);
+  const hasLoadedStorage = useRef(false);
 
   // UI States
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -42,13 +42,13 @@ export default function App() {
   const heroContainerRef = useRef(null);
   const heroOverlayRef = useRef(null);
 
-  // Zero-rerender scroll listener for cinematic GTA VI curtain reveal
+  // Zero-rerender scroll listener for cinematic GTA VI curtain reveal (sin forced reflow al montar)
   useEffect(() => {
     let ticking = false;
-    let lastP = -1;
+    let lastP = 0;
 
     const updateScroll = () => {
-      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const scrollY = window.scrollY || 0;
       if (scrollY <= 800) {
         const p = Math.min(1, Math.max(0, scrollY / 500));
         if (Math.abs(p - lastP) > 0.003) {
@@ -83,17 +83,24 @@ export default function App() {
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    updateScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const initRaf = window.requestAnimationFrame(() => {
+      if ((window.scrollY || 0) > 2) {
+        updateScroll();
+      }
+    });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.cancelAnimationFrame(initRaf);
+    };
   }, []);
 
-  // Load cart & favorites on client mount to prevent SSR hydration mismatch
+  // Load cart & favorites on client mount without triggering redundant re-renders when empty
   useEffect(() => {
     try {
       const saved = localStorage.getItem('arkano_cart') || localStorage.getItem('sultan_cart');
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
+        if (Array.isArray(parsed) && parsed.length > 0) {
           const validCart = parsed
             .map(item => {
               if (item.id === 'yves-dorgeval-sublime-red') {
@@ -115,53 +122,47 @@ export default function App() {
               return null;
             })
             .filter(Boolean);
-          setCart(validCart);
+          if (validCart.length > 0) {
+            setCart(validCart);
+          }
         }
       }
       const savedFavs = localStorage.getItem('arkano_favorites');
       if (savedFavs) {
         const parsedFavs = JSON.parse(savedFavs);
-        if (Array.isArray(parsedFavs)) {
-          // Migrar IDs antiguos y filtrar únicamente perfumes existentes en el catálogo
+        if (Array.isArray(parsedFavs) && parsedFavs.length > 0) {
           const validFavs = parsedFavs
             .map(id => id === 'yves-dorgeval-sublime-red' ? 'lattafa-badee-al-oud-sublime' : id)
             .filter(id => PERFUMES_DATA.some(p => p.id === id));
-          setFavorites(validFavs);
+          if (validFavs.length > 0) {
+            setFavorites(validFavs);
+          }
         }
       }
     } catch (e) {
       console.error('Error loading cart or favorites:', e);
     }
-    setIsMounted(true);
+    hasLoadedStorage.current = true;
   }, []);
 
-  // Sync cart & favorites to localStorage after mounted
+  // Sync cart & favorites to localStorage after initial check
   useEffect(() => {
-    if (!isMounted) return;
+    if (!hasLoadedStorage.current) return;
     try {
       localStorage.setItem('arkano_cart', JSON.stringify(cart));
     } catch (e) {
       console.error('Error saving cart:', e);
     }
-  }, [cart, isMounted]);
+  }, [cart]);
 
   useEffect(() => {
-    if (!isMounted) return;
+    if (!hasLoadedStorage.current) return;
     try {
       localStorage.setItem('arkano_favorites', JSON.stringify(favorites));
     } catch (e) {
       console.error('Error saving favorites:', e);
     }
-  }, [favorites, isMounted]);
-
-  // Depuración automática de IDs obsoletos para asegurar sincronización 1:1
-  useEffect(() => {
-    if (!isMounted) return;
-    const valid = favorites.filter(id => PERFUMES_DATA.some(p => p.id === id));
-    if (valid.length !== favorites.length) {
-      setFavorites(valid);
-    }
-  }, [favorites, isMounted]);
+  }, [favorites]);
 
   // Toggle favorite perfume
   const handleToggleFavorite = (productId) => {
