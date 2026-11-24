@@ -58,12 +58,18 @@ export default function CategoryBanner({
                 <img 
                   src="/assets/images/khamrah_clasico_transparent.webp" 
                   alt="Lattafa Khamrah Dubái" 
+                  width="340"
+                  height="340"
+                  decoding="async"
                   className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] transform -rotate-3 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
                 <img 
                   src="/assets/images/amber_oud_gold_transparent.webp" 
                   alt="Al Haramain Amber Oud Gold Edition" 
+                  width="320"
+                  height="320"
+                  decoding="async"
                   className="h-40 sm:h-52 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] transform rotate-4 group-hover:rotate-0 group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />
@@ -118,6 +124,9 @@ export default function CategoryBanner({
                 <img 
                   src="/assets/images/halloween_x_man_transparent.webp" 
                   alt="Halloween Man X Jesús del Pozo" 
+                  width="340"
+                  height="340"
+                  decoding="async"
                   className="h-44 sm:h-56 w-auto object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.18)] group-hover:scale-105 transition-all duration-700 ease-out"
                   loading="lazy"
                 />

@@ -1,11 +1,12 @@
 import React from 'react';
-import { ShieldCheck, MessageCircle, Heart, Phone, Mail, MapPin, Sparkles, ExternalLink, Crown, Award } from 'lucide-react';
+import { ShieldCheck, MessageCircle, Phone, Mail, MapPin, Crown, Award } from 'lucide-react';
 import Logo from './Logo';
 
 export default function Footer({ onSelectCategory }) {
   return (
     <footer className="bg-[#0E0E0E] text-[#F5F1E8] pt-14 pb-8 border-t border-[#C9A961]/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <h2 className="sr-only">Información institucional y contacto de ARKANO Perfumería</h2>
 
         {/* 4 Perfectly Balanced Columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-12 border-b border-white/10">
@@ -20,9 +21,9 @@ export default function Footer({ onSelectCategory }) {
             </div>
 
             <div className="pt-2">
-              <h5 className="font-bold text-[11px] uppercase tracking-wider text-[#C9A961] mb-2">
+              <h3 className="font-bold text-[11px] uppercase tracking-wider text-[#C9A961] mb-2">
                 Compra Directa por WhatsApp
-              </h5>
+              </h3>
               <p className="text-xs text-stone-300 leading-relaxed font-normal">
                 Atención personalizada sin necesidad de registros engorrosos. Eliges tu perfume y coordinamos el despacho en minutos.
               </p>
@@ -31,48 +32,53 @@ export default function Footer({ onSelectCategory }) {
 
           {/* Col 2: CATEGORÍAS & COLECCIONES */}
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3">
+            <h3 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3">
               Colecciones Exclusivas
-            </h4>
-            <ul className="space-y-2.5 text-xs text-gray-300">
+            </h3>
+            <ul className="space-y-1.5 text-xs text-gray-300">
               <li>
                 <button
+                  type="button"
                   onClick={() => onSelectCategory && onSelectCategory('arabes')}
-                  className="hover:text-[#C9A961] transition-colors flex items-center gap-1.5 text-left"
+                  className="py-1 min-h-[28px] hover:text-[#C9A961] transition-colors inline-flex items-center gap-1.5 text-left cursor-pointer"
                 >
                   <Crown className="w-3.5 h-3.5 text-[#C9A961]" />
-                  <span>Perfumes Árabes (Dubái) </span>
+                  <span>Perfumes Árabes (Dubái)</span>
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => onSelectCategory && onSelectCategory('disenador')}
-                  className="hover:text-[#C9A961] transition-colors flex items-center gap-1.5 text-left"
+                  className="py-1 min-h-[28px] hover:text-[#C9A961] transition-colors inline-flex items-center gap-1.5 text-left cursor-pointer"
                 >
                   <Award className="w-3.5 h-3.5 text-[#C9A961]" />
-                  <span>Perfumes de Diseñador </span>
+                  <span>Perfumes de Diseñador</span>
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => onSelectCategory && onSelectCategory('Para Él')}
-                  className="hover:text-[#C9A961] transition-colors block text-left"
+                  className="py-1 min-h-[28px] hover:text-[#C9A961] transition-colors inline-flex items-center text-left cursor-pointer"
                 >
                   Colección Masculina (Para Él)
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => onSelectCategory && onSelectCategory('Para Ella')}
-                  className="hover:text-[#C9A961] transition-colors block text-left"
+                  className="py-1 min-h-[28px] hover:text-[#C9A961] transition-colors inline-flex items-center text-left cursor-pointer"
                 >
                   Colección Femenina (Para Ella)
                 </button>
               </li>
               <li>
                 <button
+                  type="button"
                   onClick={() => onSelectCategory && onSelectCategory('decants')}
-                  className="hover:text-[#C9A961] transition-colors block text-left"
+                  className="py-1 min-h-[28px] hover:text-[#C9A961] transition-colors inline-flex items-center text-left cursor-pointer"
                 >
                   Decants de Muestra
                 </button>
@@ -83,9 +89,9 @@ export default function Footer({ onSelectCategory }) {
           {/* Col 3: GARANTÍA & FRAGRANTICA */}
           <div className="space-y-4">
             <div>
-              <h4 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
+              <h3 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-[#C9A961]" /> Garantía de Origen
-              </h4>
+              </h3>
               <ul className="space-y-2 text-xs text-gray-300">
                 <li className="flex items-center gap-1.5">
                   <span className="text-[#C9A961]">✓</span>
@@ -105,9 +111,9 @@ export default function Footer({ onSelectCategory }) {
 
           {/* Col 4: CONTACTO DIRECTO */}
           <div>
-            <h4 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
+            <h3 className="font-bold text-xs uppercase tracking-widest text-[#C9A961] mb-3 flex items-center gap-1.5">
               <Phone className="w-3.5 h-3.5 text-[#C9A961]" /> Contacto Directo
-            </h4>
+            </h3>
 
             <div className="space-y-3 text-xs">
               {/* WhatsApp Express */}
@@ -119,7 +125,7 @@ export default function Footer({ onSelectCategory }) {
                   href="https://wa.me/593992851808?text=Hola%20ARKANO%20Perfumería,%20deseo%20asesoría%20sobre%20un%20perfume"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-bold text-sm text-[#C9A961] hover:underline flex items-center gap-1.5 mt-0.5"
+                  className="font-bold text-sm text-[#C9A961] hover:underline inline-flex items-center gap-1.5 mt-0.5 py-1 min-h-[28px]"
                 >
                   <MessageCircle className="w-4 h-4 text-emerald-400" />
                   <span>+593 99 285 1808</span>

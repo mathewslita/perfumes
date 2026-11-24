@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import React, { useRef, useMemo } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ProductCard from './ProductCard';
 
 export default function CrossSelling({ 
@@ -10,6 +10,7 @@ export default function CrossSelling({
   onToggleFavorite 
 }) {
   const scrollRef = useRef(null);
+  const featuredRecommendations = useMemo(() => products.slice(0, 10), [products]);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -38,9 +39,9 @@ export default function CrossSelling({
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#C9A961] ring-4 ring-[#C9A961]/20 flex-shrink-0"></span>
             <div>
-              <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
+              <h2 className="font-serif text-lg sm:text-2xl font-bold text-[#0E0E0E] uppercase tracking-wide">
                 Nuestras Recomendaciones Para Ti
-              </h3>
+              </h2>
               <p className="text-xs text-stone-600 font-medium hidden sm:block mt-0.5">
                 Selección basada en las fragancias más deseadas de nuestra colección
               </p>
@@ -59,10 +60,10 @@ export default function CrossSelling({
             </button>
 
             {/* Carousel Navigation Buttons - Clean, accessible on all screens without blocking cards */}
-            <div className="flex items-center gap-1.5 flex-shrink-0">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <button
                 onClick={() => scroll('left')}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-gray-200 text-[#0E0E0E] flex items-center justify-center hover:bg-[#0E0E0E] hover:text-[#C9A961] hover:border-[#C9A961] transition-all shadow-xs active:scale-90 cursor-pointer"
+                className="w-9 h-9 rounded-full bg-white border border-gray-200 text-[#0E0E0E] flex items-center justify-center hover:bg-[#0E0E0E] hover:text-[#C9A961] hover:border-[#C9A961] transition-all shadow-xs active:scale-90 cursor-pointer"
                 aria-label="Anterior recomendación"
                 title="Anterior"
               >
@@ -70,7 +71,7 @@ export default function CrossSelling({
               </button>
               <button
                 onClick={() => scroll('right')}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white border border-gray-200 text-[#0E0E0E] flex items-center justify-center hover:bg-[#0E0E0E] hover:text-[#C9A961] hover:border-[#C9A961] transition-all shadow-xs active:scale-90 cursor-pointer"
+                className="w-9 h-9 rounded-full bg-white border border-gray-200 text-[#0E0E0E] flex items-center justify-center hover:bg-[#0E0E0E] hover:text-[#C9A961] hover:border-[#C9A961] transition-all shadow-xs active:scale-90 cursor-pointer"
                 aria-label="Siguiente recomendación"
                 title="Siguiente"
               >
@@ -88,7 +89,7 @@ export default function CrossSelling({
             ref={scrollRef}
             className="flex items-stretch gap-4 sm:gap-6 overflow-x-auto scroll-smooth scrollbar-none py-3 px-1 -mx-1"
           >
-            {products.map((item) => (
+            {featuredRecommendations.map((item) => (
               <div 
                 key={item.id}
                 className="w-[260px] sm:w-[285px] flex-shrink-0 flex flex-col"

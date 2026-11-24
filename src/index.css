@@ -45,30 +45,30 @@
   background: #A58B4E;
 }
 
-/* Tipografías Editoriales Homogéneas y Armónicas (Estilo Editorial Alta Gama) */
+/* Tipografías Editoriales Homogéneas y Armónicas (Self-Hosted Next Font + Fallback) */
 @theme {
-  --font-serif: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-cinzel: 'Cinzel', serif;
-  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-serif: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-sans: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-cinzel: var(--font-cinzel-gf), 'Cinzel', serif;
+  --font-cormorant: var(--font-cormorant-gf), 'Cormorant Garamond', Georgia, serif;
 }
 
 .font-arabic-title,
 .font-serif {
-  font-family: 'Playfair Display', Georgia, serif !important;
+  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif !important;
 }
 
 .font-body,
 .font-sans {
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+  font-family: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
 }
 
 .font-cinzel {
-  font-family: 'Cinzel', serif !important;
+  font-family: var(--font-cinzel-gf), 'Cinzel', serif !important;
 }
 
 .font-cormorant {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-cormorant-gf), 'Cormorant Garamond', Georgia, serif !important;
 }
 
 /* Sombras y Efectos de Lujo */

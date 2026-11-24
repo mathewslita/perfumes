@@ -58,7 +58,7 @@ export const OCCASIONS_LIST = [
     name: 'DECANTS 10ML',
     category: 'decants',
     icon: '🧪',
-    badge: '$15 / $30',
+    badge: '$15 / $18',
     desc: 'Prueba ~120 atomizaciones de viaje'
   }
 ];
@@ -170,7 +170,7 @@ export default function Header({
             {/* Hamburger 3-rayitas Button (Visible on mobile/tablet) */}
             <button 
               onClick={() => setMobileMenuOpen(true)}
-              className="lg:hidden p-1.5 sm:p-2 rounded-xl bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/35 transition-all active:scale-95 flex items-center justify-center shadow-sm flex-shrink-0"
+              className="lg:hidden min-w-[38px] min-h-[38px] p-2 rounded-xl bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/35 transition-all active:scale-95 flex items-center justify-center shadow-sm flex-shrink-0"
               aria-label="Abrir menú de categorías"
               title="Todas las categorías"
             >
@@ -354,7 +354,7 @@ export default function Header({
               {searchQuery && (
                 <button 
                   onClick={() => onSearch('')} 
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+                  className="absolute right-1 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center text-gray-400 hover:text-white"
                   title="Limpiar búsqueda"
                 >
                   <X className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
@@ -441,7 +441,7 @@ export default function Header({
             {/* Favorites Trigger with Heart Icon */}
             <button
               onClick={onOpenFavorites}
-              className="relative p-2 sm:p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-rose-400 hover:text-rose-300 border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0"
+              className="relative min-w-[38px] min-h-[38px] p-2 sm:p-2.5 flex items-center justify-center rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-rose-400 hover:text-rose-300 border border-[#C9A961]/30 transition-all hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0"
               aria-label="Ver lista de favoritos"
               title="Mis perfumes favoritos"
             >
@@ -456,7 +456,7 @@ export default function Header({
             {/* Cart Trigger - Siempre visible, nunca comprimido ni recortado en móviles */}
             <button 
               onClick={onOpenCart}
-              className="relative p-2 sm:p-2.5 rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/40 transition-all hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0 shadow-sm"
+              className="relative min-w-[38px] min-h-[38px] p-2 sm:p-2.5 flex items-center justify-center rounded-full bg-[#1A1A1A] hover:bg-[#252525] text-[#C9A961] border border-[#C9A961]/40 transition-all hover:scale-105 active:scale-95 cursor-pointer flex-shrink-0 shadow-sm"
               aria-label="Ver carrito"
               title="Mi carrito de compras"
             >
@@ -644,7 +644,7 @@ export default function Header({
                       <span>Decants 10ml</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[9px] font-black text-[#C9A961] bg-[#C9A961]/10 px-1.5 py-0.5 rounded border border-[#C9A961]/25">$15 / $30</span>
+                      <span className="text-[9px] font-black text-[#C9A961] bg-[#C9A961]/10 px-1.5 py-0.5 rounded border border-[#C9A961]/25">$15 / $18</span>
                       <ChevronRight className="w-3.5 h-3.5 text-[#C9A961]/60 group-hover:translate-x-0.5 transition-all" />
                     </div>
                   </button>

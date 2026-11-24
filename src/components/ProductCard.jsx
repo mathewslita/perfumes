@@ -71,11 +71,12 @@ function ProductCard({
 
           {/* Botón de Favoritos con Corazón */}
           <button
+            type="button"
             onClick={(e) => {
               e.stopPropagation();
               onToggleFavorite && onToggleFavorite(product.id);
             }}
-            className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
+            className={`w-8 h-8 rounded-full shadow-sm flex items-center justify-center transition-all cursor-pointer active:scale-90 ${
               isFavorite
                 ? 'bg-rose-50 border border-rose-300 text-rose-500 shadow-md scale-105'
                 : 'bg-white/95 text-stone-400 hover:text-rose-500 border border-stone-200 hover:border-rose-300'
@@ -101,7 +102,7 @@ function ProductCard({
                     return next;
                   });
                 }}
-                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full shadow-sm flex items-center justify-center cursor-pointer transition-all duration-200 border active:scale-90 ${
+                className={`w-8 h-8 rounded-full shadow-sm flex items-center justify-center cursor-pointer transition-all duration-200 border active:scale-90 ${
                   product.timeOfDay === 'dia'
                     ? 'bg-amber-50/95 text-amber-600 border-amber-200 hover:border-amber-400 hover:bg-amber-100'
                     : product.timeOfDay === 'noche'
@@ -154,6 +155,8 @@ function ProductCard({
         <img 
           src={product.imageMain} 
           alt={`${product.brand} ${product.name} original`} 
+          width="360"
+          height="360"
           className="w-full h-full max-h-[90%] max-w-[90%] object-contain object-center mix-blend-multiply group-hover:scale-108 transition-transform duration-500 ease-out"
           loading={priority ? "eager" : "lazy"}
           decoding="async"
@@ -181,13 +184,13 @@ function ProductCard({
           </div>
 
           {/* Nombre del Perfume */}
-          <h4 
+          <h3 
             onClick={() => onOpenProduct(product.id)}
             className="font-serif font-bold text-[13px] sm:text-[15px] text-[#0E0E0E] group-hover:text-[#8F7432] transition-colors cursor-pointer line-clamp-1 tracking-tight leading-snug"
             title={product.name}
           >
             {product.name}
-          </h4>
+          </h3>
 
           {/* 3 Notas Olfativas Principales: visibles en desktop, limpias en móvil */}
           <div className="hidden sm:flex items-center gap-1.5 mt-2.5 py-1 px-2 bg-[#F5F1E8] rounded-lg border border-stone-200/80">
@@ -215,14 +218,15 @@ function ProductCard({
               )}
             </div>
             
-            {/* Indicador refinado de Decant con micro-badge */}
-            <span 
+            {/* Indicador refinado de Decant con micro-badge accesible */}
+            <button
+              type="button"
               onClick={() => onOpenProduct(product.id)} 
-              className="text-[9.5px] sm:text-[10px] font-bold text-[#8F7432] hover:text-[#0E0E0E] transition-all cursor-pointer bg-[#F5F1E8] px-2 py-0.5 rounded-full border border-[#C9A961]/35 shadow-2xs hover:border-[#C9A961]"
+              className="text-[9.5px] sm:text-[10px] font-bold text-[#8F7432] hover:text-[#0E0E0E] transition-all cursor-pointer bg-[#F5F1E8] px-2.5 py-1 min-h-[26px] inline-flex items-center rounded-full border border-[#C9A961]/35 shadow-2xs hover:border-[#C9A961]"
               title="Ver presentación en decants de 10ml y 30ml"
             >
               Decants ${(product.priceDecant10ml || product.priceDecant || (isArabic ? 15 : 18)).toFixed(0)}
-            </span>
+            </button>
           </div>
 
           {/* Botón Añadir al Carrito ARKANO */}

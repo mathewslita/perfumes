@@ -29,7 +29,7 @@ export const ALL_BRANDS = [
     id: 'al-haramain',
     name: 'AL HARAMAIN',
     category: 'arabes',
-    logoImage: '/assets/images/brands/al_haramain.png?v=2',
+    logoImage: '/assets/images/brands/al_haramain.webp?v=2',
     filterStyle: { filter: 'grayscale(100%) contrast(150%) brightness(0.2)' },
     heightClass: 'h-11 sm:h-13.5 w-auto object-contain max-w-[210px]'
   },
@@ -66,14 +66,14 @@ export const ALL_BRANDS = [
     id: 'dumont-paris',
     name: 'DUMONT PARIS',
     category: 'arabes',
-    logoImage: '/assets/images/brands/dumont_paris.png',
+    logoImage: '/assets/images/brands/dumont_paris.webp',
     heightClass: 'h-13 sm:h-16 w-auto object-contain max-w-[170px] scale-115 sm:scale-125 mix-blend-multiply'
   },
   {
     id: 'rayhaan',
     name: 'RAYHAAN',
     category: 'arabes',
-    logoImage: '/assets/images/brands/rayhaan.png',
+    logoImage: '/assets/images/brands/rayhaan.webp',
     heightClass: 'h-9 sm:h-11 w-auto object-contain max-w-[190px] mix-blend-multiply'
   },
 
@@ -82,7 +82,7 @@ export const ALL_BRANDS = [
     id: 'halloween',
     name: 'HALLOWEEN',
     category: 'disenador',
-    logoImage: '/assets/images/brands/halloween_delpozo.png',
+    logoImage: '/assets/images/brands/halloween_delpozo.webp',
     heightClass: 'h-12 sm:h-15 w-auto object-contain max-w-[180px] scale-115 sm:scale-125 mix-blend-multiply'
   }
 ];
@@ -135,13 +135,18 @@ export default function BrandsSection({ onSelectBrand }) {
                 key={`${brand.id}-${idx}`}
                 type="button"
                 onClick={() => handleBrandClick(brand.name)}
+                tabIndex={idx >= ALL_BRANDS.length ? -1 : undefined}
+                aria-hidden={idx >= ALL_BRANDS.length ? 'true' : undefined}
                 className="flex items-center justify-center flex-shrink-0 px-8 sm:px-12 h-26 sm:h-30 transition-all duration-300 opacity-80 hover:opacity-100 hover:scale-105 cursor-pointer focus:outline-none group select-none"
                 title={`Ver fragancias de ${brand.name}`}
-                aria-label={`Ver fragancias de ${brand.name}`}
+                aria-label={idx >= ALL_BRANDS.length ? undefined : `Ver fragancias de ${brand.name}`}
               >
                 <img
                   src={brand.logoImage}
-                  alt={brand.name}
+                  alt={idx >= ALL_BRANDS.length ? '' : brand.name}
+                  width="180"
+                  height="64"
+                  decoding="async"
                   style={brand.filterStyle || {}}
                   className={`transition-transform duration-300 ${brand.heightClass || 'h-12'}`}
                   loading="lazy"

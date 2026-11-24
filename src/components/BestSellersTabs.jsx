@@ -132,7 +132,7 @@ export default function BestSellersTabs({
                 <button
                   key={tab.id}
                   onClick={() => onTabChange(tab.id)}
-                  className={`pb-2.5 sm:pb-3 px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer flex-shrink-0 ${
+                  className={`pt-1.5 pb-2.5 sm:pb-3 min-h-[36px] px-3 sm:px-4 text-xs font-bold tracking-wider transition-all relative whitespace-nowrap cursor-pointer flex-shrink-0 ${
                     isActive
                       ? 'text-[#0E0E0E] font-black'
                       : 'text-stone-400 hover:text-stone-900'
@@ -279,9 +279,9 @@ export default function BestSellersTabs({
             <div className="w-16 h-16 rounded-full bg-[#0E0E0E] text-[#C9A961] flex items-center justify-center mx-auto mb-4 border border-[#C9A961]/50">
               <Sparkles className="w-8 h-8 text-[#C9A961]" />
             </div>
-            <h4 className="font-serif text-xl font-bold text-gray-950 mb-2">
+            <h3 className="font-serif text-xl font-bold text-gray-950 mb-2">
               No hay coincidencias con esos filtros combinados
-            </h4>
+            </h3>
             <p className="text-xs text-gray-600 leading-relaxed mb-6">
               Puedes restablecer los filtros para ver todo el catálogo de fragancias árabes y de diseñador listas para despacho.
             </p>
@@ -315,7 +315,7 @@ export default function BestSellersTabs({
                   onAddToCart={onAddToCart}
                   isFavorite={favorites.includes(perfume.id)}
                   onToggleFavorite={onToggleFavorite}
-                  priority={idx < 4}
+                  priority={false}
                 />
               ))}
             </div>

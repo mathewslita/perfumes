@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import TopBar from './components/TopBar';
 import Header from './components/Header';
 import HeroBanner from './components/HeroBanner';
@@ -8,15 +9,16 @@ import CategoryBanner from './components/CategoryBanner';
 import VibeSelector from './components/VibeSelector';
 import BestSellersTabs from './components/BestSellersTabs';
 import CrossSelling from './components/CrossSelling';
-import ProductDetailModal from './components/ProductDetailModal';
-import CartDrawer from './components/CartDrawer';
-import FavoritesDrawer from './components/FavoritesDrawer';
 import AiSommelierWidget from './components/AiSommelierWidget';
 import BrandsSection from './components/BrandsSection';
 import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import { PERFUMES_DATA, VIBE_CATEGORIES } from './data/perfumes';
-import { Sparkles, ShieldCheck, Check, RotateCcw, Crown, Award } from 'lucide-react';
+import { Check } from 'lucide-react';
+
+const ProductDetailModal = dynamic(() => import('./components/ProductDetailModal'), { ssr: false });
+const CartDrawer = dynamic(() => import('./components/CartDrawer'), { ssr: false });
+const FavoritesDrawer = dynamic(() => import('./components/FavoritesDrawer'), { ssr: false });
 
 export default function App() {
   // Cart state persisted in localStorage
@@ -106,10 +108,13 @@ export default function App() {
                   price: item.type === 'decant' ? newProd.priceDecant : newProd.price100ml
                 };
               }
-              return item;
+              const matchedProd = PERFUMES_DATA.find(p => p.id === item.id);
+              if (matchedProd) {
+                return { ...item, image: matchedProd.imageMain };
+              }
+              return null;
             })
-            .filter(Boolean)
-            .filter(item => PERFUMES_DATA.some(p => p.id === item.id));
+            .filter(Boolean);
           setCart(validCart);
         }
       }
@@ -569,40 +574,44 @@ export default function App() {
         />
       )}
 
-      {/* 13. Slide-Over Cart Drawer */}
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cart={cart}
-        cartItems={cart}
-        onUpdateQty={handleUpdateQty}
-        onRemoveItem={handleRemoveItem}
-        onExploreCatalog={() => {
-          setIsCartOpen(false);
-          const el = document.getElementById('los-mas-vendidos');
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }}
-      />
+      {/* 13. Slide-Over Cart Drawer (Cargado bajo demanda) */}
+      {isCartOpen && (
+        <CartDrawer
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          cart={cart}
+          cartItems={cart}
+          onUpdateQty={handleUpdateQty}
+          onRemoveItem={handleRemoveItem}
+          onExploreCatalog={() => {
+            setIsCartOpen(false);
+            const el = document.getElementById('los-mas-vendidos');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      )}
 
-      {/* 14. Slide-Over Favorites Drawer */}
-      <FavoritesDrawer
-        isOpen={isFavoritesOpen}
-        onClose={() => setIsFavoritesOpen(false)}
-        favorites={favorites}
-        onAddToCart={handleAddToCart}
-        onRemoveFavorite={handleToggleFavorite}
-        onOpenProduct={(id) => setSelectedProductId(id)}
-        onClearFavorites={handleClearFavorites}
-        onExploreCatalog={() => {
-          setIsFavoritesOpen(false);
-          const el = document.getElementById('los-mas-vendidos');
-          el?.scrollIntoView({ behavior: 'smooth' });
-        }}
-        onOpenCart={() => {
-          setIsFavoritesOpen(false);
-          setIsCartOpen(true);
-        }}
-      />
+      {/* 14. Slide-Over Favorites Drawer (Cargado bajo demanda) */}
+      {isFavoritesOpen && (
+        <FavoritesDrawer
+          isOpen={isFavoritesOpen}
+          onClose={() => setIsFavoritesOpen(false)}
+          favorites={favorites}
+          onAddToCart={handleAddToCart}
+          onRemoveFavorite={handleToggleFavorite}
+          onOpenProduct={(id) => setSelectedProductId(id)}
+          onClearFavorites={handleClearFavorites}
+          onExploreCatalog={() => {
+            setIsFavoritesOpen(false);
+            const el = document.getElementById('los-mas-vendidos');
+            el?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          onOpenCart={() => {
+            setIsFavoritesOpen(false);
+            setIsCartOpen(true);
+          }}
+        />
+      )}
 
       {/* 14. AI Sommelier Floating Concierge Widget */}
       <AiSommelierWidget

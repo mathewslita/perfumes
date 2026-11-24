@@ -1,4 +1,34 @@
 import '../src/index.css';
+import { Playfair_Display, Plus_Jakarta_Sans, Cormorant_Garamond, Cinzel } from 'next/font/google';
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  style: ['normal', 'italic'],
+  display: 'swap',
+  variable: '--font-playfair',
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+  variable: '--font-jakarta',
+});
+
+const cormorant = Cormorant_Garamond({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-cormorant-gf',
+});
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  display: 'swap',
+  variable: '--font-cinzel-gf',
+});
 
 export const metadata = {
   metadataBase: new URL('https://arkanoperfumeria.com'),
@@ -8,7 +38,7 @@ export const metadata = {
   openGraph: {
     title: 'ARKANO PERFUMERÍA | El Arte de la Alta Perfumería',
     description: 'Descubre las fragancias árabes y de diseñador más exclusivas del mundo. Concentración pura, estela legendaria y garantía total.',
-    images: ['/assets/images/lattafa_khamrah.jpg'],
+    images: ['/assets/images/Khamrah clasico.webp'],
     type: 'website',
   },
 };
@@ -20,15 +50,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="es">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link 
-          href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" 
-          rel="stylesheet" 
-        />
-      </head>
+    <html
+      lang="es"
+      className={`${playfair.variable} ${jakarta.variable} ${cormorant.variable} ${cinzel.variable}`}
+    >
       <body className="bg-[#F5F1E8] text-[#0E0E0E] antialiased selection:bg-[#0E0E0E] selection:text-[#C9A961]">
         {children}
       </body>

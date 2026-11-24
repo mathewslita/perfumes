@@ -7,7 +7,7 @@ const NEW_ARRIVALS = [
     brand: 'RASASI DUBÁI',
     name: 'Hawas Verde For Him',
     price: 85.00,
-    decantPrice: 22.00,
+    decantPrice: 15.00,
     notes: 'Lima fresca, Romero noble, Manzana verde, Pachulí y Ámbar',
     image: '/assets/images/hawas verde rasari.webp',
     categoryBadge: 'Árabe • Nuevo Lanzamiento',
@@ -42,7 +42,7 @@ const NEW_ARRIVALS = [
     price: 65.00,
     decantPrice: 18.00,
     notes: 'Café Espresso tostado, Whisky licoroso, Cardamomo y Cuero',
-    image: '/assets/images/Halloween x man.jpg',
+    image: '/assets/images/Halloween x man.webp',
     categoryBadge: 'Diseñador • Alta Costura',
     vibeText: 'Magnetismo nocturno de Jesús del Pozo'
   },
@@ -80,10 +80,16 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
   return (
     <div className="relative overflow-hidden bg-[#0A0A0B] text-[#F5F1E8] min-h-[calc(100svh-64px)] lg:min-h-[calc(100vh-80px)] flex flex-col justify-center py-2.5 sm:py-6 lg:py-16 border-b border-[#C9A961]/30">
       
-      {/* Fondo de alta gama botánico con textura oscura y líneas doradas */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none opacity-85"
-        style={{ backgroundImage: `url('/assets/images/hero_bg_dark_botanical.jpg')` }}
+      {/* Fondo de alta gama botánico optimizado como imagen LCP con prioridad máxima */}
+      <img
+        src="/assets/images/hero_bg_dark_botanical.webp"
+        alt=""
+        aria-hidden="true"
+        fetchPriority="high"
+        decoding="sync"
+        width="1440"
+        height="900"
+        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none opacity-85"
       />
 
       {/* Degradado sutil para asegurar contraste nítido y transición perfecta */}
@@ -220,6 +226,11 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                       <img 
                         src={perfume.image} 
                         alt={`${perfume.brand} ${perfume.name}`} 
+                        width="600"
+                        height="600"
+                        fetchPriority={idx === 0 ? 'high' : 'low'}
+                        loading={idx === 0 ? 'eager' : 'lazy'}
+                        decoding={idx === 0 ? 'sync' : 'async'}
                         className="w-full h-full max-h-[145px] sm:max-h-[260px] lg:max-h-[320px] object-contain mix-blend-multiply drop-shadow-[0_10px_16px_rgba(0,0,0,0.12)] transform group-hover/hero:scale-105 transition-transform duration-700 ease-out" 
                       />
                     </div>
@@ -230,8 +241,8 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                     <span>NUEVOS - DESTACADOS</span>
                   </div>
 
-                  {/* Indicadores de Slide con barra de progreso fluida */}
-                  <div className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 flex items-center gap-1 sm:gap-1.5 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-2 py-1 sm:px-3 sm:py-1.5 rounded-full border border-[#C9A961]/35 shadow-sm">
+                  {/* Indicadores de Slide con barra de progreso fluida y área táctil accesible (>=24px) */}
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex items-center gap-0 z-20 bg-[#0E0E0E]/85 backdrop-blur-md px-1.5 py-0 sm:px-2 sm:py-0 rounded-full border border-[#C9A961]/35 shadow-sm">
                     {NEW_ARRIVALS.map((_, idx) => (
                       <button
                         key={idx}
@@ -240,23 +251,27 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                           e.stopPropagation();
                           setCurrentSlide(idx);
                         }}
-                        className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 cursor-pointer overflow-hidden relative ${
-                          currentSlide === idx 
-                            ? 'w-5 sm:w-7 bg-white/20' 
-                            : 'w-1.5 sm:w-2 bg-white/40 hover:bg-white/80'
-                        }`}
+                        className="min-w-[24px] min-h-[24px] sm:min-w-[26px] sm:min-h-[26px] flex items-center justify-center cursor-pointer group/dot"
                         title={`Ver perfume ${idx + 1}`}
                         aria-label={`Ver perfume ${idx + 1}`}
                       >
-                        {currentSlide === idx && (
-                          <span 
-                            key={`${idx}-${currentSlide}`}
-                            className="absolute inset-0 bg-[#C9A961] rounded-full"
-                            style={{
-                              animation: isPaused ? 'none' : 'heroProgressFill 2.8s linear forwards'
-                            }}
-                          />
-                        )}
+                        <span
+                          className={`block h-1 sm:h-1.5 rounded-full transition-all duration-300 overflow-hidden relative ${
+                            currentSlide === idx 
+                              ? 'w-5 sm:w-7 bg-white/20' 
+                              : 'w-1.5 sm:w-2 bg-white/40 group-hover/dot:bg-white/80'
+                          }`}
+                        >
+                          {currentSlide === idx && (
+                            <span 
+                              key={`${idx}-${currentSlide}`}
+                              className="absolute inset-0 bg-[#C9A961] rounded-full"
+                              style={{
+                                animation: isPaused ? 'none' : 'heroProgressFill 2.8s linear forwards'
+                              }}
+                            />
+                          )}
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -299,9 +314,9 @@ export default function HeroBanner({ onExplore, onOpenAiModal, onOpenProduct, on
                       <span className="text-[8.5px] sm:text-[10px] text-[#C9A961] font-extrabold uppercase tracking-widest block truncate">
                         {currentProduct.brand}
                       </span>
-                      <h4 className="font-bold text-[11px] sm:text-base text-white group-hover/hero:text-[#C9A961] transition-colors truncate">
+                      <h2 className="font-bold text-[11px] sm:text-base text-white group-hover/hero:text-[#C9A961] transition-colors truncate">
                         {currentProduct.name}
-                      </h4>
+                      </h2>
                       <p className="text-[9.5px] sm:text-[11.5px] text-stone-300 truncate hidden sm:block mt-0.5">
                         {currentProduct.notes}
                       </p>
