@@ -14,7 +14,7 @@ import BrandsSection from './components/BrandsSection';
 import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import { PERFUMES_DATA, VIBE_CATEGORIES } from './data/perfumes';
-import { CART_GOALS_CONFIG } from './config/cartGoalsConfig';
+import { CART_GOALS_CONFIG, getAllowedFreePerfumesCount } from './config/cartGoalsConfig';
 import { Check, Gift, X } from 'lucide-react';
 
 const ProductDetailModal = dynamic(() => import('./components/ProductDetailModal'), { ssr: false });
@@ -39,10 +39,10 @@ export default function App() {
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
   const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
-  const [selectedGiftId, setSelectedGiftId] = useState(null);
+  const [selectedGiftIds, setSelectedGiftIds] = useState([]);
   const [isGiftModalOpen, setIsGiftModalOpen] = useState(false);
   const [showGiftUnlockNotification, setShowGiftUnlockNotification] = useState(false);
-  const prevPaidTotalRef = useRef(0);
+  const prevAllowedGiftsRef = useRef(0);
 
   // High-performance DOM refs for zero-rerender GPU scroll transition (60/120fps)
   const heroContainerRef = useRef(null);
@@ -130,15 +130,22 @@ export default function App() {
             .filter(Boolean);
           if (validCart.length > 0) {
             const loadedTotal = validCart.reduce((s, it) => s + ((it.price || 0) * (it.quantity || 1)), 0);
-            prevPaidTotalRef.current = loadedTotal;
+            const loadedAllowed = getAllowedFreePerfumesCount(loadedTotal);
+            prevAllowedGiftsRef.current = loadedAllowed;
             setCart(validCart);
-            const savedGift = localStorage.getItem('arkano_free_gift');
-            if (
-              savedGift &&
-              loadedTotal >= CART_GOALS_CONFIG.freePerfumeThreshold &&
-              CART_GOALS_CONFIG.freeGiftPerfumeIds.includes(savedGift)
-            ) {
-              setSelectedGiftId(savedGift);
+            const savedGiftsRaw = localStorage.getItem('arkano_free_gifts');
+            if (savedGiftsRaw && loadedAllowed > 0) {
+              try {
+                const parsedGifts = JSON.parse(savedGiftsRaw);
+                if (Array.isArray(parsedGifts)) {
+                  const validGifts = parsedGifts
+                    .filter((id) => CART_GOALS_CONFIG.freeGiftPerfumeIds.includes(id))
+                    .slice(0, loadedAllowed);
+                  if (validGifts.length > 0) {
+                    setSelectedGiftIds(validGifts);
+                  }
+                }
+              } catch {}
             }
           }
         }
@@ -183,15 +190,15 @@ export default function App() {
   useEffect(() => {
     if (!hasLoadedStorage.current) return;
     try {
-      if (selectedGiftId) {
-        localStorage.setItem('arkano_free_gift', selectedGiftId);
+      if (selectedGiftIds.length > 0) {
+        localStorage.setItem('arkano_free_gifts', JSON.stringify(selectedGiftIds));
       } else {
-        localStorage.removeItem('arkano_free_gift');
+        localStorage.removeItem('arkano_free_gifts');
       }
     } catch (e) {
-      console.error('Error saving free gift:', e);
+      console.error('Error saving free gifts:', e);
     }
-  }, [selectedGiftId]);
+  }, [selectedGiftIds]);
 
   // Toggle favorite perfume
   const handleToggleFavorite = (productId) => {
@@ -443,19 +450,24 @@ export default function App() {
   const openedProduct = useMemo(() => PERFUMES_DATA.find(p => p.id === selectedProductId), [selectedProductId]);
   const cartItemCount = useMemo(() => (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + (item.quantity || 1), 0), [cart]);
   const cartPaidTotal = useMemo(() => (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0), [cart]);
+  const allowedFreeGifts = useMemo(() => getAllowedFreePerfumesCount(cartPaidTotal), [cartPaidTotal]);
 
-  // Control automático de la meta de $350+: desbloquea notificación al cruzar $350 y limpia si baja de $350
+  // Control automático de metas ($350 = 1 regalo, $550 = 2 regalos; recorta o limpia si el monto disminuye)
   useEffect(() => {
-    const threshold = CART_GOALS_CONFIG.freePerfumeThreshold;
-    if (cartPaidTotal < threshold) {
-      if (selectedGiftId) setSelectedGiftId(null);
+    if (allowedFreeGifts === 0) {
+      if (selectedGiftIds.length > 0) setSelectedGiftIds([]);
       if (isGiftModalOpen) setIsGiftModalOpen(false);
       if (showGiftUnlockNotification) setShowGiftUnlockNotification(false);
-    } else if (prevPaidTotalRef.current < threshold && cartPaidTotal >= threshold && !selectedGiftId) {
-      setShowGiftUnlockNotification(true);
+    } else {
+      if (selectedGiftIds.length > allowedFreeGifts) {
+        setSelectedGiftIds((prev) => prev.slice(0, allowedFreeGifts));
+      }
+      if (allowedFreeGifts > prevAllowedGiftsRef.current && selectedGiftIds.length < allowedFreeGifts) {
+        setShowGiftUnlockNotification(true);
+      }
     }
-    prevPaidTotalRef.current = cartPaidTotal;
-  }, [cartPaidTotal, selectedGiftId, isGiftModalOpen, showGiftUnlockNotification]);
+    prevAllowedGiftsRef.current = allowedFreeGifts;
+  }, [allowedFreeGifts, selectedGiftIds.length, isGiftModalOpen, showGiftUnlockNotification]);
 
   const getAcordeLabel = (id) => {
     switch (id) {
@@ -627,7 +639,7 @@ export default function App() {
           cartItems={cart}
           onUpdateQty={handleUpdateQty}
           onRemoveItem={handleRemoveItem}
-          selectedGiftId={selectedGiftId}
+          selectedGiftIds={selectedGiftIds}
           onOpenGiftModal={() => {
             setShowGiftUnlockNotification(false);
             setIsGiftModalOpen(true);
@@ -640,28 +652,46 @@ export default function App() {
         />
       )}
 
-      {/* Modal Exclusivo de Selección de Perfume Gratis (SOLO accesible si cartPaidTotal >= $350) */}
-      {isGiftModalOpen && cartPaidTotal >= CART_GOALS_CONFIG.freePerfumeThreshold && (
+      {/* Modal Exclusivo de Selección de Perfume(s) Gratis (SOLO accesible en $350+ o $550+) */}
+      {isGiftModalOpen && allowedFreeGifts > 0 && (
         <FreeGiftModal
           isOpen={isGiftModalOpen}
           onClose={() => setIsGiftModalOpen(false)}
           cartTotal={cartPaidTotal}
-          selectedGiftId={selectedGiftId}
-          onSelectGift={(giftId) => {
-            setSelectedGiftId(giftId);
+          selectedGiftIds={selectedGiftIds}
+          onToggleGift={(giftId, maxAllowed) => {
+            if (maxAllowed === 1) {
+              setSelectedGiftIds([giftId]);
+              setIsGiftModalOpen(false);
+              setShowGiftUnlockNotification(false);
+              setIsCartOpen(true);
+              const giftProd = PERFUMES_DATA.find((p) => p.id === giftId);
+              if (giftProd) {
+                showToast(`🎁 ¡"${giftProd.name}" elegido como Perfume Gratis!`);
+              }
+            } else {
+              setSelectedGiftIds((prev) => {
+                if (prev.includes(giftId)) {
+                  return prev.filter((id) => id !== giftId);
+                }
+                if (prev.length >= maxAllowed) {
+                  return [...prev.slice(1), giftId];
+                }
+                return [...prev, giftId];
+              });
+            }
+          }}
+          onConfirmGifts={() => {
             setIsGiftModalOpen(false);
             setShowGiftUnlockNotification(false);
             setIsCartOpen(true);
-            const giftProd = PERFUMES_DATA.find((p) => p.id === giftId);
-            if (giftProd) {
-              showToast(`🎁 ¡"${giftProd.name}" añadido como Perfume Gratis!`);
-            }
+            showToast('👑 ¡Tus 2 Perfumes Gratis quedaron agregados a tu pedido!');
           }}
         />
       )}
 
-      {/* Notificación Especial Emergente al Alcanzar los $350+ USD */}
-      {showGiftUnlockNotification && cartPaidTotal >= CART_GOALS_CONFIG.freePerfumeThreshold && !isGiftModalOpen && (
+      {/* Notificación Especial Emergente al Alcanzar $350+ (1 regalo) o $550+ (2 regalos) */}
+      {showGiftUnlockNotification && allowedFreeGifts > 0 && !isGiftModalOpen && (
         <div className="fixed top-20 sm:top-24 left-1/2 -translate-x-1/2 z-[165] w-[94%] max-w-md bg-[#0E0E0E] text-[#F5F1E8] border-2 border-[#C9A961] rounded-2xl p-4 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-start gap-3">
@@ -670,10 +700,12 @@ export default function App() {
               </div>
               <div>
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#C9A961] block">
-                  ¡Meta de $350 USD Alcanzada!
+                  {allowedFreeGifts === 2 ? '¡Meta Suprema de $550 USD Alcanzada!' : '¡Meta de $350 USD Alcanzada!'}
                 </span>
                 <p className="text-xs sm:text-sm font-bold text-white leading-snug mt-0.5">
-                  Ganaste 1 Perfume Original GRATIS. Elígelo de la lista exclusiva de esta promoción:
+                  {allowedFreeGifts === 2
+                    ? 'Ganaste 2 Perfumes Originales GRATIS. Elígelos de la lista exclusiva de esta promoción:'
+                    : 'Ganaste 1 Perfume Original GRATIS. Elígelo de la lista exclusiva de esta promoción:'}
                 </p>
                 <button
                   type="button"
@@ -684,7 +716,9 @@ export default function App() {
                   className="mt-2.5 bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs py-2 px-4 rounded-full inline-flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
                 >
                   <Gift className="w-3.5 h-3.5" />
-                  <span>Ver opciones y elegir mi regalo →</span>
+                  <span>
+                    {allowedFreeGifts === 2 ? 'Elegir mis 2 perfumes gratis →' : 'Ver opciones y elegir mi regalo →'}
+                  </span>
                 </button>
               </div>
             </div>

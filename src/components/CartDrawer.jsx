@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { X, Trash2, ShoppingBag, Gift, MessageCircle, ArrowRight, ShieldCheck, Check, MapPin } from 'lucide-react';
-import { CART_GOALS_CONFIG } from '../config/cartGoalsConfig';
+import { X, Trash2, ShoppingBag, Gift, MessageCircle, ArrowRight, ShieldCheck, Check } from 'lucide-react';
+import { CART_GOALS_CONFIG, getAllowedFreePerfumesCount } from '../config/cartGoalsConfig';
 import { PERFUMES_DATA } from '../data/perfumes';
 
 export default function CartDrawer({
@@ -11,7 +11,7 @@ export default function CartDrawer({
   onUpdateQty,
   onRemoveItem,
   onExploreCatalog,
-  selectedGiftId,
+  selectedGiftIds = [],
   onOpenGiftModal,
 }) {
   const [customerName, setCustomerName] = useState('');
@@ -23,9 +23,11 @@ export default function CartDrawer({
 
   if (!isOpen) return null;
 
-  // Metas oficiales de compra ARKANO ($150 y $350)
-  const GOAL_DELIVERY = CART_GOALS_CONFIG.personalDeliveryThreshold; // $150
-  const GOAL_FREE_PERFUME = CART_GOALS_CONFIG.freePerfumeThreshold;  // $350
+  // 4 Metas oficiales de compra ARKANO ($120, $150, $350 y $550)
+  const GOAL_DECANT = CART_GOALS_CONFIG.freeDecantThreshold;           // $120
+  const GOAL_DELIVERY = CART_GOALS_CONFIG.personalDeliveryThreshold;   // $150
+  const GOAL_PERFUME_1 = CART_GOALS_CONFIG.freePerfumeThreshold;       // $350
+  const GOAL_PERFUME_2 = CART_GOALS_CONFIG.twoFreePerfumesThreshold;   // $550
   const DELIVERY_ZONES = CART_GOALS_CONFIG.personalDeliveryZones;
 
   // Cálculos basados únicamente en ítems pagados
@@ -33,50 +35,72 @@ export default function CartDrawer({
   const total = cart.reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0);
   const totalDiscount = Math.max(0, subtotal - total);
 
-  // Perfume gratis seleccionado (solo válido si total >= $350 y pertenece a la lista oficial)
-  const selectedGiftPerfume =
-    total >= GOAL_FREE_PERFUME &&
-    selectedGiftId &&
-    CART_GOALS_CONFIG.freeGiftPerfumeIds.includes(selectedGiftId)
-      ? PERFUMES_DATA.find((p) => p.id === selectedGiftId)
-      : null;
+  const allowedGiftsCount = getAllowedFreePerfumesCount(total);
 
-  // Progreso visual de 2 etapas: 0 -> $150 (50%) -> $350 (100%)
+  // Perfumes gratis seleccionados válidos según meta actual
+  const selectedGiftPerfumes =
+    allowedGiftsCount > 0
+      ? selectedGiftIds
+          .filter((id) => CART_GOALS_CONFIG.freeGiftPerfumeIds.includes(id))
+          .slice(0, allowedGiftsCount)
+          .map((id) => PERFUMES_DATA.find((p) => p.id === id))
+          .filter(Boolean)
+      : [];
+
+  const needsGiftSelection = allowedGiftsCount > 0 && selectedGiftPerfumes.length < allowedGiftsCount;
+
+  // Progreso visual de 4 etapas: 25% ($120), 50% ($150), 75% ($350), 100% ($550)
   let progressPct = 0;
   if (total <= 0) {
     progressPct = 0;
+  } else if (total < GOAL_DECANT) {
+    progressPct = (total / GOAL_DECANT) * 25;
   } else if (total < GOAL_DELIVERY) {
-    progressPct = (total / GOAL_DELIVERY) * 50;
-  } else if (total < GOAL_FREE_PERFUME) {
-    progressPct = 50 + ((total - GOAL_DELIVERY) / (GOAL_FREE_PERFUME - GOAL_DELIVERY)) * 50;
+    progressPct = 25 + ((total - GOAL_DECANT) / (GOAL_DELIVERY - GOAL_DECANT)) * 25;
+  } else if (total < GOAL_PERFUME_1) {
+    progressPct = 50 + ((total - GOAL_DELIVERY) / (GOAL_PERFUME_1 - GOAL_DELIVERY)) * 25;
+  } else if (total < GOAL_PERFUME_2) {
+    progressPct = 75 + ((total - GOAL_PERFUME_1) / (GOAL_PERFUME_2 - GOAL_PERFUME_1)) * 25;
   } else {
     progressPct = 100;
   }
 
-  // Mensaje dinámico según la meta actual
+  // Mensaje motivacional dinámico según el tramo actual
   let nextGoalMsg = null;
-  if (total < GOAL_DELIVERY) {
+  if (total < GOAL_DECANT) {
     nextGoalMsg = (
       <span>
-        Agrega <strong className="text-[#0E0E0E] font-black">${(GOAL_DELIVERY - total).toFixed(2)}</strong> más para <strong>Entrega Personal GRATIS</strong> <span className="text-stone-600 font-semibold">({DELIVERY_ZONES})</span> 🚚
+        Agrega <strong className="text-[#0E0E0E] font-black">${(GOAL_DECANT - total).toFixed(2)}</strong> más para un <strong>Decant 10 ml GRATIS</strong> 🧪
       </span>
     );
-  } else if (total < GOAL_FREE_PERFUME) {
+  } else if (total < GOAL_DELIVERY) {
     nextGoalMsg = (
       <span>
-        🎉 ¡Entrega Personal Gratis lista! Agrega <strong className="text-[#0E0E0E] font-black">${(GOAL_FREE_PERFUME - total).toFixed(2)}</strong> más para llevarte <strong>1 PERFUME GRATIS</strong> 🎁
+        🧪 ¡Decant 10 ml Gratis listo! Agrega <strong className="text-[#0E0E0E] font-black">${(GOAL_DELIVERY - total).toFixed(2)}</strong> para <strong>Entrega Personal GRATIS</strong> <span className="text-stone-600 font-semibold">({DELIVERY_ZONES})</span> 🚚
       </span>
     );
-  } else if (!selectedGiftPerfume) {
+  } else if (total < GOAL_PERFUME_1) {
+    nextGoalMsg = (
+      <span>
+        🎉 ¡Decant + Entrega Gratis listos! Agrega <strong className="text-[#0E0E0E] font-black">${(GOAL_PERFUME_1 - total).toFixed(2)}</strong> para <strong>1 PERFUME GRATIS</strong> 🎁
+      </span>
+    );
+  } else if (total < GOAL_PERFUME_2) {
+    nextGoalMsg = (
+      <span>
+        🎁 ¡1 Perfume Gratis activo! Agrega <strong className="text-[#0E0E0E] font-black">${(GOAL_PERFUME_2 - total).toFixed(2)}</strong> más para llevarte <strong>2 PERFUMES GRATIS</strong> 👑
+      </span>
+    );
+  } else if (needsGiftSelection) {
     nextGoalMsg = (
       <span className="text-[#755B1E] font-black">
-        👑 ¡META DE ${GOAL_FREE_PERFUME} SUPERADA! Tienes 1 Perfume GRATIS listo para elegir 🎁
+        👑 ¡META SUPREMA DE ${GOAL_PERFUME_2} SUPERADA! Elige tus 2 Perfumes GRATIS ({selectedGiftPerfumes.length}/2) 🎁
       </span>
     );
   } else {
     nextGoalMsg = (
       <span className="text-emerald-800 font-black">
-        👑 ¡BENEFICIOS COMPLETOS! Entrega Personal Gratis + Perfume de Regalo incluido ✨
+        👑 ¡TODAS LAS METAS ALCANZADAS! Decant 10 ml + Entrega Gratis + 2 Perfumes Gratis ✨
       </span>
     );
   }
@@ -85,8 +109,8 @@ export default function CartDrawer({
   const handleCheckoutWhatsApp = () => {
     if (cart.length === 0) return;
 
-    // Si alcanzó los $350 y aún no ha elegido su perfume de la lista cerrada, abrir el selector primero
-    if (total >= GOAL_FREE_PERFUME && !selectedGiftPerfume && onOpenGiftModal) {
+    // Si alcanzó $350+ o $550+ y le falta elegir perfume(s) de la lista cerrada, abrir el selector primero
+    if (needsGiftSelection && onOpenGiftModal) {
       onOpenGiftModal();
       return;
     }
@@ -114,11 +138,17 @@ export default function CartDrawer({
     }
     message += `👑 *TOTAL A PAGAR:* $${total.toFixed(2)} USD\n\n`;
 
-    if (total >= GOAL_DELIVERY) {
+    if (total >= GOAL_DECANT) {
       message += `🎁 *BENEFICIOS DESBLOQUEADOS POR META DE COMPRA:*\n`;
-      message += `• 🚚 Entrega Personal GRATIS (válido para ${DELIVERY_ZONES})\n`;
-      if (total >= GOAL_FREE_PERFUME && selectedGiftPerfume) {
-        message += `• 🎁 PERFUME GRATIS ($350+): *${selectedGiftPerfume.brand} - ${selectedGiftPerfume.name}* (Frasco 100ml - $0.00 USD)\n`;
+      message += `• 🧪 1 Decant de 10 ml GRATIS cortesía ARKANO\n`;
+      if (total >= GOAL_DELIVERY) {
+        message += `• 🚚 Entrega Personal GRATIS (válido para ${DELIVERY_ZONES})\n`;
+      }
+      if (selectedGiftPerfumes.length > 0) {
+        selectedGiftPerfumes.forEach((gp, idx) => {
+          const numLabel = allowedGiftsCount > 1 ? ` #${idx + 1}` : '';
+          message += `• 🎁 PERFUME GRATIS${numLabel} ($${allowedGiftsCount > 1 ? GOAL_PERFUME_2 : GOAL_PERFUME_1}+): *${gp.brand} - ${gp.name}* (Frasco 100ml - $0.00 USD)\n`;
+        });
       }
       message += `\n`;
     } else {
@@ -166,19 +196,19 @@ export default function CartDrawer({
             </button>
           </div>
 
-          {/* Barra de Metas de Compra ($150 Entrega Personal Gratis / $350 Perfume Gratis) */}
+          {/* Barra de 4 Metas de Compra ($120 Decant / $150 Entrega / $350 1 Perfume / $550 2 Perfumes) */}
           <div className="bg-[#F5F1E8] p-3.5 border-b border-[#C9A961]/30 text-xs select-none">
             <div className="flex items-start justify-between font-bold mb-2 gap-2">
               <span className="text-[#0E0E0E] text-[11px] leading-snug">
                 {nextGoalMsg}
               </span>
               <span className="text-[10px] text-stone-600 font-bold flex-shrink-0 bg-white/80 px-2 py-0.5 rounded-full border border-[#C9A961]/30">
-                ${total.toFixed(0)} / ${GOAL_FREE_PERFUME}
+                ${total.toFixed(0)} / ${GOAL_PERFUME_2}
               </span>
             </div>
 
-            {/* Stepper de 2 Nodos: 50% ($150) y 100% ($350) */}
-            <div className="relative pt-2 pb-5 px-1">
+            {/* Stepper de 4 Nodos: 25% ($120), 50% ($150), 75% ($350) y 100% ($550) */}
+            <div className="relative pt-2 pb-7 px-1">
               <div className="w-full bg-gray-200/90 rounded-full h-2 overflow-hidden shadow-inner">
                 <div
                   className="bg-gradient-to-r from-[#0E0E0E] via-[#C9A961] to-[#E3C57C] h-2 rounded-full transition-all duration-500"
@@ -186,8 +216,24 @@ export default function CartDrawer({
                 />
               </div>
 
-              {/* Meta 1: $150 (Left 50%) */}
-              <div className="absolute top-0.5 left-1/2 -translate-x-1/2 flex flex-col items-center">
+              {/* Meta 1: $120 Decant (Left 25%) */}
+              <div className="absolute top-0.5 left-[25%] -translate-x-1/2 flex flex-col items-center">
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] border shadow-sm transition-transform duration-300 ${
+                  total >= GOAL_DECANT
+                    ? 'bg-emerald-600 text-white border-emerald-700 scale-110 font-bold'
+                    : 'bg-white text-gray-400 border-gray-300'
+                }`}>
+                  {total >= GOAL_DECANT ? '✓' : '🧪'}
+                </div>
+                <span className={`text-[8.5px] sm:text-[9px] font-bold mt-1 text-center leading-tight whitespace-nowrap ${
+                  total >= GOAL_DECANT ? 'text-emerald-800' : 'text-stone-600'
+                }`}>
+                  $120<br />Decant
+                </span>
+              </div>
+
+              {/* Meta 2: $150 Entrega Gratis (Left 50%) */}
+              <div className="absolute top-0.5 left-[50%] -translate-x-1/2 flex flex-col items-center">
                 <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] border shadow-sm transition-transform duration-300 ${
                   total >= GOAL_DELIVERY
                     ? 'bg-emerald-600 text-white border-emerald-700 scale-110 font-bold'
@@ -195,63 +241,83 @@ export default function CartDrawer({
                 }`}>
                   {total >= GOAL_DELIVERY ? '✓' : '🚚'}
                 </div>
-                <span className={`text-[9.5px] font-bold mt-1 text-center whitespace-nowrap leading-none ${
+                <span className={`text-[8.5px] sm:text-[9px] font-bold mt-1 text-center leading-tight whitespace-nowrap ${
                   total >= GOAL_DELIVERY ? 'text-emerald-800' : 'text-stone-600'
                 }`}>
-                  $150 Entrega Gratis
+                  $150<br />Entrega
                 </span>
               </div>
 
-              {/* Meta 2: $350 (Right 0) */}
-              <div className="absolute top-0.5 right-0 flex flex-col items-end">
+              {/* Meta 3: $350 1 Perfume Gratis (Left 75%) */}
+              <div className="absolute top-0.5 left-[75%] -translate-x-1/2 flex flex-col items-center">
                 <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] border shadow-sm transition-transform duration-300 ${
-                  total >= GOAL_FREE_PERFUME
+                  total >= GOAL_PERFUME_1
                     ? 'bg-[#0E0E0E] text-[#C9A961] border-[#C9A961] scale-110 font-bold'
                     : 'bg-white text-gray-400 border-gray-300'
                 }`}>
-                  {total >= GOAL_FREE_PERFUME ? '🎁' : '👑'}
+                  {total >= GOAL_PERFUME_1 ? '🎁' : '🎁'}
                 </div>
-                <span className={`text-[9.5px] font-bold mt-1 text-right whitespace-nowrap leading-none ${
-                  total >= GOAL_FREE_PERFUME ? 'text-[#755B1E]' : 'text-stone-600'
+                <span className={`text-[8.5px] sm:text-[9px] font-bold mt-1 text-center leading-tight whitespace-nowrap ${
+                  total >= GOAL_PERFUME_1 ? 'text-[#755B1E]' : 'text-stone-600'
                 }`}>
-                  $350 Perfume Gratis
+                  $350<br />1 Gratis
+                </span>
+              </div>
+
+              {/* Meta 4: $550 2 Perfumes Gratis (Right 0) */}
+              <div className="absolute top-0.5 right-0 flex flex-col items-end">
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] border shadow-sm transition-transform duration-300 ${
+                  total >= GOAL_PERFUME_2
+                    ? 'bg-[#0E0E0E] text-[#C9A961] border-[#C9A961] scale-110 font-bold'
+                    : 'bg-white text-gray-400 border-gray-300'
+                }`}>
+                  {total >= GOAL_PERFUME_2 ? '★' : '👑'}
+                </div>
+                <span className={`text-[8.5px] sm:text-[9px] font-bold mt-1 text-right leading-tight whitespace-nowrap ${
+                  total >= GOAL_PERFUME_2 ? 'text-[#755B1E]' : 'text-stone-600'
+                }`}>
+                  $550<br />2 Gratis
                 </span>
               </div>
             </div>
 
-            {/* Botón de Notificación Especial SOLO cuando total >= $350 */}
-            {total >= GOAL_FREE_PERFUME ? (
+            {/* Botón de Acceso a la Lista Cerrada SOLO cuando total >= $350 */}
+            {allowedGiftsCount > 0 && (
               <button
                 type="button"
                 onClick={onOpenGiftModal}
-                className="w-full mt-1 py-2.5 px-4 rounded-xl bg-[#0E0E0E] hover:bg-[#1C1C1C] text-[#C9A961] border border-[#C9A961] font-black text-xs flex items-center justify-between gap-2 shadow-md transition-all cursor-pointer group"
+                className="w-full mt-1 py-2.5 px-3.5 rounded-xl bg-[#0E0E0E] hover:bg-[#1C1C1C] text-[#C9A961] border border-[#C9A961] font-black text-xs flex items-center justify-between gap-2 shadow-md transition-all cursor-pointer group"
               >
                 <span className="flex items-center gap-2 truncate">
                   <Gift className="w-4 h-4 text-[#C9A961] flex-shrink-0 animate-bounce" />
                   <span className="truncate">
-                    {selectedGiftPerfume
-                      ? `Regalo elegido: ${selectedGiftPerfume.name}`
-                      : '¡Elegir mi Perfume Gratis de la promoción!'}
+                    {needsGiftSelection
+                      ? allowedGiftsCount === 2
+                        ? `¡Elige tus 2 Perfumes Gratis (${selectedGiftPerfumes.length}/2)!`
+                        : '¡Elegir mi Perfume Gratis de la promoción!'
+                      : allowedGiftsCount === 2
+                        ? `2 Regalos elegidos: ${selectedGiftPerfumes.map((g) => g.name).join(' + ')}`
+                        : `Regalo elegido: ${selectedGiftPerfumes[0]?.name}`}
                   </span>
                 </span>
                 <span className="text-[10px] bg-[#C9A961] text-[#0E0E0E] px-2.5 py-0.5 rounded-full font-black flex-shrink-0 group-hover:scale-105 transition-transform">
-                  {selectedGiftPerfume ? 'CAMBIAR' : 'VER LISTA →'}
+                  {needsGiftSelection ? 'VER LISTA →' : 'CAMBIAR'}
                 </span>
               </button>
-            ) : (
-              cart.length > 0 && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    onClose();
-                    if (onExploreCatalog) onExploreCatalog();
-                  }}
-                  className="w-full text-center text-[10.5px] font-bold text-[#755B1E] hover:text-[#0E0E0E] transition-colors pt-1 flex items-center justify-center gap-1 group cursor-pointer"
-                >
-                  <span>+ Agregar otro perfume para alcanzar la siguiente meta</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                </button>
-              )
+            )}
+
+            {cart.length > 0 && total < GOAL_PERFUME_2 && (
+              <button
+                type="button"
+                onClick={() => {
+                  onClose();
+                  if (onExploreCatalog) onExploreCatalog();
+                }}
+                className="w-full text-center text-[10.5px] font-bold text-[#755B1E] hover:text-[#0E0E0E] transition-colors pt-1.5 flex items-center justify-center gap-1 group cursor-pointer"
+              >
+                <span>+ Agregar otro perfume para alcanzar la siguiente meta</span>
+                <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+              </button>
             )}
           </div>
 
@@ -363,38 +429,43 @@ export default function CartDrawer({
                   </div>
                 ))}
 
-                {/* Tarjeta del Perfume Gratis Seleccionado (SOLO visible si total >= $350 y ya eligió uno) */}
-                {total >= GOAL_FREE_PERFUME && selectedGiftPerfume && (
-                  <div className="pt-4">
-                    <div className="p-3 rounded-2xl bg-gradient-to-r from-[#FAF8F5] to-[#F5F1E8] border-2 border-[#C9A961] flex items-center gap-3 shadow-xs">
-                      <div className="w-14 h-14 rounded-xl bg-white p-1 border border-[#C9A961]/50 flex-shrink-0">
-                        <img
-                          src={selectedGiftPerfume.imageMain}
-                          alt={selectedGiftPerfume.name}
-                          width="56"
-                          height="56"
-                          className="w-full h-full object-contain mix-blend-multiply"
-                        />
-                      </div>
-                      <div className="flex-grow min-w-0 text-xs">
-                        <span className="inline-flex items-center gap-1 text-[9.5px] font-black uppercase tracking-wider bg-[#0E0E0E] text-[#C9A961] px-2 py-0.5 rounded-full">
-                          🎁 PERFUME DE REGALO ($350+)
-                        </span>
-                        <h4 className="font-bold text-[#0E0E0E] truncate mt-1">
-                          {selectedGiftPerfume.brand} - {selectedGiftPerfume.name}
-                        </h4>
-                        <div className="flex items-center justify-between mt-0.5">
-                          <span className="text-[11px] text-stone-600 font-medium">Frasco 100ml • Gratis</span>
-                          <button
-                            type="button"
-                            onClick={onOpenGiftModal}
-                            className="text-[11px] font-extrabold text-[#755B1E] hover:text-[#0E0E0E] underline cursor-pointer"
-                          >
-                            Cambiar opción
-                          </button>
+                {/* Tarjetas de Perfume(s) Gratis Seleccionados (SOLO visibles si total >= $350) */}
+                {allowedGiftsCount > 0 && selectedGiftPerfumes.length > 0 && (
+                  <div className="pt-4 space-y-2.5">
+                    {selectedGiftPerfumes.map((giftPerfume, idx) => (
+                      <div
+                        key={`${giftPerfume.id}-${idx}`}
+                        className="p-3 rounded-2xl bg-gradient-to-r from-[#FAF8F5] to-[#F5F1E8] border-2 border-[#C9A961] flex items-center gap-3 shadow-xs"
+                      >
+                        <div className="w-14 h-14 rounded-xl bg-white p-1 border border-[#C9A961]/50 flex-shrink-0">
+                          <img
+                            src={giftPerfume.imageMain}
+                            alt={giftPerfume.name}
+                            width="56"
+                            height="56"
+                            className="w-full h-full object-contain mix-blend-multiply"
+                          />
+                        </div>
+                        <div className="flex-grow min-w-0 text-xs">
+                          <span className="inline-flex items-center gap-1 text-[9.5px] font-black uppercase tracking-wider bg-[#0E0E0E] text-[#C9A961] px-2 py-0.5 rounded-full">
+                            🎁 PERFUME DE REGALO {allowedGiftsCount > 1 ? `#${idx + 1}` : ''} ($0.00)
+                          </span>
+                          <h4 className="font-bold text-[#0E0E0E] truncate mt-1">
+                            {giftPerfume.brand} - {giftPerfume.name}
+                          </h4>
+                          <div className="flex items-center justify-between mt-0.5">
+                            <span className="text-[11px] text-stone-600 font-medium">Frasco 100ml • Gratis</span>
+                            <button
+                              type="button"
+                              onClick={onOpenGiftModal}
+                              className="text-[11px] font-extrabold text-[#755B1E] hover:text-[#0E0E0E] underline cursor-pointer"
+                            >
+                              Cambiar opción
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    ))}
                   </div>
                 )}
               </>
@@ -405,8 +476,8 @@ export default function CartDrawer({
           {cart.length > 0 && (
             <div className="p-4 sm:p-5 border-t border-gray-100 bg-[#F5F1E8] space-y-3">
 
-              {/* Recompensas Desbloqueadas */}
-              {total >= GOAL_DELIVERY && (
+              {/* Recompensas Desbloqueadas ($120+) */}
+              {total >= GOAL_DECANT && (
                 <div className="bg-white/90 rounded-xl p-3 border border-[#C9A961]/50 shadow-xs space-y-1.5">
                   <div className="flex items-center gap-1.5 text-xs font-bold text-[#0E0E0E]">
                     <Gift className="w-3.5 h-3.5 text-[#755B1E]" />
@@ -415,22 +486,29 @@ export default function CartDrawer({
                   <div className="space-y-1 text-[11px] text-gray-700">
                     <div className="flex items-start gap-1.5 text-emerald-800 font-semibold leading-snug">
                       <Check className="w-3.5 h-3.5 text-emerald-700 flex-shrink-0 mt-0.5" />
-                      <span>
-                        Entrega Personal GRATIS <span className="font-normal text-stone-700">({DELIVERY_ZONES})</span>
-                      </span>
+                      <span>1 Decant de 10 ml GRATIS incluido</span>
                     </div>
 
-                    {total >= GOAL_FREE_PERFUME && (
+                    {total >= GOAL_DELIVERY && (
+                      <div className="flex items-start gap-1.5 text-emerald-800 font-semibold leading-snug">
+                        <Check className="w-3.5 h-3.5 text-emerald-700 flex-shrink-0 mt-0.5" />
+                        <span>
+                          Entrega Personal GRATIS <span className="font-normal text-stone-700">({DELIVERY_ZONES})</span>
+                        </span>
+                      </div>
+                    )}
+
+                    {allowedGiftsCount > 0 && (
                       <div className="flex items-start justify-between gap-2 text-[#755B1E] font-bold leading-snug pt-0.5">
                         <div className="flex items-start gap-1.5">
                           <span className="flex-shrink-0">🎁</span>
                           <span>
-                            {selectedGiftPerfume
-                              ? `Perfume Gratis: ${selectedGiftPerfume.brand} ${selectedGiftPerfume.name} ($0.00)`
-                              : '1 Perfume Original Gratis pendiente de elegir'}
+                            {selectedGiftPerfumes.length === allowedGiftsCount
+                              ? `${allowedGiftsCount === 2 ? '2 Perfumes Gratis' : 'Perfume Gratis'}: ${selectedGiftPerfumes.map((g) => g.name).join(' + ')}`
+                              : `${allowedGiftsCount === 2 ? `2 Perfumes Gratis (${selectedGiftPerfumes.length}/2 elegidos)` : '1 Perfume Original Gratis pendiente de elegir'}`}
                           </span>
                         </div>
-                        {!selectedGiftPerfume && (
+                        {needsGiftSelection && (
                           <button
                             type="button"
                             onClick={onOpenGiftModal}
@@ -493,8 +571,10 @@ export default function CartDrawer({
               >
                 <MessageCircle className="w-5 h-5 text-white fill-current" />
                 <span>
-                  {total >= GOAL_FREE_PERFUME && !selectedGiftPerfume
-                    ? 'ELEGIR PERFUME GRATIS Y CONTINUAR'
+                  {needsGiftSelection
+                    ? allowedGiftsCount === 2
+                      ? `ELEGIR REGALOS (${selectedGiftPerfumes.length}/2) Y CONTINUAR`
+                      : 'ELEGIR PERFUME GRATIS Y CONTINUAR'
                     : 'CONFIRMAR PEDIDO POR WHATSAPP'}
                 </span>
                 <ArrowRight className="w-4 h-4 text-white group-hover:translate-x-1 transition-transform" />
