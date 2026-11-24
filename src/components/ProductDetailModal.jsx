@@ -393,7 +393,7 @@ export default function ProductDetailModal({
                   <div className="mt-3.5 p-3 bg-gray-50 rounded-xl border border-gray-200 space-y-1.5 text-[11px] text-gray-700">
                     <div className="flex items-center gap-2 text-emerald-800 font-semibold">
                       <Truck className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span>Despacho en máximo 6 horas con empaque blindado</span>
+                      <span>Despacho en máximo 6 horas con empaque blindado a todo el país</span>
                     </div>
                     <div className="flex items-center gap-2 text-[#0E0E0E] font-semibold">
                       <ShieldCheck className="w-3.5 h-3.5 flex-shrink-0 text-[#C9A961]" />

@@ -217,9 +217,9 @@ function ProductCard({
           </div>
 
           {/* Indicador de Despacho Rápido */}
-          <div className="flex items-center gap-1.5 text-[10px] sm:text-[11px] font-semibold text-emerald-800 mb-2">
-            <Truck className="w-3.5 h-3.5 text-emerald-700 flex-shrink-0" />
-            <span>Despacho en máximo 6 horas</span>
+          <div className="flex items-start gap-1.5 text-[10px] sm:text-[10.5px] leading-snug font-semibold text-emerald-800 mb-2">
+            <Truck className="w-3.5 h-3.5 text-emerald-700 flex-shrink-0 mt-0.5" />
+            <span>Despacho en máximo 6 horas con empaque blindado a todo el país</span>
           </div>
 
           {/* Botón Añadir al Carrito ARKANO */}
