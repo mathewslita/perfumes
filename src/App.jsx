@@ -14,11 +14,13 @@ import BrandsSection from './components/BrandsSection';
 import AboutSection from './components/AboutSection';
 import Footer from './components/Footer';
 import { PERFUMES_DATA, VIBE_CATEGORIES } from './data/perfumes';
-import { Check } from 'lucide-react';
+import { CART_GOALS_CONFIG } from './config/cartGoalsConfig';
+import { Check, Gift, X } from 'lucide-react';
 
 const ProductDetailModal = dynamic(() => import('./components/ProductDetailModal'), { ssr: false });
 const CartDrawer = dynamic(() => import('./components/CartDrawer'), { ssr: false });
 const FavoritesDrawer = dynamic(() => import('./components/FavoritesDrawer'), { ssr: false });
+const FreeGiftModal = dynamic(() => import('./components/FreeGiftModal'), { ssr: false });
 
 export default function App() {
   // Cart state persisted in localStorage
@@ -37,6 +39,10 @@ export default function App() {
   const [selectedAcorde, setSelectedAcorde] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
   const [isAiAdvisorOpen, setIsAiAdvisorOpen] = useState(false);
+  const [selectedGiftId, setSelectedGiftId] = useState(null);
+  const [isGiftModalOpen, setIsGiftModalOpen] = useState(false);
+  const [showGiftUnlockNotification, setShowGiftUnlockNotification] = useState(false);
+  const prevPaidTotalRef = useRef(0);
 
   // High-performance DOM refs for zero-rerender GPU scroll transition (60/120fps)
   const heroContainerRef = useRef(null);
@@ -123,7 +129,17 @@ export default function App() {
             })
             .filter(Boolean);
           if (validCart.length > 0) {
+            const loadedTotal = validCart.reduce((s, it) => s + ((it.price || 0) * (it.quantity || 1)), 0);
+            prevPaidTotalRef.current = loadedTotal;
             setCart(validCart);
+            const savedGift = localStorage.getItem('arkano_free_gift');
+            if (
+              savedGift &&
+              loadedTotal >= CART_GOALS_CONFIG.freePerfumeThreshold &&
+              CART_GOALS_CONFIG.freeGiftPerfumeIds.includes(savedGift)
+            ) {
+              setSelectedGiftId(savedGift);
+            }
           }
         }
       }
@@ -163,6 +179,19 @@ export default function App() {
       console.error('Error saving favorites:', e);
     }
   }, [favorites]);
+
+  useEffect(() => {
+    if (!hasLoadedStorage.current) return;
+    try {
+      if (selectedGiftId) {
+        localStorage.setItem('arkano_free_gift', selectedGiftId);
+      } else {
+        localStorage.removeItem('arkano_free_gift');
+      }
+    } catch (e) {
+      console.error('Error saving free gift:', e);
+    }
+  }, [selectedGiftId]);
 
   // Toggle favorite perfume
   const handleToggleFavorite = (productId) => {
@@ -413,6 +442,20 @@ export default function App() {
 
   const openedProduct = useMemo(() => PERFUMES_DATA.find(p => p.id === selectedProductId), [selectedProductId]);
   const cartItemCount = useMemo(() => (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + (item.quantity || 1), 0), [cart]);
+  const cartPaidTotal = useMemo(() => (Array.isArray(cart) ? cart : []).reduce((sum, item) => sum + ((item.price || 0) * (item.quantity || 1)), 0), [cart]);
+
+  // Control automático de la meta de $350+: desbloquea notificación al cruzar $350 y limpia si baja de $350
+  useEffect(() => {
+    const threshold = CART_GOALS_CONFIG.freePerfumeThreshold;
+    if (cartPaidTotal < threshold) {
+      if (selectedGiftId) setSelectedGiftId(null);
+      if (isGiftModalOpen) setIsGiftModalOpen(false);
+      if (showGiftUnlockNotification) setShowGiftUnlockNotification(false);
+    } else if (prevPaidTotalRef.current < threshold && cartPaidTotal >= threshold && !selectedGiftId) {
+      setShowGiftUnlockNotification(true);
+    }
+    prevPaidTotalRef.current = cartPaidTotal;
+  }, [cartPaidTotal, selectedGiftId, isGiftModalOpen, showGiftUnlockNotification]);
 
   const getAcordeLabel = (id) => {
     switch (id) {
@@ -584,12 +627,77 @@ export default function App() {
           cartItems={cart}
           onUpdateQty={handleUpdateQty}
           onRemoveItem={handleRemoveItem}
+          selectedGiftId={selectedGiftId}
+          onOpenGiftModal={() => {
+            setShowGiftUnlockNotification(false);
+            setIsGiftModalOpen(true);
+          }}
           onExploreCatalog={() => {
             setIsCartOpen(false);
             const el = document.getElementById('los-mas-vendidos');
             el?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
+      )}
+
+      {/* Modal Exclusivo de Selección de Perfume Gratis (SOLO accesible si cartPaidTotal >= $350) */}
+      {isGiftModalOpen && cartPaidTotal >= CART_GOALS_CONFIG.freePerfumeThreshold && (
+        <FreeGiftModal
+          isOpen={isGiftModalOpen}
+          onClose={() => setIsGiftModalOpen(false)}
+          cartTotal={cartPaidTotal}
+          selectedGiftId={selectedGiftId}
+          onSelectGift={(giftId) => {
+            setSelectedGiftId(giftId);
+            setIsGiftModalOpen(false);
+            setShowGiftUnlockNotification(false);
+            setIsCartOpen(true);
+            const giftProd = PERFUMES_DATA.find((p) => p.id === giftId);
+            if (giftProd) {
+              showToast(`🎁 ¡"${giftProd.name}" añadido como Perfume Gratis!`);
+            }
+          }}
+        />
+      )}
+
+      {/* Notificación Especial Emergente al Alcanzar los $350+ USD */}
+      {showGiftUnlockNotification && cartPaidTotal >= CART_GOALS_CONFIG.freePerfumeThreshold && !isGiftModalOpen && (
+        <div className="fixed top-20 sm:top-24 left-1/2 -translate-x-1/2 z-[165] w-[94%] max-w-md bg-[#0E0E0E] text-[#F5F1E8] border-2 border-[#C9A961] rounded-2xl p-4 shadow-2xl animate-in fade-in slide-in-from-top-4 duration-300">
+          <div className="flex items-start justify-between gap-3">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-xl bg-[#C9A961]/20 border border-[#C9A961] flex items-center justify-center flex-shrink-0">
+                <Gift className="w-5 h-5 text-[#C9A961] animate-bounce" />
+              </div>
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#C9A961] block">
+                  ¡Meta de $350 USD Alcanzada!
+                </span>
+                <p className="text-xs sm:text-sm font-bold text-white leading-snug mt-0.5">
+                  Ganaste 1 Perfume Original GRATIS. Elígelo de la lista exclusiva de esta promoción:
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowGiftUnlockNotification(false);
+                    setIsGiftModalOpen(true);
+                  }}
+                  className="mt-2.5 bg-[#C9A961] hover:bg-[#B89228] text-[#0E0E0E] font-black text-xs py-2 px-4 rounded-full inline-flex items-center gap-1.5 shadow-md transition-all cursor-pointer"
+                >
+                  <Gift className="w-3.5 h-3.5" />
+                  <span>Ver opciones y elegir mi regalo →</span>
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setShowGiftUnlockNotification(false)}
+              className="text-stone-400 hover:text-white p-1 rounded-full cursor-pointer"
+              aria-label="Cerrar notificación"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       )}
 
       {/* 14. Slide-Over Favorites Drawer (Cargado bajo demanda) */}
